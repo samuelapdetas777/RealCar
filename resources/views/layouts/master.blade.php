@@ -10,15 +10,18 @@
 
     <title>@yield('title')</title>
   </head>
-  <style>
+  <style> 
       .div-img-master{
-          background-color: black;
+          background-color: gray;
           position: absolute;
           width: 100%;
+          height: 100%;
+
+          align-items: center;
+          display: flex;   /*Asi se centra un texto en un div */
+          justify-content: center;
       }
-      .img-master{
-          width: 100%;
-      }
+      
       .logo-navbar{
         width: 20%;
       }
@@ -26,12 +29,13 @@
         position: absolute;
         right: 10px;
       }
+      
      
   </style>
   <body>
     
   <div class="div-img-master">
-    @yield('background-img')
+      @yield('header-content')
   </div>
   
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

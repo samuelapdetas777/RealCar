@@ -16,27 +16,45 @@
     <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
 </head>
+<style>
+ body{
+    background-image: url('https://th.bing.com/th/id/OIP.RyTWY4ko1S9chxJr2AHcMAHaEi?pid=ImgDet&rs=1');
+    background-repeat: no-repeat ;
+    background-size: cover;
+    overflow: hidden;
+ }
+ .background-degraded{
+     width: 100vw;
+     height: 100vh;
+     position: absolute;
+     background-color: black;
+     opacity: 0.9;
+ }
+ 
+</style>
 
 <body>
-<div id="app">
-    <section class="section">
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <div class="login-brand">
-                        <img src="{{ asset('img/logo.png') }}" alt="logo" width="100"
-                             class="shadow-light">
-                    </div>
-                    @yield('content')
-                    <div class="simple-footer">
-{{--                        Copyright &copy; {{ getSettingValue('application_name') }}  {{ date('Y') }}--}}
+    <div class="background-degraded">
+    </div>
+        <div id="app">
+            <section class="section">
+                <div class="container ">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3 mt-4">
+                            <div class="login-brand">
+                                <img src="{{ asset('img/realcarlogo.png') }}" alt="logo" width="100"
+                                    class="img-logo-back">
+                            </div>
+                            @yield('content')
+                            <div class="simple-footer">
+        {{--                        Copyright &copy; {{ getSettingValue('application_name') }}  {{ date('Y') }}--}}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
-</div>
-
+    
 <!-- General JS Scripts -->
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>

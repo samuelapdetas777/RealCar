@@ -3,7 +3,7 @@
         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
     </ul>
 </form>
-<ul class="navbar-nav navbar-secondary ">
+<ul class="navbar-nav">
 
     @if(\Illuminate\Support\Facades\Auth::user())
         <li class="dropdown">

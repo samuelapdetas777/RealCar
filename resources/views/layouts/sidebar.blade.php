@@ -4,7 +4,7 @@
              alt="Infyom Logo">
         <a href="{{ url('/') }}"></a>
     </div>
-    <div class="sidebar-brand sidebar-brand-sm">
+    <div class="sidebar-brand sidebar-brand-sm ">
         <a href="{{ url('/') }}" class="small-sidebar-text">
             <img class="navbar-brand-full" src="{{ asset('img/realcarlogo.png') }}" width="45px" alt=""/>
         </a>

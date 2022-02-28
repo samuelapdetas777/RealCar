@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col-md-6 offset-md-3 mt-4">
                             <div class="login-brand">
-                                <img src="{{ asset('img/realcarlogo.png') }}" alt="logo" width="100"
+                                <img src="{{ asset('img/logorealcar2.svg') }}" alt="logo" width="100"
                                     class="img-logo-back">
                             </div>
                             @yield('content')

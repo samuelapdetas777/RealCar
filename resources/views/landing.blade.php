@@ -5,8 +5,12 @@ Bienvenido a RealCar
 @endsection
 
 @section('navbar-right-content')
-<a href="{{route('login')}}" class="btn btn-danger">Iniciar Sesión</a>
-<a href="{{route('register')}}" class="btn btn-outline-danger">Registrarse</a>
+<div class="nav-item">
+  <a href="{{route('login')}}" class="btn btn-primary">Iniciar Sesión</a>
+</div>
+<div class="nav-item">
+  <a href="{{route('register')}}" class="btn btn-outline-primary">Registrarse</a>
+</div>
 @endsection
 
 @section('header-content')

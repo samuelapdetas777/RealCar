@@ -9,7 +9,7 @@ Bienvenido a RealCar
   <a href="{{route('login')}}" class="btn btn-primary">Iniciar Sesión</a>
 </div>
 <div class="nav-item">
-  <a href="{{route('register')}}" class="btn btn-outline-primary">Registrarse</a>
+  <a href="{{route('userregister')}}" class="btn btn-outline-primary">Registrarse</a>
 </div>
 @endsection
 

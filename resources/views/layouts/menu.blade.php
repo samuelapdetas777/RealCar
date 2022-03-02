@@ -1,4 +1,4 @@
-    <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
+    <li class="side-menus {{ Request::is('*') ? 'active' : '' }}">
         <!-- Se agregan los elementos al sidebar -->
         <a class="nav-link" href="{{route('home')}}">
             <i class=" fas fa-building"></i><span>Dashboard</span>

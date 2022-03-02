@@ -1,4 +1,4 @@
-<aside id="sidebar-wrapper">
+<aside id="sidebar-wrapper bg-primary">
     <div class="sidebar-brand bg-dark">
         <img class="navbar-brand-full app-header-logo" src="{{ asset('img/logorealcar2.svg') }}" width="65"
              alt="Infyom Logo">
@@ -9,7 +9,7 @@
             <img class="navbar-brand-full" src="{{ asset('img/logorealcar3.svg') }}" width="45px" alt=""/>
         </a>
     </div>
-    <ul class="sidebar-menu">
+    <ul class="sidebar-menu bg-dark">
         @include('layouts.menu')
     </ul>
 </aside>

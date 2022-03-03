@@ -9,7 +9,7 @@ class EstadoAplicativo extends Model
 {
     use HasFactory;
 
-
+    protected $table = "estadoaplicativo";
     protected $fillable = [
         'nombre',
     ];

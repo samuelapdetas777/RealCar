@@ -1,4 +1,4 @@
-    <li class="side-menus {{ Request::is('*') ? 'active' : '' }}">
+    <li class="side-menus {{ Request::is('home') ? 'active' : '' }}">
         <!-- Se agregan los elementos al sidebar -->
         <a class="nav-link" href="{{route('home')}}">
             <i class=" fas fa-building"></i><span>Dashboard</span>
@@ -81,8 +81,8 @@
             <i class=" fas fa-cogs"></i><span>Transmisión</span>
         </a>
     </li>
-    <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="{{route('estadoaplicativo')}}" class="nav-link">
+    <li class="side-menus {{ Request::is('estadoaplicativo') ? 'active' : '' }}">
+        <a href="{{route('indexEstadoAplicativo')}}" class="nav-link">
             <i class=" fas fa-tags"></i><span>Estado aplicativo</span>
         </a>
     </li>

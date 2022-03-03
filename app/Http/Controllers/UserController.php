@@ -46,34 +46,34 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // 
-        // $request->validate([
-        //     'name' => 'required | regex:/^[A-Za-z]+$/',
-        //     'last_name' => 'required | regex:/^[A-Za-z]+$/',
-        //     'document'=> 'required | numeric | digits:10 | unique:users',
-        //     'phone'=> 'required | numeric | digits:10 | unique:users',
-        //     'email' => 'required | email | unique:users',
-        //     'password'=> 'required | regex:/^[A-Za-z0-9]+$/ |confirmed',
-        //     'contrasena_confirmation'=> 'required',
-        //     'address' => 'required',
+        
+        $request->validate([
+            'name' => 'required | regex:/^[A-Za-z]+$/',
+            'last_name' => 'required | regex:/^[A-Za-z]+$/',
+            'document'=> 'required | numeric | digits:10 | unique:users',
+            'phone'=> 'required | numeric | digits:10 | unique:users',
+            'email' => 'required | email | unique:users',
+            'password'=> 'required | regex:/^[A-Za-z0-9]+$/',
+            'contrasena_confirmation'=> 'required',
+            'address' => 'required',
          
-        // ]);
+        ]);
         // return $request->input('nombre');
 
 
         //$user = User::create($request->except('_token'));
         $user = new User ($request->except('_token'));
-        $user->name = $request->input('nombre');
-        $user->last_name = $request->input('apellido');
-        $user->document = $request->input('documento');
-        $user->phone = $request->input('celular');
-        $user->email = $request->input('correo');
-        $user->password =  bcrypt($request->input('contrasena'));
-        $user->address = $request->input('direccion');
-        $user->ciudades_id = $request->input('ciudads_id');
+        $user->name = $request->input('name');
+        $user->last_name = $request->input('last_name');
+        $user->document = $request->input('document');
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        $user->password =  bcrypt($request->input('password'));
+        $user->address = $request->input('address');
+        $user->ciudades_id = $request->input('ciudades_id');
 
         $user->save();
-        return redirect('admin');
+        return redirect('login');
 
         // return "joliiiiiiiii";
         

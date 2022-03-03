@@ -40,8 +40,8 @@
                             @csrf
                             <div class="row">
                                 <div class="col mb-5 ">
-                                    <input type="text" name="nombre" id="nombre" value="{{old('nombre')}}" class="form-control" placeholder="Nombre"> 
-                                    @error('nombre')
+                                    <input type="text" name="name" id="name" value="{{old('name')}}" class="form-control" placeholder="Nombre"> 
+                                    @error('name')
                                         <small>
                                             <strong>{{$message}}</strong>
                                         </small>
@@ -49,10 +49,9 @@
     
                                 </div>
                                 <div class="col mb-5">
-                                    <input type="text" name="apellido" id="apellido" value="{{old('apellido')}}" class="form-control" placeholder="Apellido">
-                                    @error('apellido')
-                                        <small>
-                                            <strong>{{$message}}</strong>
+                                    <input type="text" name="last_name" id="last_name" value="{{old('last_name')}}" class="form-control" placeholder="Apellido">
+                                    @error('last_name')
+                                        <small>                                            <strong>{{$message}}</strong>
                                         </small>
                                     @enderror
                                 </div>
@@ -60,16 +59,16 @@
                             </div>
                             <div class="row">
                                 <div class="col mb-5 ">
-                                    <input type="text" name="documento" id="documento" value="{{old('documento')}}" class="form-control" placeholder="No. Identificación">
-                                    @error('documento')
+                                    <input type="text" name="document" id="document" value="{{old('document')}}" class="form-control" placeholder="No. Identificación">
+                                    @error('document')
                                         <small>
                                             <strong>{{$message}}</strong>
                                         </small>
                                     @enderror
                                 </div>
                                 <div class="col mb-5">
-                                    <input type="text" name="correo" id="correo" value="{{old('correo')}}" class="form-control" placeholder="Correo">
-                                    @error('correo')
+                                    <input type="text" name="email" id="email" value="{{old('email')}}" class="form-control" placeholder="Correo">
+                                    @error('email')
                                         <small>
                                             <strong>{{$message}}</strong>
                                         </small>
@@ -79,8 +78,8 @@
                             </div>
                             <div class="row">
                                 <div class="col mb-5">
-                                    <input type="password" name="contrasena" id="contrasena" class="form-control" placeholder="Contraseña">
-                                    @error('contrasena')
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña">
+                                    @error('password')
                                         <small>
                                             <strong>{{$message}}</strong>
                                         </small>
@@ -98,15 +97,15 @@
                             </div>
                             <div class="row">
                                 <div class="col mb-5">
-                                    <input type="text" name="celular" id="celular" value="{{old('celular')}}" class="form-control" placeholder="Celular">
-                                    @error('celular')
+                                    <input type="text" name="phone" id="phone" value="{{old('phone')}}" class="form-control" placeholder="Celular">
+                                    @error('phone')
                                         <small>
                                             <strong>{{$message}}</strong>
                                         </small>
                                     @enderror 
                                 </div>
                                 <div class="col mb-5">
-                                    <select name="ciudads_id" id="ciudads_id" class="form-select" >
+                                    <select name="ciudades_id" id="ciudades_id" class="form-select" >
                                         <option >Ciudad de residencia</option>
 
                                         @foreach($ciudades as $ciudad)
@@ -121,8 +120,8 @@
 
                             <div class="row">
                                 <div class="col mb-5">
-                                    <input type="text" class="form-control" name="direccion" id="direccion" value="{{old('direccion')}}" placeholder="Dirección de residencia"> 
-                                    @error('direccion')
+                                    <input type="text" class="form-control" name="address" id="address" value="{{old('address')}}" placeholder="Dirección de residencia"> 
+                                    @error('address')
                                         <small>
                                             <strong>{{$message}}</strong>
                                         </small>

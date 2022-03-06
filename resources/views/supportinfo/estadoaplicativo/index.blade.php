@@ -1,60 +1,107 @@
 @extends('layouts.app')
 
-@section('title')
-Estados en el aplicativo
-@endsection
+@section('title', 'Estados en el aplicativo')
+
+
 
 @section('content')
 
 
-    {{--<div class="section-header">
-        <h3 class="page__heading text-light">Estados del vehículo en el aplicativo</h3>
-    </div>--}}
     
-    <section class="section">
-        <div class="section-header">
-            <h3 class="page__heading">Estados del vehículo en el aplicativo</h3>
-        </div>
-        <div class="section-body">
-            <div class="row">
-                <div class="col-lg-12">
+
                     <div class="card">
                         <div class="card-body">
-                            
+                            <h1 class="text-center text-black">Estados de los vehículos en el apicativo</h1>
                         <div class="card">
-                            <a href="{{route('indexEstadoAplicativo')}}" class="btn btn-primary col-2">Agregar <i class="fas fa-plus"></i></a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalformagregar">
+                            Agregar <i class="fas fa-plus"></i>
+                        </button>
                             <hr class="bg-primary">
                             <div class="card-body">
                                 <table class="table table-hover table-dark text-light" >
                                     <thead class="bg-dark">
                                         <tr>
-                                        <th scope="col" class=" text-light">#ID</th>
-                                        <th scope="col" class=" text-light">Nombre</th>
-                                        <th scope="col" class=" text-light">Acciones</th>
+                                        <th scope="col" class="text-light">#ID</th>
+                                        <th scope="col" class="text-light">Nombre</th>
+                                        <th scope="col" class="text-light">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($estados as $estado)
+                                        @forelse($estados as $estado)
                                         <tr>
-                                        <th scope="row">{{$estado->id}}</th>
-                                        <td>{{$estado->nombre}}</td>
-                                        <td>
-                                            <a href="" class="btn btn-info">Editar<i class="fas fa-pen"></i></a>
-                                            <a href="" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></a>
-                                        </td>
+                                            <th scope="row">{{$estado->id}}</th>
+                                            <td>{{$estado->nombre}}</td>
+                                            <td>
+                                                <form action="{{ route ('estadoaplicativo.destroy',$estado->id) }}" method="POST" class="deleteestadoaplicativo">
+                                                    <a href="#modalformeditar{{$estado->id}}" value="{{$estado->id}}" class="btn btn-info editarbtn" data-toggle="modal" data-target="#modalformeditar{{$estado->id}}">Editar<i class="fas fa-pen"></i></a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>
+                                                </form>
+                                            </td>
                                         </tr>
-                                        @endforeach
+                                        {{-- Modal Editar--}}
+                                        @include('supportinfo.estadoaplicativo.layouts.modaleditar')
+                                        
+                                        
+                                        
+                                        @empty
+                                            No hay Estados registrados, agrega uno nuevo para verlos aqui.
+                                        @endforelse
+                                        
+
                                     </tbody>
                                 </table>
+
+                                <div class="d-flex justify-content-center">
+                                    {{ $estados->links() }}
+                                </div>
                             </div>
                         </div>
-
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            
+                                    {{-- Modal Agregar--}}    
+                                    @include('supportinfo.estadoaplicativo.layouts.modalagregar'); 
 
 
+
+@endsection
+
+@section('scripts')
+
+<script src="{{ asset('assets/js/sweetalert.min.js') }}"></script>
+<script>
+
+    $(document).ready(function () {
+
+        $(".deleteestadoaplicativo").submit(function (e) { 
+            e.preventDefault();
+            
+            alert ("sadfasda");
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                    )
+                }
+                })
+
+        });
+
+
+       
+    });
+</script>
 @endsection

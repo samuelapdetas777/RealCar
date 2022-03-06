@@ -82,7 +82,7 @@
         </a>
     </li>
     <li class="side-menus {{ Request::is('estadoaplicativo') ? 'active' : '' }}">
-        <a href="{{route('indexEstadoAplicativo')}}" class="nav-link">
+        <a href="/estadoaplicativo" class="nav-link">
             <i class=" fas fa-tags"></i><span>Estado aplicativo</span>
         </a>
     </li>

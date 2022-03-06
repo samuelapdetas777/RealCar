@@ -20,7 +20,8 @@ class EstadoAplicativoController extends Controller
      */
     public function index()
     {
-        $estados = EstadoAplicativo::All();
+
+        $estados = EstadoAplicativo::paginate(5);
         return view('supportinfo.estadoaplicativo.index', compact('estados'));
     }
 
@@ -42,7 +43,13 @@ class EstadoAplicativoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $estado = 
+        $estado = new EstadoAplicativo();
+        $estado->nombre = $request->input('nombreEstadoAplicativo');;
+
+        $estado->save();
+        return redirect('/estadoaplicativo');
+        
     }
 
     /**
@@ -76,7 +83,13 @@ class EstadoAplicativoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $estado = EstadoAplicativo::find($id);
+
+        $estado->nombre = $request->input('nombreEstadoAplicativo');;
+
+        $estado->save();
+        return redirect('/estadoaplicativo');
+        
     }
 
     /**
@@ -87,6 +100,8 @@ class EstadoAplicativoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $estado = EstadoAplicativo::find($id);
+        $estado->delete();
+        return redirect('/estadoaplicativo');
     }
 }

@@ -35,10 +35,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::get('/estadoaplicativo', [App\Http\Controllers\VehiculosController::class, 'estadoAplicativo'])->name('estadoaplicativo');
 
 //Rutas para la administracion de los vehiculos
-Route::get('/estadoaplicativo',  [App\Http\Controllers\Vehiculos\EstadoAplicativoController::class, 'index'])->name('indexEstadoAplicativo');
+Route::resource('estadoaplicativo', 'App\Http\Controllers\Vehiculos\EstadoAplicativoController');
+// Route::delete('estadoaplicativo/{estado}', [EstadoAplicativoController::class, 'destroy'])->name('estadosAplicativoEliminar');
+
 
 // Rutas Angel
-
 Route::get('/register', [App\Http\Controllers\UserController::class, 'create'])->name('userregister');
 Route::resource('user', UserController::class);
 

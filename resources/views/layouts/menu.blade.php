@@ -75,7 +75,7 @@
         </a>
     </li>
 
-    <li class="menu-header"><small>Vehículos</small></li>
+    <li class="menu-header">Vehículos</li>
     <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
         <a href="" class="nav-link">
             <i class=" fas fa-cogs"></i><span>Transmisión</span>

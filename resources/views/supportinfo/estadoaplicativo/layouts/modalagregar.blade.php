@@ -14,7 +14,10 @@
                 <label for="NombreEstadoAplicativo">Nombre del estado:</label>
                 <input type="text" name="nombreEstadoAplicativo" class="form-control" id="NombreEstadoAplicativo" aria-describedby="emailHelp">
                 <br>
-                <span class="badge badge-danger"></span>
+                 @error('nombreEstadoAplicativo')
+                  <span class="badge badge-danger">{{$message}}</span>
+                @enderror
+                
             </div>
         </div>
         <div class="modal-footer">

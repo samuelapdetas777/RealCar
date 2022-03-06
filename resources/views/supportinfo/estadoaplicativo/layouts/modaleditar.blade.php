@@ -13,9 +13,11 @@
             @method('PUT')
             <div class="form-group">
                 <label for="NombreEstadoAplicativo">Nombre del estado:</label>
-                <input type="text" name="nombreEstadoAplicativo" class="form-control" id="NombreEstadoAplicativo" aria-describedby="emailHelp" value="{{$estado->nombre}}">
+                <input type="text" name="editarNombreEstadoAplicativo" class="form-control" id="NombreEstadoAplicativo" aria-describedby="emailHelp" value="{{$estado->nombre}}">
                 <br>
-                <span class="badge badge-danger"></span>
+                @error('editarNombreEstadoAplicativo')
+                  <span class="badge badge-danger">{{$message}}</span>
+                @enderror
             </div>
         </div>
         <div class="modal-footer">

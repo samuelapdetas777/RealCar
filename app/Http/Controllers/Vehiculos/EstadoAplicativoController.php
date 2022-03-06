@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vehiculos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\EstadoAplicativo;
+use Illuminate\Auth\Events\Validated;
 
 class EstadoAplicativoController extends Controller
 {
@@ -43,12 +44,15 @@ class EstadoAplicativoController extends Controller
      */
     public function store(Request $request)
     {
-        $estado = 
+        $request->validate([
+            'nombreEstadoAplicativo' => 'required|min:3'
+        ]);
+
         $estado = new EstadoAplicativo();
         $estado->nombre = $request->input('nombreEstadoAplicativo');;
 
         $estado->save();
-        return redirect('/estadoaplicativo');
+        return redirect('/estadoaplicativo')->with('agregar', 'ok');
         
     }
 
@@ -83,12 +87,15 @@ class EstadoAplicativoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'editarNombreEstadoAplicativo' => 'required|min:3'
+        ]);
+        
         $estado = EstadoAplicativo::find($id);
-
-        $estado->nombre = $request->input('nombreEstadoAplicativo');;
+        $estado->nombre = $request->input('editarNombreEstadoAplicativo');;
 
         $estado->save();
-        return redirect('/estadoaplicativo');
+        return redirect('/estadoaplicativo')->with('actualizar', 'ok');
         
     }
 
@@ -102,6 +109,6 @@ class EstadoAplicativoController extends Controller
     {
         $estado = EstadoAplicativo::find($id);
         $estado->delete();
-        return redirect('/estadoaplicativo');
+        return redirect('/estadoaplicativo')->with('eliminar', 'ok');
     }
 }

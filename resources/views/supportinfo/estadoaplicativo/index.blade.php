@@ -33,7 +33,7 @@
                                             <td>{{$estado->nombre}}</td>
                                             <td>
                                                 <form action="{{ route ('estadoaplicativo.destroy',$estado->id) }}" method="POST" class="deleteestadoaplicativo">
-                                                    <a href="#modalformeditar{{$estado->id}}" value="{{$estado->id}}" class="btn btn-info editarbtn" data-toggle="modal" data-target="#modalformeditar{{$estado->id}}">Editar<i class="fas fa-pen"></i></a>
+                                                    <button type="button" href="#modalformeditar{{$estado->id}}" value="{{$estado->id}}" class="btn btn-info editarbtn" data-toggle="modal" data-target="#modalformeditar{{$estado->id}}">Editar<i class="fas fa-pen"></i></button>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>
@@ -70,38 +70,87 @@
 
 @section('scripts')
 
-<script src="{{ asset('assets/js/sweetalert.min.js') }}"></script>
-<script>
+<script src="{{ asset('assets/js/sweetalert2.js') }}"></script>
 
+@if(session('eliminar') == 'ok')
+    <script>
+        Swal.fire(
+                'Eliminado!',
+                'El campo fue eliminado permanentemente',
+                'success'
+                )
+    </script>
+@elseif(session('actualizar') == 'ok')
+    <script>
+        Swal.fire(
+                'Actualizado!',
+                'El campo fue actualizado correctamente',
+                'success'
+                )
+    </script>
+@elseif(session('agregar') == 'ok')
+    <script>
+        Swal.fire(
+                'Agregado!',
+                'El campo fue agregado correctamente',
+                'success'
+                )
+    </script>
+@endif
+
+
+
+<script>
+    
     $(document).ready(function () {
 
-        $(".deleteestadoaplicativo").submit(function (e) { 
+        var ideditar = $('.editarbtn').val();
+        
+        
+        
+        $('.deleteestadoaplicativo').submit(function (e) { 
             e.preventDefault();
+        
             
-            alert ("sadfasda");
-
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                    )
-                }
-                })
-
-        });
-
-
-       
+            Swal.fire({
+                title: '¿Seguro quieres eliminar este campo?',
+                text: "No puedes revertir este cambio",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0fbd37',
+                cancelButtonColor: '#fd3328',
+                confirmButtonText: 'Si, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit();
+            }
+            })
+            
     });
+
+  
+});
+
 </script>
+
+
+
+
+@if($errors->any())
+    @if($errors->nombreEstadoAplicativo)
+        <script>
+            $(document).ready(function(){
+                $('#modalformagregar').modal('show')
+            })
+        </script>
+    @else
+        <script>
+            $(document).ready(function(){
+                $('#modalformeditar18').modal('show');
+            })
+        </script>
+    @endif
+@endif
+
 @endsection

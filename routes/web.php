@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EstadoAplicativoController;
+use App\Http\Controllers\Vehiculos\TipoCajaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Rutas para la administracion de los vehiculos
 Route::resource('estadoaplicativo', 'App\Http\Controllers\Vehiculos\EstadoAplicativoController');
 // Route::delete('estadoaplicativo/{estado}', [EstadoAplicativoController::class, 'destroy'])->name('estadosAplicativoEliminar');
+
+
+//Rutas para la administracion de los tipos de transmisiones
+Route::resource('tipocaja', 'App\Http\Controllers\Vehiculos\TipoCajaController');
 
 
 // Rutas Angel

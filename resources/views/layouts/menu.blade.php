@@ -76,8 +76,8 @@
     </li>
 
     <li class="menu-header">Vehículos</li>
-    <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+    <li class="side-menus {{ Request::is('tipocaja') ? 'active' : '' }}">
+        <a href="/tipocaja" class="nav-link">
             <i class=" fas fa-cogs"></i><span>Transmisión</span>
         </a>
     </li>

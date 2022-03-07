@@ -10,6 +10,7 @@ class TipoCaja extends Model
 {
     use HasFactory;
 
+    protected $table = 'tipocaja';
     protected $fillable = [
         'nombre'
     ];

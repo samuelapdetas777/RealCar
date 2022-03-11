@@ -25,7 +25,7 @@
                         </button>
                             <hr class="bg-primary">
                             <div class="card-body">
-                                <table class="table table-hover table-dark text-light" id="tabletipocaja">
+                                <table class="table table-hover table-info text-dark" id="tabletipocaja">
                                     <thead class="bg-dark">
                                         <tr>
                                         <th scope="col" class="text-light">#ID</th>
@@ -40,7 +40,7 @@
                                             <td>{{$tipo->nombre}}</td>
                                             <td>
                                                 <form action="{{ route ('estadoaplicativo.destroy',$tipo->id) }}" method="POST" class="deleteestadoaplicativo">
-                                                    <button type="button" href="#modalformeditar{{$tipo->id}}" value="{{$tipo->id}}" class="btn btn-info editarbtn" data-toggle="modal" data-target="#modalformeditar{{$tipo->id}}">Editar<i class="fas fa-pen"></i></button>
+                                                    <button type="button" id="tipocajaeditarbtn" href="#modalformeditar{{$tipo->id}}" value="{{$tipo->id}}" class="btn btn-info editarbtn" data-toggle="modal" data-target="#modalformeditar{{$tipo->id}}">Editar<i class="fas fa-pen"></i></button>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>
@@ -79,6 +79,19 @@
 <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
 
 
+
+<script>
+    $('#tipocajaeditarbtn').click(function (e) { 
+        e.preventDefault();
+        alert("holaaaaa");
+
+        this.submit();
+        
+    });
+</script>
+
+
+
 @if(session('eliminar') == 'ok')
     <script>
         Swal.fire(
@@ -110,17 +123,26 @@
 <script>
 
 
-$(document).ready( function () {
-    $('#tabletipocaja').DataTable();
-} );
-
-
 
     
+    
+    
+    
+    
+    
+    
     $(document).ready(function () {
-
-        var ideditar = $('.editarbtn').val();
         
+        $('#tabletipocaja').DataTable();  //se define el datatable
+
+        var ideditar = $('.editarbtn').val(); //Se extrae el valor del boton
+        
+
+
+        $('.').click(function (e) { 
+            e.preventDefault();
+            
+        });
         
         
         $('.deleteestadoaplicativo').submit(function (e) { 

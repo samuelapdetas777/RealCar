@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vehiculos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\EstadoAplicativo;
+use App\Models\EstadoVehiculo;
 use Illuminate\Auth\Events\Validated;
 
 class EstadoAplicativoController extends Controller
@@ -33,7 +34,7 @@ class EstadoAplicativoController extends Controller
      */
     public function create()
     {
-        //
+        return view('supportinfo.estadoaplicativo.agregarestado');
     }
 
     /**
@@ -45,12 +46,10 @@ class EstadoAplicativoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombreEstadoAplicativo' => 'required|min:3'
+            'nombre' => 'required|min:3|unique:estadoaplicativo'
         ]);
-
         $estado = new EstadoAplicativo();
-        $estado->nombre = $request->input('nombreEstadoAplicativo');;
-
+        $estado->nombre = $request->input('nombre');;
         $estado->save();
         return redirect('/estadoaplicativo')->with('agregar', 'ok');
         
@@ -75,7 +74,8 @@ class EstadoAplicativoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $estado = EstadoAplicativo::find($id);
+        return view('supportinfo.estadoaplicativo.editarestado')->with('estado', $estado);
     }
 
     /**
@@ -87,15 +87,14 @@ class EstadoAplicativoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        echo "dsada";
         $request->validate([
-            'editarNombreEstadoAplicativo' => 'required|min:3'
+            'nombre' => 'required|min:3|unique:estadoaplicativo'
         ]);
-        
-        $estado = EstadoAplicativo::find($id);
-        $estado->nombre = $request->input('editarNombreEstadoAplicativo');;
-
+        $estado =  EstadoAplicativo::find($id);
+        $estado->nombre = $request->input('nombre');;
         $estado->save();
-        return redirect('/estadoaplicativo')->with('actualizar', 'ok');
+        return redirect('/estadoaplicativo')->with('agregar', 'ok');
         
     }
 

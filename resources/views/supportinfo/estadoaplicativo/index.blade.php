@@ -11,11 +11,14 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="text-center text-black">Estados de los vehículos en el apicativo</h1>
+                            <h1 class="text-center text-black">Estados de los vehículos en el aplicativo</h1>
                         <div class="card">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalformagregar">
+                        {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalformagregar">
                             Agregar <i class="fas fa-plus"></i>
-                        </button>
+                        </button>--}}
+                        <a href="{{route('estadoaplicativo.create')}}" class="btn btn-primary" >
+                            Agregar <i class="fas fa-plus"></i>
+                        </a>
                             <hr class="bg-primary">
                             <div class="card-body">
                                 <table class="table table-hover table-dark text-light" >
@@ -32,8 +35,10 @@
                                             <th scope="row">{{$estado->id}}</th>
                                             <td>{{$estado->nombre}}</td>
                                             <td>
+                                                
                                                 <form action="{{ route ('estadoaplicativo.destroy',$estado->id) }}" method="POST" class="deleteestadoaplicativo">
-                                                    <button type="button" href="#modalformeditar{{$estado->id}}" value="{{$estado->id}}" class="btn btn-info editarbtn" data-toggle="modal" data-target="#modalformeditar{{$estado->id}}">Editar<i class="fas fa-pen"></i></button>
+                                                    <a href="/estadoaplicativo/{{$estado->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                                    {{--{{route('estadoaplicativo.index')}}--}}
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>
@@ -41,7 +46,7 @@
                                             </td>
                                         </tr>
                                         {{-- Modal Editar--}}
-                                        @include('supportinfo.estadoaplicativo.layouts.modaleditar')
+                                        {{--@include('supportinfo.estadoaplicativo.layouts.modaleditar')--}}
                                         
                                         
                                         
@@ -90,11 +95,12 @@
     </script>
 @elseif(session('agregar') == 'ok')
     <script>
-        Swal.fire(
-                'Agregado!',
-                'El campo fue agregado correctamente',
-                'success'
-                )
+        Swal.fire({
+                icon: 'success',
+                title: 'Se ha guardado correctamente',
+                timer: 1000,
+                timerProgressBar: true,
+                })
     </script>
 @endif
 
@@ -105,6 +111,17 @@
     $(document).ready(function () {
 
         var ideditar = $('.editarbtn').val();
+        
+
+       
+
+        
+        $('.formularioestadoaplicativo').submit(function (e) { 
+            e.preventDefault();
+            
+            this.submit();
+
+        });
         
         
         

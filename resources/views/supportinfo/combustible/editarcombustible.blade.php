@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Transmisiones')
+@section('title', 'Combustible')
 
 @section('css')
 
@@ -11,25 +11,26 @@
 
 <div class="card">
     <div class="card-body">
-            <h1 class="text-center text-black">Agregar transmisiones de los vehículos en el aplicativo</h1>
+            <h1 class="text-center text-black">Editar combustibles de los vehiculos</h1>
         <div class="card">
         
             <hr class="bg-primary">
-            <a href="/tipocaja">< Volver</a>
+            <a href="/combustible">< Volver</a>
             <div class="card-body">
                 <div class="col">
-                    <form action="{{route('tipocaja.store')}}" method="POST" class="formAgregarTipoCaja">
+                    <form action="/combustible/{{$combustible->id}}" method="POST" class="formEditarCombustible">
                     <div class="form-outline">
                         @csrf
+                        @method('PUT')
                         
-                        <label for="inputTipoCaja">Transmisión</label>
-                        <input type="text" class="form-control " id="inputTipoCaja" placeholder="Transmisión" value="{{old('nombre')}}" name="nombre" required>
+                        <label for="inputCombustible">Combustible</label>
+                        <input type="text" class="form-control " id="inputCombustible" placeholder="Combustible" value="{{$combustible->nombre}}" name="nombre" required>
                         @error('nombre')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
 
                     </div>
-                    <button type="submit" class="btn btn-success mt-2">Agregar</button>
+                    <button type="submit" class="btn btn-success mt-2">Editar</button>
                     </form>
                 </div>
             </div>
@@ -49,15 +50,18 @@
 
     <script>
         $(document).ready(function () {
-            $('.formAgregarTipoCaja').submit(function (e) { 
+
+            let inputCombustibleAnt = $('#inputCombustible').val();
+
+            $('.formEditarCombustible').submit(function (e) { 
                 e.preventDefault();
 
-                let inputTipoCaja = $('#inputTipoCaja').val();
+                let inputCombustible = $('#inputCombustible').val();
                 
 
                 //Se lanza una alerta antes de enviar el formulario para confirmar el envio
                 Swal.fire({
-                title: '¿Seguro que quieres agregar "'+inputTipoCaja+'" como nueva transmisión?',  //Se hace la confirmacion de si se quiere agregar el campo
+                title: '¿Seguro que quieres cambiar "'+inputCombustibleAnt+'" a "'+inputCombustible+'"?',  //Se hace la confirmacion de si se quiere agregar el campo
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -78,7 +82,7 @@
 
 @if($errors->any())
         <script>
-            $('#inputTipoCaja').addClass('is-invalid');
+            $('#inputCombustible').addClass('is-invalid');
         </script>
 @endif
 

@@ -6,22 +6,15 @@
 
 @section('content')
 
-
-    
-
                     <div class="card">
                         <div class="card-body">
                             <h1 class="text-center text-black">Agregar estados de los vehículos en el aplicativo</h1>
                         <div class="card">
-                        {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalformagregar">
-                            Agregar <i class="fas fa-plus"></i>
-                        </button>--}}
-                        
                             <hr class="bg-primary">
                             <a href="/estadoaplicativo">< Volver</a>
                             <div class="card-body">
                                 <div class="col">
-                                    <form action="{{route('estadoaplicativo.store')}}" method="POST" class="formEditarEstado">
+                                    <form action="{{route('estadoaplicativo.store')}}" method="POST" class="formAgregarEstado">
                                     <div class="form-outline">
                                         @csrf
                                         
@@ -48,7 +41,7 @@
     
     $(document).ready(function () {
 
-        let nuevoEstadoForm = $('.formEditarEstado');       //definimos una variable que contenga el formulario
+        let nuevoEstadoForm = $('.formAgregarEstado');       //definimos una variable que contenga el formulario
         let inputEstado = $('#inputEstadoAplicativo');      //definimos una variable que contenga el input
         
         nuevoEstadoForm.submit(function (e) {       //Generamos una fucnion cuando el formulario sea enviado (submit)

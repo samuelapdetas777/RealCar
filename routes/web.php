@@ -43,9 +43,13 @@ Route::resource('estadoaplicativo', 'App\Http\Controllers\Vehiculos\EstadoAplica
 //Rutas para la administracion de los tipos de transmisiones
 Route::resource('tipocaja', 'App\Http\Controllers\Vehiculos\TipoCajaController');
 
+//Rutas para la administracion de los combustibles
+Route::resource('combustible', 'App\Http\Controllers\Vehiculos\CombustibleController');
+
 
 // Rutas Angel
 Route::get('/register', [App\Http\Controllers\UserController::class, 'create'])->name('userregister');
 Route::resource('user', UserController::class);
 
 Route::resource('admin', AdminController::class);
+

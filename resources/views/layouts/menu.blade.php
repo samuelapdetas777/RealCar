@@ -86,8 +86,8 @@
             <i class=" fas fa-tags"></i><span>Estado aplicativo</span>
         </a>
     </li>
-    <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+    <li class="side-menus {{ Request::is('combustible') ? 'active' : '' }}">
+        <a href="/combustible" class="nav-link">
             <i class=" fas fa-oil-can"></i><span>Combustible</span>
         </a>
     </li>

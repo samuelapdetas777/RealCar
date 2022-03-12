@@ -26,7 +26,7 @@ class TipoCajaController extends Controller
      */
     public function create()
     {
-        //
+        return view('supportinfo.tipocaja.agregartipocaja');
     }
 
     /**
@@ -37,7 +37,14 @@ class TipoCajaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|min:3|unique:TipoCaja'
+        ]);
+
+        $tipocaja = new TipoCaja();
+        $tipocaja->nombre = $request->input('nombre');
+        $tipocaja->save();
+        return redirect('/tipocaja')->with('agregar', 'ok');
     }
 
     /**
@@ -59,7 +66,8 @@ class TipoCajaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tipocaja = TipoCaja::find($id);
+        return view('supportinfo.tipocaja.editartipocaja')->with('tipocaja', $tipocaja);
     }
 
     /**
@@ -71,7 +79,14 @@ class TipoCajaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|min:3|unique:TipoCaja'
+        ]);
+
+        $tipocaja = TipoCaja::find($id);
+        $tipocaja->nombre = $request->input('nombre');
+        $tipocaja->save();
+        return redirect('/tipocaja')->with('actualizar', 'ok');
     }
 
     /**
@@ -82,6 +97,8 @@ class TipoCajaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tipocaja = TipoCaja::find($id);
+        $tipocaja->delete();
+        return redirect('/tipocaja')->with('eliminar', 'ok');
     }
 }

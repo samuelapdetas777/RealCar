@@ -23,7 +23,7 @@ class EstadoAplicativoController extends Controller
     public function index()
     {
 
-        $estados = EstadoAplicativo::paginate(5);
+        $estados = EstadoAplicativo::All();
         return view('supportinfo.estadoaplicativo.index', compact('estados'));
     }
 
@@ -87,14 +87,13 @@ class EstadoAplicativoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo "dsada";
         $request->validate([
             'nombre' => 'required|min:3|unique:estadoaplicativo'
         ]);
         $estado =  EstadoAplicativo::find($id);
         $estado->nombre = $request->input('nombre');;
         $estado->save();
-        return redirect('/estadoaplicativo')->with('agregar', 'ok');
+        return redirect('/estadoaplicativo')->with('actualizar', 'ok');
         
     }
 

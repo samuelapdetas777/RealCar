@@ -27,7 +27,7 @@ class TipoCajaSeeder extends Seeder
         ]);
 
         DB::table('tipocaja')->insert([
-            'nombre'=> 'Semiasutomática (Doble embrague)',
+            'nombre'=> 'Semiautomática (Doble embrague)',
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);

@@ -1,32 +1,23 @@
 @extends('layouts.app')
 
-@section('title', 'Transmisión')
-
-
+@section('title', 'Transmisiones')
 
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/css/jquery.dataTables.min.css')}}">
 @endsection
 
-
-
 @section('content')
-
-
-
-
-
                     <div class="card">
                         <div class="card-body">
                             <h1 class="text-center text-black">Tipos de cajas de los vehículos</h1>
                         <div class="card">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalformagregar">
+                        <a href="/tipocaja/create" class="btn btn-primary">
                             Agregar  <i class="fas fa-plus"></i>
-                        </button>
+                        </a>
                             <hr class="bg-primary">
                             <div class="card-body">
-                                <table class="table table-hover table-info text-dark" id="tabletipocaja">
-                                    <thead class="bg-dark">
+                                <table class="table table-hover table-dark text-light " id="tabletipocaja">
+                                    <thead>
                                         <tr>
                                         <th scope="col" class="text-light">#ID</th>
                                         <th scope="col" class="text-light">Nombre</th>
@@ -35,22 +26,18 @@
                                     </thead>
                                     <tbody>
                                         @forelse($tipos as $tipo)
-                                        <tr>
+                                        <tr class="bg-dark hover">
                                             <th scope="row">{{$tipo->id}}</th>
                                             <td>{{$tipo->nombre}}</td>
                                             <td>
-                                                <form action="{{ route ('estadoaplicativo.destroy',$tipo->id) }}" method="POST" class="deleteestadoaplicativo">
-                                                    <button type="button" id="tipocajaeditarbtn" href="#modalformeditar{{$tipo->id}}" value="{{$tipo->id}}" class="btn btn-info editarbtn" data-toggle="modal" data-target="#modalformeditar{{$tipo->id}}">Editar<i class="fas fa-pen"></i></button>
+                                                <form action="{{ route ('tipocaja.destroy',$tipo->id) }}" method="POST" class="deleteTipoCaja">
+                                                    <a href="/tipocaja/{{$tipo->id}}/edit" id="tipocajaeditarbtn" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
-                                        {{-- Modal Editar--}}
-                                        @include('supportinfo.tipocaja.layouts.modaleditar')
-                                        
-                                        
                                         
                                         @empty
                                             No hay Estados registrados, agrega uno nuevo para verlos aqui.
@@ -65,10 +52,6 @@
                         </div>
                         </div>
                     </div>
-            
-                                    {{-- Modal Agregar--}}    
-                                    @include('supportinfo.tipocaja.layouts.modalagregar'); 
-
 
 
 @endsection
@@ -81,74 +64,11 @@
 
 
 <script>
-    $('#tipocajaeditarbtn').click(function (e) { 
-        e.preventDefault();
-        alert("holaaaaa");
-
-        this.submit();
-        
-    });
-</script>
-
-
-
-@if(session('eliminar') == 'ok')
-    <script>
-        Swal.fire(
-                'Eliminado!',
-                'El campo fue eliminado permanentemente',
-                'success'
-                )
-    </script>
-@elseif(session('actualizar') == 'ok')
-    <script>
-        Swal.fire(
-                'Actualizado!',
-                'El campo fue actualizado correctamente',
-                'success'
-                )
-    </script>
-@elseif(session('agregar') == 'ok')
-    <script>
-        Swal.fire(
-                'Agregado!',
-                'El campo fue agregado correctamente',
-                'success'
-                )
-    </script>
-@endif
-
-
-
-<script>
-
-
-
-    
-    
-    
-    
-    
-    
-    
     $(document).ready(function () {
-        
-        $('#tabletipocaja').DataTable();  //se define el datatable
-
-        var ideditar = $('.editarbtn').val(); //Se extrae el valor del boton
-        
-
-
-        $('.').click(function (e) { 
+        $('#tabletipocaja').DataTable();
+        $('.deleteTipoCaja').submit(function (e) { 
             e.preventDefault();
-            
-        });
-        
-        
-        $('.deleteestadoaplicativo').submit(function (e) { 
-            e.preventDefault();
-        
-            
+
             Swal.fire({
                 title: '¿Seguro quieres eliminar este campo?',
                 text: "No puedes revertir este cambio",
@@ -164,30 +84,41 @@
             }
             })
             
+        });
     });
-
-  
-});
-
 </script>
 
 
 
 
-@if($errors->any())
-    @if($errors->nombreEstadoAplicativo)
-        <script>
-            $(document).ready(function(){
-                $('#modalformagregar').modal('show')
-            })
-        </script>
-    @else
-        <script>
-            $(document).ready(function(){
-                $('#modalformeditar18').modal('show');
-            })
-        </script>
-    @endif
+@if(session('eliminar') == 'ok')
+    <script>
+        Swal.fire({
+                icon: 'success',
+                title: 'Se ha eliminado correctamente',
+                timer: 1500,
+                timerProgressBar: true,
+                })
+    </script>
+@elseif(session('actualizar') == 'ok')
+    <script>
+        Swal.fire({
+                icon: 'success',
+                title: 'Se han guardado los cambios correctamente',
+                timer: 1500,
+                timerProgressBar: true,
+                })
+    </script>
+@elseif(session('agregar') == 'ok')
+    <script>
+        Swal.fire({
+                icon: 'success',
+                title: 'Se ha agregado correctamente',
+                timer: 1500,
+                timerProgressBar: true,
+                })
+    </script>
 @endif
+
 
 @endsection

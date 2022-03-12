@@ -2,7 +2,9 @@
 
 @section('title', 'Estados en el aplicativo')
 
-
+@section('css')
+    <link rel="stylesheet" href="{{asset('assets/css/jquery.dataTables.min.css')}}">
+@endsection
 
 @section('content')
 
@@ -21,8 +23,8 @@
                         </a>
                             <hr class="bg-primary">
                             <div class="card-body">
-                                <table class="table table-hover table-dark text-light" >
-                                    <thead class="bg-dark">
+                                <table class="table table-hover table-dark text-light " id="tabletransmision">
+                                    <thead>
                                         <tr>
                                         <th scope="col" class="text-light">#ID</th>
                                         <th scope="col" class="text-light">Nombre</th>
@@ -31,12 +33,12 @@
                                     </thead>
                                     <tbody>
                                         @forelse($estados as $estado)
-                                        <tr>
+                                        <tr class="bg-dark hover">
                                             <th scope="row">{{$estado->id}}</th>
                                             <td>{{$estado->nombre}}</td>
                                             <td>
                                                 
-                                                <form action="{{ route ('estadoaplicativo.destroy',$estado->id) }}" method="POST" class="deleteestadoaplicativo">
+                                                <form action="{{ route ('estadoaplicativo.destroy',$estado->id) }}" method="POST" class="deleteEstadoAplicativo">
                                                     <a href="/estadoaplicativo/{{$estado->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
                                                     {{--{{route('estadoaplicativo.index')}}--}}
                                                     @csrf
@@ -58,9 +60,9 @@
                                     </tbody>
                                 </table>
 
-                                <div class="d-flex justify-content-center">
+                                {{-- <div class="d-flex justify-content-center">
                                     {{ $estados->links() }}
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         </div>
@@ -76,6 +78,36 @@
 @section('scripts')
 
 <script src="{{ asset('assets/js/sweetalert2.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('#tabletransmision').DataTable();      //Definimos la tabla como una DataTable
+
+                
+        $('.deleteEstadoAplicativo').submit(function (e) { 
+            e.preventDefault();
+        
+            Swal.fire({
+                title: '¿Seguro quieres eliminar este campo?',
+                text: "No puedes revertir este cambio",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0fbd37',
+                cancelButtonColor: '#fd3328',
+                confirmButtonText: 'Si, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit();
+            }
+            })
+    });
+});
+</script>
+
+
 
 @if(session('eliminar') == 'ok')
     <script>
@@ -104,70 +136,5 @@
     </script>
 @endif
 
-
-
-<script>
-    
-    $(document).ready(function () {
-
-        var ideditar = $('.editarbtn').val();
-        
-
-       
-
-        
-        $('.formularioestadoaplicativo').submit(function (e) { 
-            e.preventDefault();
-            
-            this.submit();
-
-        });
-        
-        
-        
-        $('.deleteestadoaplicativo').submit(function (e) { 
-            e.preventDefault();
-        
-            
-            Swal.fire({
-                title: '¿Seguro quieres eliminar este campo?',
-                text: "No puedes revertir este cambio",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#0fbd37',
-                cancelButtonColor: '#fd3328',
-                confirmButtonText: 'Si, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                this.submit();
-            }
-            })
-            
-    });
-
-  
-});
-
-</script>
-
-
-
-
-@if($errors->any())
-    @if($errors->nombreEstadoAplicativo)
-        <script>
-            $(document).ready(function(){
-                $('#modalformagregar').modal('show')
-            })
-        </script>
-    @else
-        <script>
-            $(document).ready(function(){
-                $('#modalformeditar18').modal('show');
-            })
-        </script>
-    @endif
-@endif
 
 @endsection

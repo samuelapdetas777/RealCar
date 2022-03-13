@@ -35,16 +35,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Route::get('/estadoaplicativo', [App\Http\Controllers\VehiculosController::class, 'estadoAplicativo'])->name('estadoaplicativo');
 
-//Rutas para la administracion de los vehiculos
-Route::resource('estadoaplicativo', 'App\Http\Controllers\Vehiculos\EstadoAplicativoController');
-// Route::delete('estadoaplicativo/{estado}', [EstadoAplicativoController::class, 'destroy'])->name('estadosAplicativoEliminar');
+Route::resource('ciudad', 'App\Http\Controllers\Info\CiudadController');    //Todas las ciudades de Colombia
 
+Route::resource('estadoaplicativo', 'App\Http\Controllers\Vehiculos\EstadoAplicativoController'); //Estados de los vehiculos en el aplicativo
 
-//Rutas para la administracion de los tipos de transmisiones
-Route::resource('tipocaja', 'App\Http\Controllers\Vehiculos\TipoCajaController');
+Route::resource('tipocaja', 'App\Http\Controllers\Vehiculos\TipoCajaController');   //Tipos de cajas de los vehiculos
 
-//Rutas para la administracion de los combustibles
-Route::resource('combustible', 'App\Http\Controllers\Vehiculos\CombustibleController');
+Route::resource('combustible', 'App\Http\Controllers\Vehiculos\CombustibleController'); //Los combustibles de los vehiculos
+
+Route::resource('sede', 'App\Http\Controllers\Info\SedeController');   //Las sedes de RealCar
+
+Route::resource('marca', 'App\Http\Controllers\Vehiculos\MarcaController');   //Las marcas de los vehiculos
+
+Route::resource('estadovehiculo', 'App\Http\Controllers\Vehiculos\EstadoVehiculoController');   //Los estados del vehiculo
+
 
 
 // Rutas Angel

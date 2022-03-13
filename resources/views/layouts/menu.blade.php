@@ -64,13 +64,13 @@
 
 
     <li class="menu-header">Información de apoyo</li>
-    <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+    <li class="side-menus {{ Request::is('ciudad') ? 'active' : '' }}">
+        <a href="/ciudad" class="nav-link">
             <i class=" fas fa-city"></i><span>Ciudades</span>
         </a>
     </li>
-    <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+    <li class="side-menus {{ Request::is('sedes') ? 'active' : '' }}">
+        <a href="/sede" class="nav-link">
             <i class=" fas fa-map-pin"></i><span>Sedes</span>
         </a>
     </li>
@@ -79,6 +79,11 @@
     <li class="side-menus {{ Request::is('tipocaja') ? 'active' : '' }}">
         <a href="/tipocaja" class="nav-link">
             <i class=" fas fa-cogs"></i><span>Transmisión</span>
+        </a>
+    </li>
+    <li class="side-menus {{ Request::is('estadovehiculo') ? 'active' : '' }}">
+        <a href="/estadovehiculo" class="nav-link">
+            <i class=" fas fa-tag"></i><span>Estado vehículo</span>
         </a>
     </li>
     <li class="side-menus {{ Request::is('estadoaplicativo') ? 'active' : '' }}">
@@ -91,8 +96,8 @@
             <i class=" fas fa-oil-can"></i><span>Combustible</span>
         </a>
     </li>
-    <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+    <li class="side-menus {{ Request::is('marca') ? 'active' : '' }}">
+        <a href="/marca" class="nav-link">
             <i class=" fas fa-tag"></i><span>Marcas</span>
         </a>
     </li>

@@ -64,27 +64,27 @@
 
 
 <script>
+    $('.deleteTipoCaja').submit(function (e) { 
+        e.preventDefault();
+
+        Swal.fire({
+            title: '¿Seguro quieres eliminar este campo?',
+            text: "No puedes revertir este cambio",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#0fbd37',
+            cancelButtonColor: '#fd3328',
+            confirmButtonText: 'Si, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            this.submit();
+        }
+        })
+        
+    });
     $(document).ready(function () {
         $('#tabletipocaja').DataTable();
-        $('.deleteTipoCaja').submit(function (e) { 
-            e.preventDefault();
-
-            Swal.fire({
-                title: '¿Seguro quieres eliminar este campo?',
-                text: "No puedes revertir este cambio",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#0fbd37',
-                cancelButtonColor: '#fd3328',
-                confirmButtonText: 'Si, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                this.submit();
-            }
-            })
-            
-        });
     });
 </script>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Info;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ciudad;
 use App\Models\Sede;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class SedeController extends Controller
     public function index()
     {
         $sedes = Sede::All();
-        return view('supportinfo.sedes.sedesindex', compact('sedes'));
+        $ciudades = Ciudad::All();
+        return view('supportinfo.sedes.sedeindex', compact('sedes', 'ciudades'));
     }
 
     /**
@@ -26,7 +28,8 @@ class SedeController extends Controller
      */
     public function create()
     {
-        return view('supportinfo.sedes.agregarsede');
+        $ciudades = Ciudad::All();
+        return view('supportinfo.sedes.agregarsede')->with('ciudades', $ciudades);
     }
 
     /**
@@ -37,7 +40,21 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required | min:5 | unique:sedes',
+            'telefono' => 'required | min:10',
+            'correo' => 'required | email',
+            'direccion' => 'required | min:5',
+            'ciudad' => 'required' 
+        ]);
+        $sede = new Sede();
+        $sede->nombre = $request->input('nombre');
+        $sede->telefono = $request->input('telefono');
+        $sede->correo = $request->input('correo');
+        $sede->direccion = $request->input('direccion');
+        $sede->ciudades_id = $request->input('ciudad');
+        $sede->save();
+        return redirect('/sede')->with('agregar', 'ok');
     }
 
     /**
@@ -48,7 +65,9 @@ class SedeController extends Controller
      */
     public function show($id)
     {
-        //
+        $ciudades = Ciudad::All();
+        $sede = Sede::find($id);
+        return view('supportinfo.sedes.detallesede',compact('ciudades', 'sede'));
     }
 
     /**
@@ -59,7 +78,9 @@ class SedeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ciudades = Ciudad::All();
+        $sede = Sede::find($id);
+        return view('supportinfo.sedes.editarsede', compact('ciudades', 'sede'));
     }
 
     /**
@@ -71,7 +92,21 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required | min:5 | unique:sedes',
+            'telefono' => 'required | min:10',
+            'correo' => 'required | email',
+            'direccion' => 'required | min:5',
+            'ciudad' => 'required'
+        ]);
+        $sede = Sede::find($id);
+        $sede->nombre = $request->input('nombre');
+        $sede->telefono = $request->input('telefono');
+        $sede->correo = $request->input('correo');
+        $sede->direccion = $request->input('direccion');
+        $sede->ciudades_id = $request->input('ciudad');
+        $sede->save();
+        return redirect('/sede')->with('actualizar', 'ok');
     }
 
     /**
@@ -82,6 +117,8 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sede = Sede::find($id);
+        $sede->delete();
+        return redirect ('/sede')->with('eliminar', 'ok');
     }
 }

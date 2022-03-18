@@ -11,20 +11,18 @@
                         <div class="card-body">
                             <h1 class="text-center text-black">Sedes de RealCar</h1>
                         <div class="card">
-                        <a href="/sedes/create" class="btn btn-primary">
+                        <a href="/sede/create" class="btn btn-primary">
                             Agregar  <i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
                             <div class="card-body">
-                                <table class="table table-hover table-dark text-light " id="tablesedes">
+                                <table class="table table-hover table-dark text-light" id="tablesedes">
                                     <thead>
                                         <tr>
                                         <th scope="col" class="text-light">#ID</th>
                                         <th scope="col" class="text-light">Nombre</th>
-                                        <th scope="col" class="text-light">Teléfono</th>
-                                        <th scope="col" class="text-light">Correo</th>
                                         <th scope="col" class="text-light">Ciudad</th>
-                                        <th scope="col" class="text-light">Dirección</th>
+                                        <th scope="col" class="text-light">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -32,13 +30,16 @@
                                         <tr class="bg-dark hover">
                                             <th scope="row">{{$sede->id}}</th>
                                             <td>{{$sede->nombre}}</td>
-                                            <td>{{$sede->telefono}}</td>
-                                            <td>{{$sede->correo}}</td>
-                                            <td>{{$sede->direccion}}</td>
-                                            <td>{{$sede->ciudades_id}}</td>
+
+                                            @foreach($ciudades as $ciudad)
+                                                @if($sede->ciudades_id == $ciudad->id)
+                                                <td>{{$ciudad->nombre}}</td>
+                                                @endif
+                                            @endforeach
                                             <td>
-                                                <form action="{{ route ('sedes.destroy',$sede->id) }}" method="POST" class="deleteSede">
-                                                    <a href="/sedes/{{$sede->id}}/edit" id="sedeeditarbtn" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                                <form action="{{ route ('sede.destroy',$sede->id) }}" method="POST" class="deleteSede">
+                                                    <a href="/sede/{{$sede->id}}/edit" id="sedeeditarbtn" class="btn btn-info editarbtn">Editar <i class="fas fa-pen"></i></a>
+                                                    <a href="/sede/{{$sede->id}}" id="sededetallebtn" class="btn btn-success mostrarbtn">Mostrar <i class="fas fa-eye"></i></a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>
@@ -49,7 +50,7 @@
                                         @empty
                                         <tr class="bg-dark hover">
                                             <td colspan="6">
-                                                No hay combustibles registrados, agrega uno nuevo para verlos aqui.
+                                                No hay sedes registradas, agrega uno nuevo para verlos aqui.
                                             </td>
                                         </tr>
                                         @endforelse
@@ -75,27 +76,27 @@
 
 
 <script>
-    $(document).ready(function () {
-        $('#tabletipocaja').DataTable();
-        $('.deleteTipoCaja').submit(function (e) { 
-            e.preventDefault();
+    $('.deleteSede').submit(function (e) { 
+        e.preventDefault();
 
-            Swal.fire({
-                title: '¿Seguro quieres eliminar este campo?',
-                text: "No puedes revertir este cambio",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#0fbd37',
-                cancelButtonColor: '#fd3328',
-                confirmButtonText: 'Si, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                this.submit();
-            }
-            })
-            
-        });
+        Swal.fire({
+            title: '¿Seguro quieres eliminar este campo?',
+            text: "No puedes revertir este cambio",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#0fbd37',
+            cancelButtonColor: '#fd3328',
+            confirmButtonText: 'Si, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            this.submit();
+        }
+        })
+        
+    });
+    $(document).ready(function () {
+        $('#tablesedes').DataTable();
     });
 </script>
 

@@ -28,7 +28,7 @@
                             
                                 <div class="card usercard mr-2">
                                     <div class="top-container"> 
-                                        <figure class="avatar mr-2 bg-danger text-white img-fluid profile-image" data-initial="SA"></figure>
+                                        <figure class="avatar mr-2 bg-info  text-white img-fluid profile-image" data-initial="SA"></figure>
                                     
                                         <div class="ml-3">
                                             <h5 class="name">{{$usuario->name}} {{$usuario->last_name}}</h5>

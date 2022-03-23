@@ -7,8 +7,8 @@
 
     <li class="menu-header">Usuarios</li>
 
-    <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+    <li class="side-menus {{ Request::is('usuarios') ? 'active' : '' }}">
+        <a href="/usuarios" class="nav-link">
             <i class=" fas fa-user"></i><span>Usuarios</span>
         </a>
     </li>
@@ -17,11 +17,7 @@
             <i class=" fas fa-user-tag"></i><span>Roles</span>
         </a>
     </li>
-    <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
-            <i class=" fas fa-clipboard-list"></i><span>Permisos</span>
-        </a>
-    </li>
+    
     <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
         <a href="/login" class="nav-link">
             <i class=" fas fa-envelope"></i><span>Notificaciones</span>

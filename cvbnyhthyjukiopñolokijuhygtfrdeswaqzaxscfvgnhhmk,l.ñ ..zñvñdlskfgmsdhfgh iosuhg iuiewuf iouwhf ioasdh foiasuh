@@ -1,0 +1,83 @@
+[33mcommit a74c5bb8175c0c4965dca39b3eddca60f56804ad[m[33m ([m[1;36mHEAD -> [m[1;32mrolesypermisos[m[33m, [m[1;32msebastiancambios12marzo[m[33m)[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Fri Mar 18 16:46:36 2022 -0500
+
+    Se agrega el CRUD de las sedes, dando por terminado todos los CRUDs de la informacion de apoyo al aplicativo
+
+[33mcommit fb5aada86fbeda4ea6de2f45d1f2508f124ca098[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Sat Mar 12 23:11:57 2022 -0500
+
+    Se agrega el CRUD completo de Sedes, Ciudades, Estado de vehiculos y Marcas, mas todos los seeders, migraciones, modelos y vistas
+
+[33mcommit 9e512630f2cda7a09e5c3c5240a32b1c40bbd37e[m[33m ([m[1;31morigin/samuel[m[33m, [m[1;31morigin/master[m[33m, [m[1;32msamuel[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Fri Mar 11 21:37:16 2022 -0500
+
+    Se agrega el CRUD completo de los combustibles
+
+[33mcommit 91494c42c9d211796da163366125e79a9e4aec76[m[33m ([m[1;32mcrudtransmision[m[33m)[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Fri Mar 11 19:15:04 2022 -0500
+
+    Se hace el CRUD de Tipo de la caja de transmision
+
+[33mcommit a9bf58b56c65636cb080c815432e05c178999284[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Fri Mar 11 15:20:32 2022 -0500
+
+    Se termina todo el CRUD completamente de los Estados de los vehiculos en el aplicativo
+
+[33mcommit 2d4c420b1fe3f30040e2414dd0c2751e6622cae6[m[33m ([m[1;31morigin/crudtransmision[m[33m)[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Sun Mar 6 21:23:27 2022 -0500
+
+    se agrega el controlador y la vista de los tipos de transmision
+
+[33mcommit bbeae873add8b04aa396535aee2126d74e47d60a[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Sun Mar 6 18:52:14 2022 -0500
+
+    Se agregan los complementos del crud de Estados de los vehiculos en el aplicativo, aun tiene error en la muestra de los errores del validate al editar
+
+[33mcommit b1083378f6079e49f7bc89d7dd2cfa6537558612[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Sat Mar 5 20:33:45 2022 -0500
+
+    Se agrega el crud completo y funcional de los estados de los vehiculos en el aplicativo
+
+[33mcommit 22d68f351028c4c496010a0bffaeed788442a13a[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Wed Mar 2 20:29:48 2022 -0500
+
+    Se hacen los ultimos ajustes para la union del registro y el login, ambos funcionales y se inicia con la realizacion del CRUD de Estados del aplicativo
+
+[33mcommit f12a3610d1dcc8b0d5db46f5e4585c6a9ac50f16[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Wed Mar 2 09:21:46 2022 -0500
+
+    Se organiza el registro desarrollado por el compañero Sebastian Angel Marin, faltan las validaciones
+
+[33mcommit ce7f821b1e6ad0e6987d066f501d1d762035b887[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Mon Feb 28 08:33:24 2022 -0500
+
+    Realizamos la personalizacion del sidebar y de los colores de stisla
+
+[33mcommit 5e6435fd86d9f9c18bb13e87ab66dae16e80b472[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Fri Feb 25 10:53:00 2022 -0500
+
+    Se Agregan los demas elementos al sidebar del administrador, y se corrigen detalles visuales del login
+
+[33mcommit 8266490bcf1190d353d9fdd54ccb4e94f799cff0[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Wed Feb 23 07:03:12 2022 -0500
+
+    Se personaliza la plantilla del Login y la plantilla admin (solo la parte de bienvenida)
+
+[33mcommit 8a3b60d548ec0c8a30484f1f0231a9a0712c31a5[m
+Author: Samuel Agudelo Paniagua <samuelapdetas@gmail.com>
+Date:   Wed Feb 16 19:32:35 2022 -0500
+
+    Se crea el repositorio con el sistema de autenticacion con laravel ui stisla

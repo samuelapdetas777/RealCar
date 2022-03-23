@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Ciudad;
+use App\Models\Rol;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -17,11 +18,9 @@ class UserController extends Controller
     public function index()
     {
 
-  
+    //    $users =User::paginate(5);
     
-       $users =User::paginate(5);
-    
-        return view('admin.list_users', compact('users'));
+    //     return view('admin.list_users', compact('users'));
     
     }
 
@@ -33,9 +32,10 @@ class UserController extends Controller
      */
     public function create()
     {   
-        $ciudades =Ciudad::all();
-        // return view('auth.register', $ciudades);
-        return view ('auth.register', compact('ciudades'));
+        $ciudades =Ciudad::All();
+        // $ciudades = DB::table('ciudades')->where('nombre', '<>', 'prueba3')->get();
+        $roles = Rol::All();
+        return view ('auth.register', compact('ciudades', 'roles'));
     }
 
     /**
@@ -48,14 +48,17 @@ class UserController extends Controller
     {
         
         $request->validate([
-            'name' => 'required | regex:/^[A-Za-z]+$/',
-            'last_name' => 'required | regex:/^[A-Za-z]+$/',
-            'document'=> 'required | numeric | digits:10 | unique:users',
-            'phone'=> 'required | numeric | digits:10 | unique:users',
+            'nombre' => 'required | regex:/^[A-Za-z]+$/',
+            'apellido' => 'required | regex:/^[A-Za-z]+$/',
+            'documento'=> 'required | numeric | digits:10',
+            'celular'=> 'required | numeric | digits:10',
             'email' => 'required | email | unique:users',
             'password'=> 'required | regex:/^[A-Za-z0-9]+$/',
-            'contrasena_confirmation'=> 'required',
-            'address' => 'required',
+            'confirmacion_password'=> 'required',
+            'ciudad' => 'required',
+            'direccion' => 'required',
+            //  'rol' => 'required',
+
          
         ]);
         // return $request->input('nombre');
@@ -63,19 +66,19 @@ class UserController extends Controller
 
         //$user = User::create($request->except('_token'));
         $user = new User ($request->except('_token'));
-        $user->name = $request->input('name');
-        $user->last_name = $request->input('last_name');
-        $user->document = $request->input('document');
-        $user->phone = $request->input('phone');
+        $user->name = $request->input('nombre');
+        $user->last_name = $request->input('apellido');
+        $user->document = $request->input('documento');
+        $user->phone = $request->input('celular');
         $user->email = $request->input('email');
         $user->password =  bcrypt($request->input('password'));
-        $user->address = $request->input('address');
-        $user->ciudades_id = $request->input('ciudades_id');
+        $user->address = $request->input('direccion');
+        $user->city_id = $request->input('ciudad');
+        // $user->role_id = $request->input('rol');
 
         $user->save();
-        return redirect('login');
+        return redirect('/login');
 
-        // return "joliiiiiiiii";
         
     }
 

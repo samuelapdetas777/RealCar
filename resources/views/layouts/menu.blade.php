@@ -12,8 +12,8 @@
             <i class=" fas fa-user"></i><span>Usuarios</span>
         </a>
     </li>
-    <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+    <li class="side-menus {{ Request::is('roles') ? 'active' : '' }}">
+        <a href="/roles" class="nav-link">
             <i class=" fas fa-user-tag"></i><span>Roles</span>
         </a>
     </li>

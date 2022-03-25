@@ -115,6 +115,18 @@
                                 @error('rol')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
+
+
+
+
+                                {{--<label for="selectrol">Rol</label>
+                                <select class="form-control" id="selectrol" name="rol" required>
+                                    <option value="">Selecciona un rol</option>
+                                    @foreach($roles as $rol)
+                                        <option value="">{{$rol}}</option>
+                                    @endforeach
+                                </select>--}}
+
                             </div>
                         </div>
 

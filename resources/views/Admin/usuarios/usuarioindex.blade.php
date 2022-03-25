@@ -32,11 +32,11 @@
                                     
                                         <div class="ml-3">
                                             <h5 class="name">{{$usuario->name}} {{$usuario->last_name}}</h5>
-                                                @foreach($roles as $rol)
-                                                @if($usuario->role_id == $rol->id)
-                                            <p class="rol"><span class="badge bg-success">{{$rol->name}}</span></p>
+                                            @if(!empty($usuario->getRoleNames()))
+                                                @foreach($usuario->getRoleNames() as $rolName)
+                                                    <p class="rol"><span class="badge bg-success">{{$rolName}}</span></p>
+                                                @endforeach
                                             @endif
-                                            @endforeach
                                         </div>
                                     </div>
                                     <ul class="list-group list-group-flush">
@@ -71,6 +71,9 @@
                            
 
 
+                            </div>
+                            <div class="pagination justify-content-star">
+                                {!! $usuarios->links() !!}
                             </div>
                         </div>
                         </div>

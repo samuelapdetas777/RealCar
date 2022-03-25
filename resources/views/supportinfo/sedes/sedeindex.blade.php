@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Transmisiones')
+@section('title', 'Sedes')
 
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/css/jquery.dataTables.min.css')}}">
@@ -9,29 +9,37 @@
 @section('content')
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="text-center text-black">Tipos de cajas de los vehículos</h1>
+                            <h1 class="text-center text-black">Sedes de RealCar</h1>
                         <div class="card">
-                        <a href="/tipocaja/create" class="btn btn-primary">
+                        <a href="/sede/create" class="btn btn-primary">
                             Agregar  <i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
                             <div class="card-body">
-                                <table class="table table-hover table-dark text-light " id="tabletipocaja">
+                                <table class="table table-hover table-dark text-light" id="tablesedes">
                                     <thead>
                                         <tr>
                                         <th scope="col" class="text-light">#ID</th>
                                         <th scope="col" class="text-light">Nombre</th>
+                                        <th scope="col" class="text-light">Ciudad</th>
                                         <th scope="col" class="text-light">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($tipos as $tipo)
+                                        @forelse($sedes as $sede)
                                         <tr class="bg-dark hover">
-                                            <th scope="row">{{$tipo->id}}</th>
-                                            <td>{{$tipo->nombre}}</td>
+                                            <th scope="row">{{$sede->id}}</th>
+                                            <td>{{$sede->nombre}}</td>
+
+                                            @foreach($ciudades as $ciudad)
+                                                @if($sede->ciudades_id == $ciudad->id)
+                                                <td>{{$ciudad->nombre}}</td>
+                                                @endif
+                                            @endforeach
                                             <td>
-                                                <form action="{{ route ('tipocaja.destroy',$tipo->id) }}" method="POST" class="deleteTipoCaja">
-                                                    <a href="/tipocaja/{{$tipo->id}}/edit" id="tipocajaeditarbtn" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                                <form action="{{ route ('sede.destroy',$sede->id) }}" method="POST" class="deleteSede">
+                                                    <a href="/sede/{{$sede->id}}/edit" id="sedeeditarbtn" class="btn btn-info editarbtn">Editar <i class="fas fa-pen"></i></a>
+                                                    <a href="/sede/{{$sede->id}}" id="sededetallebtn" class="btn btn-success mostrarbtn">Mostrar <i class="fas fa-eye"></i></a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>
@@ -40,7 +48,11 @@
                                         </tr>
                                         
                                         @empty
-                                            No hay Estados registrados, agrega uno nuevo para verlos aqui.
+                                        <tr class="bg-dark hover">
+                                            <td colspan="6">
+                                                No hay sedes registradas, agrega uno nuevo para verlos aqui.
+                                            </td>
+                                        </tr>
                                         @endforelse
                                         
 
@@ -64,7 +76,7 @@
 
 
 <script>
-    $('.deleteTipoCaja').submit(function (e) { 
+    $('.deleteSede').submit(function (e) { 
         e.preventDefault();
 
         Swal.fire({
@@ -84,7 +96,7 @@
         
     });
     $(document).ready(function () {
-        $('#tabletipocaja').DataTable();
+        $('#tablesedes').DataTable();
     });
 </script>
 

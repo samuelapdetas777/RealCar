@@ -1,22 +1,27 @@
 @extends('layouts.app')
 
-@section('title', 'Transmisiones')
+@section('title', 'Estado de los vehiculos')
 
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/css/jquery.dataTables.min.css')}}">
 @endsection
 
 @section('content')
+
+
+    
+
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="text-center text-black">Tipos de cajas de los vehículos</h1>
+                            <h1 class="text-center text-black">Estados de los vehículos</h1>
                         <div class="card">
-                        <a href="/tipocaja/create" class="btn btn-primary">
-                            Agregar  <i class="fas fa-plus"></i>
+                        
+                        <a href="{{route('estadovehiculo.create')}}" class="btn btn-primary" >
+                            Agregar <i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
                             <div class="card-body">
-                                <table class="table table-hover table-dark text-light " id="tabletipocaja">
+                                <table class="table table-hover table-dark text-light " id="tableestadovehiculo">
                                     <thead>
                                         <tr>
                                         <th scope="col" class="text-light">#ID</th>
@@ -25,35 +30,41 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($tipos as $tipo)
+                                        @forelse($estadosv as $estadov)
                                         <tr class="bg-dark hover">
-                                            <th scope="row">{{$tipo->id}}</th>
-                                            <td>{{$tipo->nombre}}</td>
+                                            <th scope="row">{{$estadov->id}}</th>
+                                            <td>{{$estadov->nombre}}</td>
                                             <td>
-                                                <form action="{{ route ('tipocaja.destroy',$tipo->id) }}" method="POST" class="deleteTipoCaja">
-                                                    <a href="/tipocaja/{{$tipo->id}}/edit" id="tipocajaeditarbtn" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                                
+                                                <form action="{{ route('estadovehiculo.destroy',$estadov->id) }}" method="POST" class="deleteEstadoVehiculo">
+                                                    <a href="/estadovehiculo/{{$estadov->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                                    
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>
+                                                    <button type="submit" class="btn btn-danger btneliminar">Eliminar <i class="fas fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
                                         
                                         @empty
-                                            No hay Estados registrados, agrega uno nuevo para verlos aqui.
+                                        <tr class="bg-dark hover">
+                                            <td colspan="3">
+
+                                                No hay marcas registradas, agrega una nueva para verlas aqui.
+                                            </td>
+                                        </tr>
                                         @endforelse
                                         
 
                                     </tbody>
                                 </table>
-
-                                
                             </div>
                         </div>
                         </div>
                     </div>
+            
 
-
+ 
 @endsection
 
 @section('scripts')
@@ -62,30 +73,39 @@
 <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
 
 
-
 <script>
-    $('.deleteTipoCaja').submit(function (e) { 
-        e.preventDefault();
 
-        Swal.fire({
-            title: '¿Seguro quieres eliminar este campo?',
-            text: "No puedes revertir este cambio",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#0fbd37',
-            cancelButtonColor: '#fd3328',
-            confirmButtonText: 'Si, eliminar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-        if (result.isConfirmed) {
-            this.submit();
-        }
-        })
-        
+
+$('.deleteEstadoVehiculo').submit(function (e) { 
+            e.preventDefault();
+            
+            Swal.fire({
+                title: '¿Seguro quieres eliminar este campo?',
+                text: "No puedes revertir este cambio",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0fbd37',
+                cancelButtonColor: '#fd3328',
+                confirmButtonText: 'Si, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit();
+            }
+            })
     });
+
+
+
+
     $(document).ready(function () {
-        $('#tabletipocaja').DataTable();
-    });
+        
+
+        $('#tableestadovehiculo').DataTable();      //Definimos la tabla como una DataTable
+
+
+
+});
 </script>
 
 
@@ -119,6 +139,7 @@
                 })
     </script>
 @endif
+
 
 
 @endsection

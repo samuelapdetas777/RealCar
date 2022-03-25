@@ -20,11 +20,14 @@ class CreateUsersTable extends Migration
             $table->string('document')->unique();
             $table->bigInteger('phone')->unique();
             $table->string('email')->unique();
-            $table->foreignId('ciudades_id')->constrained();  
+            $table->foreignId('city_id')->constrained('ciudades');  
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('address');
+            $table->foreignId('role_id')->constrained('roles');
             $table->string('photo')->nullable();
+            $table->boolean('state')->default(1);
+
             $table->rememberToken();
             $table->timestamps();
         });

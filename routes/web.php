@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EstadoAplicativoController;
 use App\Http\Controllers\Vehiculos\TipoCajaController;
+use App\Http\Controllers\Admin\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,16 +36,23 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Route::get('/estadoaplicativo', [App\Http\Controllers\VehiculosController::class, 'estadoAplicativo'])->name('estadoaplicativo');
 
-//Rutas para la administracion de los vehiculos
-Route::resource('estadoaplicativo', 'App\Http\Controllers\Vehiculos\EstadoAplicativoController');
-// Route::delete('estadoaplicativo/{estado}', [EstadoAplicativoController::class, 'destroy'])->name('estadosAplicativoEliminar');
+Route::resource('usuarios', UsuarioController::class);
 
 
-//Rutas para la administracion de los tipos de transmisiones
-Route::resource('tipocaja', 'App\Http\Controllers\Vehiculos\TipoCajaController');
+Route::resource('ciudad', 'App\Http\Controllers\Info\CiudadController');    //Todas las ciudades de Colombia
 
-//Rutas para la administracion de los combustibles
-Route::resource('combustible', 'App\Http\Controllers\Vehiculos\CombustibleController');
+Route::resource('estadoaplicativo', 'App\Http\Controllers\Vehiculos\EstadoAplicativoController'); //Estados de los vehiculos en el aplicativo
+
+Route::resource('tipocaja', 'App\Http\Controllers\Vehiculos\TipoCajaController');   //Tipos de cajas de los vehiculos
+
+Route::resource('combustible', 'App\Http\Controllers\Vehiculos\CombustibleController'); //Los combustibles de los vehiculos
+
+Route::resource('sede', 'App\Http\Controllers\Info\SedeController');   //Las sedes de RealCar
+
+Route::resource('marca', 'App\Http\Controllers\Vehiculos\MarcaController');   //Las marcas de los vehiculos
+
+Route::resource('estadovehiculo', 'App\Http\Controllers\Vehiculos\EstadoVehiculoController');   //Los estados del vehiculo
+
 
 
 // Rutas Angel

@@ -26,7 +26,8 @@ class UsuarioController extends Controller
         $usuarios = User::paginate(8);
         $ciudades = Ciudad::All();
         // $roles = Rol::All();
-        $roles = Role::pluck('name', 'name')->All();
+        // $roles = Role::pluck('name', 'name')->All();
+        $roles = Role::All();
         return view('Admin.usuarios.usuarioindex', compact('usuarios', 'ciudades', 'roles'));
     }
 
@@ -66,26 +67,25 @@ class UsuarioController extends Controller
             'estado'=> 'required'
         ]);
 
-        // $usuario = new User ($request->except('_token'));
-        // $usuario->name = $request->input('nombre');
-        // $usuario->last_name = $request->input('apellido');
-        // $usuario->document = $request->input('documento');
-        // $usuario->phone = $request->input('celular');
-        // $usuario->email = $request->input('email');
-        // $usuario->password =  bcrypt($request->input('password'));
-        // $usuario->city_id = $request->input('ciudad');
-        // $usuario->address = $request->input('direccion');
-        // $usuario->role_id = $request->input('rol');
-        // $usuario->state = $request->input('estado');
-        // $usuario->assi
-        // $usuario->save();
+        $usuario = new User ($request->except('_token'));
+        $usuario->name = $request->input('nombre');
+        $usuario->last_name = $request->input('apellido');
+        $usuario->document = $request->input('documento');
+        $usuario->phone = $request->input('celular');
+        $usuario->email = $request->input('email');
+        $usuario->password =  bcrypt($request->input('password'));
+        $usuario->city_id = $request->input('ciudad');
+        $usuario->address = $request->input('direccion');
+        $usuario->state = $request->input('estado');
+        
+        $usuario->save();
+        $usuario->assignRole($request->input('roles'));
 
 
 
         $input = $request->All();
         
-        $user = User::create($input('roles'));
-        $user->assignRole($request->input('roles'));
+        // $user = User::create($input);
 
 
 
@@ -104,7 +104,7 @@ class UsuarioController extends Controller
     {
         $usuario = user::find($id);
         $ciudades = Ciudad::All();
-        $roles = Rol::All();
+        $roles = Role::All();
         return view('Admin.usuarios.verusuario', compact('usuario', 'ciudades', 'roles'));
 
     }
@@ -118,11 +118,12 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         
-        $roles = Role::pluck('name', 'name')->All();
+        // $roles = Role::pluck('name', 'name')->All();
+        $roles = Role::All();
         $usuario = User::find($id);
         $ciudades = Ciudad::All();
-        // $roles = Rol::All();
-        $userRol = $usuario->roles->pluck('name', 'name')->All();
+        // $userRol = $usuario->roles->pluck('name', 'name')->All();
+        $userRol = $usuario->roles->All();
         return view('Admin.usuarios.editarusuario', compact('usuario', 'ciudades', 'roles', 'userRol'));
     }
 
@@ -176,21 +177,20 @@ class UsuarioController extends Controller
 
         // $usuario = new User ($request->except('_token'));
         $usuario = User::find($id);
-        // $usuario->name = $request->input('nombre');
-        // $usuario->last_name = $request->input('apellido');
-        // $usuario->document = $request->input('documento');
-        // $usuario->phone = $request->input('celular');
-        // $usuario->email = $request->input('email');
-        // $usuario->password =  bcrypt($request->input('password'));
-        // $usuario->city_id = $request->input('ciudad');
-        // $usuario->address = $request->input('direccion');
-        // $usuario->role_id = $request->input('rol');
-        // $usuario->state = $request->input('estado');
-        // $usuario->save();
+        $usuario->name = $request->input('nombre');
+        $usuario->last_name = $request->input('apellido');
+        $usuario->document = $request->input('documento');
+        $usuario->phone = $request->input('celular');
+        $usuario->email = $request->input('email');
+        $usuario->password =  bcrypt($request->input('password'));
+        $usuario->city_id = $request->input('ciudad');
+        $usuario->address = $request->input('direccion');
+
+        $usuario->state = $request->input('estado');
+        $usuario->save();
 
         $input = $request->All();
-        $usuario->update($input);
-        DB::table('model_has_role')->where('model_id', $id)->delete();
+        DB::table('model_has_roles')->where('model_id', $id)->delete(); //eliminamos el registro de la tabla detalle que relaciona al usuario con el rol, para que no este asignado a varios roles
 
         $usuario->assignRole($request->input('roles'));
         return redirect('/usuarios')->with('actualizar', 'ok');

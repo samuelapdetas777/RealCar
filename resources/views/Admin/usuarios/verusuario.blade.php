@@ -74,9 +74,9 @@
                                 <div class="col-lg-6">
                                     <label for="selectrol">Rol</label>
                                     <select class="form-control" id="selectrol" name="rol" disabled>
-                                        <option value="">Selecciona un rol</option>
-                                        @foreach($roles as $rol)
-                                            <option {{$usuario->role_id == $rol->id? 'selected' : ''}}>{{$rol->name}}</option>
+                                        @foreach($usuario->getRoleNames() as $rol)
+                                            {{--<option {{$usuario->role_id == $rol->id? 'selected' : ''}}>{{$rol->name}}</option>--}}
+                                            <option value="">{{$rol}}</option>
                                         @endforeach
                                     </select>
                                     

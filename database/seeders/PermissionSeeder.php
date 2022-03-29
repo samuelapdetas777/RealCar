@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
 {
@@ -14,7 +15,14 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permisos = [
-            'crear-rol'
+            // 'crear-rol',
+            // 'editar-rol',
+            'ver-rol',
+            'borrar-rol'
+
         ];
+        foreach($permisos as $permiso){
+            Permission::create(['name'=>$permiso]);
+        }
     }
 }

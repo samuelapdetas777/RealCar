@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\DB;
 class RolController extends Controller
 {
     public function __construct(){
-        $this->middleware('permission:ver-rol | crear-rol | editar-rol | borrar-rol', ['only'=>['index']]);
+        // $this->middleware('permission:ver-rol | crear-rol | editar-rol | borrar-rol', ['only'=>['index']]);
+        $this->middleware('permission:ver-rol', ['only'=>['index']]);
         $this->middleware('permission:crear-rol', ['only'=>['create', 'store']]);
         $this->middleware('permission:editar-rol', ['only'=>['edit', 'update']]);
         $this->middleware('permission:borrar-rol', ['only'=>['destroy']]);
@@ -40,8 +41,10 @@ class RolController extends Controller
      */
     public function create()
     {
-        $permisos = Permission::get();
-        return view('Admin.roles.agregarroles', compact('permisos'));
+        // $permisos = Permission::get();
+        $permisos = Permission::All();
+        return view('Admin.roles.agregarrol', compact('permisos'));
+        echo "hola";
     }
 
     /**
@@ -56,9 +59,15 @@ class RolController extends Controller
             'name' => 'required',
             'permission' => 'required'
         ]);
+
         $rol = Role::create(['name' => $request->input('name')]);
-        $rol->syncPermissions([$request->input('permission')]);
+        foreach($request->permission as $permisos)
+        {
+            
+            $rol->syncPermissions([$request->input('permission')]);
+        }
         return redirect('/roles')->with('agregar', 'ok');
+        
     }
 
     /**
@@ -82,9 +91,11 @@ class RolController extends Controller
     {
         $rol = Role::find($id);
         $permisos = Permission::get();
-        $rolesPermisos = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $id)
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
+        // $rolesPermisos = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $id)
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        $rolesPermisos = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $id)->get();
+        // $rolesPermisos = DB::table('role_has_permissions')->get();
         return view('Admin.roles.editarrol', compact('permisos', 'rol', 'rolesPermisos'));
     }
 
@@ -101,10 +112,17 @@ class RolController extends Controller
             'name' => 'required',
             'permission' => 'required'
         ]);
+
         $rol = Role::find($id);
         $rol->name = $request->input('name'); 
+        foreach($request->permission as $permisos)
+        {
+            
+            $rol->syncPermissions([$request->input('permission')]);
+        }
         $rol->save();
-        $rol->syncPermissions([$request->input('permission')]);
+
+        return redirect('/roles')->with('actualizar', 'ok');
 
     }
 

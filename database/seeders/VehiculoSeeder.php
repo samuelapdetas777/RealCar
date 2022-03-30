@@ -1,0 +1,190 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class VehiculoSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('vehiculos')->insert([
+            'user_id'=> '10',
+            'nombre'=> 'Toyota AE86',
+            'marcas_id'=> '2',
+            'placa' => '**2 Bogotá',
+            'motor' => '1.2 Naturalmente aspirado',
+            'airbag' => '2',
+            'kilometraje' => '10000',
+            'modelo'=> '1995',
+            'combustibles_id'=> '1',
+            'tipocaja_id'=> '2',
+            'color'=> 'Blanco',
+            'estadoaplicativo_id' => '1',
+            'estadovehiculo_id'=> '2',
+            'descripcion' => 'Todos los airbags pertenecen al conductor, unico dueño y partes originales',
+            'precio'=> '20000000',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
+
+        DB::table('vehiculos')->insert([
+            'user_id' => '11',
+            'nombre'=> 'Kia picanto',
+            'marcas_id'=> '7',
+            'placa' => '**2 Medellín',
+            'motor' => '1.2 Naturalmente aspirado',
+            'airbag' => '3',
+            'kilometraje' => '10000',
+            'modelo'=> '2015',
+            'combustibles_id'=> '1',
+            'tipocaja_id'=> '3',
+            'color'=> 'Gris',
+            'estadoaplicativo_id' => '3',
+            'estadovehiculo_id'=> '1',
+            'descripcion' => 'Todos los airbags pertenecen al conductor, unico dueño y partes originales',
+            'precio'=> '30000000',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
+        DB::table('vehiculos')->insert([
+            'user_id' => '11',
+            'nombre'=> 'Chevrolet Camaro',
+            'marcas_id'=> '1',
+            'placa' => '**2 Medellín',
+            'motor' => '1.2 Naturalmente aspirado',
+            'airbag' => '3',
+            'kilometraje' => '10000',
+            'modelo'=> '2020',
+            'combustibles_id'=> '1',
+            'tipocaja_id'=> '4',
+            'color'=> 'Rojo',
+            'estadoaplicativo_id' => '1',
+            'estadovehiculo_id'=> '1',
+            'descripcion' => 'Todos los airbags pertenecen al conductor, unico dueño y partes originales',
+            'precio'=> '10000000',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
+        DB::table('vehiculos')->insert([
+            'user_id' => '11',
+            'nombre'=> 'Toyota AE86',
+            'marcas_id'=> '2',
+            'placa' => '**2 Medellín',
+            'motor' => '1.2 Naturalmente aspirado',
+            'airbag' => '3',
+            'kilometraje' => '10000',
+            'modelo'=> '1995',
+            'combustibles_id'=> '1',
+            'tipocaja_id'=> '2',
+            'color'=> 'Blanco',
+            'estadoaplicativo_id' => '3',
+            'estadovehiculo_id'=> '2',
+            'descripcion' => 'Todos los airbags pertenecen al conductor, unico dueño y partes originales',
+            'precio'=> '20000000',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
+        DB::table('vehiculos')->insert([
+            'user_id' => '10',
+            'nombre'=> 'Toyota AE86',
+            'marcas_id'=> '2',
+            'placa' => '**2 Medellín',
+            'motor' => '1.2 Naturalmente aspirado',
+            'airbag' => '3',
+            'kilometraje' => '10000',
+            'modelo'=> '1995',
+            'combustibles_id'=> '1',
+            'tipocaja_id'=> '2',
+            'color'=> 'Blanco',
+            'estadoaplicativo_id' => '3',
+            'estadovehiculo_id'=> '2',
+            'descripcion' => 'Todos los airbags pertenecen al conductor, unico dueño y partes originales',
+            'precio'=> '20000000',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
+        DB::table('vehiculos')->insert([
+            'user_id' => '10',
+            'nombre'=> 'Toyota AE86',
+            'marcas_id'=> '2',
+            'placa' => '**2 Medellín',
+            'motor' => '1.2 Naturalmente aspirado',
+            'airbag' => '3',
+            'kilometraje' => '10000',
+            'modelo'=> '1995',
+            'combustibles_id'=> '1',
+            'tipocaja_id'=> '4',
+            'color'=> 'Blanco',
+            'estadoaplicativo_id' => '4',
+            'estadovehiculo_id'=> '2',
+            'descripcion' => 'Todos los airbags pertenecen al conductor, unico dueño y partes originales',
+            'precio'=> '20000000',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
+        DB::table('vehiculos')->insert([
+            'user_id' => '11',
+            'nombre'=> 'Toyota AE86',
+            'marcas_id'=> '2',
+            'placa' => '**2 Medellín',
+            'motor' => '1.2 Naturalmente aspirado',
+            'airbag' => '3',
+            'kilometraje' => '10000',
+            'modelo'=> '1995',
+            'combustibles_id'=> '1',
+            'tipocaja_id'=> '2',
+            'color'=> 'Blanco',
+            'estadoaplicativo_id' => '4',
+            'estadovehiculo_id'=> '2',
+            'descripcion' => 'Todos los airbags pertenecen al conductor, unico dueño y partes originales',
+            'precio'=> '20000000',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
+        DB::table('vehiculos')->insert([
+            'user_id' => '11',
+            'nombre'=> 'Toyota AE86',
+            'marcas_id'=> '2',
+            'placa' => '**2 Medellín',
+            'motor' => '1.2 Naturalmente aspirado',
+            'airbag' => '3',
+            'kilometraje' => '10000',
+            'modelo'=> '1995',
+            'combustibles_id'=> '1',
+            'tipocaja_id'=> '2',
+            'color'=> 'Blanco',
+            'estadoaplicativo_id' => '4',
+            'estadovehiculo_id'=> '2',
+            'descripcion' => 'Todos los airbags pertenecen al conductor, unico dueño y partes originales',
+            'precio'=> '20000000',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
+        DB::table('vehiculos')->insert([
+            'user_id' => '10',
+            'nombre'=> 'Toyota AE86',
+            'marcas_id'=> '2',
+            'placa' => '**2 Medellín',
+            'motor' => '1.2 Naturalmente aspirado',
+            'airbag' => '3',
+            'kilometraje' => '10000',
+            'modelo'=> '1995',
+            'combustibles_id'=> '1',
+            'tipocaja_id'=> '2',
+            'color'=> 'Blanco',
+            'estadoaplicativo_id' => '1',
+            'estadovehiculo_id'=> '2',
+            'descripcion' => 'Todos los airbags pertenecen al conductor, unico dueño y partes originales',
+            'precio'=> '20000000',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
+    }
+}

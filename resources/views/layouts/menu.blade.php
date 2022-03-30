@@ -1,5 +1,11 @@
     <li class="side-menus {{ Request::is('home') ? 'active' : '' }}">
         <!-- Se agregan los elementos al sidebar -->
+        <a class="nav-link" href="/home">
+            <i class=" fas fa-building"></i><span>Landing page usuarios</span>
+        </a>
+    </li>
+    <!-- Se agregan los elementos al sidebar -->
+    <li class="side-menus {{ Request::is('home') ? 'active' : '' }}">
         <a class="nav-link" href="{{route('home')}}">
             <i class=" fas fa-building"></i><span>Dashboard</span>
         </a>
@@ -27,7 +33,7 @@
     <li class="menu-header">Vehículos</li>
 
     <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+        <a href="/admin/vehiculos" class="nav-link">
             <i class=" fas fa-car"></i><span>Vehículos</span>
         </a>
     </li>
@@ -42,12 +48,12 @@
         </a>
     </li>
     <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+        <a href="/admin/pedidos" class="nav-link">
             <i class=" fas fa-list-alt"></i><span>Pedidos</span>
         </a>
     </li>
     <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+        <a href="/admin/compras" class="nav-link">
             <i class=" fas fa-shopping-cart"></i><span>Compras</span>
         </a>
     </li>

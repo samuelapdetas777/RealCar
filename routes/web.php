@@ -6,7 +6,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EstadoAplicativoController;
 use App\Http\Controllers\Vehiculos\TipoCajaController;
-use App\Http\Controllers\Vehiculos\VehiculoController;
+use App\Http\Controllers\Admin\VehiculoController;
+use App\Http\Controllers\Admin\CompraController;
+use App\Http\Controllers\Admin\PedidoController;
 
 //roles y permisos
 use App\Http\Controllers\Admin\UsuarioController;
@@ -46,7 +48,9 @@ Route::group(['prefix' =>'admin'], function(){
     Route::group(['middleware' => ['auth']], function(){
         Route::resource('roles', RolController::class);
         Route::resource('usuarios', UsuarioController::class);
-        
+        Route::resource('vehiculos', VehiculoController::class);
+        Route::resource('pedidos', PedidoController::class);
+        Route::resource('compras', CompraController::class);
         
         
         Route::resource('ciudad', 'App\Http\Controllers\Info\CiudadController');    //Todas las ciudades de Colombia
@@ -63,7 +67,7 @@ Route::group(['prefix' =>'admin'], function(){
         
         Route::resource('estadovehiculo', 'App\Http\Controllers\Vehiculos\EstadoVehiculoController');   //Los estados del vehiculo
         
-        Route::resource('vehiculos', VehiculoController::class);
+        
         
     });
 });

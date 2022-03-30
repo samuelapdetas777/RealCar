@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Vehiculos;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pedido;
+use App\Models\User;
+use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
-class VehiculoController extends Controller
+class PedidoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,11 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-        return view('Admin.vehiculos.vehiculosindex');
+         
+        $usuarios = User::All();
+        $pedidos = Pedido::All();
+        $vehiculos = Vehiculo::All();
+        return view('Admin.pedidos.pedidosindex', compact('usuarios', 'pedidos', 'vehiculos'));
     }
 
     /**
@@ -46,7 +53,11 @@ class VehiculoController extends Controller
      */
     public function show($id)
     {
-        //
+        $pedido = Pedido::find($id);
+        $proveedor = User::where('id', '=', $pedido->proveedor)->get();
+        $cliente = User::where('id', '=', $pedido->cliente)->get();
+        $vehiculos = Vehiculo::where('id', '=', $pedido->vehiculo)->get();
+        return view('Admin.pedidos.verpedido', compact('pedido', 'proveedor', 'cliente', 'vehiculos'));
     }
 
     /**

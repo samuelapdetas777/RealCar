@@ -15,7 +15,7 @@
         <div class="card">
         
             <hr class="bg-primary">
-            <a href="/usuarios">< Volver</a>
+            <a href="/admin/usuarios">< Volver</a>
             <div class="card-body">
                 <div class="row">
                     <div class="col">
@@ -95,7 +95,7 @@
                                 
                             </div>
                             <div class="row mt-5">
-                                <a href="/usuarios/{{$usuario->id}}/edit" class="btn btn-success">Editar</a>
+                                <a href="/admin/usuarios/{{$usuario->id}}/edit" class="btn btn-success">Editar</a>
                             </div>
                     </div>
                 </div>

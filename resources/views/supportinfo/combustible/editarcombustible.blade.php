@@ -15,7 +15,7 @@
         <div class="card">
         
             <hr class="bg-primary">
-            <a href="/combustible">< Volver</a>
+            <a href="/admin/combustible">< Volver</a>
             <div class="card-body">
                 <div class="col">
                     <form action="/combustible/{{$combustible->id}}" method="POST" class="formEditarCombustible">

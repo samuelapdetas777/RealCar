@@ -52,7 +52,7 @@ class CombustibleController extends Controller
         $combustible = new Combustible();
         $combustible->nombre = $request->input('nombre');
         $combustible->save();
-        return redirect('/combustible')->with('agregar', 'ok');
+        return redirect('/admin/combustible')->with('agregar', 'ok');
     }
 
     /**
@@ -94,7 +94,7 @@ class CombustibleController extends Controller
         $combustible = Combustible::find($id);
         $combustible->nombre = $request->input('nombre');
         $combustible->save();
-        return redirect('/combustible')->with('actualizar', 'ok');
+        return redirect('/admin/combustible')->with('actualizar', 'ok');
     }
 
     /**
@@ -107,6 +107,6 @@ class CombustibleController extends Controller
     {
         $combustible = Combustible::find($id);
         $combustible->delete();
-        return redirect('/combustible')->with('eliminar', 'ok');
+        return redirect('/admin/combustible')->with('eliminar', 'ok');
     }
 }

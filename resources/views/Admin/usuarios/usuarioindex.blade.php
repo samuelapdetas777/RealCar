@@ -49,8 +49,8 @@
                                             <span class="d-block"><a href="">Ver Citas</a></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <a href="/usuarios/{{$usuario->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                            <a href="/usuarios/{{$usuario->id}}/edit" class="btn btn-success"><i class="fas fa-pen"></i></a>
+                                            <a href="/admin/usuarios/{{$usuario->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            <a href="/admin/usuarios/{{$usuario->id}}/edit" class="btn btn-success"><i class="fas fa-pen"></i></a>
                                         </li>
                                     </ul>
                                     

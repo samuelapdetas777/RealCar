@@ -15,7 +15,7 @@
         <div class="card">
         
             <hr class="bg-primary">
-            <a href="/usuarios">< Volver</a>
+            <a href="/admin/usuarios">< Volver</a>
             <div class="card-body">
                 <div class="col">
 

@@ -44,7 +44,7 @@ class CiudadController extends Controller
         $ciudad = new Ciudad();
         $ciudad->nombre = $request->input('nombre');
         $ciudad->save();
-        return redirect('/ciudad')->with('agregar', 'ok');
+        return redirect('/admin/ciudad')->with('agregar', 'ok');
     }
 
     /**
@@ -86,7 +86,7 @@ class CiudadController extends Controller
         $ciudad = Ciudad::find($id);
         $ciudad->nombre = $request->input('nombre');
         $ciudad->save();
-        return redirect('/ciudad')->with('actualizar', 'ok');
+        return redirect('/admin/ciudad')->with('actualizar', 'ok');
     }
 
     /**
@@ -100,6 +100,6 @@ class CiudadController extends Controller
         
         $ciudad = Ciudad::find($id);
         $ciudad->delete();
-        return redirect('/ciudad')->with('eliminar', 'ok');
+        return redirect('/admin/ciudad')->with('eliminar', 'ok');
     }
 }

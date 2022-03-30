@@ -54,7 +54,7 @@ class SedeController extends Controller
         $sede->direccion = $request->input('direccion');
         $sede->ciudades_id = $request->input('ciudad');
         $sede->save();
-        return redirect('/sede')->with('agregar', 'ok');
+        return redirect('/admin/sede')->with('agregar', 'ok');
     }
 
     /**
@@ -106,7 +106,7 @@ class SedeController extends Controller
         $sede->direccion = $request->input('direccion');
         $sede->ciudades_id = $request->input('ciudad');
         $sede->save();
-        return redirect('/sede')->with('actualizar', 'ok');
+        return redirect('/admin/sede')->with('actualizar', 'ok');
     }
 
     /**
@@ -119,6 +119,6 @@ class SedeController extends Controller
     {
         $sede = Sede::find($id);
         $sede->delete();
-        return redirect ('/sede')->with('eliminar', 'ok');
+        return redirect('/admin/sede')->with('eliminar', 'ok');
     }
 }

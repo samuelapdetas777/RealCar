@@ -51,7 +51,7 @@ class EstadoAplicativoController extends Controller
         $estado = new EstadoAplicativo();
         $estado->nombre = $request->input('nombre');;
         $estado->save();
-        return redirect('/estadoaplicativo')->with('agregar', 'ok');
+        return redirect('/admin/estadoaplicativo')->with('agregar', 'ok');
         
     }
 
@@ -93,7 +93,7 @@ class EstadoAplicativoController extends Controller
         $estado =  EstadoAplicativo::find($id);
         $estado->nombre = $request->input('nombre');;
         $estado->save();
-        return redirect('/estadoaplicativo')->with('actualizar', 'ok');
+        return redirect('/admin/estadoaplicativo')->with('actualizar', 'ok');
         
     }
 
@@ -107,6 +107,6 @@ class EstadoAplicativoController extends Controller
     {
         $estado = EstadoAplicativo::find($id);
         $estado->delete();
-        return redirect('/estadoaplicativo')->with('eliminar', 'ok');
+        return redirect('/admin/estadoaplicativo')->with('eliminar', 'ok');
     }
 }

@@ -91,7 +91,7 @@ class UsuarioController extends Controller
 
 
 
-        return redirect('/usuarios')->with('agregar', 'ok');
+        return redirect('/admin/usuarios')->with('agregar', 'ok');
     }
 
     /**
@@ -193,7 +193,7 @@ class UsuarioController extends Controller
         DB::table('model_has_roles')->where('model_id', $id)->delete(); //eliminamos el registro de la tabla detalle que relaciona al usuario con el rol, para que no este asignado a varios roles
 
         $usuario->assignRole($request->input('roles'));
-        return redirect('/usuarios')->with('actualizar', 'ok');
+        return redirect('/admin/usuarios')->with('actualizar', 'ok');
     }
 
     /**
@@ -205,6 +205,6 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect('/usuarios')->with('eliminar', 'ok');
+        return redirect('/admin/usuarios')->with('eliminar', 'ok');
     }
 }

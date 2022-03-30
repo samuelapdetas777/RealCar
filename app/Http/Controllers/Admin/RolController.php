@@ -66,7 +66,7 @@ class RolController extends Controller
             
             $rol->syncPermissions([$request->input('permission')]);
         }
-        return redirect('/roles')->with('agregar', 'ok');
+        return redirect('/admin/roles')->with('agregar', 'ok');
         
     }
 
@@ -122,7 +122,7 @@ class RolController extends Controller
         }
         $rol->save();
 
-        return redirect('/roles')->with('actualizar', 'ok');
+        return redirect('/admin/roles')->with('actualizar', 'ok');
 
     }
 
@@ -136,6 +136,6 @@ class RolController extends Controller
     {
         $rol = Role::find($id);
         $rol->delete();
-        return redirect('/roles')->with('eliminar', 'ok');
+        return redirect('/admin/roles')->with('eliminar', 'ok');
     }
 }

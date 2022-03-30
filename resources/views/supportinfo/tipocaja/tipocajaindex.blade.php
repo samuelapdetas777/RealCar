@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <h1 class="text-center text-black">Tipos de cajas de los vehículos</h1>
                         <div class="card">
-                        <a href="/tipocaja/create" class="btn btn-primary">
+                        <a href="/admin/tipocaja/create" class="btn btn-primary">
                             Agregar  <i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
@@ -31,7 +31,7 @@
                                             <td>{{$tipo->nombre}}</td>
                                             <td>
                                                 <form action="{{ route ('tipocaja.destroy',$tipo->id) }}" method="POST" class="deleteTipoCaja">
-                                                    <a href="/tipocaja/{{$tipo->id}}/edit" id="tipocajaeditarbtn" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                                    <a href="/admin/tipocaja/{{$tipo->id}}/edit" id="tipocajaeditarbtn" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>

@@ -37,7 +37,7 @@
                                             <td>
                                                 
                                                 <form action="{{ route('marca.destroy',$marca->id) }}" method="POST" class="deleteMarca">
-                                                    <a href="/marca/{{$marca->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                                    <a href="/admin/marca/{{$marca->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
                                                     
                                                     @csrf
                                                     @method('DELETE')

@@ -15,7 +15,7 @@
         <div class="card">
         
             <hr class="bg-primary">
-            <a href="/tipocaja">< Volver</a>
+            <a href="/admin/tipocaja">< Volver</a>
             <div class="card-body">
                 <div class="col">
                     <form action="/tipocaja/{{$tipocaja->id}}" method="POST" class="formEditaTipoCaja">

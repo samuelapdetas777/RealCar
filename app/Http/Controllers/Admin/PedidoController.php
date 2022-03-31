@@ -7,6 +7,7 @@ use App\Models\Pedido;
 use App\Models\User;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PedidoController extends Controller
 {
@@ -31,7 +32,9 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //
+        $usuarios = User::All();
+        $vehiculos = Vehiculo::All();
+        return view('Admin.pedidos.agregarpedido', compact('usuarios', 'vehiculos'));
     }
 
     /**
@@ -42,7 +45,28 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pedido = new Pedido();
+        $proveedor = Vehiculo::find($request->input('vehiculo'));  
+        // $proveedor = Vehiculo::where('id', '=', $request->input('vehiculo'))->first(); //Otra manera de hacerlo
+        $fechaant = $request->input('fecha');
+        $año = substr($fechaant, -4);
+        $mes = substr($fechaant, 3, 2);
+        $dia = substr($fechaant, 0, 2);
+        $fecha = $año.'-'.$dia.'-'.$mes;
+
+
+
+        $pedido->cliente = $request->input('cliente');
+        $pedido->proveedor = $proveedor->user_id;
+        $pedido->vehiculo = $request->input('vehiculo');
+        $pedido->valor = $request->input('valor');
+        $pedido->fechaentrega = $fecha;
+        $pedido->save();
+
+        
+
+        return redirect('/admin/pedidos')->with('agregar', 'ok');
+
     }
 
     /**
@@ -54,10 +78,11 @@ class PedidoController extends Controller
     public function show($id)
     {
         $pedido = Pedido::find($id);
-        $proveedor = User::where('id', '=', $pedido->proveedor)->get();
-        $cliente = User::where('id', '=', $pedido->cliente)->get();
+        $proveedores = User::where('id', '=', $pedido->proveedor)->get();
+        // echo $proveedor;
+        $clientes = User::where('id', '=', $pedido->cliente)->get();
         $vehiculos = Vehiculo::where('id', '=', $pedido->vehiculo)->get();
-        return view('Admin.pedidos.verpedido', compact('pedido', 'proveedor', 'cliente', 'vehiculos'));
+        return view('Admin.pedidos.verpedido', compact('pedido', 'proveedores', 'clientes', 'vehiculos'));
     }
 
     /**
@@ -68,7 +93,16 @@ class PedidoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuarios = User::All();
+        $pedido = Pedido::find($id);
+        $vehiculos = Vehiculo::All();
+        $fechaant = $pedido->fechaentrega;
+        $mes = substr($fechaant, 5, 2);
+        $dia = substr($fechaant, -2);
+        $año = substr($fechaant, 0, 4);
+
+        $fecha = $mes.'/'. $dia.'/'. $año;
+        return view('Admin.pedidos.editarpedido', compact('usuarios', 'pedido', 'vehiculos', 'fecha'));
     }
 
     /**
@@ -80,7 +114,24 @@ class PedidoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pedido = Pedido::find($id);
+        $proveedor = Vehiculo::find($request->input('vehiculo'));  
+        $fechaant = $request->input('fecha');
+        $año = substr($fechaant, -4);
+        $mes = substr($fechaant, 3, 2);
+        $dia = substr($fechaant, 0, 2);
+        $fecha = $año.'-'.$dia.'-'.$mes;
+
+
+        $pedido->cliente = $request->input('cliente');
+        $pedido->proveedor = $proveedor->user_id;
+        $pedido->vehiculo = $request->input('vehiculo');
+        $pedido->valor = $request->input('valor');
+        $pedido->fechaentrega = $fecha;
+        $pedido->save();
+
+        return redirect('/admin/pedidos')->with('actualizar', 'ok');
+        
     }
 
     /**

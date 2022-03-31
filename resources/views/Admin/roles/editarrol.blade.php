@@ -18,7 +18,7 @@
             <a href="/admin/roles">< Volver</a>
             <div class="card-body">
                 <div class="col">
-                    <form action="/roles/{{$rol->id}}" method="POST" class="formEditarRol">
+                    <form action="/admin/roles/{{$rol->id}}" method="POST" class="formEditarRol">
                     <div class="form-outline">
                         @csrf
                         @method('PUT')

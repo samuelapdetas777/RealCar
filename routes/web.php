@@ -35,7 +35,7 @@ Route::get('/', function () {
     return view('landing');
 })->name('landingpage');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'usuarioIndex']);
 
 Auth::routes();
 

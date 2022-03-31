@@ -25,4 +25,7 @@ class HomeController extends Controller
     {
         return view('Admin.home');
     }
+    public function usuarioIndex(){
+        return view('Landing.home');
+    }
 }

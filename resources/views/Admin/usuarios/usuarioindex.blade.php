@@ -16,6 +16,14 @@
                         <div class="card-body">
                             <h1 class="text-center text-black">Usuarios</h1>
                         <div class="card">
+                            <div class="justify-content-end text-end">
+
+                                <i class="fas fa-user"></i> 
+                                @php 
+                                    use App\Models\User;
+                                    echo User::count();
+                                @endphp
+                            </div>
                         
                         <a href="{{route('usuarios.create')}}" class="btn btn-primary" >
                             Agregar nuevo usuario<i class="fas fa-plus"></i>

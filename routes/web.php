@@ -9,6 +9,7 @@ use App\Http\Controllers\Vehiculos\TipoCajaController;
 use App\Http\Controllers\Admin\VehiculoController;
 use App\Http\Controllers\Admin\CompraController;
 use App\Http\Controllers\Admin\PedidoController;
+use App\Http\Controllers\Info\ReporteController;
 
 //roles y permisos
 use App\Http\Controllers\Admin\UsuarioController;
@@ -38,7 +39,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/Admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('adminhome');
 
 
 // Route::get('/estadoaplicativo', [App\Http\Controllers\VehiculosController::class, 'estadoAplicativo'])->name('estadoaplicativo');
@@ -46,6 +47,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' =>'admin'], function(){
 
     Route::group(['middleware' => ['auth']], function(){
+        Route::get('/reportes', [ReporteController::class, 'index']);
         Route::resource('roles', RolController::class);
         Route::resource('usuarios', UsuarioController::class);
         Route::resource('vehiculos', VehiculoController::class);

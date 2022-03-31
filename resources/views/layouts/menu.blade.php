@@ -6,7 +6,7 @@
     </li>
     <!-- Se agregan los elementos al sidebar -->
     <li class="side-menus {{ Request::is('home') ? 'active' : '' }}">
-        <a class="nav-link" href="{{route('home')}}">
+        <a class="nav-link" href="{{route('adminhome')}}">
             <i class=" fas fa-building"></i><span>Dashboard</span>
         </a>
     </li>
@@ -59,7 +59,7 @@
     </li>
     <li class="menu-header">Información</li>
     <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+        <a href="/admin/reportes" class="nav-link">
             <i class=" fas fa-chart-bar"></i><span>Reportes</span>
         </a>
     </li>

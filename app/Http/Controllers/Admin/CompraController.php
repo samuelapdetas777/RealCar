@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Compra;
+use App\Models\User;
+use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
 class CompraController extends Controller
@@ -14,7 +17,10 @@ class CompraController extends Controller
      */
     public function index()
     {
-        //
+        $compras = Compra::All();
+        $usuarios = User::All();
+        $vehiculos = Vehiculo::All();
+        return view('Admin.compras.comprasindex', compact('compras', 'usuarios', 'vehiculos'));
     }
 
     /**
@@ -24,7 +30,8 @@ class CompraController extends Controller
      */
     public function create()
     {
-        //
+        $vehiculos = Vehiculo::All();
+        return view ('Admin.compras.agregarcompra')->with('vehiculos', $vehiculos);
     }
 
     /**
@@ -35,7 +42,23 @@ class CompraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'vehiculo' => 'required',
+            'valor' => 'required',
+        ]);
+        
+        $compra = new Compra();
+        $proveedor = Vehiculo::find($request->input('vehiculo'));
+
+        $compra->proveedor = $proveedor->user_id;
+        $compra->vehiculo = $request->input('vehiculo');
+        $compra->valor = $request->input('valor');
+        $compra->save();
+
+        
+
+        return redirect('/admin/compras')->with('agregar', 'ok');
+
     }
 
     /**
@@ -46,7 +69,10 @@ class CompraController extends Controller
      */
     public function show($id)
     {
-        //
+        $compra = Compra::find($id);
+        $proveedores = User::where('id', '=', $compra->proveedor)->get();
+        $vehiculos = Vehiculo::where('id', '=', $compra->vehiculo)->get();
+        return view('Admin.compras.vercompra', compact('compra', 'proveedores', 'vehiculos'));
     }
 
     /**
@@ -57,7 +83,10 @@ class CompraController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuarios = User::All();
+        $compra = Compra::find($id);
+        $vehiculos = Vehiculo::All();
+        return view('Admin.compras.editarcompra', compact('usuarios', 'compra', 'vehiculos'));
     }
 
     /**
@@ -69,7 +98,19 @@ class CompraController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'vehiculo' => 'required',
+            'valor' => 'required',
+        ]);
+        $compra = Compra::find($id);
+        $proveedor = Vehiculo::find($request->input('vehiculo'));
+
+        $compra->proveedor = $proveedor->user_id;
+        $compra->vehiculo = $request->input('vehiculo');
+        $compra->valor = $request->input('valor');
+        $compra->save();
+
+        return redirect('/admin/compras')->with('actualizar', 'ok');
     }
 
     /**

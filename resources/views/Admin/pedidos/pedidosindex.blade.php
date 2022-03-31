@@ -113,7 +113,7 @@ $('.deleteCiudad').submit(function (e) {
     $(document).ready(function () {
         
 
-        $('#tableciudades').DataTable();      //Definimos la tabla como una DataTable
+        $('#tablepedidos').DataTable();      //Definimos la tabla como una DataTable
 
 
 

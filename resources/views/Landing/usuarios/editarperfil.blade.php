@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.userapp')
 
 @section('title', 'Usuarios')
 
@@ -11,15 +11,14 @@
 
 <div class="card">
     <div class="card-body">
-            <h1 class="text-center text-black">Editar usuario</h1>
+            <h1 class="text-center text-black">Editar perfil</h1>
         <div class="card">
         
             <hr class="bg-primary">
-            <a href="/admin/usuarios">< Volver</a>
             <div class="card-body">
                 <div class="col">
 
-                    <form action="/admin/usuarios/{{$usuario->id}}" method="POST" class="editararUsuario">
+                    <form action="/usuarios/{{$usuario->id}}" method="POST" class="editararUsuario">
                         @csrf
                         @method('PUT')
                         <div class="row mt-5">
@@ -88,35 +87,10 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-lg-6">
-                                <label for="selectrol">Rol</label>
-                                <select class="form-control" id="selectrol" name="roles" required>
-                                    <option value="">Selecciona un rol</option>
-                                    @foreach($roles as $rol)
-                                        @foreach($userRol as $urol)
-                                            <option value="{{$rol->id}}" {{$urol->id == $rol->id? 'selected' : ''}}>{{$rol->name}}</option>
-                                        @endforeach
-                                    @endforeach
-                                </select>
-                                @error('rol')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mt-5">
-                            <div class="col-lg-6">
-                                <label for="selectestado">Estado</label>
-                                    <select class="form-control " id="selectestado" name="estado">
-                                        <option value="1" {{$usuario->state == 1? 'selected' : ''}}>Activo</option>
-                                        <option value="0" {{$usuario->state == 0? 'selected' : ''}}>Inactivo</option>
-                                    </select>
-                                @error('estado')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
                             
                         </div>
+
+                        
                         <div class="row mt-5">
                             <button type="submit" class="btn btn-success">Editar</button>
                         </div>

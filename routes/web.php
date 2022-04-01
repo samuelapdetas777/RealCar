@@ -14,7 +14,7 @@ use App\Http\Controllers\Info\ReporteController;
 //roles y permisos
 use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\Admin\RolController;
-
+use App\Http\Controllers\Landing\UUsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,11 +35,11 @@ Route::get('/', function () {
     return view('landing');
 })->name('landingpage');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'usuarioIndex']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'usuarioIndex'])->name('home');
 
 Auth::routes();
 
-Route::get('/Admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('adminhome');
+Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('adminhome');
 
 
 // Route::get('/estadoaplicativo', [App\Http\Controllers\VehiculosController::class, 'estadoAplicativo'])->name('estadoaplicativo');
@@ -73,6 +73,14 @@ Route::group(['prefix' =>'admin'], function(){
         
     });
 });
+
+
+Route::group(['middleware' => ['auth']], function(){
+    Route::resource('usuario', UUsuarioController::class);
+});
+
+
+
 
     // Rutas Angel
     Route::get('/register', [App\Http\Controllers\UserController::class, 'create'])->name('userregister');

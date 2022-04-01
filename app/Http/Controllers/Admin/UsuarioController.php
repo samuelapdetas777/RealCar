@@ -166,7 +166,7 @@ class UsuarioController extends Controller
             'confirmacion_de_password'=> 'required',
             'ciudad' => 'required',
             'direccion' => 'required',
-            'rol' => 'required',
+            'roles' => 'required',
             'estado'=> 'required'
         ]);
 

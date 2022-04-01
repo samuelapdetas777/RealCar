@@ -25,27 +25,15 @@
 <body>
 
 <div id="app">
-    <div class="main-wrapper main-wrapper-1 bg-dark2">
-        <div class="navbar-bg"></div>
-        <nav class="navbar navbar-expand-lg main-navbar bg-dark">
-            @include('layouts.header')
-
-        </nav>
-        <div class="main-sidebar main-sidebar-postion bg-dark">
-            @include('layouts.sidebar')
-        </div>
-        <!-- Main Content -->
-        <div class="main-content">
+    <div class="main-wrapper main-wrapper-1 bg-dark">
+        @include('layouts.landingnavbar')
+    </div>
+    <div class="main-content">
             @yield('content')
         </div>
-        <footer class="main-footer">
-            @include('layouts.footer')
-        </footer>
-    </div>
 </div>
 
 @include('profile.change_password')
-@include('profile.edit_profile')
 
 </body>
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>

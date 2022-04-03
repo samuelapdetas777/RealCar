@@ -39,7 +39,7 @@
                                             <td>
                                                 
                                                 <form action="{{ route ('estadoaplicativo.destroy',$estado->id) }}" method="POST" class="deleteEstadoAplicativo">
-                                                    <a href="/estadoaplicativo/{{$estado->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                                    <a href="/admin/estadoaplicativo/{{$estado->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
                                                     {{--{{route('estadoaplicativo.index')}}--}}
                                                     @csrf
                                                     @method('DELETE')

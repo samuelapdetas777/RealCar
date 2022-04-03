@@ -15,7 +15,7 @@
         <div class="card">
         
             <hr class="bg-primary">
-            <a href="/usuarios">< Volver</a>
+            <a href="/admin/usuarios">< Volver</a>
             <div class="card-body">
                 <div class="col">
 
@@ -106,7 +106,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <label for="selectrol">Rol</label>
-                                <select class="form-control" id="selectrol" name="rol" required>
+                                <select class="form-control" id="selectrol" name="roles" required>
                                     <option value="">Selecciona un rol</option>
                                     @foreach($roles as $rol)
                                         <option value="{{$rol->id}}">{{$rol->name}}</option>
@@ -115,6 +115,18 @@
                                 @error('rol')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
+
+
+
+
+                                {{--<label for="selectrol">Rol</label>
+                                <select class="form-control" id="selectrol" name="rol" required>
+                                    <option value="">Selecciona un rol</option>
+                                    @foreach($roles as $rol)
+                                        <option value="">{{$rol}}</option>
+                                    @endforeach
+                                </select>--}}
+
                             </div>
                         </div>
 

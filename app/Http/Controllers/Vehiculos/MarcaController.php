@@ -44,7 +44,7 @@ class MarcaController extends Controller
         $marca = new Marca();
         $marca->nombre = $request->input('nombre');
         $marca->save();
-        return redirect('/marca')->with('agregar', 'ok');
+        return redirect('/admin/marca')->with('agregar', 'ok');
     }
 
     /**
@@ -86,7 +86,7 @@ class MarcaController extends Controller
         $marca = Marca::find($id);
         $marca->nombre = $request->input('nombre');
         $marca->save();
-        return redirect('/marca')->with('actualizar', 'ok');
+        return redirect('/admin/marca')->with('actualizar', 'ok');
     }
 
     /**
@@ -99,6 +99,6 @@ class MarcaController extends Controller
     {
         $marca = Marca::find($id);
         $marca->delete();
-        return redirect('/marca')->with('eliminar', 'ok');
+        return redirect('/admin/marca')->with('eliminar', 'ok');
     }
 }

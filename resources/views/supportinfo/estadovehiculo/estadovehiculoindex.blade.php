@@ -37,7 +37,7 @@
                                             <td>
                                                 
                                                 <form action="{{ route('estadovehiculo.destroy',$estadov->id) }}" method="POST" class="deleteEstadoVehiculo">
-                                                    <a href="/estadovehiculo/{{$estadov->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                                    <a href="/admin/estadovehiculo/{{$estadov->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
                                                     
                                                     @csrf
                                                     @method('DELETE')

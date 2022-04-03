@@ -15,7 +15,7 @@
         <div class="card">
         
             <hr class="bg-primary">
-            <a href="/sede">< Volver</a>
+            <a href="/admin/sede">< Volver</a>
             <div class="card-body">
                 <div class="col">
 
@@ -54,7 +54,7 @@
                         <th scope="row">Acciones: </th>
                         <td>
                             <form action="{{ route ('sede.destroy',$sede->id) }}" method="POST" class="deleteSede">
-                                <a href="/sede/{{$sede->id}}/edit" id="sedeeditarbtn" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                <a href="/admin/sede/{{$sede->id}}/edit" id="sedeeditarbtn" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>

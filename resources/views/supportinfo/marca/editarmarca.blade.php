@@ -15,7 +15,7 @@
         <div class="card">
         
             <hr class="bg-primary">
-            <a href="/marca">< Volver</a>
+            <a href="/admin/marca">< Volver</a>
             <div class="card-body">
                 <div class="col">
                     <form action="/marca/{{$marca->id}}" method="POST" class="formEditarMarca">

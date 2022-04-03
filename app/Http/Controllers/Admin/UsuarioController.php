@@ -8,6 +8,12 @@ use App\Models\Rol;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Arr;
+
+
 class UsuarioController extends Controller
 {
     /**
@@ -19,7 +25,9 @@ class UsuarioController extends Controller
     {
         $usuarios = User::paginate(8);
         $ciudades = Ciudad::All();
-        $roles = Rol::All();
+        // $roles = Rol::All();
+        // $roles = Role::pluck('name', 'name')->All();
+        $roles = Role::All();
         return view('Admin.usuarios.usuarioindex', compact('usuarios', 'ciudades', 'roles'));
     }
 
@@ -31,7 +39,8 @@ class UsuarioController extends Controller
     public function create()
     {
         $ciudades = Ciudad::All();
-        $roles = Rol::All();
+        $roles = Role::All();
+        // $roles = Role::pluck('name', 'name')->All();
         return view('Admin.usuarios.agregarusuario', compact('ciudades', 'roles'));
     }
 
@@ -49,7 +58,8 @@ class UsuarioController extends Controller
             'documento'=> 'required | numeric | digits:10', //unico
             'celular'=> 'required | numeric | digits:10',   //unico
             'email' => 'required | email | unique:users',   //unico
-            'password'=> 'required | regex:/^[A-Za-z0-9]+$/',
+            'password'=> 'required | regex:/^[A-Za-z0-9]+$/ | same:confirmacion_de_password',
+            // 'email' => 'unique:users,email'
             'confirmacion_de_password'=> 'required',
             'ciudad' => 'required',
             'direccion' => 'required',
@@ -66,10 +76,22 @@ class UsuarioController extends Controller
         $usuario->password =  bcrypt($request->input('password'));
         $usuario->city_id = $request->input('ciudad');
         $usuario->address = $request->input('direccion');
-        $usuario->role_id = $request->input('rol');
         $usuario->state = $request->input('estado');
+        
         $usuario->save();
-        return redirect('/usuarios')->with('agregar', 'ok');
+        $usuario->assignRole($request->input('roles'));
+
+
+
+        $input = $request->All();
+        
+        // $user = User::create($input);
+
+
+
+
+
+        return redirect('/admin/usuarios')->with('agregar', 'ok');
     }
 
     /**
@@ -82,7 +104,7 @@ class UsuarioController extends Controller
     {
         $usuario = user::find($id);
         $ciudades = Ciudad::All();
-        $roles = Rol::All();
+        $roles = Role::All();
         return view('Admin.usuarios.verusuario', compact('usuario', 'ciudades', 'roles'));
 
     }
@@ -95,10 +117,14 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        $usuario = user::find($id);
+        
+        // $roles = Role::pluck('name', 'name')->All();
+        $roles = Role::All();
+        $usuario = User::find($id);
         $ciudades = Ciudad::All();
-        $roles = Rol::All();
-        return view('Admin.usuarios.editarusuario', compact('usuario', 'ciudades', 'roles'));
+        // $userRol = $usuario->roles->pluck('name', 'name')->All();
+        $userRol = $usuario->roles->All();
+        return view('Admin.usuarios.editarusuario', compact('usuario', 'ciudades', 'roles', 'userRol'));
     }
 
     /**
@@ -110,6 +136,25 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // $request->validate=([
+        //     'nombre' => 'required | regex:/^[A-Za-z]+$/',
+        //     'apellido' => 'required | regex:/^[A-Za-z]+$/',
+        //     'documento'=> 'required | numeric | digits:10', //unico
+        //     'celular'=> 'required | numeric | digits:10',   //unico
+        //     'email' => 'required | email | unique:users',   //unico
+        //     'password'=> 'required | regex:/^[A-Za-z0-9]+$/',
+        //     'confirmacion_de_password'=> 'required',
+        //     'ciudad' => 'required',
+        //     'direccion' => 'required',
+        //     'rol' => 'required',
+        //     'estado'=> 'required'
+        // ]);
+
+
+
+
+
+
         $request->validate=([
             'nombre' => 'required | regex:/^[A-Za-z]+$/',
             'apellido' => 'required | regex:/^[A-Za-z]+$/',
@@ -117,12 +162,18 @@ class UsuarioController extends Controller
             'celular'=> 'required | numeric | digits:10',   //unico
             'email' => 'required | email | unique:users',   //unico
             'password'=> 'required | regex:/^[A-Za-z0-9]+$/',
+            // 'email' => 'unique:users,email'
             'confirmacion_de_password'=> 'required',
             'ciudad' => 'required',
             'direccion' => 'required',
-            'rol' => 'required',
+            'roles' => 'required',
             'estado'=> 'required'
         ]);
+
+
+
+
+
 
         // $usuario = new User ($request->except('_token'));
         $usuario = User::find($id);
@@ -134,10 +185,15 @@ class UsuarioController extends Controller
         $usuario->password =  bcrypt($request->input('password'));
         $usuario->city_id = $request->input('ciudad');
         $usuario->address = $request->input('direccion');
-        $usuario->role_id = $request->input('rol');
+
         $usuario->state = $request->input('estado');
         $usuario->save();
-        return redirect('/usuarios')->with('actualizar', 'ok');
+
+        $input = $request->All();
+        DB::table('model_has_roles')->where('model_id', $id)->delete(); //eliminamos el registro de la tabla detalle que relaciona al usuario con el rol, para que no este asignado a varios roles
+
+        $usuario->assignRole($request->input('roles'));
+        return redirect('/admin/usuarios')->with('actualizar', 'ok');
     }
 
     /**
@@ -148,6 +204,7 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        echo "destroy";
+        User::find($id)->delete();
+        return redirect('/admin/usuarios')->with('eliminar', 'ok');
     }
 }

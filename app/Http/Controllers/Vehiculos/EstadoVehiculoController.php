@@ -44,7 +44,7 @@ class EstadoVehiculoController extends Controller
         $estadovehiculo = new EstadoVehiculo();
         $estadovehiculo->nombre = $request->input('nombre');
         $estadovehiculo->save();
-        return redirect('/estadovehiculo')->with('agregar', 'ok');
+        return redirect('/admin/estadovehiculo')->with('agregar', 'ok');
     }
 
     /**
@@ -86,7 +86,7 @@ class EstadoVehiculoController extends Controller
         $estadovehiculo = EstadoVehiculo::find($id);
         $estadovehiculo->nombre = $request->input('nombre');
         $estadovehiculo->save();
-        return redirect('/estadovehiculo')->with('actualizar', 'ok');
+        return redirect('/admin/estadovehiculo')->with('actualizar', 'ok');
     }
 
     /**
@@ -99,6 +99,6 @@ class EstadoVehiculoController extends Controller
     {
         $estadov = EstadoVehiculo::find($id);
         $estadov->delete();
-        return redirect('/estadovehiculo')->with('eliminar', 'ok');
+        return redirect('/admin/estadovehiculo')->with('eliminar', 'ok');
     }
 }

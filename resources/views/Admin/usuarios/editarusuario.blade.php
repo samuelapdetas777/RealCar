@@ -15,11 +15,11 @@
         <div class="card">
         
             <hr class="bg-primary">
-            <a href="/usuarios">< Volver</a>
+            <a href="/admin/usuarios">< Volver</a>
             <div class="card-body">
                 <div class="col">
 
-                    <form action="/usuarios/{{$usuario->id}}" method="POST" class="editararUsuario">
+                    <form action="/admin/usuarios/{{$usuario->id}}" method="POST" class="editararUsuario">
                         @csrf
                         @method('PUT')
                         <div class="row mt-5">
@@ -90,10 +90,12 @@
                             </div>
                             <div class="col-lg-6">
                                 <label for="selectrol">Rol</label>
-                                <select class="form-control" id="selectrol" name="rol" required>
+                                <select class="form-control" id="selectrol" name="roles" required>
                                     <option value="">Selecciona un rol</option>
                                     @foreach($roles as $rol)
-                                        <option value="{{$rol->id}}" {{$usuario->role_id == $rol->id? 'selected' : ''}}>{{$rol->name}}</option>
+                                        @foreach($userRol as $urol)
+                                            <option value="{{$rol->id}}" {{$urol->id == $rol->id? 'selected' : ''}}>{{$rol->name}}</option>
+                                        @endforeach
                                     @endforeach
                                 </select>
                                 @error('rol')

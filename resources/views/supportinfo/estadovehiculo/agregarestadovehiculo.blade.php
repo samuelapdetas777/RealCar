@@ -15,7 +15,7 @@
         <div class="card">
         
             <hr class="bg-primary">
-            <a href="/estadovehiculo">< Volver</a>
+            <a href="/admin/estadovehiculo">< Volver</a>
             <div class="card-body">
                 <div class="col">
                     <form action="{{route('estadovehiculo.store')}}" method="POST" class="formAgregarEstadoVehiculo">

@@ -15,9 +15,14 @@ return new class extends Migration
     {
         Schema::create('vehiculos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->string('nombre');
             $table->foreignId('marcas_id')->constrained('marcas');
+            $table->string('placa');
+            $table->string('motor');
+            $table->bigInteger('airbag');
             $table->bigInteger('modelo');
+            $table->bigInteger('kilometraje');
             $table->foreignId('combustibles_id')->constrained('combustibles');
             $table->foreignId('tipocaja_id')->constrained('tipocaja');
             $table->string('color');

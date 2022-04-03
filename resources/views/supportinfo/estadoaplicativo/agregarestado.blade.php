@@ -11,7 +11,7 @@
                             <h1 class="text-center text-black">Agregar estados de los vehículos en el aplicativo</h1>
                         <div class="card">
                             <hr class="bg-primary">
-                            <a href="/estadoaplicativo">< Volver</a>
+                            <a href="/admin/estadoaplicativo">< Volver</a>
                             <div class="card-body">
                                 <div class="col">
                                     <form action="{{route('estadoaplicativo.store')}}" method="POST" class="formAgregarEstado">

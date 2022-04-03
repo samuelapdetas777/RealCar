@@ -44,7 +44,7 @@ class TipoCajaController extends Controller
         $tipocaja = new TipoCaja();
         $tipocaja->nombre = $request->input('nombre');
         $tipocaja->save();
-        return redirect('/tipocaja')->with('agregar', 'ok');
+        return redirect('/admin/tipocaja')->with('agregar', 'ok');
     }
 
     /**
@@ -86,7 +86,7 @@ class TipoCajaController extends Controller
         $tipocaja = TipoCaja::find($id);
         $tipocaja->nombre = $request->input('nombre');
         $tipocaja->save();
-        return redirect('/tipocaja')->with('actualizar', 'ok');
+        return redirect('/admin/tipocaja')->with('actualizar', 'ok');
     }
 
     /**
@@ -99,6 +99,6 @@ class TipoCajaController extends Controller
     {
         $tipocaja = TipoCaja::find($id);
         $tipocaja->delete();
-        return redirect('/tipocaja')->with('eliminar', 'ok');
+        return redirect('/admin/tipocaja')->with('eliminar', 'ok');
     }
 }

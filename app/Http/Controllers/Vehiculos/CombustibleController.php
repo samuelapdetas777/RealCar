@@ -11,7 +11,10 @@ class CombustibleController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('permission:ver-combustible | crear-combustible | editar-combustible | borrar-combustible', ['only'=>['index']]);
+        $this->middleware('permission:crear-combustible', ['only'=>['create', 'store']]);
+        $this->middleware('permission:editar-combustible', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:borrar-combustible', ['only'=>['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -49,7 +52,7 @@ class CombustibleController extends Controller
         $combustible = new Combustible();
         $combustible->nombre = $request->input('nombre');
         $combustible->save();
-        return redirect('/combustible')->with('agregar', 'ok');
+        return redirect('/admin/combustible')->with('agregar', 'ok');
     }
 
     /**
@@ -91,7 +94,7 @@ class CombustibleController extends Controller
         $combustible = Combustible::find($id);
         $combustible->nombre = $request->input('nombre');
         $combustible->save();
-        return redirect('/combustible')->with('actualizar', 'ok');
+        return redirect('/admin/combustible')->with('actualizar', 'ok');
     }
 
     /**
@@ -104,6 +107,6 @@ class CombustibleController extends Controller
     {
         $combustible = Combustible::find($id);
         $combustible->delete();
-        return redirect('/combustible')->with('eliminar', 'ok');
+        return redirect('/admin/combustible')->with('eliminar', 'ok');
     }
 }

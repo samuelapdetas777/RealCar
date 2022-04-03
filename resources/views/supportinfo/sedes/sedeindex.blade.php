@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <h1 class="text-center text-black">Sedes de RealCar</h1>
                         <div class="card">
-                        <a href="/sede/create" class="btn btn-primary">
+                        <a href="/admin/sede/create" class="btn btn-primary">
                             Agregar  <i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
@@ -38,8 +38,8 @@
                                             @endforeach
                                             <td>
                                                 <form action="{{ route ('sede.destroy',$sede->id) }}" method="POST" class="deleteSede">
-                                                    <a href="/sede/{{$sede->id}}/edit" id="sedeeditarbtn" class="btn btn-info editarbtn">Editar <i class="fas fa-pen"></i></a>
-                                                    <a href="/sede/{{$sede->id}}" id="sededetallebtn" class="btn btn-success mostrarbtn">Mostrar <i class="fas fa-eye"></i></a>
+                                                    <a href="/admin/sede/{{$sede->id}}/edit" id="sedeeditarbtn" class="btn btn-info editarbtn">Editar <i class="fas fa-pen"></i></a>
+                                                    <a href="/admin/sede/{{$sede->id}}" id="sededetallebtn" class="btn btn-success mostrarbtn">Mostrar <i class="fas fa-eye"></i></a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>

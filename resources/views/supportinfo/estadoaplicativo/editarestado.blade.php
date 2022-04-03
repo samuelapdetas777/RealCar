@@ -16,7 +16,7 @@
                         
                         
                             <hr class="bg-primary">
-                            <a href="/estadoaplicativo">< Volver</a>
+                            <a href="/admin/estadoaplicativo">< Volver</a>
                             <div class="card-body">
                                 <div class="col">
                                     <form action="/estadoaplicativo/{{$estado->id}}" method="POST" class="formEditarEstado">

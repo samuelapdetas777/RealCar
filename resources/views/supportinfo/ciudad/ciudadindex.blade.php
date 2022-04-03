@@ -37,7 +37,7 @@
                                             <td>
                                                 
                                                 <form action="{{ route ('ciudad.destroy',$ciudad->id) }}" method="POST" class="deleteCiudad">
-                                                    <a href="/ciudad/{{$ciudad->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                                    <a href="/admin/ciudad/{{$ciudad->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
                                                     
                                                     @csrf
                                                     @method('DELETE')

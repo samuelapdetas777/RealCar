@@ -16,6 +16,14 @@
                         <div class="card-body">
                             <h1 class="text-center text-black">Usuarios</h1>
                         <div class="card">
+                            <div class="justify-content-end text-end">
+
+                                <i class="fas fa-user"></i> 
+                                @php 
+                                    use App\Models\User;
+                                    echo User::count();
+                                @endphp
+                            </div>
                         
                         <a href="{{route('usuarios.create')}}" class="btn btn-primary" >
                             Agregar nuevo usuario<i class="fas fa-plus"></i>
@@ -32,11 +40,11 @@
                                     
                                         <div class="ml-3">
                                             <h5 class="name">{{$usuario->name}} {{$usuario->last_name}}</h5>
-                                                @foreach($roles as $rol)
-                                                @if($usuario->role_id == $rol->id)
-                                            <p class="rol"><span class="badge bg-success">{{$rol->name}}</span></p>
+                                            @if(!empty($usuario->getRoleNames()))
+                                                @foreach($usuario->getRoleNames() as $rolName)
+                                                    <p class="rol"><span class="badge bg-success">{{$rolName}}</span></p>
+                                                @endforeach
                                             @endif
-                                            @endforeach
                                         </div>
                                     </div>
                                     <ul class="list-group list-group-flush">
@@ -49,8 +57,8 @@
                                             <span class="d-block"><a href="">Ver Citas</a></span>
                                         </li>
                                         <li class="list-group-item">
-                                            <a href="/usuarios/{{$usuario->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                            <a href="/usuarios/{{$usuario->id}}/edit" class="btn btn-success"><i class="fas fa-pen"></i></a>
+                                            <a href="/admin/usuarios/{{$usuario->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            <a href="/admin/usuarios/{{$usuario->id}}/edit" class="btn btn-success"><i class="fas fa-pen"></i></a>
                                         </li>
                                     </ul>
                                     
@@ -71,6 +79,9 @@
                            
 
 
+                            </div>
+                            <div class="pagination justify-content-star">
+                                {!! $usuarios->links() !!}
                             </div>
                         </div>
                         </div>

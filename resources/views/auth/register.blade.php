@@ -134,16 +134,16 @@
                                 </div>
 
                                 <div class="col mb-5">
-                                    <select name="rol" id="rol_id" class="form-select" >
+                                    <select name="roles" id="rol_id" class="form-select" >
                                         <option selected value="">Elige como te quieres registrar</option>
 
                                         @foreach($roles as $rol)
                                         
-                                        <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                                        <option value="{{$rol->id}}">{{ $rol->name }}</option>
                                        
                                         @endforeach 
                                     </select>
-                                    @error('rol')
+                                    @error('roles')
                                         <small>
                                             <strong>{{$message}}</strong>
                                         </small>

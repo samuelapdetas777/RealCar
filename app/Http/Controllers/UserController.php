@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Ciudad;
 use App\Models\Rol;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -34,7 +35,7 @@ class UserController extends Controller
     {   
         $ciudades =Ciudad::All();
         // $ciudades = DB::table('ciudades')->where('nombre', '<>', 'prueba3')->get();
-        $roles = Rol::All();
+        $roles = Role::Where('name', '<>', 'Administrador')->orWhere('name', '<>', 'Admin')->get();
         return view ('auth.register', compact('ciudades', 'roles'));
     }
 
@@ -57,7 +58,7 @@ class UserController extends Controller
             'confirmacion_password'=> 'required',
             'ciudad' => 'required',
             'direccion' => 'required',
-            //  'rol' => 'required',
+            //'roles' => 'required',
 
          
         ]);
@@ -77,6 +78,7 @@ class UserController extends Controller
         // $user->role_id = $request->input('rol');
 
         $user->save();
+        $user->assignRole($request->input('roles'));
         return redirect('/login');
 
         

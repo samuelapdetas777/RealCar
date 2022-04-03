@@ -18,7 +18,7 @@
             <a href="/admin/estadovehiculo">< Volver</a>
             <div class="card-body">
                 <div class="col">
-                    <form action="/estadovehiculo/{{$estadov->id}}" method="POST" class="formEditarEstadoVehiculo">
+                    <form action="/admin/estadovehiculo/{{$estadov->id}}" method="POST" class="formEditarEstadoVehiculo">
                     <div class="form-outline">
                         @csrf
                         @method('PUT')

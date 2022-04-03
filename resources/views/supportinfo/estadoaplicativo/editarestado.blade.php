@@ -19,7 +19,7 @@
                             <a href="/admin/estadoaplicativo">< Volver</a>
                             <div class="card-body">
                                 <div class="col">
-                                    <form action="/estadoaplicativo/{{$estado->id}}" method="POST" class="formEditarEstado">
+                                    <form action="/admin/estadoaplicativo/{{$estado->id}}" method="POST" class="formEditarEstado">
                                     <div class="form-outline">
                                         @csrf
                                         @method('PUT')

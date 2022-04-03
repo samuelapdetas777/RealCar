@@ -43,8 +43,8 @@ class CompraController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'vehiculo' => 'required',
-            'valor' => 'required ',
+            'vehiculo' => 'required  | exists:vehiculos,id',
+            'valor' => 'required | integer | numeric | digits_between:1000000,1500000000',
         ]);
         
         $compra = new Compra();
@@ -99,8 +99,8 @@ class CompraController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'vehiculo' => 'required',
-            'valor' => 'required',
+            'vehiculo' => 'required | exists:vehiculos,id',
+            'valor' => 'required | integer | numeric | digits_between:1000000,1500000000',
         ]);
         $compra = Compra::find($id);
         $proveedor = Vehiculo::find($request->input('vehiculo'));

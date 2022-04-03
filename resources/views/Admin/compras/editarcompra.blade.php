@@ -26,7 +26,7 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <label for="selectvehiculo">Vehiculo: </label>
-                                <select  class="form-control " id="selectvehiculo" name="vehiculo" required>
+                                <select  class="form-control @error('vehiculo') is-invalid @enderror" id="selectvehiculo" name="vehiculo" required>
                                 
                                 <option value="">Selecciona el vehiculo que ha adquirido la empresa</option>
                                 @foreach($vehiculos as $vehiculo)
@@ -46,14 +46,14 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
                                     </div>
-                                    <input type="number" class="form-control" name="valor" aria-label="Amount (to the nearest dollar)" value="{{$compra->valor}}">
+                                    <input type="number" class="form-control @error('valor') is-invalid @enderror" name="valor" aria-label="Amount (to the nearest dollar)" value="{{$compra->valor}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">.00</span>
                                     </div>
+                                    @error('valor')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
                                 </div>
-                                @error('valor')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
                             </div>
                         </div>
 

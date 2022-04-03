@@ -52,20 +52,21 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate=([
-            'nombre' => 'required | regex:/^[A-Za-z]+$/',
-            'apellido' => 'required | regex:/^[A-Za-z]+$/',
-            'documento'=> 'required | numeric | digits:10', //unico
-            'celular'=> 'required | numeric | digits:10',   //unico
-            'email' => 'required | email | unique:users',   //unico
+        $request->validate([
+            'nombre' => 'required | regex:/^[A-Za-z]+$/ | between:3,15',
+            'apellido' => 'required | regex:/^[A-Za-z]+$/ | between:3,15',
+            'documento'=> 'required | numeric | digits:10 | unique:users,document', 
+            'celular'=> 'required | numeric | digits:10 | unique:users,phone',
+            'email' => 'required | email | unique:users,email',
             'password'=> 'required | regex:/^[A-Za-z0-9]+$/ | same:confirmacion_de_password',
             // 'email' => 'unique:users,email'
-            'confirmacion_de_password'=> 'required',
-            'ciudad' => 'required',
+            'confirmacion_de_password'=> 'required | regex:/^[A-Za-z0-9]+$/ ',
+            'ciudad' => 'required | exists:ciudades,id',
             'direccion' => 'required',
-            'rol' => 'required',
-            'estado'=> 'required'
+            'roles' => 'required | exists:roles,id',
+            'estado'=> 'required | boolean'
         ]);
+        
 
         $usuario = new User ($request->except('_token'));
         $usuario->name = $request->input('nombre');
@@ -155,19 +156,19 @@ class UsuarioController extends Controller
 
 
 
-        $request->validate=([
-            'nombre' => 'required | regex:/^[A-Za-z]+$/',
-            'apellido' => 'required | regex:/^[A-Za-z]+$/',
-            'documento'=> 'required | numeric | digits:10', //unico
-            'celular'=> 'required | numeric | digits:10',   //unico
-            'email' => 'required | email | unique:users',   //unico
-            'password'=> 'required | regex:/^[A-Za-z0-9]+$/',
+        $request->validate([
+            'nombre' => 'required | regex:/^[A-Za-z]+$/ | between:3,15',
+            'apellido' => 'required | regex:/^[A-Za-z]+$/ | between:3,15',
+            'documento'=> 'required | numeric | digits:10 | unique:users,document', 
+            'celular'=> 'required | numeric | digits:10 | unique:users,phone',
+            'email' => 'required | email | unique:users,email',
+            'password'=> 'required | regex:/^[A-Za-z0-9]+$/ | same:confirmacion_de_password',
             // 'email' => 'unique:users,email'
-            'confirmacion_de_password'=> 'required',
-            'ciudad' => 'required',
+            'confirmacion_de_password'=> 'required | regex:/^[A-Za-z0-9]+$/ ',
+            'ciudad' => 'required | exists:ciudades,id',
             'direccion' => 'required',
-            'roles' => 'required',
-            'estado'=> 'required'
+            'roles' => 'required | exists:roles,id',
+            'estado'=> 'required | boolean'
         ]);
 
 

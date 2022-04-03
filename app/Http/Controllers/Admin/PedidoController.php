@@ -45,6 +45,12 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'cliente' => 'required | exists:users,id',
+            'vehiculo' => 'required | exists:vehiculos,id',
+            'valor' => 'required | integer | numeric | between:1000000,1500000000',
+            'fecha' => 'required | date'
+        ]);
         $pedido = new Pedido();
         $proveedor = Vehiculo::find($request->input('vehiculo'));  
         // $proveedor = Vehiculo::where('id', '=', $request->input('vehiculo'))->first(); //Otra manera de hacerlo
@@ -114,6 +120,13 @@ class PedidoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'cliente' => 'required | exists:users,id',
+            'vehiculo' => 'required | exists:vehiculos,id',
+            'valor' => 'required | integer | numeric | between:1000000,1500000000',
+            'fecha' => 'required | date'
+        ]);
+
         $pedido = Pedido::find($id);
         $proveedor = Vehiculo::find($request->input('vehiculo'));  
         $fechaant = $request->input('fecha');

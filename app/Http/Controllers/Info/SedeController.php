@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ciudad;
 use App\Models\Sede;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rule;
 class SedeController extends Controller
 {
     /**
@@ -41,11 +41,11 @@ class SedeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required | min:5 | unique:sedes',
-            'telefono' => 'required | min:10',
+            'nombre' => 'required | min:5 | string',
+            'telefono' => 'required | numeric | min:10',
             'correo' => 'required | email',
             'direccion' => 'required | min:5',
-            'ciudad' => 'required' 
+            'ciudad' => 'required | exists:ciudades,id' 
         ]);
         $sede = new Sede();
         $sede->nombre = $request->input('nombre');
@@ -93,7 +93,8 @@ class SedeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombre' => 'required | min:5 | unique:sedes',
+            'nombre' => 'required | min:5', 
+            'nombre' => Rule::unique('sedes', 'nombre')->ignore($id),  //se usa para no validar que ya este registrado, ignorando el registro que se va a editar
             'telefono' => 'required | min:10',
             'correo' => 'required | email',
             'direccion' => 'required | min:5',

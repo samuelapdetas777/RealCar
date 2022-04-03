@@ -18,7 +18,7 @@
             <a href="/admin/tipocaja">< Volver</a>
             <div class="card-body">
                 <div class="col">
-                    <form action="/tipocaja/{{$tipocaja->id}}" method="POST" class="formEditaTipoCaja">
+                    <form action="/admin/tipocaja/{{$tipocaja->id}}" method="POST" class="formEditaTipoCaja">
                     <div class="form-outline">
                         @csrf
                         @method('PUT')

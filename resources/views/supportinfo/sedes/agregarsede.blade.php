@@ -49,7 +49,7 @@
                         @enderror
 
                         <label class="mt-4" for="selectCiudad">Ciudad</label>
-                        <select class="custom-select form-control selectCiudad" id="selectCiudad" name="ciudad" required>
+                        <select class="custom-select form-control selectCiudad @error('ciudad') is-invalid @enderror" id="selectCiudad" name="ciudad" required>
                             <option selected>Selecciona la ciudad...</option>
                             @foreach($ciudades as $ciudad)
                             <option value="{{$ciudad->id}}">{{$ciudad->nombre}}</option>

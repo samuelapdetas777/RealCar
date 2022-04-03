@@ -23,9 +23,9 @@
                         @csrf
                         @method('PUT')
                         
-                        <label for="inputMarca">Marca</label>
-                        <input type="text" class="form-control " id="inputNombreRol" placeholder="Rol" value="{{$rol->name}}" name="name" required>
-                        @error('name')
+                        <label for="inputNombreRol">Nombre del rol: </label>
+                        <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="inputNombreRol" placeholder="Rol" value="{{$rol->name}}" name="nombre" required>
+                        @error('nombre')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                         <br>
@@ -34,8 +34,11 @@
                         <label for="permisos">Permisos para este rol:</label>
                         @foreach($permisos as $permiso)
                         <label class="form-check-label  d-block" for="{{$permiso->name}}">
-                            <input class="form-check-input" type="checkbox" value="{{$permiso->id}}" id="{{$permiso->name}}" name="permission[]" @foreach($rolesPermisos as $index){{$index->permission_id == $permiso->id? 'checked' : ''}} @endforeach>
+                            <input class="form-check-input @error('permission[]') is-invalid @enderror" type="checkbox" value="{{$permiso->id}}" id="{{$permiso->name}}" name="permission[]" @foreach($rolesPermisos as $index){{$index->permission_id == $permiso->id? 'checked' : ''}} @endforeach>
                             {{$permiso->name}}
+                            @error('permission[]') 
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
                         </label>
 
                         @endforeach

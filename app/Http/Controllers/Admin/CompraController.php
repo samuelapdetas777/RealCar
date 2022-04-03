@@ -44,7 +44,7 @@ class CompraController extends Controller
     {
         $request->validate([
             'vehiculo' => 'required',
-            'valor' => 'required',
+            'valor' => 'required ',
         ]);
         
         $compra = new Compra();

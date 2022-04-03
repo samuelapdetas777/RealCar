@@ -25,7 +25,7 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <label for="selectvehiculo">Vehiculo: </label>
-                                <select  class="form-control " id="selectvehiculo" name="vehiculo" required>
+                                <select  class="form-control custom-select @error('vehiculo') is-invalid @enderror" id="selectvehiculo" name="vehiculo" required>
                                 
                                 <option value="">Selecciona el vehiculo que ha sido adquirido</option>
                                 @foreach($vehiculos as $vehiculo)
@@ -37,6 +37,15 @@
                                 @enderror
                             </div>
                         </div>
+
+
+
+
+                    
+
+
+
+
                         
                         <div class="row mt-5">
                             <div class="col">
@@ -45,7 +54,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
                                     </div>
-                                    <input type="number" class="form-control" name="valor" aria-label="Amount (to the nearest dollar)">
+                                    <input type="number" class="form-control @error('valor') is-invalid @enderror" name="valor" aria-label="Amount (to the nearest dollar)" id="inputvalor">
                                     <div class="input-group-append">
                                         <span class="input-group-text">.00</span>
                                     </div>
@@ -115,7 +124,8 @@
 
 @if($errors->any())
         <script>
-            $('#inputnombre').addClass('is-invalid');
+            // $('#inputvalor').addClass('is-invalid');
+            // $('#selectvehiculo').addClass('is-invalid');
         </script>
 @endif
 

@@ -44,7 +44,7 @@ class CompraController extends Controller
     {
         $request->validate([
             'vehiculo' => 'required  | exists:vehiculos,id',
-            'valor' => 'required | integer | numeric | digits_between:1000000,1500000000',
+            'valor' => 'required | integer | numeric | between:1000000,1500000000',
         ]);
         
         $compra = new Compra();
@@ -100,7 +100,7 @@ class CompraController extends Controller
     {
         $request->validate([
             'vehiculo' => 'required | exists:vehiculos,id',
-            'valor' => 'required | integer | numeric | digits_between:1000000,1500000000',
+            'valor' => 'required | integer | numeric | between:1000000,1500000000',
         ]);
         $compra = Compra::find($id);
         $proveedor = Vehiculo::find($request->input('vehiculo'));

@@ -56,11 +56,11 @@ class RolController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'nombre' => 'required | min:3 | unique:roles,name',
             'permission' => 'required'
         ]);
 
-        $rol = Role::create(['name' => $request->input('name')]);
+        $rol = Role::create(['name' => $request->input('nombre')]);
         foreach($request->permission as $permisos)
         {
             
@@ -89,6 +89,7 @@ class RolController extends Controller
      */
     public function edit($id)
     {
+        
         $rol = Role::find($id);
         $permisos = Permission::get();
         // $rolesPermisos = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $id)
@@ -109,12 +110,12 @@ class RolController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'nombre' => 'required | min:3 | unique:roles,name',
             'permission' => 'required'
         ]);
 
         $rol = Role::find($id);
-        $rol->name = $request->input('name'); 
+        $rol->name = $request->input('nombre'); 
         foreach($request->permission as $permisos)
         {
             

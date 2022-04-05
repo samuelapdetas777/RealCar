@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CitaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
@@ -53,6 +54,7 @@ Route::group(['prefix' =>'admin'], function(){
         Route::resource('vehiculos', VehiculoController::class);
         Route::resource('pedidos', PedidoController::class);
         Route::resource('compras', CompraController::class);
+        Route::resource('citas', CitaController::class);
         
         
         Route::resource('ciudad', 'App\Http\Controllers\Info\CiudadController');    //Todas las ciudades de Colombia

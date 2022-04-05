@@ -34,9 +34,9 @@
                                         @forelse($citas as $cita)
                                         <tr class="bg-dark hover">
                                             <td scope="row">{{$cita->id}}</td>
-                                            <td scope="row">{{$cita->fecha}}</td>
-                                            <td scope="row">{{$aSUNTO->fecha}}</td>
-                                            @
+                                            <td scope="row">{{$cita->fecha}} {{$cita->hora}}</td>
+                                            <td scope="row">{{$cita->asunto}}</td>
+                                            
                                             <td>
                                                 
                                                 <form action="{{ route ('citas.destroy',$cita->id) }}" method="POST" class="deleteCita">

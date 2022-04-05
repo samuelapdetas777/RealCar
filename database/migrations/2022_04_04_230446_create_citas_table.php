@@ -16,10 +16,12 @@ class CreateCitasTable extends Migration
         Schema::create('citas', function (Blueprint $table) {
             $table->id();
             $table->string('asunto');
+            $table->foreignId('idvehiculo')->constrained('vehiculos')->nullable();
             $table->foreignId('idvendedor')->constrained('users')->nullable();
             $table->foreignId('idproveedor')->constrained('users')->nullable();
             $table->foreignId('idcliente')->constrained('users')->nullable();
-            $table->dateTime('fecha');
+            $table->date('fecha');
+            $table->time('hora');
             $table->foreignId('sedes_id')->constrained('sedes');
             $table->string('comentario');
 

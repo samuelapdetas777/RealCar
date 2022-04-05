@@ -20,12 +20,13 @@
             <div class="card-body">
                 <div class="col">
 
-                    <form action="{{route('citas.store')}}" method="POST" class="agregarCita">
+                    <form action="/admin/citas/{{$cita->id}}" method="POST" class="editarCita">
                         @csrf
+                        @method('PUT')
                         <div class="row mt-5">
                             <div class="col">
                                 <label for="inputasunto">Asunto: </label>
-                                <input type="text" class="form-control @error('asunto') is-invalid @enderror" id="inputasunto" value="{{old('asunto')}}" placeholder="Asunto..." name="asunto" required>
+                                <input type="text" class="form-control @error('asunto') is-invalid @enderror" id="inputasunto" value="{{$cita->asunto}}" placeholder="Asunto..." name="asunto" required>
                                 @error('asunto')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -38,7 +39,7 @@
                                 
                                 <option value="">Selecciona el vehiculo</option>
                                 @foreach($vehiculos as $vehiculo)
-                                    <option value="{{$vehiculo->id}}">{{$vehiculo->id}} - {{$vehiculo->nombre}} - ${{$vehiculo->precio}}</option>
+                                    <option value="{{$vehiculo->id}}" {{$cita->idvehiculo == $vehiculo->id? 'selected': ''}}>{{$vehiculo->id}} - {{$vehiculo->nombre}} - ${{$vehiculo->precio}}</option>
                                 @endforeach
                                 </select>
                                 @error('vehiculo')
@@ -54,7 +55,7 @@
                                 
                                 <option value="">Selecciona el Proveedor</option>
                                 @foreach($pusuarios as $usuario)
-                                    <option value="{{$usuario->id}}">{{$usuario->id}} - {{$usuario->name}} {{$usuario->last_name}}</option>
+                                    <option value="{{$usuario->id}}"  {{$cita->idproveedor == $usuario->id? 'selected': ''}}>{{$usuario->id}} - {{$usuario->name}} {{$usuario->last_name}}</option>
                                 @endforeach
                                 </select>
                                 @error('proveedor')
@@ -69,7 +70,7 @@
                                 
                                 <option value="">Selecciona el Cliente</option>
                                 @foreach($cusuarios as $usuario)
-                                    <option value="{{$usuario->id}}">{{$usuario->id}} - {{$usuario->name}} {{$usuario->last_name}}</option>
+                                    <option value="{{$usuario->id}}" {{$cita->idcliente == $usuario->id? 'selected': ''}}>{{$usuario->id}} - {{$usuario->name}} {{$usuario->last_name}}</option>
                                 @endforeach
                                 </select>
                                 @error('proveedor')
@@ -84,7 +85,7 @@
                                 
                                 <option value="">Selecciona el Vendedor</option>
                                 @foreach($vusuarios as $usuario)
-                                    <option value="{{$usuario->id}}">{{$usuario->id}} - {{$usuario->name}} {{$usuario->last_name}}</option>
+                                    <option value="{{$usuario->id}}" {{$cita->idvendedor == $usuario->id? 'selected': ''}}>{{$usuario->id}} - {{$usuario->name}} {{$usuario->last_name}}</option>
                                 @endforeach
                                 </select>
                                 @error('vendedor')
@@ -96,7 +97,7 @@
                             <div class="col">
                                 <label for="inputfecha">Fecha de la cita: </label>
                                 <div class="input-group date" >
-                                    <input type="date" class="form-control @error('fecha') is-invalid @enderror" id="inputfecha" name="fecha" value="{{old('fecha')}}">
+                                    <input type="date" class="form-control @error('fecha') is-invalid @enderror" id="inputfecha" name="fecha" value="{{$cita->fecha}}">
                                     
                                     @error('fecha')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -106,7 +107,7 @@
                             <div class="col">
                                 <label for="inputhora">Hora de la cita: </label>
                                 <div class="input-group " >
-                                    <input type="time" class="form-control @error('hora') is-invalid @enderror" id="inputhora" name="hora" value="{{old('hora')}}">
+                                    <input type="time" class="form-control @error('hora') is-invalid @enderror" id="inputhora" name="hora" value="{{$cita->hora}}">
                                     
                                     @error('hora')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -121,7 +122,7 @@
                                 
                                 <option value="">Selecciona la sede</option>
                                 @foreach($sedes as $sede)
-                                    <option value="{{$sede->id}}">{{$sede->nombre}} - {{$sede->correo}} - {{$sede->telefono}}</option>
+                                    <option value="{{$sede->id}}" {{$cita->sedes_id == $sede->id? 'selected': ''}}>{{$sede->nombre}} - {{$sede->correo}} - {{$sede->telefono}}</option>
                                 @endforeach
                                 </select>
                                 @error('sede')
@@ -132,7 +133,7 @@
                         <div class="row mt-5">
                             <div class="col">
                                 <label for="inputcomentario">Comentarios: </label>
-                                <textarea  class="form-control  @error('comentario') is-invalid @enderror" placeholder="Comentario..." id="inputcomentario" name="comentario" required></textarea>
+                                <textarea  class="form-control  @error('comentario') is-invalid @enderror" placeholder="Comentario..." id="inputcomentario" name="comentario" required>{{$cita->comentario}}</textarea>
                                 @error('comentario')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -141,7 +142,7 @@
 
                         
                         <div class="row mt-5">
-                            <button type="submit" class="btn btn-success">Agregar</button>
+                            <button type="submit" class="btn btn-success">Editar</button>
                         </div>
                     </form>
                 </div>
@@ -171,13 +172,13 @@
             
             
 
-            $('.agregarCita').submit(function (e) { 
+            $('.editarCita').submit(function (e) { 
                 e.preventDefault();
 
 
                 //Se lanza una alerta antes de enviar el formulario para confirmar el envio
                 Swal.fire({
-                title: '¿Seguro que quieres agregar esta nueva cita?',  //Se hace la confirmacion de si se quiere agregar el campo
+                title: '¿Seguro que quieres editar esta cita?',  //Se hace la confirmacion de si se quiere agregar el campo
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

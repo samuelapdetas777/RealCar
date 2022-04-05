@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\Admin\RolController;
 use App\Http\Controllers\Landing\UUsuarioController;
 
+use App\Http\Controllers\Landing\UVehiculoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,6 +81,7 @@ Route::group(['prefix' =>'admin'], function(){
 
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('usuario', UUsuarioController::class);
+    Route::resource('vehiculos', UVehiculoController::class);
 });
 
 

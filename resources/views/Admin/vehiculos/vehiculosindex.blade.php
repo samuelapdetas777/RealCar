@@ -24,7 +24,7 @@
                         <div class="card">
                         
                         <a href="{{route('vehiculos.create')}}" class="btn btn-primary" >
-                            Agregar nuevo usuario<i class="fas fa-plus"></i>
+                            Agregar nuevo vehiculo<i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
                             <div class="card-body">

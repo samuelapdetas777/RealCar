@@ -38,7 +38,7 @@
                                     <div class="col-md-3">
                                         <div class="card-counter success">
                                             <i class="fa fa-database"></i>
-                                            <span class="count-numbers">6875</span>
+                                            <span class="count-numbers">@php use App\Models\Cita; echo Cita::count(); @endphp</span>
                                             <span class="count-name">citas</span>
                                         </div>
                                     </div>

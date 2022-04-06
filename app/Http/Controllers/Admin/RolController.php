@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 
 
@@ -110,7 +111,7 @@ class RolController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombre' => 'required | min:3 | unique:roles,name',
+            'nombre' => 'required | min:3',
             'permission' => 'required'
         ]);
 

@@ -17,7 +17,8 @@ use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\Admin\RolController;
 use App\Http\Controllers\Landing\UUsuarioController;
 
-use App\Http\Controllers\Landing\UVehiculoController;
+use App\Http\Controllers\Landing\PVehiculoController;
+use App\Http\Controllers\Landing\CVehiculoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +82,17 @@ Route::group(['prefix' =>'admin'], function(){
 
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('usuario', UUsuarioController::class);
-    Route::resource('vehiculos', UVehiculoController::class);
+    // Route::resource('vehiculos', UVehiculoController::class);
+    
+    Route::get('/vehiculos/index/{id}', [PVehiculoController::class, 'index']);
+
+    
+    Route::get('/catalogo', [CVehiculoController::class, 'index']);
+    Route::get('/catalogo/{id}', [CVehiculoController::class, 'catalogoProveedor']);
+
+    
+    Route::get('/catalogo/vehiculo/{id}', [CVehiculoController::class, 'verVehiculo']);
+    
 });
 
 

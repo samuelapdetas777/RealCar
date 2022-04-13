@@ -23,16 +23,35 @@
                             <h1 class="text-center text-black">Vehiculos</h1>
                         <div class="card">
                         
-                        <a href="{{route('vehiculos.create')}}" class="btn btn-primary" >
-                            Agregar nuevo usuario<i class="fas fa-plus"></i>
-                        </a>
+                        
                             <hr class="bg-primary">
                             <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <input type="search" class="form-control" placeholder="Buscar">
+                                    </div>
+                                    <div class="col-sm-2">
 
+                                        <button class="btn btn-primary">Buscar</button>
+                                    </div>
+                                </div>
 
+                                <a class="btn btn-outline-dark" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fas fa-filter"></i> Filtros
+                                </a>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                    </div>
+                                </div>
+                                
                             <div class="container-fluid d-flex justify-content-center">
                                 <div class="row mt-5">
-                                    
+
+
+
+
+
 
                                 
                             @forelse($vehiculos as $vehiculo )
@@ -89,15 +108,25 @@
                                                         </div>
                                                     </div>
                                                 </div> 
-                                                
+                                                <small class="text-muted key pl-3">
+                                                    
+                                                        @foreach($usuarios as $usuario)
+                                                            @if($vehiculo->user_id == $usuario->id)
+                                                            <a href="/catalogo/{{$vehiculo->user_id}}">
+                                                                {{$usuario->name}} {{$usuario->name}}
+                                                            </a>
+                                                            @endif
+                                                        @endforeach
+                                                    
+                                                </small>
                                                 <div class="mx-3 mt-3 mb-2">
-                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
                                                         <small>Ver mas</small>
                                                     </a>
                                                     <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-danger btn-block">
-                                                        <small>Editar</small>
+                                                        <small>Agendar cita</small>
                                                     </a>
-                                                </div> 
+                                                </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>
                                             </div>
                                         </div>
                                     </div>
@@ -126,7 +155,6 @@
                         </div>
                         </div>
                     </div>
-            
 
  
 @endsection

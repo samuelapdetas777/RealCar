@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ciudad;
 use App\Models\Combustible;
 use App\Models\EstadoAplicativo;
 use App\Models\EstadoVehiculo;
@@ -12,16 +13,20 @@ use App\Models\User;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
-class UVehiculoController extends Controller
+class PVehiculoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @param int $id
      */
-    public function index()
+    public function index($id)
     {
-        $vehiculos = Vehiculo::Paginate(12);
+// echo 'id';
+        $vehiculos = Vehiculo::where('estadoaplicativo_id', 1)->where('user_id', $id)->orWhere('estadoaplicativo_id', 2)->orWhere('estadoaplicativo_id', 3)->paginate(12);
+        // Paginate(12);
+        
         $usuarios = User::All();
         $marcas = Marca::All();
         $combustibles = Combustible::All();

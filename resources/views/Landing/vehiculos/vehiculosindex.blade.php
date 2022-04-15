@@ -23,8 +23,8 @@
                             <h1 class="text-center text-black">Vehiculos</h1>
                         <div class="card">
                         
-                        <a href="{{route('vehiculos.create')}}" class="btn btn-primary" >
-                            Agregar nuevo usuario<i class="fas fa-plus"></i>
+                        <a href="/vehiculos/nuevo" class="btn btn-primary" >
+                            Agregar nuevo vehículo<i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
                             <div class="card-body">
@@ -91,10 +91,10 @@
                                                 </div> 
                                                 
                                                 <div class="mx-3 mt-3 mb-2">
-                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/vehiculos/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
                                                         <small>Ver mas</small>
                                                     </a>
-                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/vehiculos/editar/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
                                                         <small>Editar</small>
                                                     </a>
                                                 </div> 

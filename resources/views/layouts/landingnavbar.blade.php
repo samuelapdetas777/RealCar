@@ -13,7 +13,7 @@
         <a class="nav-link" href="/catalogo">HomeClie {{ Request::is('/catalogo')? '<span class="sr-only">(current)</span>': ''}}</a>
       </li>
       <li class="nav-item {{ Request::is('/vehiculos/index/')? 'active' : ''}}">
-        <a class="nav-link" href="/vehiculos/index/{{\Illuminate\Support\Facades\Auth::user()->id}}">VehiculosProv {{ Request::is('/vehiculos/index/')? '<span class="sr-only">(current)</span>': ''}}</a>
+        <a class="nav-link" href="/vehiculos/index">VehiculosProv {{ Request::is('/vehiculos/index')? '<span class="sr-only">(current)</span>': ''}}</a>
       </li> 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

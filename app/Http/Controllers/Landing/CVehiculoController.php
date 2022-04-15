@@ -33,7 +33,7 @@ class CVehiculoController extends Controller
      * @return \Illuminate\Http\Response
      * @param int $id
      */
-    public function catalogoProveedor($id){
+    public function catalogoProveedor($id){  //se desplegará cuando el usuario de click a un catalogo para ver mas vehiculos
 
         $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->where('user_id', $id)->paginate(12);
 
@@ -57,9 +57,15 @@ class CVehiculoController extends Controller
 
         $vehiculo = Vehiculo::where('id', $id)->first();
 
+        $vehiculosProveedor = Vehiculo::where('user_id', $vehiculo->user_id)->take(4)->get();
+        // $vehiculosNombre;
 
         // Paginate(12);
-        
+        $marcas = Marca::All();
+        $estadovehiculos = EstadoVehiculo::All();
+        $estadoaplicativos = EstadoAplicativo::All();
+
+
         $proveedor = User::where('id', $vehiculo->user_id)->first();
         $ciudadProveedor = Ciudad::where('id', $proveedor->city_id)->first();
         $marca = Marca::where('id', $vehiculo->marcas_id)->first();
@@ -67,7 +73,15 @@ class CVehiculoController extends Controller
         $tipocaja = TipoCaja::where('id', $vehiculo->tipocaja_id)->first();
         $estadovehiculo = EstadoVehiculo::where('id', $vehiculo->estadovehiculo_id)->first();
 
-        return view('Landing.vehiculos.vervehiculo', compact('vehiculo', 'proveedor', 'ciudadProveedor', 'marca', 'combustible', 'tipocaja', 'estadovehiculo'));
+        return view('Landing.vehiculos.vervehiculo', compact('vehiculo', 'vehiculosProveedor', 'proveedor', 'ciudadProveedor', 'marca', 'combustible', 'tipocaja', 'estadovehiculo', 'marcas', 'estadoaplicativos', 'estadovehiculos'));
+    }
+
+    /**
+     * @return \Illuminate\Http\Response
+     * @param int $id
+     */
+    public function cita(){
+
     }
     
 

@@ -84,14 +84,20 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('usuario', UUsuarioController::class);
     // Route::resource('vehiculos', UVehiculoController::class);
     
-    Route::get('/vehiculos/index/{id}', [PVehiculoController::class, 'index']);
+    Route::get('/vehiculos/index', [PVehiculoController::class, 'index']);
+    Route::get('/vehiculos/nuevo', [PVehiculoController::class, 'agregarvehiculo']);
+    Route::post('/vehiculos/guardar', [PVehiculoController::class, 'guardarvehiculo']);
+    Route::get('/vehiculos/vehiculo/{id}', [PVehiculoController::class, 'verVehiculo']);
+    Route::get('/vehiculos/editar/{id}', [PVehiculoController::class, 'editar']);
+    Route::put('/vehiculos/editar/guardar/{id}', [PVehiculoController::class, 'guardarEditar']);
+
 
     
     Route::get('/catalogo', [CVehiculoController::class, 'index']);
     Route::get('/catalogo/{id}', [CVehiculoController::class, 'catalogoProveedor']);
-
-    
     Route::get('/catalogo/vehiculo/{id}', [CVehiculoController::class, 'verVehiculo']);
+    
+    Route::get('/citas/nueva', [CVehiculoController::class, 'cita']);
     
 });
 

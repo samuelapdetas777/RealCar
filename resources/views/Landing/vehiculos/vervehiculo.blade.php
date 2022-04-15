@@ -42,7 +42,7 @@
                                         </div>
                                         <h1 class="display-5 fw-bolder">{{$vehiculo->nombre}}</h1>
                                         <div class="fs-5 mb-3">
-                                            <span class="text-decoration-line-through">${{$vehiculo->precio}}</span> {{$estadovehiculo->nombre}}
+                                            <span class="text-decoration-line-through">${{$vehiculo->precio}}</span> - {{$estadovehiculo->nombre}}
                                         </div>
                                         <p class="lead">{{$vehiculo->descripcion}}</p>
                                         <div class="d-flex">
@@ -81,65 +81,62 @@
                             <div class="container px-4 px-lg-5 my-5">
                                 <div class="row gx-4 gx-lg-5 align-items-center">
                                     
-
-
-
-                                <table class="table table-bordered">
-                    
-                    <thead>
-                        <tr>
-                            <th class="text-center bg-dark text-light" colspan="2">Detalles del vehiculo</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-dark">
-
-                        <tr class="table-dark text-dark">
-                            <th scope="row">ID del vehiculo:</th>
-                            <td>{{$vehiculo->id}}</td>
-                        </tr>
-
-                        <tr class="">
-                            <th scope="row">Motor:</th>
-                            <td>{{$vehiculo->motor}}</td>
-                        </tr>
-
-                        <tr class="table-dark text-dark">
-                            <th scope="row">Combustible:</th>
-                                <td>{{$combustible->nombre}}</td>
-                        </tr>
-
-                        <tr class="">
-                            <th scope="row">Transmisión:</th>
-                                <td>{{$tipocaja->nombre}}</td>
-                        </tr>
-
-                        <tr class="table-dark text-dark">
-                            <th scope="row">Modelo:</th>
-                            <td>{{$vehiculo->modelo}}</td>
-                        </tr>
-
-                        <tr class="">
-                            <th scope="row">Kilometraje:</th>
-                                <td>{{$vehiculo->kilometraje}}</td>
-                        </tr>
+                                    <table class="table table-bordered">
                         
-                        <tr class="table-dark text-dark">
-                            <th scope="row">Color del vehiculo: </th>
-                                <td>{{$vehiculo->color}}</td>
-                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center bg-dark text-light" colspan="2">Detalles del vehiculo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-dark">
 
-                        <tr class="">
-                            <th scope="row">Bolsas de aire: </th>
-                                <td>{{$vehiculo->airbag}}</td>
-                        </tr>
+                                            <tr class="table-dark text-dark">
+                                                <th scope="row">ID del vehiculo:</th>
+                                                <td>{{$vehiculo->id}}</td>
+                                            </tr>
 
-                        <tr class="">
-                            <th scope="row">Placa: </th>
-                                <td>{{$vehiculo->placa}}</td>
-                        </tr>
+                                            <tr class="">
+                                                <th scope="row">Motor:</th>
+                                                <td>{{$vehiculo->motor}}</td>
+                                            </tr>
 
-                    </tbody>
-                </table>
+                                            <tr class="table-dark text-dark">
+                                                <th scope="row">Combustible:</th>
+                                                    <td>{{$combustible->nombre}}</td>
+                                            </tr>
+
+                                            <tr class="">
+                                                <th scope="row">Transmisión:</th>
+                                                    <td>{{$tipocaja->nombre}}</td>
+                                            </tr>
+
+                                            <tr class="table-dark text-dark">
+                                                <th scope="row">Modelo:</th>
+                                                <td>{{$vehiculo->modelo}}</td>
+                                            </tr>
+
+                                            <tr class="">
+                                                <th scope="row">Kilometraje:</th>
+                                                    <td>{{$vehiculo->kilometraje}}</td>
+                                            </tr>
+                                            
+                                            <tr class="table-dark text-dark">
+                                                <th scope="row">Color del vehiculo: </th>
+                                                    <td>{{$vehiculo->color}}</td>
+                                            </tr>
+
+                                            <tr class="">
+                                                <th scope="row">Bolsas de aire: </th>
+                                                    <td>{{$vehiculo->airbag}}</td>
+                                            </tr>
+
+                                            <tr class="">
+                                                <th scope="row">Placa: </th>
+                                                    <td>{{$vehiculo->placa}}</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
 
 
 
@@ -149,107 +146,163 @@
                             </div>
                         </section>
                         <section class="py-5 bg-dark">
-                            <div class="container px-4 px-lg-5 mt-5">
-                                <h2 class="fw-bolder mb-4">Related products</h2>
-                                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                                    <div class="col mb-5">
-                                        <div class="card h-100">
-                                            <!-- Product image-->
-                                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                                            <!-- Product details-->
-                                            <div class="card-body p-4">
-                                                <div class="text-center">
-                                                    <!-- Product name-->
-                                                    <h5 class="fw-bolder">Fancy Product</h5>
-                                                    <!-- Product price-->
-                                                    $40.00 - $80.00
+                            <div class="container px-4 px-lg-4 mt-2">
+                                <h2 class="fw-bolder mb-4">Vehiculos similares</h2>
+                                <div class="row justify-content-center">
+                                    
+
+
+                            @foreach($vehiculosProveedor as $vehiculo)
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="card shadow" > <img src="{{asset('img/img-landing/mazda.jpg')}}" class="card-img-top" width="100%">
+                                            <div class="card-body pt-0 px-0">
+
+                                                <div class="d-flex flex-row justify-content-between  px-2 mt-1"> 
+                                                        @foreach($marcas as $marca)
+                                                            @if($marca->id == $vehiculo->marcas_id)
+                                                                <p class="d-inline"> <bold>{{$marca->nombre}}</bold></p>
+                                                            @endif
+                                                        @endforeach
+                                                        {{$vehiculo->nombre}}
                                                 </div>
-                                            </div>
-                                            <!-- Product actions-->
-                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col mb-5">
-                                        <div class="card h-100">
-                                            <!-- Sale badge-->
-                                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                                            <!-- Product image-->
-                                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                                            <!-- Product details-->
-                                            <div class="card-body p-4">
-                                                <div class="text-center">
-                                                    <!-- Product name-->
-                                                    <h5 class="fw-bolder">Special Item</h5>
-                                                    <!-- Product reviews-->
-                                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                                        <div class="bi-star-fill"></div>
-                                                        <div class="bi-star-fill"></div>
-                                                        <div class="bi-star-fill"></div>
-                                                        <div class="bi-star-fill"></div>
-                                                        <div class="bi-star-fill"></div>
+
+                                                <div class="d-flex flex-row justify-content-between mb-0 px-3 mt-1 mid"> 
+                                                    
+                                                        Precio
+                                                        <h6>&dollar;{{$vehiculo->precio}}</h6>
+                                                     
+                                                </div>
+                                                <hr class="mt-2 mx-3">
+                                                <div class="d-flex flex-row justify-content-between px-3 pb-4">
+                                                    @foreach($estadoaplicativos as $ea)
+                                                        @if($ea->id == $vehiculo->estadoaplicativo_id)
+                                                            <span class="badge text-black {{$ea->nombre == "Registrado"? 'bg-info' : 
+                                                                ($ea->nombre == "Disponible"? 'bg-success' : 
+                                                                ($ea->nombre == "Vendido"? 'bg-light' : 
+                                                                ($ea->nombre == "No Disponible"? 'bg-danger': 
+                                                                ($ea->nombre == "En revisión"? 'bg-warning': ''))))}}">
+                                                                {{$ea->nombre}}
+                                                            </span>
+                                                        @endif
+                                                    @endforeach
+                                                    @foreach($estadovehiculos as $ev)
+                                                        @if($ev->id == $vehiculo->estadovehiculo_id)
+                                                            <span class="badge text-black {{$ev->nombre == "Nuevo"? 'bg-info' : ($ev->nombre == "Usado"? 'bg-light': 'bg-light')}}">
+                                                                {{$ev->nombre}}
+                                                            </span>
+                                                        @endif
+                                                    @endforeach
+                                                    
+                                                </div>
+                                                <div class="d-flex flex-row justify-content-between p-3 mid">
+                                                    <div class="d-flex flex-column"><small class="text-muted mb-1">Motor</small>
+                                                        <div class="d-flex flex-row">
+                                                            <div class="d-flex flex-column ml-1">{{$vehiculo->motor}}</div>
+                                                        </div>
                                                     </div>
-                                                    <!-- Product price-->
-                                                    <span class="text-muted text-decoration-line-through">$20.00</span>
-                                                    $18.00
-                                                </div>
-                                            </div>
-                                            <!-- Product actions-->
-                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col mb-5">
-                                        <div class="card h-100">
-                                            <!-- Sale badge-->
-                                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                                            <!-- Product image-->
-                                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                                            <!-- Product details-->
-                                            <div class="card-body p-4">
-                                                <div class="text-center">
-                                                    <!-- Product name-->
-                                                    <h5 class="fw-bolder">Sale Item</h5>
-                                                    <!-- Product price-->
-                                                    <span class="text-muted text-decoration-line-through">$50.00</span>
-                                                    $25.00
-                                                </div>
-                                            </div>
-                                            <!-- Product actions-->
-                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col mb-5">
-                                        <div class="card h-100">
-                                            <!-- Product image-->
-                                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                                            <!-- Product details-->
-                                            <div class="card-body p-4">
-                                                <div class="text-center">
-                                                    <!-- Product name-->
-                                                    <h5 class="fw-bolder">Popular Item</h5>
-                                                    <!-- Product reviews-->
-                                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                                        <div class="bi-star-fill"></div>
-                                                        <div class="bi-star-fill"></div>
-                                                        <div class="bi-star-fill"></div>
-                                                        <div class="bi-star-fill"></div>
-                                                        <div class="bi-star-fill"></div>
+                                                    <div class="d-flex flex-column"><small class="text-muted mb-2">Kilometraje</small>
+                                                        <div class="d-flex flex-row">
+                                                            <h6 class="ml-1">{{$vehiculo->kilometraje}} Km</h6>
+                                                        </div>
                                                     </div>
-                                                    <!-- Product price-->
-                                                    $40.00
-                                                </div>
-                                            </div>
-                                            <!-- Product actions-->
-                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                                                </div> 
+                                                <div class="mx-3 mt-3 mb-2">
+                                                    <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
+                                                        <small>Ver mas</small>
+                                                    </a>
+                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-danger btn-block">
+                                                        <small>Agendar cita</small>
+                                                    </a>
+                                                </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>
                                             </div>
                                         </div>
                                     </div>
+                                @endforeach
+                                <a href="/catalogo/{{$vehiculo->user_id}}">Ver mas vehiculos de {{$proveedor->name}} {{$proveedor->name}}...</a>
+                                </div>
+                            </div>
+
+
+<hr class="bg-light mx-5">
+
+                            <div class="container px-4 px-lg-4 mt-5">
+                                <h2 class="fw-bolder mb-4">Otros vehiculos del proveedor</h2>
+                                <div class="row justify-content-center">
+                                    
+
+
+                            @foreach($vehiculosProveedor as $vehiculo)
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="card shadow" > <img src="{{asset('img/img-landing/mazda.jpg')}}" class="card-img-top" width="100%">
+                                            <div class="card-body pt-0 px-0">
+
+                                                <div class="d-flex flex-row justify-content-between  px-2 mt-1"> 
+                                                        @foreach($marcas as $marca)
+                                                            @if($marca->id == $vehiculo->marcas_id)
+                                                                <p class="d-inline"> <bold>{{$marca->nombre}}</bold></p>
+                                                            @endif
+                                                        @endforeach
+                                                        {{$vehiculo->nombre}}
+                                                </div>
+
+                                                <div class="d-flex flex-row justify-content-between mb-0 px-3 mt-1 mid"> 
+                                                    
+                                                        Precio
+                                                        <h6>&dollar;{{$vehiculo->precio}}</h6>
+                                                     
+                                                </div>
+                                                <hr class="mt-2 mx-3">
+                                                <div class="d-flex flex-row justify-content-between px-3 pb-4">
+                                                    @foreach($estadoaplicativos as $ea)
+                                                        @if($ea->id == $vehiculo->estadoaplicativo_id)
+                                                            <span class="badge text-black {{$ea->nombre == "Registrado"? 'bg-info' : 
+                                                                ($ea->nombre == "Disponible"? 'bg-success' : 
+                                                                ($ea->nombre == "Vendido"? 'bg-light' : 
+                                                                ($ea->nombre == "No Disponible"? 'bg-danger': 
+                                                                ($ea->nombre == "En revisión"? 'bg-warning': ''))))}}">
+                                                                {{$ea->nombre}}
+                                                            </span>
+                                                        @endif
+                                                    @endforeach
+                                                    @foreach($estadovehiculos as $ev)
+                                                        @if($ev->id == $vehiculo->estadovehiculo_id)
+                                                            <span class="badge text-black {{$ev->nombre == "Nuevo"? 'bg-info' : ($ev->nombre == "Usado"? 'bg-light': 'bg-light')}}">
+                                                                {{$ev->nombre}}
+                                                            </span>
+                                                        @endif
+                                                    @endforeach
+                                                    
+                                                </div>
+                                                <div class="d-flex flex-row justify-content-between p-3 mid">
+                                                    <div class="d-flex flex-column"><small class="text-muted mb-1">Motor</small>
+                                                        <div class="d-flex flex-row">
+                                                            <div class="d-flex flex-column ml-1">{{$vehiculo->motor}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-column"><small class="text-muted mb-2">Kilometraje</small>
+                                                        <div class="d-flex flex-row">
+                                                            <h6 class="ml-1">{{$vehiculo->kilometraje}} Km</h6>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <div class="mx-3 mt-3 mb-2">
+                                                    <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
+                                                        <small>Ver mas</small>
+                                                    </a>
+                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-danger btn-block">
+                                                        <small>Agendar cita</small>
+                                                    </a>
+                                                </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <a href="/catalogo/{{$vehiculo->user_id}}">Ver mas vehiculos de {{$proveedor->name}} {{$proveedor->name}}...</a>
+
+
+
+
+
                                 </div>
                             </div>
                         </section>

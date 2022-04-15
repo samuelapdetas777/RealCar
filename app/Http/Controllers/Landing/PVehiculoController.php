@@ -13,6 +13,9 @@ use App\Models\User;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth; //se usa para sabe el usuario que a ingresado
+
+
 class PVehiculoController extends Controller
 {
     /**
@@ -21,9 +24,10 @@ class PVehiculoController extends Controller
      * @return \Illuminate\Http\Response
      * @param int $id
      */
-    public function index($id)
+    public function index()
     {
 // echo 'id';
+        $id = Auth::user()->id;
         $vehiculos = Vehiculo::where('estadoaplicativo_id', 1)->where('user_id', $id)->orWhere('estadoaplicativo_id', 2)->orWhere('estadoaplicativo_id', 3)->paginate(12);
         // Paginate(12);
         
@@ -42,9 +46,16 @@ class PVehiculoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function agregarvehiculo()
     {
-        //
+        
+        $marcas = Marca::All();
+        $combustibles = Combustible::All();
+        $tipocajas = TipoCaja::All();
+        $estadovehiculos = EstadoVehiculo::All();
+        $ciudades = Ciudad::All();
+
+        return view('Landing.vehiculos.agregarvehiculo', compact('marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'ciudades'));
     }
 
     /**
@@ -53,9 +64,52 @@ class PVehiculoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    public function guardarvehiculo(Request $request)
     {
-        //
+
+        // echo Auth::user()->id; //
+
+        // Auth::user()->id
+
+        $request->validate([
+            'marca' => 'required | exists:marcas,id',
+            'nombre' => 'required | min:3',
+            'modelo' => 'required | numeric | between:1910,2100',
+            'kilometraje' => 'required | numeric | between:0,500000',
+            'tipocaja' => 'required | exists:tipocaja,id',
+            'motor' => 'required | min:3',
+            'combustible' => 'required |  exists:combustibles,id',
+            'estadovehiculo' => 'required |  exists:estadovehiculo,id',
+            'color' => 'required | min:4',
+            'placa' => 'required | numeric | between:0,9',
+            'cplaca' => 'required |  exists:ciudades,id',
+            'airbag' => 'required | numeric | between:0,20',
+            'precio' => 'required | numeric | between:700000,2500000000',
+            'descripcion' => 'required | min:10'
+            
+        ]);
+        $proveedor = Auth::user()->id;
+        $cplaca = $request->input('cplaca');
+
+        $vehiculo = new Vehiculo();
+        $vehiculo->user_id = $proveedor;
+        $vehiculo->nombre = $request->input('nombre');
+        $vehiculo->marcas_id = $request->input('marca');
+        $vehiculo->modelo = $request->input('modelo');
+        $vehiculo->kilometraje = $request->input('kilometraje');
+        $vehiculo->tipocaja_id = $request->input('tipocaja');
+        $vehiculo->motor = $request->input('motor');
+        $vehiculo->combustibles_id = $request->input('combustible');
+        $vehiculo->estadovehiculo_id = $request->input('estadovehiculo');
+        $vehiculo->color = $request->input('color');
+        $vehiculo->placa = '**'.($request->input('placa').' '.$cplaca);
+        $vehiculo->airbag = $request->input('airbag');
+        $vehiculo->precio = $request->input('precio');
+        $vehiculo->estadoaplicativo_id = 1;
+        $vehiculo->descripcion = $request->input('descripcion');
+        $vehiculo->save();
+        return redirect('/vehiculos/index')->with('agregar', 'ok');
     }
 
     /**
@@ -64,9 +118,27 @@ class PVehiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function verVehiculo($id)
     {
-        //
+        $vehiculo = Vehiculo::where('id', $id)->first();
+
+        $vehiculosProveedor = Vehiculo::where('user_id', $vehiculo->user_id)->take(4)->get();
+        // $vehiculosNombre;
+
+        // Paginate(12);
+        $marcas = Marca::All();
+        $estadovehiculos = EstadoVehiculo::All();
+        $estadoaplicativos = EstadoAplicativo::All();
+
+
+        $proveedor = User::where('id', $vehiculo->user_id)->first();
+        $ciudadProveedor = Ciudad::where('id', $proveedor->city_id)->first();
+        $marca = Marca::where('id', $vehiculo->marcas_id)->first();
+        $combustible = Combustible::where('id', $vehiculo->combustibles_id)->first();
+        $tipocaja = TipoCaja::where('id', $vehiculo->tipocaja_id)->first();
+        $estadovehiculo = EstadoVehiculo::where('id', $vehiculo->estadovehiculo_id)->first();
+
+        return view('Landing.vehiculos.proveedor.vervehiculo', compact('vehiculo', 'vehiculosProveedor', 'proveedor', 'ciudadProveedor', 'marca', 'combustible', 'tipocaja', 'estadovehiculo', 'marcas', 'estadoaplicativos', 'estadovehiculos'));
     }
 
     /**
@@ -75,9 +147,16 @@ class PVehiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editar($id)
     {
-        //
+        $vehiculo = Vehiculo::find($id); 
+        $marcas = Marca::All();
+        $combustibles = Combustible::All();
+        $tipocajas = TipoCaja::All();
+        $estadovehiculos = EstadoVehiculo::All();
+        $ciudades = Ciudad::All();
+
+        return view('Landing.vehiculos.proveedor.editarvehiculo', compact('vehiculo', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'ciudades'));
     }
 
     /**
@@ -87,9 +166,40 @@ class PVehiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function guardarEditar($id, Request $request)
     {
-        //
+        $request->validate([
+            'marca' => 'required | exists:marcas,id',
+            'nombre' => 'required | min:3',
+            'modelo' => 'required | numeric | between:1910,2100',
+            'kilometraje' => 'required | numeric | between:0,500000',
+            'tipocaja' => 'required | exists:tipocaja,id',
+            'motor' => 'required | min:3',
+            'combustible' => 'required |  exists:combustibles,id',
+            'estadovehiculo' => 'required |  exists:estadovehiculo,id',
+            'color' => 'required | min:4',
+            'airbag' => 'required | numeric | between:0,20',
+            'precio' => 'required | numeric | between:700000,2500000000',
+            'descripcion' => 'required | min:10'
+            
+        ]);
+
+        $vehiculo = Vehiculo::find($id);
+        // $vehiculo->user_id = $proveedor;
+        $vehiculo->nombre = $request->input('nombre');
+        $vehiculo->marcas_id = $request->input('marca');
+        $vehiculo->modelo = $request->input('modelo');
+        $vehiculo->kilometraje = $request->input('kilometraje');
+        $vehiculo->tipocaja_id = $request->input('tipocaja');
+        $vehiculo->motor = $request->input('motor');
+        $vehiculo->combustibles_id = $request->input('combustible');
+        $vehiculo->estadovehiculo_id = $request->input('estadovehiculo');
+        $vehiculo->color = $request->input('color');
+        $vehiculo->airbag = $request->input('airbag');
+        $vehiculo->precio = $request->input('precio');
+        $vehiculo->descripcion = $request->input('descripcion');
+        $vehiculo->save();
+        return redirect('/vehiculos/index')->with('actualizar', 'ok');
     }
 
     /**

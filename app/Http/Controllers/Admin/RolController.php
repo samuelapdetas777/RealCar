@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 
 
@@ -12,8 +11,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
-
-
+use Illuminate\Validation\Rule;
 
 class RolController extends Controller
 {
@@ -112,6 +110,7 @@ class RolController extends Controller
     {
         $request->validate([
             'nombre' => 'required | min:3',
+            'nombre' => Rule::unique('roles', 'name')->ignore($id),
             'permission' => 'required'
         ]);
 

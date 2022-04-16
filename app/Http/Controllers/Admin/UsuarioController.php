@@ -12,7 +12,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
-
+use Illuminate\Validation\Rule;
 
 class UsuarioController extends Controller
 {
@@ -160,8 +160,11 @@ class UsuarioController extends Controller
             'nombre' => 'required | regex:/^[A-Za-z]+$/ | between:3,15',
             'apellido' => 'required | regex:/^[A-Za-z]+$/ | between:3,15',
             'documento'=> 'required | numeric | digits:10 | unique:users,document', 
+            'document' =>  Rule::unique('users', 'document')->ignore($id),
             'celular'=> 'required | numeric | digits:10 | unique:users,phone',
+            'celular' =>  Rule::unique('users', 'phone')->ignore($id),
             'email' => 'required | email | unique:users,email',
+            'email' =>  Rule::unique('users', 'email')->ignore($id),
             'password'=> 'required | regex:/^[A-Za-z0-9]+$/ | same:confirmacion_de_password',
             // 'email' => 'unique:users,email'
             'confirmacion_de_password'=> 'required | regex:/^[A-Za-z0-9]+$/ ',

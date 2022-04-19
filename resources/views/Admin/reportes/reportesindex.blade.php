@@ -17,11 +17,13 @@
         <div class="card">
         <div class="row mt">
             <div class="col-md-6">
+
+        {{--AQUI EMPIEZA REPORTE DE CITAS--}}
                 <h3>Citas de este mes</h3>
                 <div class="card-counter primary">
                     <i class="fa fa-users"></i>
-                    <span class="count-numbers">@php use App\Models\User; 
-                        echo User::count(); 
+                    <span class="count-numbers">@php use App\Models\Cita; 
+                        echo Cita::count(); 
                         @endphp</span>
                     <span class="count-name">Citas</span>
                 </div>

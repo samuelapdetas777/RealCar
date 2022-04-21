@@ -8,6 +8,14 @@ use App\Models\Ciudad;
 
 class CiudadController extends Controller
 {
+     
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:admin-ciudad', ['only'=>['index']]);
+        $this->middleware('permission:admin-ciudad', ['only'=>['create', 'store']]);
+        $this->middleware('permission:admin-ciudad', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:admin-ciudad', ['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

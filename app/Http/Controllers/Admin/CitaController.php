@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 
 class CitaController extends Controller
 {
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:admin-cita', ['only'=>['index']]);
+        $this->middleware('permission:admin-cita', ['only'=>['create', 'store']]);
+        $this->middleware('permission:admin-cita', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:admin-cita', ['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

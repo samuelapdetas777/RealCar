@@ -34,7 +34,10 @@
                         <label for="permisos">Permisos para este rol:</label>
                         @foreach($permisos as $permiso)
                         <label class="form-check-label  d-block" for="{{$permiso->name}}">
-                            <input class="form-check-input @error('permission[]') is-invalid @enderror" type="checkbox" value="{{$permiso->id}}" id="{{$permiso->name}}" name="permission[]" @foreach($rolesPermisos as $index){{$index->permission_id == $permiso->id? 'checked' : ''}} @endforeach>
+                            <input class="form-check-input @error('permission[]') is-invalid @enderror" type="checkbox" value="{{$permiso->id}}" id="{{$permiso->name}}" name="permission[]" 
+                                @foreach($rolesPermisos as $index)
+                                    {{$index->permission_id == $permiso->id? 'checked' : ''}} 
+                                @endforeach>
                             {{$permiso->name}}
                             @error('permission[]') 
                             <div class="invalid-feedback">{{$message}}</div>

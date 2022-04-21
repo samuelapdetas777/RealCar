@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class PedidoController extends Controller
 {
+    
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:admin-pedido', ['only'=>['index']]);
+        $this->middleware('permission:admin-pedidop', ['only'=>['create', 'store']]);
+        $this->middleware('permission:admin-pedido', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:admin-pedido', ['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

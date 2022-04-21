@@ -15,6 +15,16 @@ use Illuminate\Http\Request;
 
 class CVehiculoController extends Controller
 {
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:c-ver-catalogo', ['only'=>['index']]);
+        $this->middleware('permission:c-ver-catalogo-de-proveedores', ['only'=>['catalogoProveedor']]);
+        $this->middleware('permission:c-ver-informacion-vehiculo', ['only'=>['verVehiculo']]);
+        $this->middleware('permission:c-agendar-cita', ['only'=>['agendarCita', 'guardarCita']]);
+        $this->middleware('permission:c-ver-citas', ['only'=>['verCitas']]);
+        $this->middleware('permission:c-ver-pedido', ['only'=>['verPedidos']]);
+    }
+
     public function index(){
         $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->paginate(12);
         // Paginate(12);
@@ -80,9 +90,35 @@ class CVehiculoController extends Controller
      * @return \Illuminate\Http\Response
      * @param int $id
      */
-    public function cita(){
+    public function agendarCita(){
 
     }
+    
+    /**
+     * @return \Illuminate\Http\Response
+     * @param int $id
+     */
+    public function guardarCita(){
+
+    }
+    
+    /**
+     * @return \Illuminate\Http\Response
+     * @param int $id
+     */
+    public function verCitas(){
+
+    }
+    
+    /**
+     * @return \Illuminate\Http\Response
+     * @param int $id
+     */
+    public function verPedidos(){
+
+    }
+    
+
     
 
 }

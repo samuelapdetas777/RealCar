@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class EstadoVehiculoController extends Controller
 {
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:admin-estadovehiculo', ['only'=>['index']]);
+        $this->middleware('permission:admin-estadovehiculo', ['only'=>['create', 'store']]);
+        $this->middleware('permission:admin-estadovehiculo', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:admin-estadovehiculo', ['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

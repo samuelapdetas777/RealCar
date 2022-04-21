@@ -36,15 +36,19 @@
                             
                                 <div class="card usercard mr-2">
                                     <div class="top-container"> 
-                                        <figure class="avatar mr-2 bg-info  text-white img-fluid profile-image" data-initial="SA"></figure>
+                                        <div class="col-3">
+                                            <figure class="avatar m-0 p-0 bg-info  text-white img-fluid profile-image" data-initial="SA"></figure>
+                                        </div>
                                     
-                                        <div class="ml-3">
-                                            <h5 class="name">{{$usuario->name}} {{$usuario->last_name}}</h5>
-                                            @if(!empty($usuario->getRoleNames()))
-                                                @foreach($usuario->getRoleNames() as $rolName)
-                                                    <p class="rol"><span class="badge bg-success">{{$rolName}}</span></p>
-                                                @endforeach
-                                            @endif
+                                        <div class="col-9">
+                                            <div class="ml-1">
+                                                <h5 class="name">{{$usuario->name}} {{$usuario->last_name}}</h5>
+                                                @if(!empty($usuario->getRoleNames()))
+                                                    @foreach($usuario->getRoleNames() as $rolName)
+                                                        <p class="rol"><span class="badge bg-success">{{$rolName}}</span></p>
+                                                    @endforeach
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <ul class="list-group list-group-flush">

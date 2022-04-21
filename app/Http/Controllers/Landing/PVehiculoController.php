@@ -18,6 +18,15 @@ use Illuminate\Support\Facades\Auth; //se usa para sabe el usuario que a ingresa
 
 class PVehiculoController extends Controller
 {
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:p-ver-catalogo-propio', ['only'=>['index']]);
+        $this->middleware('permission:p-agregar-vehiculo', ['only'=>['agregarvehiculo', 'guardarvehiculo']]);
+        $this->middleware('permission:p-editar-vehiculo', ['only'=>['editar', 'guardarEditar']]);
+        $this->middleware('permission:p-ver-vehiculos-propios', ['only'=>['verVehiculo']]);
+        $this->middleware('permission:p-ver-pedidos', ['only'=>['verPedidos']]);
+        $this->middleware('permission:p-ver-citas', ['only'=>['verCitas']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -200,6 +209,28 @@ class PVehiculoController extends Controller
         $vehiculo->descripcion = $request->input('descripcion');
         $vehiculo->save();
         return redirect('/vehiculos/index')->with('actualizar', 'ok');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function verPedidos()
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function verCitas()
+    {
+        //
     }
 
     /**

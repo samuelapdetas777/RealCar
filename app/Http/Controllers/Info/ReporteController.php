@@ -12,7 +12,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ReporteController extends Controller
-{
+{ 
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:admin-reporte', ['only'=>['index']]);
+    }
+
     public function index(){
 
         $usuarios = User::All();

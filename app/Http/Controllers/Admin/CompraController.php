@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class CompraController extends Controller
 {
+    
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:admin-compra', ['only'=>['index']]);
+        $this->middleware('permission:admin-compra', ['only'=>['create', 'store']]);
+        $this->middleware('permission:admin-compra', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:admin-compra', ['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

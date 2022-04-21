@@ -10,6 +10,12 @@ use Spatie\Permission\Models\Role;
 
 class UUsuarioController extends Controller
 {
+    
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:ver-perfil', ['only'=>['show']]);
+        $this->middleware('permission:editar-perfil', ['only'=>['edit', 'update']]);
+    }
     /**
      * Display a listing of the resource.
      *

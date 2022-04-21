@@ -39,11 +39,20 @@ Route::get('/', function () {
     return view('landing');
 })->name('landingpage');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'usuarioIndex'])->name('home');
 
 Auth::routes();
 
-Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('adminhome');
+
+
+Route::group(['middleware' => ['permission:index']], function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'usuarioIndex'])->name('home');
+});
+
+
+
+Route::group(['middleware' => ['permission:admin-home']], function () {
+    Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('adminhome');
+});
 
 
 // Route::get('/estadoaplicativo', [App\Http\Controllers\VehiculosController::class, 'estadoAplicativo'])->name('estadoaplicativo');
@@ -108,5 +117,4 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/register', [App\Http\Controllers\UserController::class, 'create'])->name('userregister');
     Route::resource('user', UserController::class);
 
-    Route::resource('admin', AdminController::class);
 

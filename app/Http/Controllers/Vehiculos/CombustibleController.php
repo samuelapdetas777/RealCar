@@ -11,7 +11,7 @@ class CombustibleController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:ver-combustible | crear-combustible | editar-combustible | borrar-combustible', ['only'=>['index']]);
+        $this->middleware('permission:ver-combustible', ['only'=>['index']]);
         $this->middleware('permission:crear-combustible', ['only'=>['create', 'store']]);
         $this->middleware('permission:editar-combustible', ['only'=>['edit', 'update']]);
         $this->middleware('permission:borrar-combustible', ['only'=>['destroy']]);

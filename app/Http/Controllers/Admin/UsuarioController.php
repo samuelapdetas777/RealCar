@@ -16,6 +16,14 @@ use Illuminate\Validation\Rule;
 
 class UsuarioController extends Controller
 {
+    
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:admin-usuario', ['only'=>['index']]);
+        $this->middleware('permission:admin-usuario', ['only'=>['create', 'store']]);
+        $this->middleware('permission:admin-usuario', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:admin-usuario', ['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -209,6 +217,7 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
         return redirect('/admin/usuarios')->with('eliminar', 'ok');
     }
 }

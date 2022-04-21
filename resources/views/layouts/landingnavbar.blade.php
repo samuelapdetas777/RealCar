@@ -6,29 +6,39 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item {{ Request::is('/home')? 'active' : ''}}">
-        <a class="nav-link" href="/home">HomeProv {{ Request::is('/home')? '<span class="sr-only">(current)</span>': ''}}</a>
-      </li>
-      <li class="nav-item active {{ Request::is('/catalogo')? 'active' : ''}}">
-        <a class="nav-link" href="/catalogo">HomeClie {{ Request::is('/catalogo')? '<span class="sr-only">(current)</span>': ''}}</a>
-      </li>
-      <li class="nav-item {{ Request::is('/vehiculos/index/')? 'active' : ''}}">
-        <a class="nav-link" href="/vehiculos/index">VehiculosProv {{ Request::is('/vehiculos/index')? '<span class="sr-only">(current)</span>': ''}}</a>
+      @can('administrador')  
+        <li class="nav-item {{ Request::is('/home')? 'active' : ''}}">
+          <a class="nav-link" href="/admin/home">Administrador {{ Request::is('/admin/home')? '<span class="sr-only">(current)</span>': ''}}</a>
+        </li>
+      @endcan
+      @can('cliente')
+        <li class="nav-item  {{ Request::is('/catalogo')? 'active' : ''}}">
+          <a class="nav-link" href="/catalogo">Home @can('administrador')(cliente) @endcan  {{ Request::is('/catalogo')? '<span class="sr-only">(current)</span>': ''}}</a>
+        </li>
+      @endcan
+      @can('proveedor')
+        <li class="nav-item {{ Request::is('/vehiculos/index/')? 'active' : ''}}">
+          <a class="nav-link" href="/vehiculos/index">Home @can('administrador')(Proveedor) @endcan {{ Request::is('/vehiculos/index')? '<span class="sr-only">(current)</span>': ''}}</a>
+        </li> 
+      @endcan
+      @can('cliente')
+        <li class="nav-item {{ Request::is('/reportes/cliente')? 'active' : ''}}">
+          <a class="nav-link" href="/reportes/cliente">Reportes @can('administrador')(Proveedor) @endcan {{ Request::is('/reportes/cliente')? '<span class="sr-only">(current)</span>': ''}}</a>
+        </li> 
+      @endcan
+      @can('proveedor')
+        <li class="nav-item {{ Request::is('/reportes/proveedor')? 'active' : ''}}">
+          <a class="nav-link" href="/reportes/proveedor">Reportes @can('administrador')(Proveedor) @endcan {{ Request::is('/reportes/proveedor')? '<span class="sr-only">(current)</span>': ''}}</a>
+        </li> 
+      @endcan
+      <li class="nav-item {{ Request::is('/contactanos')? 'active' : ''}}">
+        <a class="nav-link" href="/contactanos">Contáctanos {{ Request::is('/contactanos')? '<span class="sr-only">(current)</span>': ''}}</a>
       </li> 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
+      <li class="nav-item {{ Request::is('/about')? 'active' : ''}}">
+        <a class="nav-link" href="/about">Sobre nosotros {{ Request::is('/about')? '<span class="sr-only">(current)</span>': ''}}</a>
+      </li> 
+      
+      
     </ul>
     <div class="form-inline my-2 my-lg-0">
       <ul class="navbar-nav">
@@ -38,7 +48,7 @@
                 <img alt="image" src="{{ asset('img/realcarlogo.png') }}"
                     class="rounded-circle mr-1 thumbnail-rounded user-thumbnail ">
                 <div class="d-sm-none d-lg-inline-block">
-                    Bienvenido {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
+                    {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
             </a>
 
             <div class="dropdown-menu dropdown-menu-right">

@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class MarcaController extends Controller
 {
+    
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:admin-marca', ['only'=>['index']]);
+        $this->middleware('permission:admin-marca', ['only'=>['create', 'store']]);
+        $this->middleware('permission:admin-marca', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:admin-marca', ['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

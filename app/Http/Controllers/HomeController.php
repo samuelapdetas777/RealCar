@@ -13,6 +13,11 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+
+        $this->middleware('permission:admin-home', ['only'=>['index']]);
+        $this->middleware('permission:p-home|c-home', ['only'=>['usuarioIndex']]);
+
+
         $this->middleware('auth');
     }
 

@@ -12,6 +12,12 @@ class EstadoAplicativoController extends Controller
 {
     public function __construct()
     {
+
+        $this->middleware('permission:admin-estadoaplicativo', ['only'=>['index']]);
+        $this->middleware('permission:admin-estadoaplicativo', ['only'=>['create', 'store']]);
+        $this->middleware('permission:admin-estadoaplicativo', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:admin-estadoaplicativo', ['only'=>['destroy']]);
+
         $this->middleware('auth');
     }
 

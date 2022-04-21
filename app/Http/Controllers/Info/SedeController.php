@@ -8,7 +8,14 @@ use App\Models\Sede;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 class SedeController extends Controller
-{
+{ 
+    public function __construct(){
+        // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
+        $this->middleware('permission:admin-sede', ['only'=>['index']]);
+        $this->middleware('permission:admin-sede', ['only'=>['create', 'store']]);
+        $this->middleware('permission:admin-sede', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:admin-sede', ['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

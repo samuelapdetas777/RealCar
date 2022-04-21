@@ -53,13 +53,29 @@
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
+
+                                                    
+
+
                                             <span><i class="fas fa-id-card"></i>{{$usuario->document}}</span>
                                             <span class="d-block"><i class="fas fa-phone-alt"></i>{{$usuario->phone}}</span>
                                         </li>
-                                        <li class="list-group-item">
-                                            <span class="d-block"><a href="">Ver Catálogo</a></span>
-                                            <span class="d-block"><a href="">Ver Citas</a></span>
-                                        </li>
+                                        
+                                            @foreach($usuario->getRoleNames() as $rolName)
+                                                @if($rolName == 'Proveedor')
+                                                <li class="list-group-item">
+                                                    <span class="d-block"><a href="/admin/catalogo/{{$usuario->id}}">Ver Catálogo</a></span>
+                                                    <span class="d-block"><a href="/admin/citas/{{$usuario->id}}">Ver Citas</a></span>
+                                                </li>
+                                                @elseif($rolName == 'Cliente')
+                                                <li class="list-group-item">
+                                                    <span class="d-block"><a href="/admin/citas/cliente/{{$usuario->id}}">Ver Citas</a></span>
+                                                </li>
+                                                @else
+
+                                                @endif
+                                            @endforeach
+                                        
                                         <li class="list-group-item">
                                             <a href="/admin/usuarios/{{$usuario->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                             <a href="/admin/usuarios/{{$usuario->id}}/edit" class="btn btn-success"><i class="fas fa-pen"></i></a>

@@ -3,9 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cita;
 use App\Models\Ciudad;
+use App\Models\Combustible;
+use App\Models\EstadoAplicativo;
+use App\Models\EstadoVehiculo;
+use App\Models\Marca;
 use App\Models\Rol;
+use App\Models\TipoCaja;
 use App\Models\User;
+use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
 use Spatie\Permission\Models\Role;
@@ -23,6 +30,8 @@ class UsuarioController extends Controller
         $this->middleware('permission:admin-usuario', ['only'=>['create', 'store']]);
         $this->middleware('permission:admin-usuario', ['only'=>['edit', 'update']]);
         $this->middleware('permission:admin-usuario', ['only'=>['destroy']]);
+        $this->middleware('permission:admin-cita', ['only'=>['verCatalogo']]);
+        $this->middleware('permission:admin-cita', ['only'=>['verCitas']]);
     }
     /**
      * Display a listing of the resource.
@@ -220,4 +229,34 @@ class UsuarioController extends Controller
         DB::table('model_has_roles')->where('model_id', $id)->delete();
         return redirect('/admin/usuarios')->with('eliminar', 'ok');
     }
+
+    /**
+     * 
+     * @param int $id
+     */
+    public function verCatalogo($id){
+
+        $vehiculos = Vehiculo::where('user_id', $id)->Paginate(12);
+        $usuarios = User::All();
+        $marcas = Marca::All();
+        $combustibles = Combustible::All();
+        $tipocaja = TipoCaja::All();
+        $estadovehiculo = EstadoVehiculo::All();
+        $estadoaplicativo = EstadoAplicativo::All();
+
+        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo'));
+    }
+
+    /**
+     * 
+     * @param int $id
+     */
+    public function verCitas($id){
+
+        $citas = Cita::where('idproveedor', $id)->orWhere('idcliente',$id)->get();
+        return view('Admin.citas.citasindex', compact('citas'));
+    }
+    
+
+
 }

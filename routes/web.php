@@ -84,7 +84,8 @@ Route::group(['prefix' =>'admin'], function(){
         Route::resource('estadovehiculo', 'App\Http\Controllers\Vehiculos\EstadoVehiculoController');   //Los estados del vehiculo
         
         
-        
+        Route::get('/catalogo/{id}', [UsuarioController::class, 'verCatalogo']);
+        Route::get('/citas/cliente/{id}', [UsuarioController::class, 'verCitas']);
     });
 });
 

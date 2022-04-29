@@ -40,13 +40,13 @@
                                             <td>
                                                 
                                                 <form action="{{ route ('citas.destroy',$cita->id) }}" method="POST" class="deleteCita">
-                                                    <a href="/admin/citas/{{$cita->id}}" class="btn btn-success editarbtn">Ver<i class="fas fa-eye"></i></a>
+                                                    <a href="/admin/citas/{{$cita->id}}" class="btn btn-success editarbtn">Ver <i class="fas fa-eye"></i></a>
                                                     
-                                                    <a href="/admin/citas/{{$cita->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                                    <a href="/admin/citas/{{$cita->id}}/edit" class="btn btn-info editarbtn">Agendar <i class="fas fa-check"></i></a>
                                                     
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btneliminar">Eliminar <i class="fas fa-trash"></i></button>
+                                                    {{--<button type="submit" class="btn btn-danger btneliminar">Eliminar <i class="fas fa-trash"></i></button>--}}
                                                 </form>
                                             </td>
                                         </tr>

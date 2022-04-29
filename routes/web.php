@@ -67,6 +67,7 @@ Route::group(['prefix' =>'admin'], function(){
         Route::resource('pedidos', PedidoController::class);
         Route::resource('compras', CompraController::class);
         Route::resource('citas', CitaController::class);
+        Route::post('/citasfecha', [CitaController::class, 'citasPorFecha']);
         
         
         Route::resource('ciudad', 'App\Http\Controllers\Info\CiudadController');    //Todas las ciudades de Colombia

@@ -7,6 +7,7 @@ use App\Models\Vehiculo;
 use App\Models\Cita;
 use App\Models\Sede;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 
 class CitaController extends Controller
@@ -25,7 +26,7 @@ class CitaController extends Controller
      */
     public function index()
     {
-        $citas = Cita::All();
+        $citas = Cita::where('estado', 0)->get();
         return view('Admin.citas.citasindex', compact('citas'));
     }
 
@@ -37,8 +38,8 @@ class CitaController extends Controller
     public function create()
     {
         $vehiculos = Vehiculo::All();
-        $pusuarios = User::All();
-        $cusuarios = User::All();
+        $pusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('*')->get();
+        $cusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857095)->select('*')->get();
         $vusuarios = User::All();
         $sedes = Sede::All();
         return view('Admin.citas.agregarcita', compact('vehiculos', 'pusuarios', 'cusuarios', 'vusuarios', 'sedes'));
@@ -75,6 +76,7 @@ class CitaController extends Controller
         $cita->hora = $request->input('hora');
         $cita->sedes_id = $request->input('sede');
         $cita->comentario = $request->input('comentario');
+        $cita->estado = 0;
         $cita->save();
 
         return redirect('/admin/citas')->with('agregar', 'ok');
@@ -108,12 +110,13 @@ class CitaController extends Controller
     public function edit($id)
     {
         $cita = Cita::find($id);
+        $citasfecha = Cita::where('fecha', $cita->fecha)->where('sedes_id', $cita->sedes_id)->Where('id', '<>', $id)->where('estado', 1)->get();
         $vehiculos = Vehiculo::All();
-        $pusuarios = User::All();
-        $cusuarios = User::All();
+        $pusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('*')->get();
+        $cusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857095)->select('*')->get();
         $vusuarios = User::All();
         $sedes = Sede::All();
-        return view('Admin.citas.editarcita', compact( 'cita', 'vehiculos', 'pusuarios', 'cusuarios', 'vusuarios', 'sedes'));
+        return view('Admin.citas.editarcita', compact( 'cita', 'citasfecha', 'vehiculos', 'pusuarios', 'cusuarios', 'vusuarios', 'sedes'));
     }
 
     /**
@@ -149,10 +152,12 @@ class CitaController extends Controller
         $cita->hora = $request->input('hora');
         $cita->sedes_id = $request->input('sede');
         $cita->comentario = $request->input('comentario');
+        $cita->estado = 1;
         $cita->save();
         // echo $request->input('hora');
 
         return redirect('/admin/citas')->with('actualizar', 'ok');
+        
     }
 
     /**
@@ -164,5 +169,23 @@ class CitaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function citasPorFecha(Request $request){
+        try{
+            
+            $fecha = $request->fecha;
+            $sede = $request->sede;
+            $citasfecha = Cita::where('fecha', $fecha)->where('sedes_id', $sede)->where('estado', 1)->get();
+            return response(json_encode($citasfecha),200);
+
+        }catch(Exception $e){
+            echo $e;
+        }
+        
+        
+        
+        // $prueba = "hola que mas pues";
+        // return response()->json(array('msg'=> $prueba), 200);
     }
 }

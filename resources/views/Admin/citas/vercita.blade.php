@@ -120,10 +120,10 @@
                         <th scope="row">Acciones: </th>
                         <td>
                             <form action="{{ route ('citas.destroy',$cita->id) }}" method="POST" class="deletecita">
-                                <a href="/admin/citas/{{$cita->id}}/edit" id="sedeeditarbtn" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
+                                <a href="/admin/citas/{{$cita->id}}/edit" id="sedeeditarbtn" class="btn btn-info editarbtn">Agendar <i class="fas fa-check"></i></a>
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>
+                                {{--<button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>--}}
                             </form>
                         </td>
                         </tr>

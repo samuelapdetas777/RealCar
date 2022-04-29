@@ -39,7 +39,7 @@
                                 
                                 <option value="">Selecciona el vehiculo</option>
                                 @foreach($vehiculos as $vehiculo)
-                                    <option value="{{$vehiculo->id}}" {{$cita->idvehiculo == $vehiculo->id? 'selected': ''}}>{{$vehiculo->id}} - {{$vehiculo->nombre}} - ${{$vehiculo->precio}}</option>
+                                    <option value="{{$vehiculo->id}}" {{$cita->idvehiculo == $vehiculo->id? 'selected': ''}}> Id Proeedor: {{$vehiculo->user_id}} ---  Id Vehículo {{$vehiculo->id}} - {{$vehiculo->nombre}}</option>
                                 @endforeach
                                 </select>
                                 @error('vehiculo')
@@ -93,11 +93,13 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mt-5">
+                        
+                        <div class="border mt-5">
+                        <div class="row m-3">
                             <div class="col">
                                 <label for="inputfecha">Fecha de la cita: </label>
                                 <div class="input-group date" >
-                                    <input type="date" class="form-control @error('fecha') is-invalid @enderror" id="inputfecha" name="fecha" value="{{$cita->fecha}}">
+                                    <input type="date" class="form-control @error('fecha') is-invalid @enderror citasfecha" id="inputfecha" name="fecha" value="{{$cita->fecha}}">
                                     
                                     @error('fecha')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -115,10 +117,25 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row m-2">
+                            <div class="col">
+
+                                <ul class="list-group" id="listCitasFecha">
+                                    @forelse($citasfecha as $cf)
+                                        <li class="list-group-item"><a href="/admin/citas/{{$cf->id}}">{{$cf->id}} - {{$cf->asunto}} - {{$cf->fecha}} - {{$cf->hora}}</a></li>
+                                    @empty
+                                        <li class="list-group-item">No hay citas agendadas para este dia</li>
+                                    @endforelse
+                                    <p id="p"></p>
+                                </ul>
+                            </div>
+                        </div>
+                        </div>
+                            
                         <div class="row mt-5">
                             <div class="col">
                                 <label for="selectsede">Sede: </label>
-                                <select  class="form-control selector @error('sede') is-invalid @enderror" id="selectsede" name="sede" required>
+                                <select  class="form-control selector @error('sede') is-invalid @enderror citasfecha" id="selectsede" name="sede" required>
                                 
                                 <option value="">Selecciona la sede</option>
                                 @foreach($sedes as $sede)
@@ -142,7 +159,7 @@
 
                         
                         <div class="row mt-5">
-                            <button type="submit" class="btn btn-success">Editar</button>
+                            <button type="submit" class="btn btn-success">Agendar</button>
                         </div>
                     </form>
                 </div>
@@ -169,6 +186,37 @@
 
             $('.selector').select2();
             $('#selectvehiculo').select2();
+
+            $('.citasfecha').change(function (e) { 
+                e.preventDefault();
+                let fecha = $('#inputfecha').val();
+                let sede = $('#selectsede').val();
+                
+                
+                
+                $.ajax({
+                    method: "POST",
+                    url: "/admin/citasfecha",
+                    data: {
+                        fecha: fecha,
+                        sede: sede
+                    }
+                }).done(function(res){
+                    let citas = JSON.parse(res);
+                    $('#listCitasFecha').text('');
+                    if (citas.length) {   
+                        for (let x = 0; x < citas.length; x++) {
+                            let cita = '<li class="list-group-item"><a href="/admin/citas/'+citas[x].id+'">'+citas[x].id+' - ' +citas[x].asunto + ' - ' +citas[x].fecha+ ' - ' + citas[x].hora+ '</a></li>';
+                            $('#listCitasFecha').append(cita);
+                        }
+                    }else{
+                        $('#listCitasFecha').append('No hay citas agendadas para este dia');
+                        
+                    }
+                    
+                });
+            });
+            
             
             
 
@@ -178,12 +226,12 @@
 
                 //Se lanza una alerta antes de enviar el formulario para confirmar el envio
                 Swal.fire({
-                title: '¿Seguro que quieres editar esta cita?',  //Se hace la confirmacion de si se quiere agregar el campo
+                title: '¿Seguro que quieres agendar esta cita?',  //Se hace la confirmacion de si se quiere agregar el campo
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',                      //Se lanza una alerta para confirmar si se quiere enviar
-                confirmButtonText: 'Si, agregar',
+                confirmButtonText: 'Si, agendar',
                 cancelButtonText: 'Cancelar'
                 }).then((result) => {
                 if (result.isConfirmed) {       //Se hace un condicional, de si la alerta a sido confirmaba

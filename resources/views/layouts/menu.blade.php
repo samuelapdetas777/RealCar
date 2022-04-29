@@ -42,9 +42,14 @@
             <i class=" fas fa-check-square"></i><span>Vehículos sin aprobar</span>
         </a>
     </li>
+    <li class="side-menus {{ Request::is('admin/citas/agendadas') ? 'active' : '' }}">
+        <a href="/admin/citas" class="nav-link">
+            <i class=" fas fa-calendar-day"></i><span>Citas agendadas</span>
+        </a>
+    </li>
     <li class="side-menus {{ Request::is('admin/citas') ? 'active' : '' }}">
         <a href="/admin/citas" class="nav-link">
-            <i class=" fas fa-calendar-day"></i><span>Citas</span>
+            <i class=" fas fa-calendar-day"></i><span>Solicitud de citas</span>
         </a>
     </li>
     <li class="side-menus {{ Request::is('') ? 'active' : '' }}">

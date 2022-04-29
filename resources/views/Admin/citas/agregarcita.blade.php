@@ -38,7 +38,7 @@
                                 
                                 <option value="">Selecciona el vehiculo</option>
                                 @foreach($vehiculos as $vehiculo)
-                                    <option value="{{$vehiculo->id}}">{{$vehiculo->id}} - {{$vehiculo->nombre}} - ${{$vehiculo->precio}}</option>
+                                    <option value="{{$vehiculo->id}}"> Id Proeedor: {{$vehiculo->user_id}} ---  Id Vehículo {{$vehiculo->id}} - {{$vehiculo->nombre}}</option>
                                 @endforeach
                                 </select>
                                 @error('vehiculo')

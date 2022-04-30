@@ -64,6 +64,8 @@ Route::group(['prefix' =>'admin'], function(){
         Route::resource('roles', RolController::class);
         Route::resource('usuarios', UsuarioController::class);
         Route::resource('vehiculos', VehiculoController::class);
+        Route::get('/vehiculossinaprobar', [VehiculoController::class, 'vehiculosSinAprobar']);
+
         Route::resource('pedidos', PedidoController::class);
         Route::resource('compras', CompraController::class);
         Route::resource('citas', CitaController::class);

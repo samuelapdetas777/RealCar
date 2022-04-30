@@ -29,15 +29,16 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-        $vehiculos = Vehiculo::Paginate(12);
+        $vehiculos = Vehiculo::where('estadoaplicativo_id', '<>', 1)->where('estadoaplicativo_id', '<>', 2)->paginate(12);
         $usuarios = User::All();
         $marcas = Marca::All();
         $combustibles = Combustible::All();
         $tipocaja = TipoCaja::All();
         $estadovehiculo = EstadoVehiculo::All();
         $estadoaplicativo = EstadoAplicativo::All();
+        $titulo = "Vehiculos";
 
-        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo'));
+        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo'));
     }
 
     /**
@@ -52,7 +53,7 @@ class VehiculoController extends Controller
         $combustibles = Combustible::All();
         $tipocajas = TipoCaja::All();
         $estadovehiculos = EstadoVehiculo::All();
-        $estadoaplicativos = EstadoAplicativo::All();
+        $estadoaplicativos = EstadoAplicativo::where('id', 1)->orWhere('id', 2)->orWhere('id', 3)->get();
         $ciudades = Ciudad::All();
 
         return view('Admin.vehiculos.agregarvehiculo', compact('usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades'));
@@ -145,7 +146,7 @@ class VehiculoController extends Controller
         $combustibles = Combustible::All();
         $tipocajas = TipoCaja::All();
         $estadovehiculos = EstadoVehiculo::All();
-        $estadoaplicativos = EstadoAplicativo::All();
+        $estadoaplicativos = EstadoAplicativo::where('id', 1)->orWhere('id', 2)->orWhere('id', 3)->get();
         $ciudades = Ciudad::All();
 
         return view('Admin.vehiculos.editarvehiculo', compact('vehiculo', 'usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades', 'is'));
@@ -198,6 +199,22 @@ class VehiculoController extends Controller
         $vehiculo->save();
         return redirect('/admin/vehiculos')->with('actualizar', 'ok');
     }
+
+
+    public function vehiculosSinAprobar(){
+        // echo "hsakdhfkasdhhfksadhkjh";
+        $vehiculos = Vehiculo::where('estadoaplicativo_id', 1)->orWhere('estadoaplicativo_id', 2)->paginate(12);
+        $usuarios = User::All();
+        $marcas = Marca::All();
+        $combustibles = Combustible::All();
+        $tipocaja = TipoCaja::All();
+        $estadovehiculo = EstadoVehiculo::All();
+        $estadoaplicativo = EstadoAplicativo::All();
+        $titulo = "Vehiculos sin aprobar";
+
+        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo'));
+    }
+
 
     /**
      * Remove the specified resource from storage.

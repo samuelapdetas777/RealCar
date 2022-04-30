@@ -20,7 +20,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="text-center text-black">Vehiculos</h1>
+                            <h1 class="text-center text-black">{{$titulo}}</h1>
                         <div class="card">
                         
                         <a href="{{route('vehiculos.create')}}" class="btn btn-primary" >

@@ -37,8 +37,8 @@
             <i class=" fas fa-car"></i><span>Vehículos</span>
         </a>
     </li>
-    <li class="side-menus {{ Request::is('') ? 'active' : '' }}">
-        <a href="" class="nav-link">
+    <li class="side-menus {{ Request::is('/admin/vehiculossinaprobar') ? 'active' : '' }}">
+        <a href="/admin/vehiculossinaprobar" class="nav-link">
             <i class=" fas fa-check-square"></i><span>Vehículos sin aprobar</span>
         </a>
     </li>

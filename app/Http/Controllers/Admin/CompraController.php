@@ -38,7 +38,7 @@ class CompraController extends Controller
      */
     public function create()
     {
-        $vehiculos = Vehiculo::All();
+        $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->get();
         return view ('Admin.compras.agregarcompra')->with('vehiculos', $vehiculos);
     }
 
@@ -63,8 +63,9 @@ class CompraController extends Controller
         $compra->valor = $request->input('valor');
         $compra->save();
 
+        $proveedor->user_id = 8;
+        $proveedor->save();
         
-
         return redirect('/admin/compras')->with('agregar', 'ok');
 
     }

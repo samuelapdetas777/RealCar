@@ -60,7 +60,7 @@ class PedidoController extends Controller
             'fecha' => 'required | date'
         ]);
         $pedido = new Pedido();
-        $proveedor = Vehiculo::find($request->input('vehiculo'));  
+        $vehiculo = Vehiculo::find($request->input('vehiculo'));  
         // $proveedor = Vehiculo::where('id', '=', $request->input('vehiculo'))->first(); //Otra manera de hacerlo
         $fechaant = $request->input('fecha');
         $año = substr($fechaant, -4);
@@ -76,6 +76,11 @@ class PedidoController extends Controller
         $pedido->valor = $request->input('valor');
         $pedido->fechaentrega = $fecha;
         $pedido->save();
+
+        $vehiculo->user_id = $request->input('cliente');
+        $vehiculo->estadoaplicativo_id = 4;
+
+        $proveedor->save();
 
         
 

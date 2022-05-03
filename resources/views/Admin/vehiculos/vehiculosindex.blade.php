@@ -77,26 +77,25 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="d-flex flex-row justify-content-between p-3 mid">
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-1">ENGINE</small>
+                                                    <div class="d-flex flex-column"><small class="text-muted mb-1">Motor</small>
                                                         <div class="d-flex flex-row"><i class="fas fa-tachometer"></i>
-                                                            <div class="d-flex flex-column ml-1"><small class="ghj">1.4L MultiAir</small><small class="ghj">16V I-4 Turbo</small></div>
+                                                            <div class="d-flex flex-column ml-1"><small class="ghj">{{$vehiculo->motor}}</small></div>
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-2">HORSEPOWER</small>
-                                                        <div class="d-flex flex-row"><img src="https://imgur.com/J11mEBq.png">
-                                                            <h6 class="ml-1">135 hp&ast;</h6>
+                                                    <div class="d-flex flex-column"><small class="text-muted mb-2">Kilometraje</small>
+                                                        <div class="d-flex flex-row">
+                                                            <h6 class="ml-1">{{$vehiculo->kilometraje}} Km</h6>
                                                         </div>
                                                     </div>
                                                 </div> 
-                                                <small class="text-muted key pl-3">Standard key Features</small>
                                                 <div class="mx-3 mt-3 mb-2">
                                                     <a href="/admin/vehiculos/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
                                                         <small>Ver mas</small>
                                                     </a>
                                                     <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-danger btn-block">
-                                                        <small>Editar</small>
+                                                        <small>{{$boton}}</small>
                                                     </a>
-                                                </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>
+                                                </div> 
                                             </div>
                                         </div>
                                     </div>

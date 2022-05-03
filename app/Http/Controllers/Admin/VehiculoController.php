@@ -11,6 +11,7 @@ use App\Models\Marca;
 use App\Models\TipoCaja;
 use App\Models\User;
 use App\Models\Vehiculo;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 
 class VehiculoController extends Controller
@@ -37,8 +38,9 @@ class VehiculoController extends Controller
         $estadovehiculo = EstadoVehiculo::All();
         $estadoaplicativo = EstadoAplicativo::All();
         $titulo = "Vehiculos";
+        $boton = "Editar";
 
-        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo'));
+        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton'));
     }
 
     /**
@@ -48,7 +50,7 @@ class VehiculoController extends Controller
      */
     public function create()
     {
-        $usuarios = User::All();
+        $usuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('*')->get();
         $marcas = Marca::All();
         $combustibles = Combustible::All();
         $tipocajas = TipoCaja::All();
@@ -141,15 +143,18 @@ class VehiculoController extends Controller
     {
         $is = $id;
         $vehiculo = Vehiculo::find($id);
-        $usuarios = User::All();
+        $roles = Role::All();
+        $user = User::All();
+        $usuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('*')->get();
         $marcas = Marca::All();
         $combustibles = Combustible::All();
         $tipocajas = TipoCaja::All();
         $estadovehiculos = EstadoVehiculo::All();
         $estadoaplicativos = EstadoAplicativo::where('id', 1)->orWhere('id', 2)->orWhere('id', 3)->get();
         $ciudades = Ciudad::All();
+        $boton = "Editar";
 
-        return view('Admin.vehiculos.editarvehiculo', compact('vehiculo', 'usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades', 'is'));
+        return view('Admin.vehiculos.editarvehiculo', compact('vehiculo', 'usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades', 'is', 'boton'));
     }
 
     /**
@@ -211,8 +216,9 @@ class VehiculoController extends Controller
         $estadovehiculo = EstadoVehiculo::All();
         $estadoaplicativo = EstadoAplicativo::All();
         $titulo = "Vehiculos sin aprobar";
+        $boton = "Aprobar";
 
-        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo'));
+        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton'));
     }
 
 

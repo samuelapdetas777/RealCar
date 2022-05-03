@@ -13,11 +13,14 @@
     <div class="card-body">
             <h1 class="text-center text-black">Editar el vehiculo</h1>
         <div class="card">
+            
         
             <hr class="bg-primary">
             <a href="/admin/vehiculos">< Volver</a>
             <div class="card-body">
                 <div class="col">
+                        <p class="text-center text-primary">Para aprobar un vehículo cambia el campo de Estado del aplicativo</p>
+                    
 
                     <form action="{{route('vehiculos.update', $vehiculo->id)}}" method="POST" class="editararVehiculo">
                         @csrf

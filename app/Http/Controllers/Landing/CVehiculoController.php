@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cita;
 use App\Models\Ciudad;
 use App\Models\Combustible;
 use App\Models\EstadoAplicativo;
 use App\Models\EstadoVehiculo;
 use App\Models\Marca;
+use App\Models\Sede;
 use App\Models\TipoCaja;
 use App\Models\User;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CVehiculoController extends Controller
 {
@@ -90,15 +94,40 @@ class CVehiculoController extends Controller
      * @return \Illuminate\Http\Response
      * @param int $id
      */
-    public function agendarCita(){
-
+    public function agendarCita($id){
+        $vehiculo = Vehiculo::find($id);
+        $marca = Vehiculo::join('marcas', 'marcas.id', 'vehiculos.marcas_id')->select(DB::raw('marcas.nombre'))->where('vehiculos.id', $id)->first();
+        $estadovehiculo = Vehiculo::join('estadovehiculo as ev', 'ev.id', 'vehiculos.estadovehiculo_id')->select(DB::raw('ev.nombre'))->where('vehiculos.id', $id)->first();
+        $estadoaplicativo= Vehiculo::join('estadoaplicativo as ea', 'ea.id', 'vehiculos.estadoaplicativo_id')->select(DB::raw('ea.nombre'))->where('vehiculos.id', $id)->first();
+        $proveedor = Vehiculo::join('users', 'users.id', 'vehiculos.user_id')->select(DB::raw('users.name, users.last_name, users.id'))->where('vehiculos.id', $id)->first();
+        $sedes = Sede::All();
+        return view('Landing.vehiculos.agendarcita', compact('vehiculo', 'sedes', 'marca', 'estadovehiculo', 'estadoaplicativo', 'proveedor'));
     }
     
     /**
      * @return \Illuminate\Http\Response
      * @param int $id
      */
-    public function guardarCita(){
+    public function guardarCita(Request $request, $id){
+
+        $request->validate([
+            'fecha' => 'required | date',
+            'hora' => 'required | date_format:H:i',
+            'sede' => 'required | exists:sedes,id',
+
+        ]);
+
+        $cita = new Cita();
+        $cita->asunto = 'Visualización de vehículo';
+        $cita->idvehiculo = $id;
+        $cita->idcliente = Auth::user()->id;
+        $cita->fecha = $request->input('fecha');
+        $cita->hora = $request->input('hora');
+        $cita->sedes_id = $request->input('sede');
+        $cita->estado = 0;
+        $cita->save();
+
+        return redirect('/catalogo')->with('agregarcita', 'ok');
 
     }
     

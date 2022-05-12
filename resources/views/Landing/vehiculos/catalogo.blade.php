@@ -123,7 +123,7 @@
                                                     <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
                                                         <small>Ver mas</small>
                                                     </a>
-                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/cita/{{$vehiculo->id}}/nueva" type="button" class="btn btn-danger btn-block">
                                                         <small>Agendar cita</small>
                                                     </a>
                                                 </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>

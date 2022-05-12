@@ -23,7 +23,7 @@ class CreateCitasTable extends Migration
             $table->date('fecha');
             $table->time('hora');
             $table->foreignId('sedes_id')->constrained('sedes');
-            $table->string('comentario');
+            $table->string('comentario')->nullable();
 
             $table->timestamps();
         });

@@ -113,7 +113,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/catalogo/{id}', [CVehiculoController::class, 'catalogoProveedor']);
     Route::get('/catalogo/vehiculo/{id}', [CVehiculoController::class, 'verVehiculo']);
     
-    Route::get('/citas/nueva', [CVehiculoController::class, 'cita']);
+    Route::get('/cita/{id}/nueva', [CVehiculoController::class, 'agendarCita']);
+    Route::post('/cita/{id}/guardar', [CVehiculoController::class, 'guardarCita']);
     
 });
 

@@ -70,6 +70,9 @@ Route::group(['prefix' =>'admin'], function(){
         Route::resource('compras', CompraController::class);
         Route::resource('citas', CitaController::class);
         Route::post('/citasfecha', [CitaController::class, 'citasPorFecha']);
+        Route::get('/citasagendadas', [CitaController::class, 'indexCitasAgendadas']);
+        Route::get('/mostrarcitasagendadas', [CitaController::class, 'mostrarCitasAgendadas']);
+        Route::get('/vercitasmodal', [CitaController::class, 'verCitaModal']);
         
         
         Route::resource('ciudad', 'App\Http\Controllers\Info\CiudadController');    //Todas las ciudades de Colombia

@@ -9,6 +9,7 @@ use App\Models\Sede;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CitaController extends Controller
 {
@@ -156,7 +157,7 @@ class CitaController extends Controller
         $cita->save();
         // echo $request->input('hora');
 
-        return redirect('/admin/citas')->with('actualizar', 'ok');
+        return redirect('/admin/citasagendadas')->with('actualizar', 'ok');
         
     }
 
@@ -188,4 +189,30 @@ class CitaController extends Controller
         // $prueba = "hola que mas pues";
         // return response()->json(array('msg'=> $prueba), 200);
     }
+
+    public function indexCitasAgendadas(){
+        return view('Admin.citas.citasagendadas');
+        // return response()->json($citas);
+    }
+
+
+    public function mostrarCitasAgendadas(){
+        $citas = DB::table('citas')
+        ->join('sedes as s', 's.id', 'citas.sedes_id')
+        ->select(DB::raw('citas.fecha as start , citas.hora, citas.asunto as title, citas.id, citas.comentario, s.nombre as sede'))
+        ->where('citas.estado', 1)
+        ->get();
+//          $citas =  DB::table('citas')->join('sedes as s', 's.id', 'citas.sedes_id')->select(DB::raw('citas.fecha as start , citas.hora, citas.asunto as title, cita
+// s.id, citas.comentario, s.nombre as sede'))->where('estado', 1)->get(); 
+        return response()->json($citas);
+    }
+
+
+    public function verCitaModal(Request $request){
+        $id = $request->id;
+        $citas = Cita::find($id);
+        return response(json_encode($citas));
+    }
+
+    
 }

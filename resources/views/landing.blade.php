@@ -14,7 +14,7 @@ Bienvenido a RealCar
 @endsection
 
 @section('header-content')
-
+{{--
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -66,6 +66,96 @@ Bienvenido a RealCar
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+--}}
+
+
+
+
+
+
+
+
+
+<section id="hero" class=" p-5">
+        <h1>Encuentra el vehiculo de tu sueños con nosotros.</h1>
+        <a href="/catalogo" class="btn btn-primary btn-landing">Buscar Tu vehículo</a>
+        <a href="/vehiculos/index" class="btn btn-outline-white btn-landing">Vender tu vehículo</a>
+    </section>
+
+    <section id="somos-realcar">
+        <div class="container">
+            <div class="img-container"></div>
+            <div class="texto">
+
+                <h2>Bienvenido a <span class="color-acento">RealCar!</span></h2>
+                <p>Somos un concesionario de vehículos con varias sedes ubicadas en Colombia.
+                    Nos especializamos en la compra y venta de vehículos de marcas muy reconocidas como Volkswagen, Ford, Renault, Hyundai, Mazda, Audi, Peugeot, Jeep, Dodge, Ram, Honda, entre otras más que te podrían interesar. Contamos con excelente asesoría por parte de nuestro personal especializado y cada uno de nuestros productos tiene calidad y garantía certificada.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="nuestros-servicios"  class="row">
+        
+        <div class="container">
+            <h2>Nuestros servicios</h2>
+            <div class="programas">
+                <div class="carta">
+                    <h3>Programador Front-end</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt vero corporis incidunt saepe qui commodi quasi neque veniam quam, aspernatur est beatae maxime animi sed reiciendis mollitia ducimus veritatis repellendus?</p>
+                    <button>+ Info</button>
+                </div>
+                <div class="carta">
+                    <h3>Programador Full-Stack</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt vero corporis incidunt saepe qui commodi quasi neque veniam quam, aspernatur est beatae maxime animi sed reiciendis mollitia ducimus veritatis repellendus?</p>
+                    <button>+ Info</button>
+                </div>
+                <div class="carta">
+                    <h3>Programador Python</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt vero corporis incidunt saepe qui commodi quasi neque veniam quam, aspernatur est beatae maxime animi sed reiciendis mollitia ducimus veritatis repellendus?</p>
+                    <button>+ Info</button>
+                </div>  
+            </div>
+        </div>
+    </section>
+
+    <section id="caracteristicas"  class="row">
+        <div class="container">
+            <ul>
+                <li>✔️ 100% online</li>
+                <li>✔️ Flexibilidad de horarios</li>
+                <li>✔️ Soporte 1:1</li>
+                <li>✔️ Asistencia financiera</li>
+            </ul>
+        </div>
+    </section>
+
+   
+
+    <footer>
+        <div class="container">
+            <p>&copy; ProgramaYa 2021</p>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @endsection
 

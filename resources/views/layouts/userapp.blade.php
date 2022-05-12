@@ -28,7 +28,7 @@
     <div class="main-wrapper main-wrapper-1 bg-dark">
         @include('layouts.landingnavbar')
     </div>
-    <div class="main-content-user" style="padding-top: 7%;">
+    <div class="main-content-user">
             @yield('content')
         </div>
 </div>

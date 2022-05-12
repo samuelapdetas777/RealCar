@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- local CSS -->
-    
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
 
     <title>@yield('title')</title>
@@ -22,7 +22,7 @@
           height: 100%;
 
           align-items: center;
-          display: flex;   /*Asi se centra un texto en un div */
+             /*Asi se centra un texto en un div */
           justify-content: center;
       }
       
@@ -32,6 +32,13 @@
       .div-auth-navbar{
         position: absolute;
         right: 10px;
+      }
+
+      .btn-landing{
+        padding-top: 1%;
+        width: 40%;
+        height: 10%;
+        font-size: 100%;
       }
       
      

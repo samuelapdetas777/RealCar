@@ -34,7 +34,7 @@
                             @forelse($usuarios as $usuario )
                             
                             
-                                <div class="card usercard mr-2">
+                                <div class="card usercard mr-2" style="height: 400px;">
                                     <div class="top-container"> 
                                         <div class="">
                                             @if($usuario->photo != null)
@@ -46,12 +46,11 @@
                                     
                                         <div class="col-9">
                                             <div class="ml-1">
-                                                <h5 class="name">{{$usuario->name}} {{$usuario->last_name}}</h5>
-                                                @if(!empty($usuario->getRoleNames()))
-                                                    @foreach($usuario->getRoleNames() as $rolName)
-                                                        <p class="rol"><span class="badge bg-success">{{$rolName}}</span></p>
-                                                    @endforeach
-                                                @endif
+                                                
+                                            
+                                            <a href="/admin/usuarios/{{$usuario->id}}" class="btn btn-info" style="padding: 2px 7px"><i class="fas fa-eye"></i></a>
+                                            <a href="/admin/usuarios/{{$usuario->id}}/edit" class="btn btn-success" style="padding: 2px 7px"><i class="fas fa-pen"></i></a>
+
                                             </div>
                                         </div>
                                     </div>
@@ -60,6 +59,14 @@
 
                                                     
 
+
+                                            <span>{{$usuario->name}}</span>
+                                            <span class="d-block">{{$usuario->last_name}}</span>
+                                            @if(!empty($usuario->getRoleNames()))
+                                                    @foreach($usuario->getRoleNames() as $rolName)
+                                                        <p class="rol"><span class="badge bg-success">{{$rolName}}</span></p>
+                                                    @endforeach
+                                                @endif
 
                                             <span><i class="fas fa-id-card"></i>{{$usuario->document}}</span>
                                             <span class="d-block"><i class="fas fa-phone-alt"></i>{{$usuario->phone}}</span>
@@ -80,10 +87,7 @@
                                                 @endif
                                             @endforeach
                                         
-                                        <li class="list-group-item">
-                                            <a href="/admin/usuarios/{{$usuario->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                            <a href="/admin/usuarios/{{$usuario->id}}/edit" class="btn btn-success"><i class="fas fa-pen"></i></a>
-                                        </li>
+                                        
                                     </ul>
                                     
                                 </div>

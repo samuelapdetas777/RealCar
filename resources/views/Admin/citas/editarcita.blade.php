@@ -99,7 +99,7 @@
                             <div class="col">
                                 <label for="inputfecha">Fecha de la cita: </label>
                                 <div class="input-group date" >
-                                    <input type="date" class="form-control @error('fecha') is-invalid @enderror citasfecha" id="inputfecha" name="fecha" value="{{$cita->fecha}}">
+                                    <input type="date" class="form-control @error('fecha') is-invalid @enderror citasfecha" id="inputfecha" name="fecha" value="{{$cita->fecha}}" min="<?= date('Y-m-d'); ?>">
                                     
                                     @error('fecha')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -109,7 +109,7 @@
                             <div class="col">
                                 <label for="inputhora">Hora de la cita: </label>
                                 <div class="input-group " >
-                                    <input type="time" class="form-control @error('hora') is-invalid @enderror" id="inputhora" name="hora" value="{{$cita->hora}}">
+                                    <input type="time" class="form-control @error('hora') is-invalid @enderror" id="inputhora" name="hora" value="{{$cita->hora}}" min="08:00:00">
                                     
                                     @error('hora')
                                     <div class="invalid-feedback">{{$message}}</div>

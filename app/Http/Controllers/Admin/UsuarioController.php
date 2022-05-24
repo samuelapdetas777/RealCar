@@ -42,6 +42,7 @@ class UsuarioController extends Controller
     public function index()
     {
         $usuarios = User::paginate(8);
+
         $ciudades = Ciudad::All();
         // $roles = Rol::All();
         // $roles = Role::pluck('name', 'name')->All();

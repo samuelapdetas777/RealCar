@@ -9,7 +9,7 @@
             <img class="navbar-brand-full" src="{{ asset('img/logorealcar3.svg') }}" width="45px" alt=""/>
         </a>
     </div>
-    <ul class="sidebar-menu bg-dark">
+    <ul class="sidebar-menu bg-dark" style="font-family: 'Roboto', sans-serif !important;">
         @include('layouts.menu')
     </ul>
 </aside>

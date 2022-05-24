@@ -2741,7 +2741,7 @@ body {
     background-color: #f4f6f9;
     font-size: 14px;
     font-weight: 400;
-    font-family: "Nunito", "Segoe UI", arial;
+    font-family: "Nunito", "Segoe UI", arial !important;
     color: #6c757d;
 }
 

@@ -8,6 +8,39 @@
 
 @section('content')
 
+<style>
+    .upload{
+        width: 100px;
+        position: relative;
+        margin: auto;
+    }
+    #imgprofile{
+        border-radius: 50%;
+        border: 3px solid #c70000;
+    }
+    #div-imgprofile{
+      position: absolute;
+      bottom: 0;
+      right: 0%;
+      width: 32px;
+      height: 32px;
+      line-height: 33px;
+      text-align: center;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+    #inputprofileimg{
+        cursor: pointer;
+        position: absolute;
+        transform: scale(2);
+        opacity: 0;
+    }
+    #inputprofileimg::-webkit-file-upload-button{
+        cursor: pointer;
+
+    }
+    
+</style>
 
 <div class="card">
     <div class="card-body">
@@ -19,9 +52,28 @@
             <div class="card-body">
                 <div class="col">
 
-                    <form action="/admin/usuarios/{{$usuario->id}}" method="POST" class="editararUsuario">
+                    <form action="/admin/usuarios/{{$usuario->id}}" method="POST" class="editararUsuario" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+                        Foto de perfil:
+                        
+
+                        <div class="upload">
+                            @if($usuario->photo != null)
+                            <img src="/imagen/{{$usuario->photo}}" width="100" height="100" alt="" id="imgprofile">
+                            @else
+                            <img src="{{asset('img/no-profile-img.jpg')}}" width="100" height="100" alt="" id="imgprofile">
+                            @endif
+                            <div class="btn-danger" id="div-imgprofile">
+                                <input type="file" name="imagen" id="inputprofileimg" accept="image/png, .jpeg, .jpg">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                        @error('imagen')
+                        <div class="text-danger">{{$message}}</div>
+                        @enderror
+
+                        <hr>
                         <div class="row mt-5">
 
                             <div class="col-lg-6">
@@ -166,17 +218,31 @@
                 }
                 })
             });
+
+
+
+
+            $('#inputprofileimg').change(function(){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    $('#imgprofile').attr('src', e.target.result);
+                    
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+
+
+
+
+
+
+
+
         });
     </script>
 
 
 
-
-@if($errors->any())
-        <script>
-            $('#inputnombre').addClass('is-invalid');
-        </script>
-@endif
 
 
 @endsection

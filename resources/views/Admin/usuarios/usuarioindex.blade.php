@@ -36,8 +36,12 @@
                             
                                 <div class="card usercard mr-2">
                                     <div class="top-container"> 
-                                        <div class="col-3">
-                                            <figure class="avatar m-0 p-0 bg-info  text-white img-fluid profile-image" data-initial="SA"></figure>
+                                        <div class="">
+                                            @if($usuario->photo != null)
+                                                <img src="/imagen/{{$usuario->photo}}" class="rounded-circle mr-1 thumbnail-rounded user-thumbnail" width="100" height="100" alt="">
+                                            @else
+                                                <img src="{{asset('img/no-profile-img.jpg')}}" class="rounded-circle mr-1 thumbnail-rounded user-thumbnail" width="100" height="100" alt="">
+                                            @endif
                                         </div>
                                     
                                         <div class="col-9">

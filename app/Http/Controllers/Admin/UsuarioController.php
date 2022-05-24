@@ -19,6 +19,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class UsuarioController extends Controller
@@ -154,37 +155,17 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $request->validate=([
-        //     'nombre' => 'required | regex:/^[A-Za-z]+$/',
-        //     'apellido' => 'required | regex:/^[A-Za-z]+$/',
-        //     'documento'=> 'required | numeric | digits:10', //unico
-        //     'celular'=> 'required | numeric | digits:10',   //unico
-        //     'email' => 'required | email | unique:users',   //unico
-        //     'password'=> 'required | regex:/^[A-Za-z0-9]+$/',
-        //     'confirmacion_de_password'=> 'required',
-        //     'ciudad' => 'required',
-        //     'direccion' => 'required',
-        //     'rol' => 'required',
-        //     'estado'=> 'required'
-        // ]);
-
-
-
-
-
 
         $request->validate([
+            'imagen' => ' image | mimes:jpeg,png,jpg',
             'nombre' => 'required | regex:/^[A-Za-z]+$/ | between:3,15',
             'apellido' => 'required | regex:/^[A-Za-z]+$/ | between:3,15',
             'documento'=> 'required | numeric | digits:10 | unique:users,document', 
-            'document' =>  Rule::unique('users', 'document')->ignore($id),
+            'documento' =>  Rule::unique('users', 'document')->ignore($id),
             'celular'=> 'required | numeric | digits:10 | unique:users,phone',
             'celular' =>  Rule::unique('users', 'phone')->ignore($id),
             'email' => 'required | email | unique:users,email',
             'email' =>  Rule::unique('users', 'email')->ignore($id),
-            'password'=> 'required | regex:/^[A-Za-z0-9]+$/ | same:confirmacion_de_password',
-            // 'email' => 'unique:users,email'
-            'confirmacion_de_password'=> 'required | regex:/^[A-Za-z0-9]+$/ ',
             'ciudad' => 'required | exists:ciudades,id',
             'direccion' => 'required',
             'roles' => 'required | exists:roles,id',
@@ -193,10 +174,6 @@ class UsuarioController extends Controller
 
 
 
-
-
-
-        // $usuario = new User ($request->except('_token'));
         $usuario = User::find($id);
         $usuario->name = $request->input('nombre');
         $usuario->last_name = $request->input('apellido');
@@ -208,9 +185,34 @@ class UsuarioController extends Controller
         $usuario->address = $request->input('direccion');
 
         $usuario->state = $request->input('estado');
+        
+
+
+
+        if ($request->hasFile('imagen')) {
+            if ($usuario->photo !=null) {
+                $usuario->photo->delete();
+            }
+
+
+            $input = $request->All();
+            $imagen = $request->file('imagen');
+    
+    
+            $rutaGuardarImagen = 'imagen/';
+            $imagenProducto = date('YmdHis'). "." . $imagen->getClientOriginalExtension();
+            $imagen->move($rutaGuardarImagen, $imagenProducto);
+            // $input['imagen'] = "$imagenProducto";
+            $usuario->photo = "$imagenProducto";
+        }
+
+
         $usuario->save();
 
-        $input = $request->All();
+        // return $request->file('imagen')->store('public/imagenes/users');
+
+
+
         DB::table('model_has_roles')->where('model_id', $id)->delete(); //eliminamos el registro de la tabla detalle que relaciona al usuario con el rol, para que no este asignado a varios roles
 
         $usuario->assignRole($request->input('roles'));

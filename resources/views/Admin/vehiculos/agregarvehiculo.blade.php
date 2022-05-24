@@ -9,6 +9,32 @@
 @section('content')
 
 
+
+<style>
+    #btn-imgprofile{
+      position: relative;
+      padding: 11px 16px;
+      font-size: 15px;
+      line-height: 1.5;
+      border-radius: 50%;
+      color: white;
+      border: 0;
+      overflow: hidden;
+    }
+    #profileimg{
+        cursor: pointer;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: scale(3);
+        opacity: 0;
+    }
+</style>
+
+
+
+
+
 <div class="card">
     <div class="card-body">
             <h1 class="text-center text-black">Agregar un nuevo vehiculo</h1>
@@ -221,6 +247,17 @@
                                         <label class="custom-file-label" for="customFile">Elegir un archivo</label>
                                     </div>
                                 </div>
+
+
+                                <div class="upload">
+                                    <button type="button" class="btn-danger" id="btn-imgprofile">
+                                        <i class="fas fa-plus"></i>
+                                        <input type="file" name="selectimg" id="selectim">
+                                    </button>
+                                </div>
+
+
+
                             </div>
                         <div class="row mt-5">
                             <button type="submit" class="btn btn-success">Agregar</button>

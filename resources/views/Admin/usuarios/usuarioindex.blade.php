@@ -25,7 +25,7 @@
                                 @endphp
                             </div>
                         
-                        <a href="{{route('usuarios.create')}}" class="btn btn-primary" >
+                        <a href="{{route('usuarios.create')}}" class="btn btn-dark" >
                             Agregar nuevo usuario<i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
@@ -75,12 +75,12 @@
                                             @foreach($usuario->getRoleNames() as $rolName)
                                                 @if($rolName == 'Proveedor')
                                                 <li class="list-group-item">
-                                                    <span class="d-block"><a href="/admin/catalogo/{{$usuario->id}}">Ver Catálogo</a></span>
-                                                    <span class="d-block"><a href="/admin/citas/{{$usuario->id}}">Ver Citas</a></span>
+                                                    <span class="d-block"><a class="text-info" href="/admin/catalogo/{{$usuario->id}}">Ver Catálogo</a></span>
+                                                    <span class="d-block"><a class="text-info" href="/admin/citas/{{$usuario->id}}">Ver Citas</a></span>
                                                 </li>
                                                 @elseif($rolName == 'Cliente')
                                                 <li class="list-group-item">
-                                                    <span class="d-block"><a href="/admin/citas/cliente/{{$usuario->id}}">Ver Citas</a></span>
+                                                    <span class="d-block"><a class="text-info" href="/admin/citas/cliente/{{$usuario->id}}">Ver Citas</a></span>
                                                 </li>
                                                 @else
 

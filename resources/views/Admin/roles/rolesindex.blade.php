@@ -16,7 +16,7 @@
                             <h1 class="text-center text-black">Roles de los usuarios en el aplicativo</h1>
                         <div class="card">
                         
-                        <a href="{{route('roles.create')}}" class="btn btn-primary" >
+                        <a href="{{route('roles.create')}}" class="btn btn-dark" >
                             Agregar <i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">

@@ -13,10 +13,10 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="text-center text-black">Compras de las empresas</h1>
+                            <h1 class="text-center text-black">Compras de la empresa</h1>
                         <div class="card">
                         
-                        <a href="{{route('compras.create')}}" class="btn btn-primary" >
+                        <a href="{{route('compras.create')}}" class="btn btn-dark" >
                             Agregar <i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">

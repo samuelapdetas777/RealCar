@@ -114,7 +114,7 @@
   <header >
           --}}
         
-                <nav class="navbar navbar-expand-xl navbar-light" style="background-color: rgb(43, 38, 38); position: relative; z-index: 1000;">
+                <nav class="navbar navbar-expand-xl navbar-light" style="background-color: rgb(43, 38, 38); position: relative; z-index: 1000; padding: left 0 !important;">
                     <div class="container">
                         <a class="navbar-brand logo" href="/home">
                             <img src="{{ asset('img/logorealcar2.svg') }}" alt="..." height="36">
@@ -162,12 +162,12 @@
                               @endcan
                               @can('cliente')
                                 <li class="nav-item {{ Request::is('/reportes/cliente')? 'active' : ''}}">
-                                  <a class="nav-link text-white" href="/reportes/cliente">Reportes @can('administrador')(Proveedor) @endcan {{ Request::is('/reportes/cliente')? '<span class="sr-only">(current)</span>': ''}}</a>
+                                  <a class="nav-link text-white" href="/reportes/cliente">Citas @can('administrador')(Proveedor) @endcan {{ Request::is('/reportes/cliente')? '<span class="sr-only">(current)</span>': ''}}</a>
                                 </li> 
                               @endcan
                               @can('proveedor')
                                 <li class="nav-item {{ Request::is('/reportes/proveedor')? 'active' : ''}}">
-                                  <a class="nav-link text-white" href="/reportes/proveedor">Reportes @can('administrador')(Proveedor) @endcan {{ Request::is('/reportes/proveedor')? '<span class="sr-only">(current)</span>': ''}}</a>
+                                  <a class="nav-link text-white" href="/reportes/proveedor">Citas @can('administrador')(Proveedor) @endcan {{ Request::is('/reportes/proveedor')? '<span class="sr-only">(current)</span>': ''}}</a>
                                 </li> 
                               @endcan
                               <li class="nav-item {{ Request::is('/contactanos')? 'active' : ''}}">

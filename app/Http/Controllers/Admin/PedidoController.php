@@ -71,7 +71,7 @@ class PedidoController extends Controller
 
 
         $pedido->cliente = $request->input('cliente');
-        $pedido->proveedor = $proveedor->user_id;
+        $pedido->proveedor = $vehiculo->user_id;
         $pedido->vehiculo = $request->input('vehiculo');
         $pedido->valor = $request->input('valor');
         $pedido->fechaentrega = $fecha;
@@ -80,7 +80,7 @@ class PedidoController extends Controller
         $vehiculo->user_id = $request->input('cliente');
         $vehiculo->estadoaplicativo_id = 4;
 
-        $proveedor->save();
+        $vehiculo->save();
 
         
 

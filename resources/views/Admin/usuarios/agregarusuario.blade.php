@@ -11,7 +11,7 @@
 
 <div class="card">
     <div class="card-body">
-            <h1 class="text-center text-black">Agregar un nuevo usuario de los vehiculos</h1>
+            <h1 class="text-center text-black">Agregar un nuevo usuario</h1>
         <div class="card">
         
             <hr class="bg-primary">

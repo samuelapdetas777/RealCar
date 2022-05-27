@@ -11,7 +11,7 @@
 
 <div class="card">
     <div class="card-body">
-            <h1 class="text-center text-black">Editar el vehiculo</h1>
+            <h1 class=í>Editar el vehiculo</h1>
         <div class="card">
             
         

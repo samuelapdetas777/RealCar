@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <h1 class="text-center text-black">Sedes de RealCar</h1>
                         <div class="card">
-                        <a href="/admin/sede/create" class="btn btn-primary">
+                        <a href="/admin/sede/create" class="btn btn-dark">
                             Agregar  <i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">

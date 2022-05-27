@@ -8,27 +8,48 @@
 
 @section('content')
 
-
-
 <style>
-    #btn-imgprofile{
-      position: relative;
-      padding: 11px 16px;
-      font-size: 15px;
-      line-height: 1.5;
-      border-radius: 50%;
-      color: white;
-      border: 0;
-      overflow: hidden;
+
+.upload{
+        width: 100px;
+        position: relative;
+        display: block;
     }
-    #profileimg{
+    #div-imgprofile{
+      position: absolute;
+      width: 170px;
+      height: 110px;
+      line-height: 33px;
+      text-align: center;
+      overflow: hidden;
+      border-radius: 20px;
+      border: dotted 5px black;
+      margin: pointer ;
+    }
+    #div-imgprofile:hover{
+      background-color: rgba(255, 0, 0);
+    }
+    #inputprofileimg{
         cursor: pointer;
         position: absolute;
-        left: 0;
-        top: 0;
-        transform: scale(3);
+        transform: scale(4.7);
         opacity: 0;
     }
+    #inputprofileimg::-webkit-file-upload-button{
+        cursor: pointer;
+
+    }
+
+    #iconoinput{
+        margin-top: 12%;
+        font-size: 500%;
+        color: black;
+    }
+
+    #btn-submit{
+        margin-top:  110px;
+    }
+
 </style>
 
 
@@ -37,7 +58,7 @@
 
 <div class="card">
     <div class="card-body">
-            <h1 class="text-center text-black">Agregar un nuevo vehiculo</h1>
+            <h1 class="text-center text-black">Agregar un nuevo vehículo</h1>
         <div class="card">
         
             <hr class="bg-primary">
@@ -45,7 +66,7 @@
             <div class="card-body">
                 <div class="col">
 
-                    <form action="{{route('vehiculos.store')}}" method="POST" class="agregarVehiculo">
+                    <form action="{{route('vehiculos.store')}}" method="POST" class="agregarVehiculo" enctype="multipart/form-data">
                         @csrf
                         <div class="row mt-5">
 
@@ -240,27 +261,21 @@
                             </div>
 
                         
-                            <div class="row mt-5">
-                                <div class="col">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" value="Elegir" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Elegir un archivo</label>
-                                    </div>
+                            <div class="upload mt-3">
+                                
+                                <div class="" id="div-imgprofile">
+                                    <input type="file" name="imagenes[]" id="inputprofileimg" accept="image/png, .jpeg, .jpg" multiple>
+                                    <i class="fas fa-camera" id="iconoinput"></i>
                                 </div>
-
-
-                                <div class="upload">
-                                    <button type="button" class="btn-danger" id="btn-imgprofile">
-                                        <i class="fas fa-plus"></i>
-                                        <input type="file" name="selectimg" id="selectim">
-                                    </button>
-                                </div>
-
-
-
                             </div>
+                            @error('imagenes[]')
+                                <div class="text-danger">{{$message}}</div>
+                            @enderror
+
+                            
+
                         <div class="row mt-5">
-                            <button type="submit" class="btn btn-success">Agregar</button>
+                            <button type="submit" class="btn btn-success" id="btn-submit">Agregar</button>
                         </div>
                     </form>
                 </div>

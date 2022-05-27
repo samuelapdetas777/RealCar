@@ -20,7 +20,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="text-center text-black">Vehiculos</h1>
+                            <h1 class="text-center text-black">Vehículos</h1>
                         <div class="card">
                         
                         
@@ -56,7 +56,7 @@
                                 
                             @forelse($vehiculos as $vehiculo )
                                     <div class="col-sm-4">
-                                        <div class="card shadow" > <img src="{{asset('img/img-landing/mazda.jpg')}}" class="card-img-top" width="100%">
+                                        <div class="card shadow" > <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
                                             <div class="card-body pt-0 px-0">
 
                                                 <div class="d-flex flex-row justify-content-between  px-3 mt-1"> 
@@ -97,9 +97,9 @@
                                                     
                                                 </div>
                                                 <div class="d-flex flex-row justify-content-between p-3 mid">
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-1">Motor</small>
+                                                    <div class="d-flex flex-column"><small class="text-muted mb-2">Motor</small>
                                                         <div class="d-flex flex-row">
-                                                            <div class="d-flex flex-column ml-1">{{$vehiculo->motor}}</div>
+                                                        <h6 class="ml-1">{{$vehiculo->motor}}</h6>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex flex-column"><small class="text-muted mb-2">Kilometraje</small>
@@ -108,25 +108,23 @@
                                                         </div>
                                                     </div>
                                                 </div> 
-                                                <small class="text-muted key pl-3">
                                                     
                                                         @foreach($usuarios as $usuario)
                                                             @if($vehiculo->user_id == $usuario->id)
-                                                            <a href="/catalogo/{{$vehiculo->user_id}}">
+                                                            <a class="text-info" href="/catalogo/{{$vehiculo->user_id}}">
                                                                 {{$usuario->name}} {{$usuario->name}}
                                                             </a>
                                                             @endif
                                                         @endforeach
                                                     
-                                                </small>
                                                 <div class="mx-3 mt-3 mb-2">
-                                                    <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-outline-dark btn-block">
                                                         <small>Ver mas</small>
                                                     </a>
-                                                    <a href="/cita/{{$vehiculo->id}}/nueva" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/cita/{{$vehiculo->id}}/nueva" type="button" class="btn btn-dark btn-block">
                                                         <small>Agendar cita</small>
                                                     </a>
-                                                </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>
+                                                </div> 
                                             </div>
                                         </div>
                                     </div>

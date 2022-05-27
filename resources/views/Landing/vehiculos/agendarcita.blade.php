@@ -29,7 +29,7 @@
                 <div class="col">
                     <div class="row">    
                         <div class="col-lg-4">
-                            <div class="card shadow" > <img src="{{asset('img/img-landing/mazda.jpg')}}" class="card-img-top" width="100%">
+                            <div class="card shadow" > <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
                                 <div class="card-body pt-0 px-0">
                                     <div class="d-flex flex-row justify-content-between  px-3 mt-1"> 
                                         <p class="d-inline"> <bold>{{$marca->nombre}}</bold></p>        
@@ -53,19 +53,19 @@
                                         </span>
                                     </div>
                                     <div class="d-flex flex-row justify-content-between p-3 mid">
-                                        <div class="d-flex flex-column"><small class="text-muted mb-1">Motor</small>
+                                        <div class="d-flex flex-column"><small class="mb-2">Motor</small>
                                             <div class="d-flex flex-row">
-                                                <div class="d-flex flex-column ml-1">{{$vehiculo->motor}}</div>
+                                            <h6 class="ml-1">{{$vehiculo->motor}}</h6>
                                             </div>
                                         </div>
-                                        <div class="d-flex flex-column"><small class="text-muted mb-2">Kilometraje</small>
+                                        <div class="d-flex flex-column"><small class="mb-2">Kilometraje</small>
                                             <div class="d-flex flex-row">
                                                 <h6 class="ml-1">{{$vehiculo->kilometraje}} Km</h6>
                                             </div>
                                         </div>
                                     </div> 
                                     <div class="mx-3 mt-3 mb-2">
-                                        <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
+                                        <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-info btn-block">
                                             <small>Ver mas</small>
                                         </a>
                                     </div> 
@@ -89,7 +89,7 @@
                                     <div class="col">
                                         <label for="inputfecha">Fecha tentativa de la cita: </label>
                                         <div class="input-group date" >
-                                            <input type="date" class="form-control @error('fecha') is-invalid @enderror" id="inputfecha" name="fecha" value="{{old('fecha')}}">
+                                            <input type="date" class="form-control @error('fecha') is-invalid @enderror" id="inputfecha" name="fecha" value="{{old('fecha')}}"  min="<?= date('Y-m-d'); ?>">
                                             
                                             @error('fecha')
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -99,7 +99,7 @@
                                     <div class="col">
                                         <label for="inputhora">Hora tentativa de la cita: </label>
                                         <div class="input-group " >
-                                            <input type="time" class="form-control @error('hora') is-invalid @enderror" id="inputhora" name="hora" value="{{old('hora')}}">
+                                            <input type="time" class="form-control @error('hora') is-invalid @enderror" id="inputhora" name="hora" value="{{old('hora')}}" min="8:00:00">
                                             
                                             @error('hora')
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -123,7 +123,7 @@
                                     </div>
                                 </div>
 
-                                <div class="alert alert-danger mt-5" role="alert">
+                                <div class="alert alert-warning mt-5" role="alert">
                                     La solicitud de tu cita quedará sujeta a cambios, será revisada, y agendada de acuerdo a la disponibilidad de la sede.
                                 </div>
 

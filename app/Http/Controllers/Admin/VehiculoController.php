@@ -7,6 +7,7 @@ use App\Models\Ciudad;
 use App\Models\Combustible;
 use App\Models\EstadoAplicativo;
 use App\Models\EstadoVehiculo;
+use App\Models\ImagenVehiculo;
 use App\Models\Marca;
 use App\Models\TipoCaja;
 use App\Models\User;
@@ -37,10 +38,11 @@ class VehiculoController extends Controller
         $tipocaja = TipoCaja::All();
         $estadovehiculo = EstadoVehiculo::All();
         $estadoaplicativo = EstadoAplicativo::All();
+        $imagenes = ImagenVehiculo::All();
         $titulo = "Vehiculos";
         $boton = "Editar";
 
-        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton'));
+        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton', 'imagenes'));
     }
 
     /**
@@ -86,7 +88,8 @@ class VehiculoController extends Controller
             'airbag' => 'required | numeric | between:0,20',
             'precio' => 'required | numeric | between:700000,2500000000',
             'estadoaplicativo' => 'required | exists:estadoaplicativo,id',
-            'descripcion' => 'required | min:10'
+            'descripcion' => 'required | min:10',
+            'imagenes.*' => 'image | mimes:jpeg, jpg, png'
             
         ]);
 
@@ -109,6 +112,39 @@ class VehiculoController extends Controller
         $vehiculo->estadoaplicativo_id = $request->input('estadoaplicativo');
         $vehiculo->descripcion = $request->input('descripcion');
         $vehiculo->save();
+        
+
+
+        if ($request->imagenes) {
+
+            for ($i=0; $i < count($request->imagenes); $i++) { 
+                // echo $request->imagenes[$i];
+                // echo '<br>';
+                // echo $i;
+
+
+                $imagen = $request->imagenes[$i];
+                $rutaGuardarImagen = 'imagen/';
+                $imagenProducto = date('YmdHis'). $i ."." . $imagen->getClientOriginalExtension();
+                $imagen->move($rutaGuardarImagen, $imagenProducto);
+
+                // var_dump($imagen);
+
+
+                $guardarimagen = new ImagenVehiculo();
+                $guardarimagen->idvehiculo = 1;
+                $guardarimagen->foto = "$imagenProducto";
+                $guardarimagen->save();
+
+
+
+                // ImagenVehiculo::create([
+                //     'idvehiculo' => 1,
+                //     'foto' => "$imagenProducto"
+
+                // ]);
+            }
+        }
         return redirect('/admin/vehiculos')->with('agregar', 'ok');
     }
 
@@ -215,10 +251,11 @@ class VehiculoController extends Controller
         $tipocaja = TipoCaja::All();
         $estadovehiculo = EstadoVehiculo::All();
         $estadoaplicativo = EstadoAplicativo::All();
+        $imagenes = ImagenVehiculo::All();
         $titulo = "Vehiculos sin aprobar";
         $boton = "Aprobar";
 
-        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton'));
+        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton', 'imagenes'));
     }
 
 

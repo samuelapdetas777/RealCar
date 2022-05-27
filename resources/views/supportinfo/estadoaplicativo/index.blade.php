@@ -18,7 +18,7 @@
                         {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalformagregar">
                             Agregar <i class="fas fa-plus"></i>
                         </button>--}}
-                        <a href="{{route('estadoaplicativo.create')}}" class="btn btn-primary" >
+                        <a href="{{route('estadoaplicativo.create')}}" class="btn btn-dark" >
                             Agregar <i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">

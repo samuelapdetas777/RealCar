@@ -20,10 +20,10 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="text-center text-black">Vehiculos</h1>
+                            <h1 class="text-center text-black">Vehículos</h1>
                         <div class="card">
                         
-                        <a href="/vehiculos/nuevo" class="btn btn-primary" >
+                        <a href="/vehiculos/nuevo" class="btn btn-dark" >
                             Agregar nuevo vehículo<i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
@@ -37,7 +37,7 @@
                                 
                             @forelse($vehiculos as $vehiculo )
                                     <div class="col-sm-4">
-                                        <div class="card shadow" > <img src="{{asset('img/img-landing/mazda.jpg')}}" class="card-img-top" width="100%">
+                                        <div class="card shadow" > <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
                                             <div class="card-body pt-0 px-0">
 
                                                 <div class="d-flex flex-row justify-content-between  px-3 mt-1"> 
@@ -80,7 +80,7 @@
                                                 <div class="d-flex flex-row justify-content-between p-3 mid">
                                                     <div class="d-flex flex-column"><small class="text-muted mb-1">Motor</small>
                                                         <div class="d-flex flex-row">
-                                                            <div class="d-flex flex-column ml-1">{{$vehiculo->motor}}</div>
+                                                            <h6 class="ml-1">{{$vehiculo->motor}} </h6>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex flex-column"><small class="text-muted mb-2">Kilometraje</small>
@@ -91,10 +91,10 @@
                                                 </div> 
                                                 
                                                 <div class="mx-3 mt-3 mb-2">
-                                                    <a href="/vehiculos/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/vehiculos/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-outline-dark btn-block">
                                                         <small>Ver mas</small>
                                                     </a>
-                                                    <a href="/vehiculos/editar/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/vehiculos/editar/{{$vehiculo->id}}" type="button" class="btn btn-dark btn-block">
                                                         <small>Editar</small>
                                                     </a>
                                                 </div> 

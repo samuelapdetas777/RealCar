@@ -16,7 +16,7 @@
                             <h1 class="text-center text-black">Ciudades de Colombia</h1>
                         <div class="card">
                         
-                        <a href="{{route('ciudad.create')}}" class="btn btn-primary" >
+                        <a href="{{route('ciudad.create')}}" class="btn btn-dark" >
                             Agregar <i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">

@@ -16,7 +16,7 @@
                             <h1 class="text-center text-black">Citas</h1>
                         <div class="card">
                         
-                        <a href="{{route('citas.create')}}" class="btn btn-primary" >
+                        <a href="{{route('citas.create')}}" class="btn btn-dark" >
                             Agregar <i class="fas fa-plus"></i>
                         </a>
 
@@ -74,8 +74,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <a id="editarmodal" class="btn btn-primary" href="">Editar</a>
-                            <a id="vermasmodal" class="btn btn-primary" href="">Ver mas</a>
+                            <a id="editarmodal" class="btn btn-info" href="">Editar</a>
+                            <a id="vermasmodal" class="btn btn-success" href="">Ver mas</a>
                         </div>
                         </div>
                     </div>

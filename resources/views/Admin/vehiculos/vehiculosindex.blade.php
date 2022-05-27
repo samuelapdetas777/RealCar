@@ -23,7 +23,7 @@
                             <h1 class="text-center text-black">{{$titulo}}</h1>
                         <div class="card">
                         
-                        <a href="{{route('vehiculos.create')}}" class="btn btn-primary" >
+                        <a href="{{route('vehiculos.create')}}" class="btn btn-dark" >
                             Agregar nuevo vehiculo<i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
@@ -37,7 +37,16 @@
                                 
                             @forelse($vehiculos as $vehiculo )
                                     <div class="col-sm-4">
-                                        <div class="card shadow" > <img src="{{asset('img/img-landing/mazda.jpg')}}" class="card-img-top" width="100%">
+                                        <div class="card shadow" > 
+                                            @for($e = 0; $e == 0; $e++)
+                                                @foreach($imagenes as $i)
+                                                    @if($i->idvehiculo == $vehiculo->id)
+                                                        <img src="/imagen/{{$i->foto}}" class="card-img-top" width="100%">
+                                                    @else
+                                                    @endif
+                                                    @endforeach
+                                                    <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
+                                            @endfor
                                             <div class="card-body pt-0 px-0">
 
                                                 <div class="d-flex flex-row justify-content-between  px-3 mt-1"> 
@@ -77,22 +86,24 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="d-flex flex-row justify-content-between p-3 mid">
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-1">Motor</small>
+                                                    <div class="d-flex flex-column">
+                                                        <small class=" mb-2">Motor</small>
                                                         <div class="d-flex flex-row"><i class="fas fa-tachometer"></i>
-                                                            <div class="d-flex flex-column ml-1"><small class="ghj">{{$vehiculo->motor}}</small></div>
+                                                            <h6 class="ml-1">{{$vehiculo->motor}}</h6>
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-2">Kilometraje</small>
+                                                    <div class="d-flex flex-column">
+                                                        <small class=" mb-2">Kilometraje</small>
                                                         <div class="d-flex flex-row">
                                                             <h6 class="ml-1">{{$vehiculo->kilometraje}} Km</h6>
                                                         </div>
                                                     </div>
                                                 </div> 
                                                 <div class="mx-3 mt-3 mb-2">
-                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}" type="button" class="btn btn-outline-dark btn-block">
                                                         <small>Ver mas</small>
                                                     </a>
-                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-dark btn-block">
                                                         <small>{{$boton}}</small>
                                                     </a>
                                                 </div> 

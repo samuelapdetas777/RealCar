@@ -20,7 +20,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h1 class="text-center text-black">Ver vehiculo</h1>
+                <h1 class="text-center text-black">Ver vehículo</h1>
                 <div class="card">
                         
                         
@@ -32,7 +32,7 @@
                         <section class="py-5 bg-light">
                             <div class="container px-4 px-lg-5 my-5">
                                 <div class="row gx-4 gx-lg-5 align-items-center">
-                                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+                                    <div class="col-md-6"><img src="{{asset('img/no-image.jpg')}}" class="" width="100%"></div>
                                     <div class="col-md-6">
                                         <div class="small mb-1"> <h5>
                                             
@@ -46,7 +46,7 @@
                                         </div>
                                         <p class="lead">{{$vehiculo->descripcion}}</p>
                                         <div class="d-flex">
-                                            <a href="" class="btn btn-outline-primary">
+                                            <a href="/cita/{{$vehiculo->id}}/nueva" class="btn btn-outline-dark">
                                                 <i class="fas fa-calendar-check me-1"></i>
                                                 Agendar una cita
                                             </a>

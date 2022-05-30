@@ -134,8 +134,8 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputdireccion">Direccion de residencia</label>
-                                <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="inputdireccion" placeholder="Direccion" value="{{$usuario->address}}" name="direccion" required>
+                                <label for="inputdireccion">Dirección de residencia</label>
+                                <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="inputdireccion" placeholder="Dirección de residencia" value="{{$usuario->address}}" name="direccion" required>
                                 @error('direccion')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror

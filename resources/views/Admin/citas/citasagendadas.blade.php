@@ -64,13 +64,13 @@
 
                             
                             <h5 id="idfecha">Fecha y hora</h5>
-                            <p id="fecha">Aqui va la fecha y la hora</p>
+                            <p id="fecha">Aquí va la fecha y la hora</p>
                             
                             <h5 id="idsede">Sede</h5>
-                            <p id="sede">Aqui va la sede</p>
+                            <p id="sede">Aquí va la sede</p>
                             
                             <h5 id="idcomentarios">Comentarios</h5>
-                            <p id="comentarios">Aqui van los comentarios</p>
+                            <p id="comentarios">Aquí van los comentarios</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

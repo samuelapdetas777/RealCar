@@ -159,7 +159,7 @@
                                
                                 <div class="col-12 text-center">
                                
-                                    <p>¿Ya tienes una cuenta? <a class="link-r-l" href="/login">Ingresa aqui</a></p>
+                                    <p>¿Ya tienes una cuenta? <a class="link-r-l" href="/login">Ingresa aquí</a></p>
                                 
                                 </div>
                             </div>

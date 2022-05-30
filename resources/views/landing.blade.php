@@ -28,7 +28,7 @@ Bienvenido a RealCar
         <div class="carousel-caption d-none d-md-block">
           <h3>Chevrolet Onix</h3>
           <h5>$40'900.000</h5>
-          <p>Carro en buen estado en la ciudad de medellin</p>
+          <p>Carro en buen estado en la ciudad de Medellín</p>
         </div>
       </a>
     </div>
@@ -77,8 +77,8 @@ Bienvenido a RealCar
 
 
 <section id="hero" class=" p-5">
-        <h1>Encuentra el vehiculo de tu sueños con nosotros.</h1>
-        <a href="/catalogo" class="btn btn-primary btn-landing">Buscar Tu vehículo</a>
+        <h1>Encuentra el vehículo de tu sueños con nosotros.</h1>
+        <a href="/catalogo" class="btn btn-primary btn-landing">Buscar tu vehículo</a>
         <a href="/vehiculos/index" class="btn btn-outline-white btn-landing">Vender tu vehículo</a>
     </section>
 

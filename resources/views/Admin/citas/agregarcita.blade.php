@@ -24,7 +24,7 @@
                         @csrf
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="inputasunto">Asunto: </label>
+                                <label for="inputasunto">Asunto: *</label>
                                 <input type="text" class="form-control @error('asunto') is-invalid @enderror" id="inputasunto" value="{{old('asunto')}}" placeholder="Asunto..." name="asunto" required>
                                 @error('asunto')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -33,10 +33,10 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectvehiculo">Vehiculo: </label>
+                                <label for="selectvehiculo">Vehículo: </label>
                                 <select  class="form-control selector @error('vehiculo') is-invalid @enderror" id="selectvehiculo" name="vehiculo" >
                                 
-                                <option value="">Selecciona el vehiculo</option>
+                                <option value="">Selecciona el vehículo</option>
                                 @foreach($vehiculos as $vehiculo)
                                     <option value="{{$vehiculo->id}}"> Id Proeedor: {{$vehiculo->user_id}} ---  Id Vehículo {{$vehiculo->id}} - {{$vehiculo->nombre}}</option>
                                 @endforeach
@@ -94,7 +94,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="inputfecha">Fecha de la cita: </label>
+                                <label for="inputfecha">Fecha de la cita: *</label>
                                 <div class="input-group date" >
                                     <input type="date" class="form-control @error('fecha') is-invalid @enderror" id="inputfecha" name="fecha" value="{{old('fecha')}}"  min="<?= date('Y-m-d'); ?>">
                                     
@@ -104,7 +104,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <label for="inputhora">Hora de la cita: </label>
+                                <label for="inputhora">Hora de la cita: *</label>
                                 <div class="input-group " >
                                     <input type="time" class="form-control @error('hora') is-invalid @enderror" id="inputhora" name="hora" value="{{old('hora')}}" min="8:00:00">
                                     
@@ -116,7 +116,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectsede">Sede: </label>
+                                <label for="selectsede">Sede: *</label>
                                 <select  class="form-control selector @error('sede') is-invalid @enderror" id="selectsede" name="sede" required>
                                 
                                 <option value="">Selecciona la sede</option>
@@ -131,7 +131,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="inputcomentario">Comentarios: </label>
+                                <label for="inputcomentario">Comentarios: *</label>
                                 <textarea  class="form-control  @error('comentario') is-invalid @enderror" placeholder="Comentario..." id="inputcomentario" name="comentario" required></textarea>
                                 @error('comentario')
                                 <div class="invalid-feedback">{{$message}}</div>

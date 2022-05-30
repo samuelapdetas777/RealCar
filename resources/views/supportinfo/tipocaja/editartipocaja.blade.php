@@ -11,7 +11,7 @@
 
 <div class="card">
     <div class="card-body">
-            <h1 class="text-center text-black">Agregar transmisiones de los vehículos en el aplicativo</h1>
+            <h1 class="text-center text-black">Editar transmisión</h1>
         <div class="card">
         
             <hr class="bg-primary">

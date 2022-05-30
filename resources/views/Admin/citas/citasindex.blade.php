@@ -55,7 +55,7 @@
                                         <tr class="bg-dark hover">
                                             <td colspan="4">
 
-                                                No hay citas registradas, agrega uno nuevo para verlo aqui.
+                                                No hay citas registradas, agrega una nuevo para verla aquí.
                                             </td>
                                         </tr>
                                         @endforelse

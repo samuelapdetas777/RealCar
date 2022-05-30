@@ -65,8 +65,8 @@
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputconfcontraseña">Confirmacion de contraseña</label>
-                                <input type="password" class="form-control @error('confirmacion_de_password') is-invalid @enderror" id="inputconfcontraseña" placeholder="Confirmacion de la contraseña" value="{{old('confirmacion_de_password')}}" name="confirmacion_de_password" required>
+                                <label for="inputconfcontraseña">Confirmación de contraseña</label>
+                                <input type="password" class="form-control @error('confirmacion_de_password') is-invalid @enderror" id="inputconfcontraseña" placeholder="Confirmación de la contraseña" value="{{old('confirmacion_de_password')}}" name="confirmacion_de_password" required>
                                 @error('confirmacion_de_password')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -98,7 +98,7 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputdireccion">Direccion de residencia</label>
+                                <label for="inputdireccion">Dirección de residencia</label>
                                 <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="inputdireccion" placeholder="Direccion" value="{{old('direccion')}}" name="direccion" required>
                                 @error('direccion')
                                 <div class="invalid-feedback">{{$message}}</div>

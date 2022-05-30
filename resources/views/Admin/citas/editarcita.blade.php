@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-body">
-            <h1 class="text-center text-black">Agregar una nueva cita</h1>
+            <h1 class="text-center text-black">Editar cita</h1>
         <div class="card">
         
             <hr class="bg-primary">
@@ -25,7 +25,7 @@
                         @method('PUT')
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="inputasunto">Asunto: </label>
+                                <label for="inputasunto">Asunto: *</label>
                                 <input type="text" class="form-control @error('asunto') is-invalid @enderror" id="inputasunto" value="{{$cita->asunto}}" placeholder="Asunto..." name="asunto" required>
                                 @error('asunto')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -34,10 +34,10 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectvehiculo">Vehiculo: </label>
+                                <label for="selectvehiculo">Vehículo: </label>
                                 <select  class="form-control selector @error('vehiculo') is-invalid @enderror" id="selectvehiculo" name="vehiculo" >
                                 
-                                <option value="">Selecciona el vehiculo</option>
+                                <option value="">Selecciona el vehículo</option>
                                 @foreach($vehiculos as $vehiculo)
                                     <option value="{{$vehiculo->id}}" {{$cita->idvehiculo == $vehiculo->id? 'selected': ''}}> Id Proeedor: {{$vehiculo->user_id}} ---  Id Vehículo {{$vehiculo->id}} - {{$vehiculo->nombre}}</option>
                                 @endforeach

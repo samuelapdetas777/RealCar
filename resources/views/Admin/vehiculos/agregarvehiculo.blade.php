@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Vehiculos')
+@section('title', 'vehículos')
 
 @section('css')
 <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
@@ -74,7 +74,7 @@
                             <label for="selectproveedor">Proveedor</label>
                                 <select type="number" class="form-control selector @error('proveedor') is-invalid @enderror" id="selectproveedor" name="proveedor" required>
                                 
-                                    <option value="">Selecciona el dueño del vehiculo</option>
+                                    <option value="">Selecciona el dueño del vehículo</option>
                                     @foreach($usuarios as $usuario)
                                         <option value="{{$usuario->id}}">{{$usuario->name}} {{$usuario->last_name}}</option>
                                     @endforeach
@@ -91,7 +91,7 @@
                             <label for="selectmarca">Marca: </label>
                                 <select class="form-control selector @error('marca') is-invalid @enderror" id="selectmarca" name="marca" required>
                                 
-                                    <option value="">Selecciona la marca del vehiculo</option>
+                                    <option value="">Selecciona la marca del vehículo</option>
                                     @foreach($marcas as $marca)
                                         <option value="{{$marca->id}}">{{$marca->nombre}}</option>
                                     @endforeach
@@ -101,7 +101,7 @@
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputnombre">Nombre del vehiculo</label>
+                                <label for="inputnombre">Nombre del vehículo</label>
                                 <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="inputnombre" placeholder="Nombre" value="{{old('nombre')}}" name="nombre" required>
                                 @error('nombre')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -131,7 +131,7 @@
                                 <label for="selecttipocaja">Transmisiòn: </label>
                                 <select class="form-control @error('tipocaja') is-invalid @enderror" id="selecttipocaja" name="tipocaja" required>
                                 
-                                    <option value="">Selecciona la transmisiòn del vehiculo</option>
+                                    <option value="">Selecciona la transmisiòn del vehículo</option>
                                     @foreach($tipocajas as $tipocaja)
                                         <option value="{{$tipocaja->id}}">{{$tipocaja->nombre}}</option>
                                     @endforeach
@@ -154,7 +154,7 @@
                             <label for="selectcombustible">Combustible: </label>
                                 <select type="number" class="form-control @error('combustible') is-invalid @enderror" id="selectcombustible" name="combustible" required>
                                 
-                                <option value="">Seleccione el combustible del vehiculo</option>
+                                <option value="">Seleccione el combustible del vehículo</option>
                                 @foreach($combustibles as $combustible)
                                     <option value="{{$combustible->id}}">{{$combustible->nombre}}</option>
                                 @endforeach
@@ -164,7 +164,7 @@
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="selectestadovehiculo">Estado del vehiculo</label>
+                                <label for="selectestadovehiculo">Estado del vehículo</label>
                                 <select class="form-control @error('estadovehiculo') is-invalid @enderror" id="selectestadovehiculo" name="estadovehiculo" required>
                                     <option value="">Selecciona un estado</option>
                                     @foreach($estadovehiculos as $estadovehiculo)
@@ -310,7 +310,7 @@
 
                 //Se lanza una alerta antes de enviar el formulario para confirmar el envio
                 Swal.fire({
-                title: '¿Seguro que quieres agregar este nuevo vehiculo?',  //Se hace la confirmacion de si se quiere agregar el campo
+                title: '¿Seguro que quieres agregar este nuevo vehículo?',  //Se hace la confirmacion de si se quiere agregar el campo
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

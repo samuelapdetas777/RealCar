@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="card card-danger">
-        <div class="card-header"><h4>Inicia sesión para poder  encontrar tu auto ideal</h4></div>
+        <div class="card-header"><h4>Inicia sesión para poder encontrar tu auto ideal</h4></div>
 
         <div class="card-body">
             <form method="POST" action="{{ route('login') }}">
@@ -49,17 +49,11 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
-                               id="remember"{{ (Cookie::get('remember') !== null) ? 'checked' : '' }}>
-                        <label class="custom-control-label" for="remember">Recuerdame</label>
-                    </div>
-                </div>
+              
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-danger btn-lg btn-block" tabindex="4">
-                        Iniciar Sesión
+                        Iniciar sesión
                     </button>
                 </div>
             </form>

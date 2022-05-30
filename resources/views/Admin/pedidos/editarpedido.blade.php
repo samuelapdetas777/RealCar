@@ -88,7 +88,7 @@
 
                         
                         <div class="row mt-5">
-                            <button type="submit" class="btn btn-success">Agregar</button>
+                            <button type="submit" class="btn btn-success">Editar</button>
                         </div>
                     </form>
                 </div>

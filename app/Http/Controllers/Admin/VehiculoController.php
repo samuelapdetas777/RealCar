@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Vehiculo;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VehiculoController extends Controller
 {
@@ -38,7 +39,7 @@ class VehiculoController extends Controller
         $tipocaja = TipoCaja::All();
         $estadovehiculo = EstadoVehiculo::All();
         $estadoaplicativo = EstadoAplicativo::All();
-        $imagenes = ImagenVehiculo::All();
+        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
         $titulo = "Vehiculos";
         $boton = "Editar";
 
@@ -94,6 +95,9 @@ class VehiculoController extends Controller
         ]);
 
         $cplaca = $request->input('cplaca');
+        $ciudad = Ciudad::where('id', $cplaca)->first();
+        $ciudadplaca = $ciudad->nombre;
+
 
         $vehiculo = new Vehiculo();
         $vehiculo->user_id = $request->input('proveedor');
@@ -106,7 +110,7 @@ class VehiculoController extends Controller
         $vehiculo->combustibles_id = $request->input('combustible');
         $vehiculo->estadovehiculo_id = $request->input('estadovehiculo');
         $vehiculo->color = $request->input('color');
-        $vehiculo->placa = '**'.($request->input('placa').' '.$cplaca);
+        $vehiculo->placa = '**'.($request->input('placa').' '.$ciudadplaca);
         $vehiculo->airbag = $request->input('airbag');
         $vehiculo->precio = $request->input('precio');
         $vehiculo->estadoaplicativo_id = $request->input('estadoaplicativo');
@@ -114,35 +118,26 @@ class VehiculoController extends Controller
         $vehiculo->save();
         
 
+        
+
 
         if ($request->imagenes) {
 
             for ($i=0; $i < count($request->imagenes); $i++) { 
-                // echo $request->imagenes[$i];
-                // echo '<br>';
-                // echo $i;
-
-
+                
                 $imagen = $request->imagenes[$i];
                 $rutaGuardarImagen = 'imagen/';
                 $imagenProducto = date('YmdHis'). $i ."." . $imagen->getClientOriginalExtension();
                 $imagen->move($rutaGuardarImagen, $imagenProducto);
 
-                // var_dump($imagen);
-
 
                 $guardarimagen = new ImagenVehiculo();
-                $guardarimagen->idvehiculo = 1;
+                $guardarimagen->idvehiculo = $vehiculo->id;
+                if ($i == 0) {
+                    $guardarimagen->prioridad = 1;
+                }
                 $guardarimagen->foto = "$imagenProducto";
                 $guardarimagen->save();
-
-
-
-                // ImagenVehiculo::create([
-                //     'idvehiculo' => 1,
-                //     'foto' => "$imagenProducto"
-
-                // ]);
             }
         }
         return redirect('/admin/vehiculos')->with('agregar', 'ok');
@@ -163,10 +158,11 @@ class VehiculoController extends Controller
         $combustibles = Combustible::All();
         $tipocajas = TipoCaja::All();
         $estadovehiculos = EstadoVehiculo::All();
+        $imagenes = ImagenVehiculo::Where('idvehiculo', $id)->get();
         $estadoaplicativos = EstadoAplicativo::All();
         $ciudades = Ciudad::All();
 
-        return view('Admin.vehiculos.vervehiculo', compact('vehiculo', 'usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades', 'is'));    
+        return view('Admin.vehiculos.vervehiculo', compact('vehiculo', 'usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades', 'is', 'imagenes'));    
     }
 
     /**
@@ -187,10 +183,11 @@ class VehiculoController extends Controller
         $tipocajas = TipoCaja::All();
         $estadovehiculos = EstadoVehiculo::All();
         $estadoaplicativos = EstadoAplicativo::where('id', 1)->orWhere('id', 2)->orWhere('id', 3)->get();
+        $imagenes = ImagenVehiculo::Where('idvehiculo', $id)->get();
         $ciudades = Ciudad::All();
         $boton = "Editar";
 
-        return view('Admin.vehiculos.editarvehiculo', compact('vehiculo', 'usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades', 'is', 'boton'));
+        return view('Admin.vehiculos.editarvehiculo', compact('vehiculo', 'usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades', 'is', 'boton', 'imagenes'));
     }
 
     /**
@@ -216,7 +213,8 @@ class VehiculoController extends Controller
             'airbag' => 'required | numeric | between:0,20',
             'precio' => 'required | numeric | between:700000,2500000000',
             'estadoaplicativo' => 'required | exists:estadoaplicativo,id',
-            'descripcion' => 'required | min:10'
+            'descripcion' => 'required | min:10',
+            'imagenes.*' => 'image | mimes:jpeg, jpg, png'
             
         ]);
 
@@ -238,6 +236,41 @@ class VehiculoController extends Controller
         $vehiculo->estadoaplicativo_id = $request->input('estadoaplicativo');
         $vehiculo->descripcion = $request->input('descripcion');
         $vehiculo->save();
+        
+
+
+
+
+
+        if ($request->imagenes) {
+
+            for ($i=0; $i < count($request->imagenes); $i++) { 
+                
+                $imagen = $request->imagenes[$i];
+                $rutaGuardarImagen = 'imagen/';
+                $imagenProducto = date('YmdHis'). $i ."." . $imagen->getClientOriginalExtension();
+                $imagen->move($rutaGuardarImagen, $imagenProducto);
+
+
+                $guardarimagen = new ImagenVehiculo();
+                $guardarimagen->idvehiculo = $id;
+                if ($i == 0) {
+                    $guardarimagen->prioridad = 1;
+                }
+                $guardarimagen->foto = "$imagenProducto";
+                $guardarimagen->save();
+            }
+        }
+
+
+
+
+        // echo "melo";
+
+
+
+
+
         return redirect('/admin/vehiculos')->with('actualizar', 'ok');
     }
 
@@ -251,7 +284,7 @@ class VehiculoController extends Controller
         $tipocaja = TipoCaja::All();
         $estadovehiculo = EstadoVehiculo::All();
         $estadoaplicativo = EstadoAplicativo::All();
-        $imagenes = ImagenVehiculo::All();
+        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
         $titulo = "Vehiculos sin aprobar";
         $boton = "Aprobar";
 

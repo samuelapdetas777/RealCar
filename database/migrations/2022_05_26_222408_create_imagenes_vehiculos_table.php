@@ -16,6 +16,7 @@ class CreateImagenesVehiculosTable extends Migration
         Schema::create('imagenes_vehiculos', function (Blueprint $table) {
             $table->foreignId('idvehiculo')->constrained('vehiculos');
             $table->string('foto');
+            $table->boolean('prioridad')->default(0);
             $table->timestamps();
         });
     }

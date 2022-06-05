@@ -24,7 +24,7 @@
                         <div class="card">
                         
                         <a href="{{route('vehiculos.create')}}" class="btn btn-dark" >
-                            Agregar nuevo vehiculo<i class="fas fa-plus"></i>
+                            Agregar nuevo vehículo<i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
                             <div class="card-body">
@@ -37,16 +37,35 @@
                                 
                             @forelse($vehiculos as $vehiculo )
                                     <div class="col-sm-4">
-                                        <div class="card shadow" > 
-                                            @for($e = 0; $e == 0; $e++)
-                                                @foreach($imagenes as $i)
-                                                    @if($i->idvehiculo == $vehiculo->id)
-                                                        <img src="/imagen/{{$i->foto}}" class="card-img-top" width="100%">
-                                                    @else
-                                                    @endif
-                                                    @endforeach
-                                                    <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
-                                            @endfor
+                                        <div class="card shadow" >     
+                                            @php
+                                            $x = 1;
+                                                foreach($imagenes as $i){
+
+                                                    if($x != count($imagenes)){
+                                                        if($i->idvehiculo == $vehiculo->id){
+                                                            echo '<img src="/imagen/'.$i->foto.'" class="card-img-top" width="100%">';
+                                                            break; 
+                                                        }    
+                                                    }else{
+                                                        if($i->idvehiculo == $vehiculo->id){
+                                                            echo '<img src="/imagen/'.$i->foto.'" class="card-img-top" width="100%">';
+                                                            break; 
+                                                        }else{
+                                            @endphp
+                                                            <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
+                                            @php
+                                                            break;
+                                                        }
+                                                    }
+                                                    $x++;
+                                                } 
+
+                                                
+                                                
+
+                                            @endphp
+                                    
                                             <div class="card-body pt-0 px-0">
 
                                                 <div class="d-flex flex-row justify-content-between  px-3 mt-1"> 

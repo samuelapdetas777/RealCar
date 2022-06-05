@@ -260,8 +260,16 @@
                             </div>
                             </div>
 
-                        
-                            <div class="upload mt-3">
+                            
+                            <p class="mt-5 tituloimagenes">Imagenes:</p>
+                            
+                            <div class="row d-inline" id="fotoscontainer">
+
+                                
+                            </div>
+                            
+                            <div class="upload mt-3 d-inline">
+
                                 
                                 <div class="" id="div-imgprofile">
                                     <input type="file" name="imagenes[]" id="inputprofileimg" accept="image/png, .jpeg, .jpg" multiple>
@@ -323,7 +331,51 @@
                 }
                 })
             });
+
+
+            
+
+
+            $('#inputprofileimg').change(function(){
+                let files = this.files;
+                var element;
+
+
+
+                for (let i = 0; i < files.length; i++) {
+                    elemento = files[i]
+                    console.log(elemento);
+                    previsualizarImagen(elemento)
+                    
+                }
+            });
+
+            
+
+            function previsualizarImagen(imagen) {
+            //    alert(imagen);
+               
+                var imgCodified = URL.createObjectURL(imagen);
+                var img = $('<div class="image-container p-0 d-inline"><img src="' + imgCodified + '" alt="" width="150px" id="imagenvehiculo" class="m-1 mt-2 imagenvehiculo"></div>');
+                $(img).insertBefore('#div-imgprofile');
+                // $('#fotoscontainer').html(img);
+            }
         });
+
+
+
+        $(document).on("click", ".imagenvehiculo", function (e) {
+            $(this).parent().remove();  //solo remueve la previsualizacion, no lo remueve del input
+            
+        });
+
+        
+        
+        
+        // $('.imagenvehiculo').click(function (e) { 
+        //     // $(this).parent().remove();
+        // });
+
     </script>
 
 

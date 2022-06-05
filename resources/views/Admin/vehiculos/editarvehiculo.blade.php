@@ -4,6 +4,50 @@
 
 @section('css')
 <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+
+<style>
+
+.upload{
+        width: 100px;
+        /* position: absolute; */
+        display: inline;
+    }
+    #div-imgprofile{
+      /* position: absolute; */
+      width: 170px;
+      height: 110px;
+      line-height: 33px;
+      text-align: center;
+      overflow: hidden;
+      border-radius: 20px;
+      border: dotted 5px black;
+      margin: pointer ;
+    }
+    #div-imgprofile:hover{
+      background-color: rgba(255, 0, 0);
+    }
+    #inputprofileimg{
+        cursor: pointer;
+        position: absolute;
+        transform: scale(4.7);
+        opacity: 0;
+    }
+    #inputprofileimg::-webkit-file-upload-button{
+        cursor: pointer;
+
+    }
+
+    #iconoinput{
+        margin-top: 12%;
+        font-size: 500%;
+        color: black;
+    }
+
+    #btn-submit{
+        margin-top:  110px;
+    }
+
+</style>
 @endsection
 
 @section('content')
@@ -11,7 +55,7 @@
 
 <div class="card">
     <div class="card-body">
-            <h1 class=í>Editar el vehiculo</h1>
+            <h1 class=í>Editar el vehículo</h1>
         <div class="card">
             
         
@@ -22,7 +66,7 @@
                         <p class="text-center text-primary">Para aprobar un vehículo cambia el campo de Estado del aplicativo</p>
                     
 
-                    <form action="{{route('vehiculos.update', $vehiculo->id)}}" method="POST" class="editararVehiculo">
+                    <form action="{{route('vehiculos.update', $vehiculo->id)}}" method="POST" class="editararVehiculo" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row mt-5">
@@ -31,7 +75,7 @@
                             <label for="selectproveedor">Proveedor</label>
                                 <select type="number" class="form-control selector @error('proveedor') is-invalid @enderror" id="selectproveedor" name="proveedor" required>
                                 
-                                    <option value="">Selecciona el dueño del vehiculo</option>
+                                    <option value="">Selecciona el dueño del vehículo</option>
                                     @foreach($usuarios as $usuario)
                                         <option value="{{$usuario->id}}" {{$vehiculo->user_id == $usuario->id? 'selected' : ''}}>{{$usuario->name}} {{$usuario->last_name}}</option>
                                     @endforeach
@@ -190,7 +234,7 @@
                             
 
                             <div class="col-lg-8">
-                                <label for="textareadescripcion">Descripciòn</label>
+                                <label for="textareadescripcion">Descripción</label>
                                 <textarea class="form-control @error('descripcion') is-invalid @enderror" id="textareadescripcion" placeholder="Descripcion..." name="descripcion" rows="3" required>{{$vehiculo->descripcion}}</textarea>
                                 @error('descripcion')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -200,13 +244,27 @@
 
                         
                             <div class="row mt-5">
-                                <div class="col">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" value="Elegir" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Elegir un archivo</label>
+                                @forelse($imagenes as $i)
+                                    <div class="col">
+                                        <img src="/imagen/{{$i->foto}}" alt="" width="150px" class="m-1 mt-2 imagenvehiculo">
                                     </div>
-                                </div>
+                                @empty
+                                    <div class="col imagenes">
+                                        <h3 class="text-muted">No hay imagenes para este vehículo</h3>
+                                    </div>
+                                    
+                                @endforelse
+
+                                <div class="col">
+                                        <div class="upload mt-3 d-inline">
+                                            <div class="" id="div-imgprofile">
+                                                <input type="file" name="imagenes[]" id="inputprofileimg" accept="image/png, .jpeg, .jpg" multiple>
+                                                <i class="fas fa-camera" id="iconoinput"></i>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
+
                         <div class="row mt-5">
                             <button type="submit" class="btn btn-success">Editar</button>
                             
@@ -257,6 +315,39 @@
                 }
                 })
             });
+
+
+
+
+            $('#inputprofileimg').change(function(){
+                let files = this.files;
+                var element;
+                $('.imagenes').remove()
+                for (let i = 0; i < files.length; i++) {
+                    elemento = files[i]
+                    console.log(elemento);
+                    previsualizarImagen(elemento)
+                    
+                }
+            });
+
+
+            function previsualizarImagen(imagen) {
+            //    alert(imagen);
+               
+                var imgCodified = URL.createObjectURL(imagen);
+                var img = $('<div class=" colimage-container p-0 d-inline"><img src="' + imgCodified + '" alt="" width="150px" id="imagenvehiculo" class="m-1 mt-2 imagenvehiculo"></div>');
+                $(img).insertBefore('#div-imgprofile');
+                // $('#fotoscontainer').html(img);
+            }
+
+        });
+
+
+
+        $(document).on("click", ".imagenvehiculo", function (e) {
+            $(this).parent().remove();  //solo remueve la previsualizacion, no lo remueve del input
+            
         });
     </script>
 

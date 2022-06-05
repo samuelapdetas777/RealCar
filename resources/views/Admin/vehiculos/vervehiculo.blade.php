@@ -4,6 +4,21 @@
 
 @section('css')
 <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+<style>
+    
+    .imagen-activo{
+        position: absolute;
+        z-index: 2;
+        left: 0;
+    }
+    .imagenvehiculo{
+        width: 100%;
+        min-width: 200px;
+    }
+    .swal-wide{
+        width: 100px !important;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -11,7 +26,7 @@
 
 <div class="card">
     <div class="card-body">
-            <h1 class="text-center text-black">Editar el vehículo</h1>
+            <h1 class="text-center text-black">Ver vehículo</h1>
         <div class="card">
         
             <hr class="bg-primary">
@@ -19,15 +34,28 @@
             <div class="card-body">
                 <div class="col">
 
-                    <form action="{{route('vehiculos.update', $vehiculo->id)}}" method="POST" class="editararVehiculo">
+                    <form action="" method="POST" class="editararVehiculo">
                         @csrf
+
+                        <div class="row mt-5">
+                            @forelse($imagenes as $i)
+                                <div class="col">
+                                    <img src="/imagen/{{$i->foto}}" alt="" width="150px" class="m-1 mt-2 imagenvehiculo">
+                                </div>
+                            @empty
+                                <div class="col">
+                                    <h3 class="text-muted">No hay imagenes para este vehículo</h3>
+                                </div>
+                            @endforelse
+                        </div>
+
                         <div class="row mt-5">
 
                             <div class="col">
                             <label for="selectproveedor">Proveedor</label>
                                 <select type="number" class="form-control selector @error('proveedor') is-invalid @enderror" id="selectproveedor" name="proveedor" disabled>
                                 
-                                    <option value="">Selecciona el dueño del vehiculo</option>
+                                    <option value="">Selecciona el dueño del vehículo</option>
                                     @foreach($usuarios as $usuario)
                                         <option value="{{$usuario->id}}" {{$vehiculo->user_id == $usuario->id? 'selected' : ''}}>{{$usuario->name}} {{$usuario->last_name}}</option>
                                     @endforeach
@@ -249,6 +277,24 @@
                 }
                 })
             });
+
+
+
+            $('.imagenvehiculo').click(function (e) { 
+                console.log(this.src);
+                e.preventDefault();
+                Swal.fire({
+                    imageUrl: this.src,
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    width: '800px',
+                })
+            });
+
+
+
+
+
         });
     </script>
 

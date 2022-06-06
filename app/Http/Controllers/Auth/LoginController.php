@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class LoginController extends Controller
 {
@@ -39,5 +41,20 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function redirectPath()
+    {
+
+        $user = auth()->user()->id;
+        $rol =  Role::join('model_has_roles', 'model_has_roles.role_id', 'roles.id')->where('model_has_roles.model_id', $user)->select('roles.name')->get();
+        if ($rol == 'Administrador' || $user == 8) {
+            return '/admin/home';
+        }
+        elseif ($rol == 'Proveedor') {
+            return '/vehiculos/index';
+        }else{
+            return '/catalogo';
+        }
     }
 }

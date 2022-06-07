@@ -29,7 +29,12 @@
                 <div class="col">
                     <div class="row">    
                         <div class="col-lg-4">
-                            <div class="card shadow" > <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
+                            <div class="card shadow" > 
+                                @if($imagen)
+                                    <img src="/imagen/{{$imagen->foto}}" class="card-img-top" width="100%">
+                                @else
+                                    <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
+                                @endif
                                 <div class="card-body pt-0 px-0">
                                     <div class="d-flex flex-row justify-content-between  px-3 mt-1"> 
                                         <p class="d-inline"> <bold>{{$marca->nombre}}</bold></p>        
@@ -65,8 +70,8 @@
                                         </div>
                                     </div> 
                                     <div class="mx-3 mt-3 mb-2">
-                                        <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-info btn-block">
-                                            <small>Ver mas</small>
+                                        <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-dark btn-block">
+                                            <small>Ver más</small>
                                         </a>
                                     </div> 
                                 </div>

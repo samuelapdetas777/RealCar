@@ -120,7 +120,7 @@
                                                 </div> 
                                                 <div class="mx-3 mt-3 mb-2">
                                                     <a href="/admin/vehiculos/{{$vehiculo->id}}" type="button" class="btn btn-outline-dark btn-block">
-                                                        <small>Ver mas</small>
+                                                        <small>Ver más</small>
                                                     </a>
                                                     <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-dark btn-block">
                                                         <small>{{$boton}}</small>

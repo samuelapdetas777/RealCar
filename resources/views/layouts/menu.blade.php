@@ -1,6 +1,6 @@
-    <li class="side-menus {{ Request::is('home') ? 'active' : '' }}">
+    <li class="side-menus {{ Request::is('catalogo') ? 'active' : '' }}">
         <!-- Se agregan los elementos al sidebar -->
-        <a class="nav-link" href="/home">
+        <a class="nav-link" href="/catalogo">
             <i class=" fas fa-building"></i><span>Landing page usuarios</span>
         </a>
     </li>

@@ -32,7 +32,15 @@
                         <section class="py-5 bg-light">
                             <div class="container px-4 px-lg-5 my-5">
                                 <div class="row gx-4 gx-lg-5 align-items-center">
-                                    <div class="col-md-6"><img src="{{asset('img/no-image.jpg')}}" class="" width="100%"></div>
+                                    <div class="col-md-6">
+                                        @forelse($imagenesVehiculo as $iv)
+                                        @if($iv->prioridad == 1)
+                                            <img src="/imagen/{{$iv->foto}}" class="img-main" width="100%">
+                                        @endif
+                                        @empty
+                                        <img src="{{asset('img/no-image.jpg')}}" class="" width="100%">
+                                        @endforelse
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="small mb-1"> <h5>
                                             
@@ -51,6 +59,13 @@
                                                 Agendar una cita
                                             </a>
                                         </div>
+                                    </div>
+
+
+                                    <div class="pl-4 row">
+                                        @foreach($imagenesVehiculo as $iv)
+                                            <img src="/imagen/{{$iv->foto}}" class="img-imagenes mr-1 mt-1" style="height:12vh">
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -85,13 +100,13 @@
                         
                                         <thead>
                                             <tr>
-                                                <th class="text-center bg-dark text-light" colspan="2">Detalles del vehiculo</th>
+                                                <th class="text-center bg-dark text-light" colspan="2">Detalles del vehículo</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-dark">
 
                                             <tr class="table-dark text-dark">
-                                                <th scope="row">ID del vehiculo:</th>
+                                                <th scope="row">ID del vehículo:</th>
                                                 <td>{{$vehiculo->id}}</td>
                                             </tr>
 
@@ -121,7 +136,7 @@
                                             </tr>
                                             
                                             <tr class="table-dark text-dark">
-                                                <th scope="row">Color del vehiculo: </th>
+                                                <th scope="row">Color del vehículo: </th>
                                                     <td>{{$vehiculo->color}}</td>
                                             </tr>
 
@@ -147,14 +162,41 @@
                         </section>
                         <section class="py-5 bg-dark">
                             <div class="container px-4 px-lg-4 mt-2">
-                                <h2 class="fw-bolder mb-4">Vehiculos similares</h2>
+                                <h2 class="fw-bolder mb-4">Vehículos similares</h2>
                                 <div class="row justify-content-center">
                                     
 
 
-                            @foreach($vehiculosProveedor as $vehiculo)
+                            @foreach($vehiculosSimilares as $vehiculo)
                                 <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="card shadow" > <img src="{{asset('img/img-landing/mazda.jpg')}}" class="card-img-top" width="100%">
+                                        <div class="card shadow" > 
+                                        @php
+                                            $x = 1;
+                                                foreach($imagenes as $i){
+
+                                                    if($x != count($imagenes)){
+                                                        if($i->idvehiculo == $vehiculo->id){
+                                                            echo '<img src="/imagen/'.$i->foto.'" class="card-img-top" width="100%">';
+                                                            break; 
+                                                        }    
+                                                    }else{
+                                                        if($i->idvehiculo == $vehiculo->id){
+                                                            echo '<img src="/imagen/'.$i->foto.'" class="card-img-top" width="100%">';
+                                                            break; 
+                                                        }else{
+                                            @endphp
+                                                            <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
+                                            @php
+                                                            break;
+                                                        }
+                                                    }
+                                                    $x++;
+                                                } 
+
+                                                
+                                                
+
+                                            @endphp
                                             <div class="card-body pt-0 px-0">
 
                                                 <div class="d-flex flex-row justify-content-between  px-2 mt-1"> 
@@ -195,45 +237,72 @@
                                                     
                                                 </div>
                                                 <div class="d-flex flex-row justify-content-between p-3 mid">
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-1">Motor</small>
+                                                    <div class="d-flex flex-column">Motor
                                                         <div class="d-flex flex-row">
-                                                            <div class="d-flex flex-column ml-1">{{$vehiculo->motor}}</div>
+                                                            <h6 class="ml-1">{{$vehiculo->motor}}</h6>
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-2">Kilometraje</small>
+                                                    <div class="d-flex flex-column">Kilometraje
                                                         <div class="d-flex flex-row">
                                                             <h6 class="ml-1">{{$vehiculo->kilometraje}} Km</h6>
                                                         </div>
                                                     </div>
                                                 </div> 
                                                 <div class="mx-3 mt-3 mb-2">
-                                                    <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
-                                                        <small>Ver mas</small>
+                                                    <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-outline-dark btn-block">
+                                                        <small>Ver más</small>
                                                     </a>
-                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-dark btn-block">
                                                         <small>Agendar cita</small>
                                                     </a>
-                                                </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
-                                <a href="/catalogo/{{$vehiculo->user_id}}">Ver mas vehiculos de {{$proveedor->name}} {{$proveedor->name}}...</a>
-                                </div>
+                            </div>
+                            
                             </div>
 
 
 <hr class="bg-light mx-5">
 
                             <div class="container px-4 px-lg-4 mt-5">
-                                <h2 class="fw-bolder mb-4">Otros vehiculos del proveedor</h2>
+                                <h2 class="fw-bolder mb-4">Otros vehículos del proveedor</h2>
                                 <div class="row justify-content-center">
                                     
 
 
                             @foreach($vehiculosProveedor as $vehiculo)
                                 <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="card shadow" > <img src="{{asset('img/img-landing/mazda.jpg')}}" class="card-img-top" width="100%">
+                                        <div class="card shadow" > 
+                                        @php
+                                            $x = 1;
+                                                foreach($imagenes as $i){
+
+                                                    if($x != count($imagenes)){
+                                                        if($i->idvehiculo == $vehiculo->id){
+                                                            echo '<img src="/imagen/'.$i->foto.'" class="card-img-top" width="100%">';
+                                                            break; 
+                                                        }    
+                                                    }else{
+                                                        if($i->idvehiculo == $vehiculo->id){
+                                                            echo '<img src="/imagen/'.$i->foto.'" class="card-img-top" width="100%">';
+                                                            break; 
+                                                        }else{
+                                            @endphp
+                                                            <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
+                                            @php
+                                                            break;
+                                                        }
+                                                    }
+                                                    $x++;
+                                                } 
+
+                                                
+                                                
+
+                                            @endphp
                                             <div class="card-body pt-0 px-0">
 
                                                 <div class="d-flex flex-row justify-content-between  px-2 mt-1"> 
@@ -274,30 +343,30 @@
                                                     
                                                 </div>
                                                 <div class="d-flex flex-row justify-content-between p-3 mid">
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-1">Motor</small>
+                                                    <div class="d-flex flex-column">Motor
                                                         <div class="d-flex flex-row">
-                                                            <div class="d-flex flex-column ml-1">{{$vehiculo->motor}}</div>
+                                                        <h6 class="ml-1">{{$vehiculo->motor}}</h6>
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-2">Kilometraje</small>
+                                                    <div class="d-flex flex-column">Kilometraje
                                                         <div class="d-flex flex-row">
                                                             <h6 class="ml-1">{{$vehiculo->kilometraje}} Km</h6>
                                                         </div>
                                                     </div>
                                                 </div> 
                                                 <div class="mx-3 mt-3 mb-2">
-                                                    <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-danger btn-block">
-                                                        <small>Ver mas</small>
+                                                    <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-outline-dark btn-block">
+                                                        <small>Ver más</small>
                                                     </a>
-                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-danger btn-block">
+                                                    <a href="/admin/vehiculos/{{$vehiculo->id}}/edit" type="button" class="btn btn-dark btn-block">
                                                         <small>Agendar cita</small>
                                                     </a>
-                                                </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>
+                                                </div> 
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
-                                <a href="/catalogo/{{$vehiculo->user_id}}">Ver mas vehiculos de {{$proveedor->name}} {{$proveedor->name}}...</a>
+                                <a href="/catalogo/{{$vehiculo->user_id}}">Ver más vehiculos de {{$proveedor->name}} {{$proveedor->name}}...</a>
 
 
 
@@ -349,7 +418,10 @@ $('.deleteCiudad').submit(function (e) {
 
 
     $(document).ready(function () {
-
+        $('.img-imagenes').click(function () { 
+            var linkclick = $(this).attr('src');
+            $('.img-main').attr('src', linkclick);            
+        });
     });
 </script>
 
@@ -388,63 +460,3 @@ $('.deleteCiudad').submit(function (e) {
 
 
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{--
-<div class="col-sm-4">
-                                        <div class="card"> <img src="{{asset('img/img-landing/mazda.jpg')}}" class="card-img-top" width="100%">
-                                            <div class="card-body pt-0 px-0">
-
-                                                <div class="d-flex flex-row justify-content-between  px-3 mt-1"> 
-                                                        @foreach($marcas as $marca)
-                                                            <p class="d-inline"> <bold>{{$marca->id == $vehiculo->marcas_id? $marca->nombre : ''}}</bold></p>
-                                                        @endforeach
-                                                        {{$vehiculo->nombre}}
-                                                </div>
-
-                                                <div class="d-flex flex-row justify-content-between mb-0 px-3 mt-1 mid"> 
-                                                    
-                                                        Precio
-                                                        <h6>&dollar;{{$vehiculo->precio}}</h6>
-                                                     
-                                                </div>
-                                                <hr class="mt-2 mx-3">
-                                                <div class="d-flex flex-row justify-content-between px-3 pb-4">
-                                                    <div class="d-flex flex-column"><span class="text-muted">Fuel Efficiency</span><small class="text-muted">L/100KM&ast;</small></div>
-                                                    <div class="d-flex flex-column">
-                                                        <h5 class="mb-0">8.5/7.1</h5><small class="text-muted text-right">(city/Hwy)</small>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex flex-row justify-content-between p-3 mid">
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-1">ENGINE</small>
-                                                        <div class="d-flex flex-row"><i class="fas fa-tachometer"></i>
-                                                            <div class="d-flex flex-column ml-1"><small class="ghj">1.4L MultiAir</small><small class="ghj">16V I-4 Turbo</small></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-2">HORSEPOWER</small>
-                                                        <div class="d-flex flex-row"><img src="https://imgur.com/J11mEBq.png">
-                                                            <h6 class="ml-1">135 hp&ast;</h6>
-                                                        </div>
-                                                    </div>
-                                                </div> 
-                                                <small class="text-muted key pl-3">Standard key Features</small>
-                                                <div class="mx-3 mt-3 mb-2">
-                                                    <button type="button" class="btn btn-danger btn-block">
-                                                        <small>Ver mas</small>
-                                                    </button>
-                                                </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>
-                                            </div>
-                                        </div>
-                                     </div> --}}

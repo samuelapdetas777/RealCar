@@ -56,7 +56,34 @@
                                 
                             @forelse($vehiculos as $vehiculo )
                                     <div class="col-sm-4">
-                                        <div class="card shadow" > <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
+                                        <div class="card shadow" > 
+                                        @php
+                                            $x = 1;
+                                                foreach($imagenes as $i){
+
+                                                    if($x != count($imagenes)){
+                                                        if($i->idvehiculo == $vehiculo->id){
+                                                            echo '<img src="/imagen/'.$i->foto.'" class="card-img-top" width="100%">';
+                                                            break; 
+                                                        }    
+                                                    }else{
+                                                        if($i->idvehiculo == $vehiculo->id){
+                                                            echo '<img src="/imagen/'.$i->foto.'" class="card-img-top" width="100%">';
+                                                            break; 
+                                                        }else{
+                                            @endphp
+                                                            <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
+                                            @php
+                                                            break;
+                                                        }
+                                                    }
+                                                    $x++;
+                                                } 
+
+                                                
+                                                
+
+                                            @endphp
                                             <div class="card-body pt-0 px-0">
 
                                                 <div class="d-flex flex-row justify-content-between  px-3 mt-1"> 
@@ -119,7 +146,7 @@
                                                     
                                                 <div class="mx-3 mt-3 mb-2">
                                                     <a href="/catalogo/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-outline-dark btn-block">
-                                                        <small>Ver mas</small>
+                                                        <small>Ver más</small>
                                                     </a>
                                                     <a href="/cita/{{$vehiculo->id}}/nueva" type="button" class="btn btn-dark btn-block">
                                                         <small>Agendar cita</small>
@@ -282,7 +309,7 @@ $('.deleteCiudad').submit(function (e) {
                                                 <small class="text-muted key pl-3">Standard key Features</small>
                                                 <div class="mx-3 mt-3 mb-2">
                                                     <button type="button" class="btn btn-danger btn-block">
-                                                        <small>Ver mas</small>
+                                                        <small>Ver más</small>
                                                     </button>
                                                 </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>
                                             </div>

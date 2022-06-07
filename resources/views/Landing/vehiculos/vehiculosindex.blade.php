@@ -37,7 +37,34 @@
                                 
                             @forelse($vehiculos as $vehiculo )
                                     <div class="col-sm-4">
-                                        <div class="card shadow" > <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
+                                        <div class="card shadow" > 
+                                        @php
+                                            $x = 1;
+                                                foreach($imagenes as $i){
+
+                                                    if($x != count($imagenes)){
+                                                        if($i->idvehiculo == $vehiculo->id){
+                                                            echo '<img src="/imagen/'.$i->foto.'" class="card-img-top" width="100%">';
+                                                            break; 
+                                                        }    
+                                                    }else{
+                                                        if($i->idvehiculo == $vehiculo->id){
+                                                            echo '<img src="/imagen/'.$i->foto.'" class="card-img-top" width="100%">';
+                                                            break; 
+                                                        }else{
+                                            @endphp
+                                                            <img src="{{asset('img/no-image.jpg')}}" class="card-img-top" width="100%">
+                                            @php
+                                                            break;
+                                                        }
+                                                    }
+                                                    $x++;
+                                                } 
+
+                                                
+                                                
+
+                                            @endphp
                                             <div class="card-body pt-0 px-0">
 
                                                 <div class="d-flex flex-row justify-content-between  px-3 mt-1"> 
@@ -92,7 +119,7 @@
                                                 
                                                 <div class="mx-3 mt-3 mb-2">
                                                     <a href="/vehiculos/vehiculo/{{$vehiculo->id}}" type="button" class="btn btn-outline-dark btn-block">
-                                                        <small>Ver mas</small>
+                                                        <small>Ver más</small>
                                                     </a>
                                                     <a href="/vehiculos/editar/{{$vehiculo->id}}" type="button" class="btn btn-dark btn-block">
                                                         <small>Editar</small>

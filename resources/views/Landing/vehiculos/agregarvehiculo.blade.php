@@ -349,7 +349,7 @@ $('.deleteCiudad').submit(function (e) {
                                                 <small class="text-muted key pl-3">Standard key Features</small>
                                                 <div class="mx-3 mt-3 mb-2">
                                                     <button type="button" class="btn btn-danger btn-block">
-                                                        <small>Ver mas</small>
+                                                        <small>Ver más</small>
                                                     </button>
                                                 </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>
                                             </div>

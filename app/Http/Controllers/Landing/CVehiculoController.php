@@ -8,6 +8,7 @@ use App\Models\Ciudad;
 use App\Models\Combustible;
 use App\Models\EstadoAplicativo;
 use App\Models\EstadoVehiculo;
+use App\Models\ImagenVehiculo;
 use App\Models\Marca;
 use App\Models\Sede;
 use App\Models\TipoCaja;
@@ -39,8 +40,9 @@ class CVehiculoController extends Controller
         $tipocaja = TipoCaja::All();
         $estadovehiculo = EstadoVehiculo::All();
         $estadoaplicativo = EstadoAplicativo::All();
+        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
 
-        return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo'));
+        return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes'));
     }
 
     /**
@@ -59,8 +61,9 @@ class CVehiculoController extends Controller
         $tipocaja = TipoCaja::All();
         $estadovehiculo = EstadoVehiculo::All();
         $estadoaplicativo = EstadoAplicativo::All();
+        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
 
-        return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo'));
+        return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes'));
     }
     
     /**
@@ -73,11 +76,14 @@ class CVehiculoController extends Controller
 
         $vehiculosProveedor = Vehiculo::where('user_id', $vehiculo->user_id)->take(4)->get();
         // $vehiculosNombre;
+        $vehiculosSimilares = Vehiculo::where('nombre', 'like', '%'. $vehiculo->nombre. '%')->take(4)->get();
+        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
 
         // Paginate(12);
         $marcas = Marca::All();
         $estadovehiculos = EstadoVehiculo::All();
         $estadoaplicativos = EstadoAplicativo::All();
+        $imagenesVehiculo = ImagenVehiculo::where('idvehiculo', $id)->get(); 
 
 
         $proveedor = User::where('id', $vehiculo->user_id)->first();
@@ -87,7 +93,7 @@ class CVehiculoController extends Controller
         $tipocaja = TipoCaja::where('id', $vehiculo->tipocaja_id)->first();
         $estadovehiculo = EstadoVehiculo::where('id', $vehiculo->estadovehiculo_id)->first();
 
-        return view('Landing.vehiculos.vervehiculo', compact('vehiculo', 'vehiculosProveedor', 'proveedor', 'ciudadProveedor', 'marca', 'combustible', 'tipocaja', 'estadovehiculo', 'marcas', 'estadoaplicativos', 'estadovehiculos'));
+        return view('Landing.vehiculos.vervehiculo', compact('vehiculo', 'vehiculosProveedor', 'vehiculosSimilares', 'proveedor', 'ciudadProveedor', 'marca', 'combustible', 'tipocaja', 'estadovehiculo', 'marcas', 'estadoaplicativos', 'estadovehiculos', 'imagenesVehiculo', 'imagenes'));
     }
 
     /**
@@ -96,12 +102,13 @@ class CVehiculoController extends Controller
      */
     public function agendarCita($id){
         $vehiculo = Vehiculo::find($id);
+        $imagen = ImagenVehiculo::where('idvehiculo', $id)->where('prioridad', 1)->first();
         $marca = Vehiculo::join('marcas', 'marcas.id', 'vehiculos.marcas_id')->select(DB::raw('marcas.nombre'))->where('vehiculos.id', $id)->first();
         $estadovehiculo = Vehiculo::join('estadovehiculo as ev', 'ev.id', 'vehiculos.estadovehiculo_id')->select(DB::raw('ev.nombre'))->where('vehiculos.id', $id)->first();
         $estadoaplicativo= Vehiculo::join('estadoaplicativo as ea', 'ea.id', 'vehiculos.estadoaplicativo_id')->select(DB::raw('ea.nombre'))->where('vehiculos.id', $id)->first();
         $proveedor = Vehiculo::join('users', 'users.id', 'vehiculos.user_id')->select(DB::raw('users.name, users.last_name, users.id'))->where('vehiculos.id', $id)->first();
         $sedes = Sede::All();
-        return view('Landing.vehiculos.agendarcita', compact('vehiculo', 'sedes', 'marca', 'estadovehiculo', 'estadoaplicativo', 'proveedor'));
+        return view('Landing.vehiculos.agendarcita', compact('vehiculo', 'sedes', 'marca', 'estadovehiculo', 'estadoaplicativo', 'proveedor', 'imagen'));
     }
     
     /**

@@ -7,6 +7,7 @@ use App\Models\Ciudad;
 use App\Models\Combustible;
 use App\Models\EstadoAplicativo;
 use App\Models\EstadoVehiculo;
+use App\Models\ImagenVehiculo;
 use App\Models\Marca;
 use App\Models\TipoCaja;
 use App\Models\User;
@@ -38,7 +39,8 @@ class PVehiculoController extends Controller
 // echo 'id';
         $id = Auth::user()->id;
         $vehiculos = Vehiculo::where('estadoaplicativo_id', 1)->where('user_id', $id)->orWhere('estadoaplicativo_id', 2)->orWhere('estadoaplicativo_id', 3)->paginate(12);
-        // Paginate(12);
+        // Paginate(12); 
+        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
         
         $usuarios = User::All();
         $marcas = Marca::All();
@@ -47,7 +49,7 @@ class PVehiculoController extends Controller
         $estadovehiculo = EstadoVehiculo::All();
         $estadoaplicativo = EstadoAplicativo::All();
 
-        return view('Landing.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo'));
+        return view('Landing.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes'));
     }
 
     /**

@@ -97,7 +97,9 @@ Route::group(['prefix' =>'admin'], function(){
 
 
 Route::group(['middleware' => ['auth']], function(){
-    Route::resource('usuario', UUsuarioController::class);
+    Route::get('/perfil', [UUsuarioController::class, 'show']);
+    Route::get('/perfil/editar', [UUsuarioController::class, 'edit']);
+    Route::put('/perfil/guardar', [UUsuarioController::class, 'update']);
     // Route::resource('vehiculos', UVehiculoController::class);
     
     Route::get('/vehiculos/index', [PVehiculoController::class, 'index']);

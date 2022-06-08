@@ -7,7 +7,41 @@
 @endsection
 
 @section('content')
+ 
 
+<style>
+    .upload{
+        width: 100px;
+        position: relative;
+        margin: auto;
+    }
+    #imgprofile{
+        border-radius: 50%;
+        border: 3px solid #c70000;
+    }
+    #div-imgprofile{
+      position: absolute;
+      bottom: 0;
+      right: 0%;
+      width: 32px;
+      height: 32px;
+      line-height: 33px;
+      text-align: center;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+    #inputprofileimg{
+        cursor: pointer;
+        position: absolute;
+        transform: scale(2);
+        opacity: 0;
+    }
+    #inputprofileimg::-webkit-file-upload-button{
+        cursor: pointer;
+
+    }
+    
+</style>
 
 <div class="card">
     <div class="card-body">
@@ -18,6 +52,13 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
+                    <div class="upload">
+                            @if($usuario->photo != null)
+                            <img src="/imagen/{{$usuario->photo}}" width="100" height="100" alt="" id="imgprofile">
+                            @else
+                            <img src="{{asset('img/no-profile-img.jpg')}}" width="100" height="100" alt="" id="imgprofile">
+                            @endif
+                        </div>
                             <div class="row mt-5">
 
                                 <div class="col-lg-6">
@@ -83,7 +124,7 @@
                             </div>
 
                             <div class="row mt-5">
-                                <a href="/home" class="btn btn-success">ir a inicio</a>
+                                <a href="/perfil/editar" class="btn btn-success">Editar perfil</a>
                             </div>
                     </div>
                 </div>
@@ -132,17 +173,21 @@
                 }
                 })
             });
+
+            $('#imgprofile').click(function (e) { 
+                console.log(this.src);
+                e.preventDefault();
+                Swal.fire({
+                    imageUrl: this.src,
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    width: '800px',
+                })
+            });
         });
     </script>
 
 
-
-
-@if($errors->any())
-        <script>
-            $('#inputnombre').addClass('is-invalid');
-        </script>
-@endif
 
 
 @endsection

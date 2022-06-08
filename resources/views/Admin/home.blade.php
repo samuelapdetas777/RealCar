@@ -77,3 +77,16 @@
     </section>
 @endsection
 
+@section('scripts')
+<script src="{{ asset('assets/js/sweetalert2.js') }}"></script>
+@if(session('edicionperfil') == 'ok')
+    <script>
+        Swal.fire({
+                icon: 'success',
+                title: 'Se ha editado tu perfil',
+                timer: 1500,
+                timerProgressBar: true,
+                })
+    </script>
+@endif
+@endsection

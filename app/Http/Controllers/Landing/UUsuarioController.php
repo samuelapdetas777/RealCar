@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ciudad;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class UUsuarioController extends Controller
@@ -50,11 +51,13 @@ class UUsuarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 
      */
-    public function show($id)
+    public function show()
     {
+        
+        $id = Auth::user()->id;
+
         $usuario = user::find($id);
         $ciudades = Ciudad::All();
         $roles = Role::All();
@@ -68,14 +71,12 @@ class UUsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        $roles = Role::All();
+        $id = auth()->user()->id;
         $usuario = User::find($id);
         $ciudades = Ciudad::All();
-        // $userRol = $usuario->roles->pluck('name', 'name')->All();
-        $userRol = $usuario->roles->All();
-        return view('Landing.usuarios.editarperfil', compact('usuario', 'ciudades', 'roles', 'userRol'));
+        return view('Landing.usuarios.editarperfil', compact('usuario', 'ciudades'));
     }
 
     /**
@@ -85,7 +86,7 @@ class UUsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         
 
@@ -95,19 +96,14 @@ class UUsuarioController extends Controller
             'documento'=> 'required | numeric | digits:10', //unico
             'celular'=> 'required | numeric | digits:10',   //unico
             'email' => 'required | email | unique:users',   //unico
-            'password'=> 'required | regex:/^[A-Za-z0-9]+$/',
-            // 'email' => 'unique:users,email'
-            'confirmacion_de_password'=> 'required',
             'ciudad' => 'required',
             'direccion' => 'required',
-            'roles' => 'required',
-            'estado'=> 'required'
         ]);
 
 
 
 
-
+        $id = auth()->user()->id;
 
         // $usuario = new User ($request->except('_token'));
         $usuario = User::find($id);
@@ -119,10 +115,40 @@ class UUsuarioController extends Controller
         $usuario->city_id = $request->input('ciudad');
         $usuario->address = $request->input('direccion');
 
+
+
+        if ($request->hasFile('imagen')) {
+            if ($usuario->photo !=null) {
+                $usuario->photo->delete();
+            }
+
+
+            $input = $request->All();
+            $imagen = $request->file('imagen');
+    
+    
+            $rutaGuardarImagen = 'imagen/';
+            $imagenProducto = date('YmdHis'). "." . $imagen->getClientOriginalExtension();
+            $imagen->move($rutaGuardarImagen, $imagenProducto);
+            // $input['imagen'] = "$imagenProducto";
+            $usuario->photo = "$imagenProducto";
+        }
+
+
+
         $usuario->save();
 
         $input = $request->All();
-        return redirect('/home')->with('edicionperfil', 'ok');
+
+        
+        $rol =  Role::join('model_has_roles', 'model_has_roles.role_id', 'roles.id')->where('model_has_roles.model_id', $id)->select('roles.name')->get();
+        if($rol == "Cliente"){
+            return redirect('/catalogo')->with('edicionperfil', 'ok');
+        }else if($rol == "Proveedor"){
+            return redirect('/vehiculos/index')->with('edicionperfil', 'ok');
+        }else{
+            return redirect('/admin/home')->with('edicionperfil', 'ok');
+        }
     }
 
     /**

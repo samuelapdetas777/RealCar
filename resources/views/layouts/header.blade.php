@@ -9,9 +9,11 @@
         <li class="dropdown">
             <a href="#" data-toggle="dropdown"
                class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-               
-               <img alt="image" src="{{asset('img/no-profile-img.jpg')}}"
-                     class="rounded-circle mr-1 thumbnail-rounded user-thumbnail ">
+               @if(auth()->user()->photo == null)
+                    <img alt="imagen de perfil" src="{{ asset('img/no-profile-img.jpg') }}" class="rounded-circle mr-1 thumbnail-rounded user-thumbnail ">  
+                @else
+                    <img alt="imagen de perfil" src="/imagen/{{auth()->user()->photo}}" class="rounded-circle mr-1 thumbnail-rounded user-thumbnail ">
+                @endif
                 <div class="d-sm-none d-lg-inline-block">
                      Bienvenido {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
             </a>
@@ -19,10 +21,10 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">
                     Bienvenido de nuevo {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
-                <a class="dropdown-item has-icon edit-profile" href="#" data-id="{{ \Auth::id() }}">
-                    <i class="fa fa-user"></i>Editar pérfil</a>
-                <a class="dropdown-item has-icon" data-toggle="modal" data-target="#changePasswordModal" href="#" data-id="{{ \Auth::id() }}"><i
-                            class="fa fa-lock"> </i>Cambiar contraseña</a>
+                {{--<a class="dropdown-item has-icon " href="/perfil">
+                    <i class="fa fa-user"></i>Ver perfil</a>
+                <a class="dropdown-item has-icon edit-profile" href="/perfil/editar" data-id="{{ \Auth::id() }}">
+                    <i class="fa fa-user"></i>Editar pérfil</a>--}}
                 <a href="{{ url('logout') }}" class="dropdown-item has-icon text-danger"
                    onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt"></i> Cerrar Sesión

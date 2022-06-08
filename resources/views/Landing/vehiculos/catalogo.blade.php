@@ -250,6 +250,15 @@ $('.deleteCiudad').submit(function (e) {
                 timerProgressBar: true,
                 })
     </script>
+@elseif(session('edicionperfil') == 'ok')
+    <script>
+        Swal.fire({
+                icon: 'success',
+                title: 'Se ha editado tu perfil',
+                timer: 1500,
+                timerProgressBar: true,
+                })
+    </script>
 @endif
 
 

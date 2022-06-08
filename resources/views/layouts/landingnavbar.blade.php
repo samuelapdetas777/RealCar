@@ -1,118 +1,4 @@
-{{-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      @can('administrador')  
-        <li class="nav-item {{ Request::is('/home')? 'active' : ''}}">
-          <a class="nav-link" href="/admin/home">Administrador {{ Request::is('/admin/home')? '<span class="sr-only">(current)</span>': ''}}</a>
-        </li>
-      @endcan
-      @can('cliente')
-        <li class="nav-item  {{ Request::is('/catalogo')? 'active' : ''}}">
-          <a class="nav-link" href="/catalogo">Home @can('administrador')(cliente) @endcan  {{ Request::is('/catalogo')? '<span class="sr-only">(current)</span>': ''}}</a>
-        </li>
-      @endcan
-      @can('proveedor')
-        <li class="nav-item {{ Request::is('/vehiculos/index/')? 'active' : ''}}">
-          <a class="nav-link" href="/vehiculos/index">Home @can('administrador')(Proveedor) @endcan {{ Request::is('/vehiculos/index')? '<span class="sr-only">(current)</span>': ''}}</a>
-        </li> 
-      @endcan
-      @can('cliente')
-        <li class="nav-item {{ Request::is('/reportes/cliente')? 'active' : ''}}">
-          <a class="nav-link" href="/reportes/cliente">Reportes @can('administrador')(Proveedor) @endcan {{ Request::is('/reportes/cliente')? '<span class="sr-only">(current)</span>': ''}}</a>
-        </li> 
-      @endcan
-      @can('proveedor')
-        <li class="nav-item {{ Request::is('/reportes/proveedor')? 'active' : ''}}">
-          <a class="nav-link" href="/reportes/proveedor">Reportes @can('administrador')(Proveedor) @endcan {{ Request::is('/reportes/proveedor')? '<span class="sr-only">(current)</span>': ''}}</a>
-        </li> 
-      @endcan
-      <li class="nav-item {{ Request::is('/contactanos')? 'active' : ''}}">
-        <a class="nav-link" href="/contactanos">Contáctanos {{ Request::is('/contactanos')? '<span class="sr-only">(current)</span>': ''}}</a>
-      </li> 
-      <li class="nav-item {{ Request::is('/about')? 'active' : ''}}">
-        <a class="nav-link" href="/about">Sobre nosotros {{ Request::is('/about')? '<span class="sr-only">(current)</span>': ''}}</a>
-      </li> 
-      
-      
-    </ul>
-    <div class="form-inline my-2 my-lg-0">
-      <ul class="navbar-nav">
-        <li class="dropdown">
-            <a href="#" data-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="{{ asset('img/realcarlogo.png') }}"
-                    class="rounded-circle mr-1 thumbnail-rounded user-thumbnail ">
-                <div class="d-sm-none d-lg-inline-block">
-                    {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">
-                    Bienvenido de nuevo {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
-                <a class="dropdown-item has-icon " href="/usuario/{{ \Auth::id() }}">
-                    <i class="fa fa-user"></i>Ver perfil</a>
-                <a class="dropdown-item has-icon " href="/usuario/{{ \Auth::id() }}/edit">
-                    <i class="fa fa-pen"></i>Editar perfil</a>
-                <a class="dropdown-item has-icon" data-toggle="modal" data-target="#changePasswordModal" href="#" data-id="{{ \Auth::id() }}"><i
-                            class="fa fa-lock"> </i>Cambiar contraseña</a>
-                <a href="{{ url('logout') }}" class="dropdown-item has-icon text-danger"
-                  onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">
-                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                </a>
-                <form id="logout-form" action="{{ url('/logout') }}" method="POST" class="d-none">
-                    {{ csrf_field() }}
-                </form>
-            </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
---}}
-
-
-
-
-
-
-
-
-{{--
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-<title>RealCar</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="index.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.bootstrap4.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Raleway">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-
-<link rel="stylesheet" href="index.css">
-</head>
-<body>
-  <header >
-          --}}
         
                 <nav class="navbar navbar-expand-xl navbar-light" style="background-color: rgb(43, 38, 38); position: relative; z-index: 1000; padding: left 0 !important;">
                     <div class="container">
@@ -188,21 +74,23 @@
                                 <li class="dropdown">
                                     <a href="#" data-toggle="dropdown"
                                       class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                                        <img alt="image" src="{{ asset('img/realcarlogo.png') }}"
-                                            class="rounded-circle mr-1 thumbnail-rounded user-thumbnail ">
+                                      @if(auth()->user()->photo == null)
+                                        <img alt="imagen de perfil" src="{{ asset('img/no-profile-img.jpg') }}" class="rounded-circle mr-1 thumbnail-rounded user-thumbnail ">  
+                                      @else
+                                        <img alt="imagen de perfil" src="/imagen/{{auth()->user()->photo}}" class="rounded-circle mr-1 thumbnail-rounded user-thumbnail ">
+                                      @endif
                                         <div class="d-sm-none d-lg-inline-block">
-                                            {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
+                                        Bienvenido {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <div class="dropdown-title">
                                             Bienvenido de nuevo {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
-                                        <a class="dropdown-item has-icon " href="/usuario/{{ \Auth::id() }}">
+                                        <a class="dropdown-item has-icon " href="/perfil">
                                             <i class="fa fa-user"></i>Ver perfil</a>
-                                        <a class="dropdown-item has-icon " href="/usuario/{{ \Auth::id() }}/edit">
+                                        <a class="dropdown-item has-icon " href="/perfil/editar">
                                             <i class="fa fa-pen"></i>Editar perfil</a>
-                                        <a class="dropdown-item has-icon" data-toggle="modal" data-target="#changePasswordModal" href="#" data-id="{{ \Auth::id() }}"><i
-                                                    class="fa fa-lock"> </i>Cambiar contraseña</a>
+                                        
                                         <a href="{{ url('logout') }}" class="dropdown-item has-icon text-danger"
                                           onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">
                                             <i class="fas fa-sign-out-alt"></i> Cerrar Sesión

@@ -131,17 +131,10 @@ class PVehiculoController extends Controller
      */
     public function verVehiculo($id)
     {
-        $vehiculo = Vehiculo::where('id', $id)->first();
-
-        $vehiculosProveedor = Vehiculo::where('user_id', $vehiculo->user_id)->take(4)->get();
-        // $vehiculosNombre;
-
-        // Paginate(12);
-        $marcas = Marca::All();
-        $estadovehiculos = EstadoVehiculo::All();
-        $estadoaplicativos = EstadoAplicativo::All();
-
-
+        $vehiculo = Vehiculo::find($id);
+        $imagenes = ImagenVehiculo::where('idvehiculo', $id)->get();
+        
+        $estadoaplicativo = EstadoAplicativo::where('id', $vehiculo->estadoaplicativo_id)->first();
         $proveedor = User::where('id', $vehiculo->user_id)->first();
         $ciudadProveedor = Ciudad::where('id', $proveedor->city_id)->first();
         $marca = Marca::where('id', $vehiculo->marcas_id)->first();
@@ -149,7 +142,7 @@ class PVehiculoController extends Controller
         $tipocaja = TipoCaja::where('id', $vehiculo->tipocaja_id)->first();
         $estadovehiculo = EstadoVehiculo::where('id', $vehiculo->estadovehiculo_id)->first();
 
-        return view('Landing.vehiculos.proveedor.vervehiculo', compact('vehiculo', 'vehiculosProveedor', 'proveedor', 'ciudadProveedor', 'marca', 'combustible', 'tipocaja', 'estadovehiculo', 'marcas', 'estadoaplicativos', 'estadovehiculos'));
+        return view('Landing.vehiculos.proveedor.vervehiculo', compact('vehiculo', 'proveedor', 'ciudadProveedor', 'marca', 'combustible', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes'));
     }
 
     /**

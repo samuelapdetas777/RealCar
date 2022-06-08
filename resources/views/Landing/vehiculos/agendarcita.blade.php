@@ -88,6 +88,9 @@
 
 
                         <div class="col-md-8">
+                            <div class="alert alert-warning mt-5 text-dark" role="alert">
+                                    <i class="fas fa-exclamation-circle"></i>  La solicitud de tu cita quedará sujeta a cambios, será revisada, y agendada de acuerdo a la disponibilidad de la sede.
+                                </div>
                             <form action="/cita/{{$vehiculo->id}}/guardar" method="POST" class="agregarCita">
                                 @csrf
                                 <div class="row mt-5">
@@ -128,9 +131,7 @@
                                     </div>
                                 </div>
 
-                                <div class="alert alert-warning mt-5" role="alert">
-                                    La solicitud de tu cita quedará sujeta a cambios, será revisada, y agendada de acuerdo a la disponibilidad de la sede.
-                                </div>
+                                
 
                                 
                                 <div class="row mt-5">

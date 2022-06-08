@@ -87,7 +87,7 @@
                                     <h6>Ciudad:  </h6>   {{$ciudadProveedor->nombre}}
                                 </div>
                                 <div class="col-sm-6 mt-4">
-                                    <h6>Catalogo:  </h6>   <a href="/catalogo/{{$vehiculo->user_id}}">{{$proveedor->name}} {{$proveedor->name}}</a>
+                                    <h6>Catálogo:  </h6>   <a href="/catalogo/{{$vehiculo->user_id}}">{{$proveedor->name}} {{$proveedor->name}}</a>
                                 </div>
                             </div>
                             </div>

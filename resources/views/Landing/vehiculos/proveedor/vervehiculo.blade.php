@@ -32,7 +32,15 @@
                         <section class="py-5 bg-dark">
                             <div class="container px-4 px-lg-5 my-5">
                                 <div class="row gx-4 gx-lg-5 align-items-center">
-                                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+                                    <div class="col-md-6">
+                                        @forelse($imagenes as $iv)
+                                            @if($iv->prioridad == 1)
+                                                <img src="/imagen/{{$iv->foto}}" class="img-main" width="100%">
+                                            @endif
+                                        @empty
+                                            <img src="{{asset('img/no-image.jpg')}}" class="" width="100%">
+                                        @endforelse
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="small mb-1"> <h5>
                                             
@@ -47,6 +55,13 @@
                                         <p class="lead">{{$vehiculo->descripcion}}</p>
                                         
                                     </div>
+
+                                    <div class="pl-4 row">
+                                        @foreach($imagenes as $iv)
+                                            <img src="/imagen/{{$iv->foto}}" class="img-imagenes mr-1 mt-1" style="height:12vh">
+                                        @endforeach
+                                    </div>
+
                                 </div>
                             </div>
                         </section>
@@ -60,13 +75,18 @@
                         
                                         <thead>
                                             <tr>
-                                                <th class="text-center bg-dark text-light" colspan="2">Detalles del vehiculo</th>
+                                                <th class="text-center bg-dark text-light" colspan="2">Detalles del vehículo</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-dark">
 
+                                            <tr class="">
+                                                <th scope="row">Estado en el aplicativo: </th>
+                                                    <td>{{$estadoaplicativo->nombre}}</td>
+                                            </tr>
+
                                             <tr class="table-dark text-dark">
-                                                <th scope="row">ID del vehiculo:</th>
+                                                <th scope="row">ID del vehículo:</th>
                                                 <td>{{$vehiculo->id}}</td>
                                             </tr>
 
@@ -96,7 +116,7 @@
                                             </tr>
                                             
                                             <tr class="table-dark text-dark">
-                                                <th scope="row">Color del vehiculo: </th>
+                                                <th scope="row">Color del vehículo: </th>
                                                     <td>{{$vehiculo->color}}</td>
                                             </tr>
 
@@ -109,6 +129,8 @@
                                                 <th scope="row">Placa: </th>
                                                     <td>{{$vehiculo->placa}}</td>
                                             </tr>
+
+                                            
 
                                         </tbody>
                                     </table>
@@ -164,7 +186,10 @@ $('.deleteCiudad').submit(function (e) {
 
 
     $(document).ready(function () {
-
+        $('.img-imagenes').click(function () { 
+            var linkclick = $(this).attr('src');
+            $('.img-main').attr('src', linkclick);            
+        });
     });
 </script>
 

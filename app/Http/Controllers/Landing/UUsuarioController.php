@@ -163,11 +163,11 @@ class UUsuarioController extends Controller
 
     public function mostrarCitasAgendadas(){
         $id = auth()->user()->id;
-        $citas = DB::table('citas')
-        ->join('sedes as s', 's.id', 'citas.sedes_id')
-        ->select(DB::raw('citas.fecha as start , citas.hora, citas.asunto as title, citas.id, citas.comentario, s.nombre as sede'))
-        ->get();
-        // $citas = DB::select('SELECT c.fecha AS start , c.hora, c.asunto AS title, c.id, c.comentario, s.nombre AS sede FROM citas AS c JOIN sedes AS s ON c.sedes_id = s.id WHERE c.estado = 1 AND (c.idproveedor = '.$id.' OR c.idcliente = '.$id.')');
+        // $citas = DB::table('citas')
+        // ->join('sedes as s', 's.id', 'citas.sedes_id')
+        // ->select(DB::raw('citas.fecha as start , citas.hora, citas.asunto as title, citas.id, citas.comentario, s.nombre as sede'))
+        // ->get();
+        $citas = DB::select('SELECT c.fecha AS start , c.hora, c.asunto AS title, c.id, c.comentario, s.nombre AS sede FROM citas AS c JOIN sedes AS s ON c.sedes_id = s.id WHERE c.estado = 1 AND (c.idproveedor = '.$id.' OR c.idcliente = '.$id.')');
         return response()->json($citas);
     }
 

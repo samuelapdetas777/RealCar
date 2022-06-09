@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cita;
 use App\Models\Ciudad;
+use App\Models\Sede;
 use App\Models\User;
+use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class UUsuarioController extends Controller
@@ -16,6 +20,7 @@ class UUsuarioController extends Controller
         // $this->middleware('permission:admin-cita, index| create | store | edit | update | destroy');
         $this->middleware('permission:ver-perfil', ['only'=>['show']]);
         $this->middleware('permission:editar-perfil', ['only'=>['edit', 'update']]);
+        $this->middleware('permission:p-ver-citas|c-ver-citas', ['only'=>['verCitas', 'mostrarCitasAgendadas']]);
     }
     /**
      * Display a listing of the resource.
@@ -151,6 +156,32 @@ class UUsuarioController extends Controller
         }
     }
 
+
+    public function verCitas(){
+        return view('Landing.vehiculos.citas');
+    }
+
+    public function mostrarCitasAgendadas(){
+        $id = auth()->user()->id;
+        $citas = DB::table('citas')
+        ->join('sedes as s', 's.id', 'citas.sedes_id')
+        ->select(DB::raw('citas.fecha as start , citas.hora, citas.asunto as title, citas.id, citas.comentario, s.nombre as sede'))
+        ->get();
+        // $citas = DB::select('SELECT c.fecha AS start , c.hora, c.asunto AS title, c.id, c.comentario, s.nombre AS sede FROM citas AS c JOIN sedes AS s ON c.sedes_id = s.id WHERE c.estado = 1 AND (c.idproveedor = '.$id.' OR c.idcliente = '.$id.')');
+        return response()->json($citas);
+    }
+
+    public function verCita($id){
+        $cita = Cita::find($id);
+        $proveedores = User::where('id', $cita->idproveedor)->get();
+        $vendedores = User::where('id', $cita->idvendedor)->get();
+        $clientes = User::where('id', $cita->idcliente)->get();
+        $vehiculos = Vehiculo::where('id', $cita->idvehiculo)->get();
+        $sedes = Sede::where('id', $cita->sedes_id)->get();
+
+
+        return view('Landing.vehiculos.vercita', compact('cita', 'proveedores', 'vendedores', 'clientes', 'vehiculos', 'sedes'));
+    }
     /**
      * Remove the specified resource from storage.
      *

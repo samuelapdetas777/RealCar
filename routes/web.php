@@ -100,7 +100,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/perfil', [UUsuarioController::class, 'show']);
     Route::get('/perfil/editar', [UUsuarioController::class, 'edit']);
     Route::put('/perfil/guardar', [UUsuarioController::class, 'update']);
-    // Route::resource('vehiculos', UVehiculoController::class);
+    Route::get('/citas', [UUsuarioController::class, 'verCitas']);
+    Route::get('/mostrarcitasagendadas', [UUsuarioController::class, 'mostrarCitasAgendadas']);
+    Route::get('/cita/{id}', [UUsuarioController::class, 'verCita']);
     
     Route::get('/vehiculos/index', [PVehiculoController::class, 'index']);
     Route::get('/vehiculos/nuevo', [PVehiculoController::class, 'agregarvehiculo']);
@@ -114,9 +116,10 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/catalogo', [CVehiculoController::class, 'index']);
     Route::get('/catalogo/{id}', [CVehiculoController::class, 'catalogoProveedor']);
     Route::get('/catalogo/vehiculo/{id}', [CVehiculoController::class, 'verVehiculo']);
-    
     Route::get('/cita/{id}/nueva', [CVehiculoController::class, 'agendarCita']);
     Route::post('/cita/{id}/guardar', [CVehiculoController::class, 'guardarCita']);
+
+
     
 });
 

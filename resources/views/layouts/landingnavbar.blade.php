@@ -47,15 +47,11 @@
                                 </li> 
                               @endcan
                               @can('cliente')
-                                <li class="nav-item {{ Request::is('/reportes/cliente')? 'active' : ''}}">
-                                  <a class="nav-link text-white" href="/reportes/cliente">Citas @can('administrador')(Proveedor) @endcan {{ Request::is('/reportes/cliente')? '<span class="sr-only">(current)</span>': ''}}</a>
+                                <li class="nav-item {{ Request::is('/citas/cliente')? 'active' : ''}}">
+                                  <a class="nav-link text-white" href="/citas">Citas {{ Request::is('/citas/cliente')? '<span class="sr-only">(current)</span>': ''}}</a>
                                 </li> 
                               @endcan
-                              @can('proveedor')
-                                <li class="nav-item {{ Request::is('/reportes/proveedor')? 'active' : ''}}">
-                                  <a class="nav-link text-white" href="/reportes/proveedor">Citas @can('administrador')(Proveedor) @endcan {{ Request::is('/reportes/proveedor')? '<span class="sr-only">(current)</span>': ''}}</a>
-                                </li> 
-                              @endcan
+                              
                               <li class="nav-item {{ Request::is('/contactanos')? 'active' : ''}}">
                                 <a class="nav-link text-white" href="/contactanos">Contáctanos {{ Request::is('/contactanos')? '<span class="sr-only">(current)</span>': ''}}</a>
                               </li> 

@@ -1,23 +1,29 @@
-@extends('layouts.app')
+@extends('layouts.userapp')
 
 @section('title', 'Citas')
 
 @section('css')
-
+<link rel="stylesheet" href="{{asset('assets/css/fullcalendar-main.min.css')}}">
+<link rel="stylesheet" href="{{asset('css/style.css')}}">
 @endsection
 
 @section('content')
--
+
+<style>
+    .text-black {
+        color: black;
+    }
+</style>
+
+
 
 <div class="card">
     <div class="card-body">
-            <h1 class="text-center text-black">Detalle de la cita</h1>
+        <h1 class="text-center text-black">Citas</h1>
         <div class="card">
-        
             <hr class="bg-primary">
-            <a href="/admin/citas">< Volver</a>
             <div class="card-body">
-                <div class="col">
+                <a href="/citas">< Volver</a>
 
                 <table class="table table-bordered">
                     
@@ -91,13 +97,13 @@
                         </tr>
                         
                         <tr>
-                        <th scope="row">ID del vehiculo: </th>
+                        <th scope="row">ID del vehículo: </th>
                             @foreach($vehiculos as $vehiculo)
                                 <td>{{$vehiculo->id}}</td>
                             @endforeach
                         </tr>
                         <tr>
-                        <th scope="row">Vehiculo: </th>
+                        <th scope="row">Vehículo: </th>
                             @foreach($vehiculos as $vehiculo)
                                 <td>{{$vehiculo->nombre}}</td>
                             @endforeach
@@ -116,64 +122,14 @@
                                 <td>{{$cita->comentario}}</td>
                         </tr>
                         
-                        <tr class="table-dark text-dark">
-                        <th scope="row">Acciones: </th>
-                        <td>
-                            <form action="{{ route ('citas.destroy',$cita->id) }}" method="POST" class="deletecita">
-                                <a href="/admin/citas/{{$cita->id}}/edit" id="sedeeditarbtn" class="btn btn-info editarbtn">Agendar <i class="fas fa-check"></i></a>
-                                @csrf
-                                @method('DELETE')
-                                {{--<button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>--}}
-                            </form>
-                        </td>
-                        </tr>
+                        
                         
                     </tbody>
                 </table>
 
-              
 
-                
                 </div>
-            </div>
         </div>
     </div>
-
 </div>
-
-
-
-@endsection
-
-
-@section('scripts')
-
-    <script src="{{asset('assets/js/sweetalert2.js')}}"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('.deleteSede').submit(function (e) { 
-            e.preventDefault();
-    
-            Swal.fire({
-                title: '¿Seguro quieres eliminar este campo?',
-                text: "No puedes revertir este cambio",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#0fbd37',
-                cancelButtonColor: '#fd3328',
-                confirmButtonText: 'Si, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                this.submit();
-            }
-            })
-            
-        });
-        });
-    </script>
-
-
-
 @endsection

@@ -30,20 +30,55 @@ class VehiculoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $vehiculos = Vehiculo::where('estadoaplicativo_id', '<>', 1)->where('estadoaplicativo_id', '<>', 2)->paginate(12);
-        $usuarios = User::All();
-        $marcas = Marca::All();
-        $combustibles = Combustible::All();
-        $tipocaja = TipoCaja::All();
-        $estadovehiculo = EstadoVehiculo::All();
-        $estadoaplicativo = EstadoAplicativo::All();
-        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
-        $titulo = "Vehiculos";
-        $boton = "Editar";
+        $texto = $request->texto;
 
-        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton', 'imagenes'));
+        if(!empty($texto)){
+            $vehiculos = DB::select('SELECT v.* 
+            FROM vehiculos AS v 
+            JOIN users AS u ON v.user_id = u.id 
+            JOIN marcas AS m ON v.marcas_id = m.id 
+            JOIN estadovehiculo AS ev ON v.estadovehiculo_id = ev.id 
+            WHERE v.estadoaplicativo_id NOT IN (1,2) 
+            AND (
+                v.nombre LIKE "%'.$texto.'%" 
+                OR u.name LIKE "%'.$texto.'%" 
+                OR u.last_name LIKE "%'.$texto.'%" 
+                OR v.precio LIKE "%'.$texto.'%" 
+                OR v.motor LIKE "%'.$texto.'%" 
+                OR m.nombre LIKE "%'.$texto.'%" 
+                OR ev.nombre LIKE "%'.$texto.'%"
+                )');
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $titulo = "Vehículos";
+            $action = "vehiculos";
+            $boton = "Editar";
+            
+
+            return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton', 'imagenes', 'texto', 'action'));
+            
+        }else{
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', '<>', 1)->where('estadoaplicativo_id', '<>', 2)->paginate(12);
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $titulo = "Vehículos";
+            $action = "vehiculos";
+            $boton = "Editar";
+
+            return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton', 'imagenes', 'texto', 'action'));
+        }
     }
 
     /**
@@ -275,20 +310,59 @@ class VehiculoController extends Controller
     }
 
 
-    public function vehiculosSinAprobar(){
-        // echo "hsakdhfkasdhhfksadhkjh";
-        $vehiculos = Vehiculo::where('estadoaplicativo_id', 1)->orWhere('estadoaplicativo_id', 2)->paginate(12);
-        $usuarios = User::All();
-        $marcas = Marca::All();
-        $combustibles = Combustible::All();
-        $tipocaja = TipoCaja::All();
-        $estadovehiculo = EstadoVehiculo::All();
-        $estadoaplicativo = EstadoAplicativo::All();
-        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
-        $titulo = "Vehiculos sin aprobar";
-        $boton = "Aprobar";
+    public function vehiculosSinAprobar(Request $request){
 
-        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton', 'imagenes'));
+
+        $texto = $request->texto;
+
+        if(!empty($texto)){
+            $vehiculos = DB::select('SELECT v.* 
+            FROM vehiculos AS v 
+            JOIN users AS u ON v.user_id = u.id 
+            JOIN marcas AS m ON v.marcas_id = m.id 
+            JOIN estadovehiculo AS ev ON v.estadovehiculo_id = ev.id 
+            WHERE v.estadoaplicativo_id IN (1,2) 
+            AND (
+                v.nombre LIKE "%'.$texto.'%" 
+                OR u.name LIKE "%'.$texto.'%" 
+                OR u.last_name LIKE "%'.$texto.'%" 
+                OR v.precio LIKE "%'.$texto.'%" 
+                OR v.motor LIKE "%'.$texto.'%" 
+                OR m.nombre LIKE "%'.$texto.'%" 
+                OR ev.nombre LIKE "%'.$texto.'%"
+                )');
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $titulo = "Vehículos";
+            $action = "vehiculossinaprobar";
+            $boton = "Editar";
+            
+
+            return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton', 'imagenes', 'texto', 'action'));
+            
+        }else{
+
+
+            // echo "hsakdhfkasdhhfksadhkjh";
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', 1)->orWhere('estadoaplicativo_id', 2)->paginate(12);
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $titulo = "Vehículos sin aprobar";
+            $action = "vehiculossinaprobar";
+            $boton = "Aprobar";
+
+            return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton', 'imagenes', 'texto', 'action'));
+        }
     }
 
 

@@ -38,7 +38,8 @@ class PVehiculoController extends Controller
     {
 // echo 'id';
         $id = Auth::user()->id;
-        $vehiculos = Vehiculo::where('estadoaplicativo_id', 1)->where('user_id', $id)->orWhere('estadoaplicativo_id', 2)->orWhere('estadoaplicativo_id', 3)->paginate(12);
+        // $vehiculos = Vehiculo::select('estadoaplicativo_id', 1,2,3)->where('user_id', $id)->paginate(12);
+        $vehiculos = Vehiculo::whereIn('estadoaplicativo_id',[1,2,3])->where('user_id', $id)->paginate(12);
         // Paginate(12); 
         $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
         

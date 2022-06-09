@@ -30,10 +30,28 @@
                             <div class="card-body">
 
 
+                                <div class="d-block">
+                                    <form action="/admin/{{$action}}" class="row " method="get">
+                                        @csrf
+                                        <div class="col-sm-10">
+                                            <input type="search" class="form-control" placeholder="Buscar" value="{{$texto}}" name="texto">
+                                        </div>
+                                        <div class="col-sm-2">
+
+                                            <button class="btn btn-primary" type="submit">Buscar</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                @if(!empty($texto))
+
+                                    <h5 class="mt-2 text-muted">Resultados para "{{$texto}}"</h5>
+                                @endif
+
                             <div class="container-fluid d-flex justify-content-center">
+                                
                                 <div class="row mt-5">
                                     
-
                                 
                             @forelse($vehiculos as $vehiculo )
                                     <div class="col-sm-4">
@@ -135,7 +153,7 @@
                             @empty
 
 
-                            <h2>No se encontraron Vehiculos</h2>
+                            <h2>No se encontraron Vehículos</h2>
 
                             @endforelse
 
@@ -148,9 +166,11 @@
 
 
                             </div>
-                            <div class="pagination justify-content-star">
-                                {!! $vehiculos->links() !!}
-                            </div>
+                            {{--@if(!empty($vehiculos))
+                                <div class="pagination justify-content-star">
+                                    {!! $vehiculos->links() !!}
+                                </div>
+                            @endif--}}
                         </div>
                         </div>
                     </div>

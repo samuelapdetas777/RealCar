@@ -30,6 +30,23 @@
                         </a>
                             <hr class="bg-primary">
                             <div class="card-body">
+                            <div class="d-block">
+                                    <form action="/admin/usuarios" class="row " method="get">
+                                        @csrf
+                                        <div class="col-sm-10">
+                                            <input type="search" class="form-control" placeholder="Buscar" value="{{$texto}}" name="texto">
+                                        </div>
+                                        <div class="col-sm-2">
+
+                                            <button class="btn btn-primary" type="submit">Buscar</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                @if(!empty($texto))
+
+                                    <h5 class="mt-2 text-muted">Resultados para "{{$texto}}"</h5>
+                                @endif
 
                             @forelse($usuarios as $usuario )
                             

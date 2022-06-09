@@ -39,15 +39,49 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = User::paginate(8);
 
-        $ciudades = Ciudad::All();
-        // $roles = Rol::All();
-        // $roles = Role::pluck('name', 'name')->All();
-        $roles = Role::All();
-        return view('Admin.usuarios.usuarioindex', compact('usuarios', 'ciudades', 'roles'));
+        $texto = $request->texto;
+
+        if(!empty($texto)){
+            // $usuarios = DB::select('SELECT u.*
+            // FROM users AS u 
+            // JOIN model_has_roles AS mhr ON u.id = mhr.model_id 
+            // JOIN roles AS r ON mhr.role_id = r.id
+            // WHERE
+            //     u.name LIKE "%'.$texto.'%" 
+            //     OR u.last_name LIKE "%'.$texto.'%"
+            //     OR u.document LIKE "%'.$texto.'%"
+            //     OR u.email LIKE "%'.$texto.'%"
+            //     OR r.name LIKE "%'.$texto.'%"
+            //     ');
+
+            // $usuarios = User::paginate(8);
+            
+            $usuarios = User::join('model_has_roles', 'users.id', 'model_has_roles.model_id')
+            ->join('roles', 'model_has_roles.role_id', 'roles.id')
+            ->join('ciudades', 'users.city_id', 'ciudades.id')
+            ->where('roles.name', 'like', '%'.$texto.'%')
+            ->orWhere('users.name', 'like', '%'.$texto.'%')
+            ->orWhere('users.last_name', 'like', '%'.$texto.'%')
+            ->orWhere('users.document', 'like', '%'.$texto.'%')
+            ->orWhere('ciudades.nombre', 'like', '%'.$texto.'%')
+            ->select('users.*')->paginate(9);
+            
+            
+            // echo $usuarios;
+            $ciudades = Ciudad::All();
+            $roles = Role::All(); 
+            return view('Admin.usuarios.usuarioindex', compact('usuarios', 'ciudades', 'roles', 'texto'));
+            
+        }else{
+
+            $usuarios = User::paginate(8);
+            $ciudades = Ciudad::All();
+            $roles = Role::All(); 
+            return view('Admin.usuarios.usuarioindex', compact('usuarios', 'ciudades', 'roles', 'texto'));
+        }
     }
 
     /**

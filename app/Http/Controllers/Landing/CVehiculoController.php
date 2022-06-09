@@ -30,19 +30,54 @@ class CVehiculoController extends Controller
         $this->middleware('permission:c-ver-pedido', ['only'=>['verPedidos']]);
     }
 
-    public function index(){
-        $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->paginate(12);
-        // Paginate(12);
-        
-        $usuarios = User::All();
-        $marcas = Marca::All();
-        $combustibles = Combustible::All();
-        $tipocaja = TipoCaja::All();
-        $estadovehiculo = EstadoVehiculo::All();
-        $estadoaplicativo = EstadoAplicativo::All();
-        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+    public function index(Request $request){
 
-        return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes'));
+
+        
+        $texto = $request->texto;
+
+        if(!empty($texto)){
+            $vehiculos = DB::select('SELECT v.* 
+                FROM vehiculos AS v 
+                JOIN users AS u ON v.user_id = u.id 
+                JOIN marcas AS m ON v.marcas_id = m.id 
+                JOIN estadovehiculo AS ev ON v.estadovehiculo_id = ev.id 
+                WHERE v.estadoaplicativo_id IN (3)
+                AND (
+                    v.nombre LIKE "%'.$texto.'%" 
+                    OR u.name LIKE "%'.$texto.'%" 
+                    OR u.last_name LIKE "%'.$texto.'%" 
+                    OR v.precio LIKE "%'.$texto.'%" 
+                    OR v.motor LIKE "%'.$texto.'%" 
+                    OR m.nombre LIKE "%'.$texto.'%" 
+                    OR ev.nombre LIKE "%'.$texto.'%"
+                    )');
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $action = 'c';
+
+            return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action'));
+        }else{
+
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->paginate(12);
+            // Paginate(12);
+            
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $action = 'c';
+
+            return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action'));
+        }
     }
 
     /**
@@ -51,6 +86,8 @@ class CVehiculoController extends Controller
      */
     public function catalogoProveedor($id){  //se desplegará cuando el usuario de click a un catalogo para ver mas vehiculos
 
+
+                
         $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->where('user_id', $id)->paginate(12);
 
         // Paginate(12);
@@ -62,9 +99,11 @@ class CVehiculoController extends Controller
         $estadovehiculo = EstadoVehiculo::All();
         $estadoaplicativo = EstadoAplicativo::All();
         $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+        $action = 'cp';
 
-        return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes'));
+        return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action'));
     }
+    
     
     /**
      * @return \Illuminate\Http\Response

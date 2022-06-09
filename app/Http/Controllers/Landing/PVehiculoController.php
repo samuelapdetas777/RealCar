@@ -15,7 +15,7 @@ use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth; //se usa para sabe el usuario que a ingresado
-
+use Illuminate\Support\Facades\DB;
 
 class PVehiculoController extends Controller
 {
@@ -34,23 +34,54 @@ class PVehiculoController extends Controller
      * @return \Illuminate\Http\Response
      * @param int $id
      */
-    public function index()
+    public function index(Request $request)
     {
-// echo 'id';
-        $id = Auth::user()->id;
-        // $vehiculos = Vehiculo::select('estadoaplicativo_id', 1,2,3)->where('user_id', $id)->paginate(12);
-        $vehiculos = Vehiculo::whereIn('estadoaplicativo_id',[1,2,3])->where('user_id', $id)->paginate(12);
-        // Paginate(12); 
-        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
-        
-        $usuarios = User::All();
-        $marcas = Marca::All();
-        $combustibles = Combustible::All();
-        $tipocaja = TipoCaja::All();
-        $estadovehiculo = EstadoVehiculo::All();
-        $estadoaplicativo = EstadoAplicativo::All();
+        $texto = $request->texto;
 
-        return view('Landing.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes'));
+        if(!empty($texto)){
+            $vehiculos = DB::select('SELECT v.* 
+                FROM vehiculos AS v 
+                JOIN users AS u ON v.user_id = u.id 
+                JOIN marcas AS m ON v.marcas_id = m.id 
+                JOIN estadovehiculo AS ev ON v.estadovehiculo_id = ev.id 
+                JOIN estadoaplicativo AS ea ON v.estadoaplicativo_id = ea.id
+                WHERE v.estadoaplicativo_id IN (1,2,3)
+                AND (
+                    v.nombre LIKE "%'.$texto.'%" 
+                    OR u.name LIKE "%'.$texto.'%" 
+                    OR u.last_name LIKE "%'.$texto.'%" 
+                    OR v.precio LIKE "%'.$texto.'%" 
+                    OR v.motor LIKE "%'.$texto.'%" 
+                    OR m.nombre LIKE "%'.$texto.'%" 
+                    OR ev.nombre LIKE "%'.$texto.'%"
+                    OR ea.nombre LIKE "%'.$texto.'%"
+                    )');
+
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+    
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+
+            return view('Landing.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto'));        
+        }else{
+
+            $id = Auth::user()->id;
+            $vehiculos = Vehiculo::whereIn('estadoaplicativo_id',[1,2,3])->where('user_id', $id)->paginate(12);
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+
+            return view('Landing.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto'));
+        }
     }
 
     /**

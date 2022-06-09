@@ -26,24 +26,25 @@
                         
                             <hr class="bg-primary">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-10">
-                                        <input type="search" class="form-control" placeholder="Buscar">
-                                    </div>
-                                    <div class="col-sm-2">
+                                @if($action != 'cp')
+                                <div class="d-block">
+                                    <form action="/catalogo" class="row " method="get">
+                                        @csrf
+                                        <div class="col-sm-10">
+                                            <input type="search" class="form-control" placeholder="Buscar" value="{{$texto}}" name="texto">
+                                        </div>
+                                        <div class="col-sm-2">
 
-                                        <button class="btn btn-primary">Buscar</button>
-                                    </div>
+                                            <button class="btn btn-primary" type="submit">Buscar</button>
+                                        </div>
+                                    </form>
                                 </div>
 
-                                <a class="btn btn-outline-dark" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    <i class="fas fa-filter"></i> Filtros
-                                </a>
-                                <div class="collapse" id="collapseExample">
-                                    <div class="card card-body">
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                                    </div>
-                                </div>
+                                @if(!empty($texto))
+
+                                    <h5 class="mt-2 text-muted">Resultados para "{{$texto}}"</h5>
+                                @endif
+                                @endif
                                 
                             <div class="container-fluid d-flex justify-content-center">
                                 <div class="row mt-5">
@@ -174,9 +175,11 @@
 
 
                             </div>
+                            @if(empty($texto))
                             <div class="pagination justify-content-star">
                                 {!! $vehiculos->links() !!}
                             </div>
+                            @endif
                         </div>
                         </div>
                     </div>

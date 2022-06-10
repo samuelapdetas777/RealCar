@@ -173,14 +173,25 @@ class UUsuarioController extends Controller
 
     public function verCita($id){
         $cita = Cita::find($id);
-        $proveedores = User::where('id', $cita->idproveedor)->get();
-        $vendedores = User::where('id', $cita->idvendedor)->get();
-        $clientes = User::where('id', $cita->idcliente)->get();
-        $vehiculos = Vehiculo::where('id', $cita->idvehiculo)->get();
-        $sedes = Sede::where('id', $cita->sedes_id)->get();
-
-
-        return view('Landing.vehiculos.vercita', compact('cita', 'proveedores', 'vendedores', 'clientes', 'vehiculos', 'sedes'));
+        $iduser = auth()->user()->id;
+        $x=0;
+        if (empty($cita)) {
+            $x = 0;
+            return view('Landing.vehiculos.citas', compact('x'));
+        }elseif ($cita->estado != 1) {
+            $x = 1;
+            return view('Landing.vehiculos.citas', compact('x'));
+        }elseif ($cita->idproveedor = $iduser || $cita->idcliente = $iduser) {
+            $x = 2;
+            return view('Landing.vehiculos.citas', compact('x'));
+        }else {
+            $proveedores = User::where('id', $cita->idproveedor)->get();
+            $vendedores = User::where('id', $cita->idvendedor)->get();
+            $clientes = User::where('id', $cita->idcliente)->get();
+            $vehiculos = Vehiculo::where('id', $cita->idvehiculo)->get();
+            $sedes = Sede::where('id', $cita->sedes_id)->get();
+            return view('Landing.vehiculos.vercita', compact('cita', 'proveedores', 'vendedores', 'clientes', 'vehiculos', 'sedes'));
+        }
     }
     /**
      * Remove the specified resource from storage.

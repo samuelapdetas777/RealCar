@@ -16,7 +16,6 @@
 </style>
 
 
-
 <div class="card">
     <div class="card-body">
         <h1 class="text-center text-black">Citas</h1>
@@ -149,34 +148,31 @@
 
 
 
+@if(!empty($x))
+    @if($x == 0)
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'La cita que buscas, no existe',
+        })
+        
+    </script>
+    @elseif($x == 1)
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Esta cita esta en proceso de agendamiento',
+        })
+    </script>
+    @elseif($x == 2)
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Esta cita no esta disponible para ti',
+        })
+    </script>
 
-@if(session('eliminar') == 'ok')
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Se ha eliminado correctamente',
-        timer: 1500,
-        timerProgressBar: true,
-    })
-</script>
-@elseif(session('actualizar') == 'ok')
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Se han guardado los cambios correctamente',
-        timer: 1500,
-        timerProgressBar: true,
-    })
-</script>
-@elseif(session('agregar') == 'ok')
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Se ha agregado correctamente',
-        timer: 1500,
-        timerProgressBar: true,
-    })
-</script>
+    @endif
 @endif
 
 

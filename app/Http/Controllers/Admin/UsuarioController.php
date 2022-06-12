@@ -8,6 +8,7 @@ use App\Models\Ciudad;
 use App\Models\Combustible;
 use App\Models\EstadoAplicativo;
 use App\Models\EstadoVehiculo;
+use App\Models\ImagenVehiculo;
 use App\Models\Marca;
 use App\Models\Rol;
 use App\Models\TipoCaja;
@@ -157,10 +158,18 @@ class UsuarioController extends Controller
     public function show($id)
     {
         $usuario = user::find($id);
-        $ciudades = Ciudad::All();
-        $roles = Role::All();
-        return view('Admin.usuarios.verusuario', compact('usuario', 'ciudades', 'roles'));
-
+        $texto = '';
+        if (empty($usuario)) {
+            $e = 1;
+            $usuarios = User::paginate(8);
+            $ciudades = Ciudad::All();
+            $roles = Role::All(); 
+            return view('Admin.usuarios.usuarioindex', compact('usuarios', 'ciudades', 'roles', 'texto', 'e'));
+        }else{
+            $ciudades = Ciudad::All();
+            $roles = Role::All();
+            return view('Admin.usuarios.verusuario', compact('usuario', 'ciudades', 'roles'));
+        }
     }
 
     /**
@@ -171,14 +180,20 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        
-        // $roles = Role::pluck('name', 'name')->All();
-        $roles = Role::All();
         $usuario = User::find($id);
-        $ciudades = Ciudad::All();
-        // $userRol = $usuario->roles->pluck('name', 'name')->All();
-        $userRol = $usuario->roles->All();
-        return view('Admin.usuarios.editarusuario', compact('usuario', 'ciudades', 'roles', 'userRol'));
+        $texto = '';
+        if (empty($usuario)) {
+            $e = 1;
+            $usuarios = User::paginate(8);
+            $ciudades = Ciudad::All();
+            $roles = Role::All(); 
+            return view('Admin.usuarios.usuarioindex', compact('usuarios', 'ciudades', 'roles', 'texto', 'e'));
+        }else{
+            $roles = Role::All();
+            $ciudades = Ciudad::All();
+            $userRol = $usuario->roles->All();
+            return view('Admin.usuarios.editarusuario', compact('usuario', 'ciudades', 'roles', 'userRol'));
+        }
     }
 
     /**
@@ -272,16 +287,30 @@ class UsuarioController extends Controller
      * @param int $id
      */
     public function verCatalogo($id){
+        $user = User::find($id);
+        $texto = '';
+        if(empty($user)){
+            $e = 1;
+            $usuarios = User::paginate(8);
+            $ciudades = Ciudad::All();
+            $roles = Role::All(); 
+            return view('Admin.usuarios.usuarioindex', compact('usuarios', 'ciudades', 'roles', 'texto', 'e'));
+        }else{
+            $vehiculos = Vehiculo::where('user_id', $id)->where('estadoaplicativo_id', 3)->Paginate(12);
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $titulo = 'Vehículos de '.$user->name;
+            $action = "vehiculossinaprobar";
+            $texto = '';
+            $boton = "Editar";
 
-        $vehiculos = Vehiculo::where('user_id', $id)->Paginate(12);
-        $usuarios = User::All();
-        $marcas = Marca::All();
-        $combustibles = Combustible::All();
-        $tipocaja = TipoCaja::All();
-        $estadovehiculo = EstadoVehiculo::All();
-        $estadoaplicativo = EstadoAplicativo::All();
-
-        return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo'));
+            return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'action', 'texto', 'imagenes', 'boton'));
+        }
     }
 
     /**
@@ -289,9 +318,18 @@ class UsuarioController extends Controller
      * @param int $id
      */
     public function verCitas($id){
-
-        $citas = Cita::where('idproveedor', $id)->orWhere('idcliente',$id)->get();
-        return view('Admin.citas.citasindex', compact('citas'));
+        $user = User::find($id);
+        if(empty($user)){
+            $texto = '';
+            $e = 1;
+            $usuarios = User::paginate(8);
+            $ciudades = Ciudad::All();
+            $roles = Role::All(); 
+            return view('Admin.usuarios.usuarioindex', compact('usuarios', 'ciudades', 'roles', 'texto', 'e'));
+        }else{
+            $citas = Cita::where('idproveedor', $id)->orWhere('idcliente',$id)->get();
+            return view('Admin.citas.citasindex', compact('citas'));
+        }
     }
     
 

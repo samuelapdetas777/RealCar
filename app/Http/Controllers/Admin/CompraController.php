@@ -79,9 +79,17 @@ class CompraController extends Controller
     public function show($id)
     {
         $compra = Compra::find($id);
-        $proveedores = User::where('id', '=', $compra->proveedor)->get();
-        $vehiculos = Vehiculo::where('id', '=', $compra->vehiculo)->get();
-        return view('Admin.compras.vercompra', compact('compra', 'proveedores', 'vehiculos'));
+        if(empty($compra)){
+            $e = 1;
+            $compras = Compra::All();
+            $usuarios = User::All();
+            $vehiculos = Vehiculo::All();
+            return view('Admin.compras.comprasindex', compact('compras', 'usuarios', 'vehiculos', 'e'));
+        }else{
+            $proveedores = User::where('id', '=', $compra->proveedor)->get();
+            $vehiculos = Vehiculo::where('id', '=', $compra->vehiculo)->get();
+            return view('Admin.compras.vercompra', compact('compra', 'proveedores', 'vehiculos'));
+        }
     }
 
     /**
@@ -92,10 +100,18 @@ class CompraController extends Controller
      */
     public function edit($id)
     {
-        $usuarios = User::All();
         $compra = Compra::find($id);
-        $vehiculos = Vehiculo::All();
-        return view('Admin.compras.editarcompra', compact('usuarios', 'compra', 'vehiculos'));
+        if(empty($compra)){
+            $e = 1;
+            $compras = Compra::All();
+            $usuarios = User::All();
+            $vehiculos = Vehiculo::All();
+            return view('Admin.compras.comprasindex', compact('compras', 'usuarios', 'vehiculos', 'e'));
+        }else{
+            $usuarios = User::All();
+            $vehiculos = Vehiculo::All();
+            return view('Admin.compras.editarcompra', compact('usuarios', 'compra', 'vehiculos'));
+        }
     }
 
     /**

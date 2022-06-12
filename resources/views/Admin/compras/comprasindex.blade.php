@@ -117,7 +117,17 @@ $('.deleteCiudad').submit(function (e) {
 </script>
 
 
-
+@if(!empty($e))
+    @if($e == 1)
+        <script>
+            
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Esta compra no existe'
+                    })
+        </script>
+    @endif 
+@endif
 
 @if(session('eliminar') == 'ok')
     <script>

@@ -88,15 +88,16 @@ class RolController extends Controller
      */
     public function edit($id)
     {
-        
         $rol = Role::find($id);
-        $permisos = Permission::get();
-        // $rolesPermisos = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $id)
-        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-        //     ->all();
-        $rolesPermisos = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $id)->get();
-        // $rolesPermisos = DB::table('role_has_permissions')->get();
-        return view('Admin.roles.editarrol', compact('permisos', 'rol', 'rolesPermisos'));
+        if(empty($rol)){
+            $e = 1;
+            $roles = Role::All();
+            return view('Admin.roles.rolesindex', compact('roles', 'e'));
+        }else{
+            $permisos = Permission::get();
+            $rolesPermisos = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $id)->get();
+            return view('Admin.roles.editarrol', compact('permisos', 'rol', 'rolesPermisos'));
+        }
     }
 
     /**

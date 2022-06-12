@@ -123,6 +123,18 @@ $('.deleteCiudad').submit(function (e) {
 
 
 
+@if(!empty($e))
+    @if($e == 1)
+        <script>
+            
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Este pedido no existe'
+                    })
+        </script>
+    @endif 
+@endif
+
 @if(session('eliminar') == 'ok')
     <script>
         Swal.fire({

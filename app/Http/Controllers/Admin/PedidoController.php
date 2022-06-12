@@ -97,11 +97,19 @@ class PedidoController extends Controller
     public function show($id)
     {
         $pedido = Pedido::find($id);
-        $proveedores = User::where('id', '=', $pedido->proveedor)->get();
-        // echo $proveedor;
-        $clientes = User::where('id', '=', $pedido->cliente)->get();
-        $vehiculos = Vehiculo::where('id', '=', $pedido->vehiculo)->get();
-        return view('Admin.pedidos.verpedido', compact('pedido', 'proveedores', 'clientes', 'vehiculos'));
+        if(empty($pedido)){
+            $e = 1; 
+            $usuarios = User::All();
+            $pedidos = Pedido::All();
+            $vehiculos = Vehiculo::All();
+            return view('Admin.pedidos.pedidosindex', compact('usuarios', 'pedidos', 'vehiculos', 'e'));
+        }else{
+            $proveedores = User::where('id', '=', $pedido->proveedor)->get();
+            // echo $proveedor;
+            $clientes = User::where('id', '=', $pedido->cliente)->get();
+            $vehiculos = Vehiculo::where('id', '=', $pedido->vehiculo)->get();
+            return view('Admin.pedidos.verpedido', compact('pedido', 'proveedores', 'clientes', 'vehiculos'));
+        }
     }
 
     /**
@@ -112,16 +120,25 @@ class PedidoController extends Controller
      */
     public function edit($id)
     {
-        $usuarios = User::All();
         $pedido = Pedido::find($id);
-        $vehiculos = Vehiculo::All();
-        $fechaant = $pedido->fechaentrega;
-        $mes = substr($fechaant, 5, 2);
-        $dia = substr($fechaant, -2);
-        $año = substr($fechaant, 0, 4);
+        if(empty($pedido)){
+            $e = 1;
+            $usuarios = User::All();
+            $pedidos = Pedido::All();
+            $vehiculos = Vehiculo::All();
+            return view('Admin.pedidos.pedidosindex', compact('usuarios', 'pedidos', 'vehiculos', 'e'));
+        }else{
+            $usuarios = User::All();
+            $pedido = Pedido::find($id);
+            $vehiculos = Vehiculo::All();
+            $fechaant = $pedido->fechaentrega;
+            $mes = substr($fechaant, 5, 2);
+            $dia = substr($fechaant, -2);
+            $año = substr($fechaant, 0, 4);
 
-        $fecha = $mes.'/'. $dia.'/'. $año;
-        return view('Admin.pedidos.editarpedido', compact('usuarios', 'pedido', 'vehiculos', 'fecha'));
+            $fecha = $mes.'/'. $dia.'/'. $año;
+            return view('Admin.pedidos.editarpedido', compact('usuarios', 'pedido', 'vehiculos', 'fecha'));
+        }
     }
 
     /**

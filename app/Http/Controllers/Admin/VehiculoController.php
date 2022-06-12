@@ -186,18 +186,35 @@ class VehiculoController extends Controller
      */
     public function show($id)
     {
-        $is = $id;
         $vehiculo = Vehiculo::find($id);
-        $usuarios = User::All();
-        $marcas = Marca::All();
-        $combustibles = Combustible::All();
-        $tipocajas = TipoCaja::All();
-        $estadovehiculos = EstadoVehiculo::All();
-        $imagenes = ImagenVehiculo::Where('idvehiculo', $id)->get();
-        $estadoaplicativos = EstadoAplicativo::All();
-        $ciudades = Ciudad::All();
+        if(empty($vehiculo)){
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', '<>', 1)->where('estadoaplicativo_id', '<>', 2)->paginate(12);
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $titulo = "Vehículos";
+            $action = "vehiculos";
+            $boton = "Editar";
+            $texto = '';
+            $e = 1;
 
-        return view('Admin.vehiculos.vervehiculo', compact('vehiculo', 'usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades', 'is', 'imagenes'));    
+            return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton', 'imagenes', 'texto', 'action', 'e'));
+        }else{
+            $is = $id;
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocajas = TipoCaja::All();
+            $estadovehiculos = EstadoVehiculo::All();
+            $imagenes = ImagenVehiculo::Where('idvehiculo', $id)->get();
+            $estadoaplicativos = EstadoAplicativo::All();
+            $ciudades = Ciudad::All();
+            return view('Admin.vehiculos.vervehiculo', compact('vehiculo', 'usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades', 'is', 'imagenes'));    
+        }
     }
 
     /**
@@ -208,21 +225,40 @@ class VehiculoController extends Controller
      */
     public function edit($id)
     {
-        $is = $id;
         $vehiculo = Vehiculo::find($id);
-        $roles = Role::All();
-        $user = User::All();
-        $usuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('*')->get();
-        $marcas = Marca::All();
-        $combustibles = Combustible::All();
-        $tipocajas = TipoCaja::All();
-        $estadovehiculos = EstadoVehiculo::All();
-        $estadoaplicativos = EstadoAplicativo::where('id', 1)->orWhere('id', 2)->orWhere('id', 3)->get();
-        $imagenes = ImagenVehiculo::Where('idvehiculo', $id)->get();
-        $ciudades = Ciudad::All();
-        $boton = "Editar";
 
-        return view('Admin.vehiculos.editarvehiculo', compact('vehiculo', 'usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades', 'is', 'boton', 'imagenes'));
+        if(empty($vehiculo)){
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', '<>', 1)->where('estadoaplicativo_id', '<>', 2)->paginate(12);
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $titulo = "Vehículos";
+            $action = "vehiculos";
+            $boton = "Editar";
+            $texto = '';
+            $e = 1;
+
+            return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton', 'imagenes', 'texto', 'action', 'e'));
+        }else{
+            $is = $id;
+            $roles = Role::All();
+            $user = User::All();
+            $usuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('*')->get();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocajas = TipoCaja::All();
+            $estadovehiculos = EstadoVehiculo::All();
+            $estadoaplicativos = EstadoAplicativo::where('id', 1)->orWhere('id', 2)->orWhere('id', 3)->get();
+            $imagenes = ImagenVehiculo::Where('idvehiculo', $id)->get();
+            $ciudades = Ciudad::All();
+            $boton = "Editar";
+
+            return view('Admin.vehiculos.editarvehiculo', compact('vehiculo', 'usuarios', 'marcas', 'combustibles', 'tipocajas', 'estadovehiculos', 'estadoaplicativos', 'ciudades', 'is', 'boton', 'imagenes'));
+        }
     }
 
     /**

@@ -92,14 +92,18 @@ class CitaController extends Controller
     public function show($id)
     {
         $cita = Cita::find($id);
-        $proveedores = User::where('id', $cita->idproveedor)->get();
-        $vendedores = User::where('id', $cita->idvendedor)->get();
-        $clientes = User::where('id', $cita->idcliente)->get();
-        $vehiculos = Vehiculo::where('id', $cita->idvehiculo)->get();
-        $sedes = Sede::where('id', $cita->sedes_id)->get();
+        if(empty($cita)){
+            $e = 1;
+            return view('Admin.citas.citasagendadas', compact('e'));
+        }else{
+            $proveedores = User::where('id', $cita->idproveedor)->get();
+            $vendedores = User::where('id', $cita->idvendedor)->get();
+            $clientes = User::where('id', $cita->idcliente)->get();
+            $vehiculos = Vehiculo::where('id', $cita->idvehiculo)->get();
+            $sedes = Sede::where('id', $cita->sedes_id)->get();
 
-        return view('Admin.citas.vercita', compact('cita', 'proveedores', 'vendedores', 'clientes', 'vehiculos', 'sedes'));
-
+            return view('Admin.citas.vercita', compact('cita', 'proveedores', 'vendedores', 'clientes', 'vehiculos', 'sedes'));
+        }
     }
 
     /**
@@ -111,13 +115,19 @@ class CitaController extends Controller
     public function edit($id)
     {
         $cita = Cita::find($id);
-        $citasfecha = Cita::where('fecha', $cita->fecha)->where('sedes_id', $cita->sedes_id)->Where('id', '<>', $id)->where('estado', 1)->get();
-        $vehiculos = Vehiculo::All();
-        $pusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('*')->get();
-        $cusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857095)->select('*')->get();
-        $vusuarios = User::All();
-        $sedes = Sede::All();
-        return view('Admin.citas.editarcita', compact( 'cita', 'citasfecha', 'vehiculos', 'pusuarios', 'cusuarios', 'vusuarios', 'sedes'));
+        if(empty($cita)){
+            $e = 1;
+            return view('Admin.citas.citasagendadas', compact('e'));
+        }else{
+
+            $citasfecha = Cita::where('fecha', $cita->fecha)->where('sedes_id', $cita->sedes_id)->Where('id', '<>', $id)->where('estado', 1)->get();
+            $vehiculos = Vehiculo::All();
+            $pusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('*')->get();
+            $cusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857095)->select('*')->get();
+            $vusuarios = User::All();
+            $sedes = Sede::All();
+            return view('Admin.citas.editarcita', compact( 'cita', 'citasfecha', 'vehiculos', 'pusuarios', 'cusuarios', 'vusuarios', 'sedes'));
+        }
     }
 
     /**
@@ -184,10 +194,6 @@ class CitaController extends Controller
             echo $e;
         }
         
-        
-        
-        // $prueba = "hola que mas pues";
-        // return response()->json(array('msg'=> $prueba), 200);
     }
 
     public function indexCitasAgendadas(){

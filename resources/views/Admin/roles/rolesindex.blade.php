@@ -114,7 +114,16 @@ $(selector).click(function (e) {
 </script>
 
 
-
+@if(!empty($e))
+    @if($e == 1)
+    <script>
+        Swal.fire({
+                icon: 'error',
+                title: 'Este rol no existe'
+                })
+    </script>
+    @endif
+@endif
 
 @if(session('eliminar') == 'ok')
     <script>

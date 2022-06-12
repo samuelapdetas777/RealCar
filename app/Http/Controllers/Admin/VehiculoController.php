@@ -65,7 +65,7 @@ class VehiculoController extends Controller
             return view('Admin.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'titulo', 'boton', 'imagenes', 'texto', 'action'));
             
         }else{
-            $vehiculos = Vehiculo::where('estadoaplicativo_id', '<>', 1)->where('estadoaplicativo_id', '<>', 2)->paginate(12);
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', '<>', 1)->where('estadoaplicativo_id', '<>', 2)->get();
             $usuarios = User::All();
             $marcas = Marca::All();
             $combustibles = Combustible::All();
@@ -188,7 +188,7 @@ class VehiculoController extends Controller
     {
         $vehiculo = Vehiculo::find($id);
         if(empty($vehiculo)){
-            $vehiculos = Vehiculo::where('estadoaplicativo_id', '<>', 1)->where('estadoaplicativo_id', '<>', 2)->paginate(12);
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', '<>', 1)->where('estadoaplicativo_id', '<>', 2)->get();
             $usuarios = User::All();
             $marcas = Marca::All();
             $combustibles = Combustible::All();
@@ -228,7 +228,7 @@ class VehiculoController extends Controller
         $vehiculo = Vehiculo::find($id);
 
         if(empty($vehiculo)){
-            $vehiculos = Vehiculo::where('estadoaplicativo_id', '<>', 1)->where('estadoaplicativo_id', '<>', 2)->paginate(12);
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', '<>', 1)->where('estadoaplicativo_id', '<>', 2)->get();
             $usuarios = User::All();
             $marcas = Marca::All();
             $combustibles = Combustible::All();
@@ -385,7 +385,7 @@ class VehiculoController extends Controller
 
 
             // echo "hsakdhfkasdhhfksadhkjh";
-            $vehiculos = Vehiculo::where('estadoaplicativo_id', 1)->orWhere('estadoaplicativo_id', 2)->paginate(12);
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', 1)->orWhere('estadoaplicativo_id', 2)->get();
             $usuarios = User::All();
             $marcas = Marca::All();
             $combustibles = Combustible::All();

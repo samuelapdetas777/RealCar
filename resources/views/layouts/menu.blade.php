@@ -24,11 +24,7 @@
         </a>
     </li>
     
-    <li class="side-menus {{ Request::is('admin/notificaciones') || Request::is('admin/notificaciones/*') ? 'active' : '' }}">
-        <a href="/admin/login" class="nav-link">
-            <i class=" fas fa-envelope"></i><span>Notificaciones</span>
-        </a>
-    </li>
+    
 
     <li class="menu-header">Vehículos</li>
 
@@ -55,6 +51,11 @@
     <li class="side-menus {{ Request::is('admin/pedidos') || Request::is('admin/pedidos/*') ? 'active' : '' }}">
         <a href="/admin/pedidos" class="nav-link">
             <i class=" fas fa-list-alt"></i><span>Pedidos</span>
+        </a>
+    </li>
+    <li class="side-menus {{ Request::is('admin/ventas') || Request::is('admin/ventas/*') ? 'active' : '' }}">
+        <a href="/admin/ventas" class="nav-link">
+            <i class=" fas fa-list-alt"></i><span>Ventas</span>
         </a>
     </li>
     <li class="side-menus {{ Request::is('admin/compras') || Request::is('admin/compras/*') ? 'active' : '' }}">

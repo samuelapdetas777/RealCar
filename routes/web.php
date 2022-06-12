@@ -10,6 +10,7 @@ use App\Http\Controllers\Vehiculos\TipoCajaController;
 use App\Http\Controllers\Admin\VehiculoController;
 use App\Http\Controllers\Admin\CompraController;
 use App\Http\Controllers\Admin\PedidoController;
+use App\Http\Controllers\Admin\VentaController;
 use App\Http\Controllers\Info\ReporteController;
 
 //roles y permisos
@@ -67,6 +68,7 @@ Route::group(['prefix' =>'admin'], function(){
         Route::get('/vehiculossinaprobar', [VehiculoController::class, 'vehiculosSinAprobar']);
 
         Route::resource('pedidos', PedidoController::class);
+        Route::resource('ventas', VentaController::class);
         Route::resource('compras', CompraController::class);
         Route::resource('citas', CitaController::class);
         Route::post('/citasfecha', [CitaController::class, 'citasPorFecha']);

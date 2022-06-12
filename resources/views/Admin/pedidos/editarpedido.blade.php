@@ -23,34 +23,17 @@
                     <form action="/admin/pedidos/{{$pedido->id}}" method="POST" class="editarPedido">
                         @csrf
                         @method('PUT')
+                        
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectcliente">Cliente: </label>
-                                <select  class="form-control @error('cliente') is-invalid @enderror" id="selectcliente" name="cliente" required>
+                                <label for="selectvehiculo">Vehículo: </label>
                                 
-                                    <option value="">Selecciona el cliente que ha adquirido el vehiculo</option>
-                                    @foreach($usuarios as $usuario)
-                                        <option value="{{$usuario->id}}" {{$pedido->cliente == $usuario->id? 'selected' : ''}}>{{$usuario->id}} - {{$usuario->name}} {{$usuario->last_name}}</option>
-                                    @endforeach
-                                </select>
-                                @error('cliente')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col">
-                                <label for="selectvehiculo">Vehiculo: </label>
-                                <select  class="form-control @error('vehiculo') is-invalid @enderror" id="selectvehiculo" name="vehiculo" required>
-                                
-                                    <option value="">Selecciona el vehiculo que ha sido adquirido</option>
                                     @foreach($vehiculos as $vehiculo)
-                                        <option value="{{$vehiculo->id}}" {{$pedido->vehiculo == $vehiculo->id? 'selected' : ''}}>{{$vehiculo->id}} - {{$vehiculo->nombre}} - ${{$vehiculo->precio}}</option>
+                                        @if($pedido->vehiculo == $vehiculo->id)
+                                            <p>{{$vehiculo->id}} - {{$vehiculo->nombre}} - ${{$vehiculo->precio}}</p>
+                                        @endif
                                     @endforeach
-                                </select>
-                                @error('vehiculo')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                                
                             </div>
                         </div>
                         
@@ -83,6 +66,26 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col">
+                                <label for="estadopedido">Estado del pedido: </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="estado" id="estadopedido1" value="0" checked>
+                                    <label class="form-check-label" for="estadopedido1">
+                                        Pedido
+                                    </label>
+                                </div>
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="estado" id="estadopedido2" value="1">
+                                    <label class="form-check-label" for="estadopedido2">
+                                        Venta
+                                    </label>
+                                </div>
+                                @error('estado')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
                             </div>
                         </div>
 

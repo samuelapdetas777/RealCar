@@ -28,7 +28,7 @@ class PedidoController extends Controller
     {
          
         $usuarios = User::All();
-        $pedidos = Pedido::All();
+        $pedidos = Pedido::Where('estado', 0)->get();
         $vehiculos = Vehiculo::All();
         return view('Admin.pedidos.pedidosindex', compact('usuarios', 'pedidos', 'vehiculos'));
     }
@@ -41,8 +41,10 @@ class PedidoController extends Controller
     public function create()
     {
         $usuarios = User::All();
-        $vehiculos = Vehiculo::All();
-        return view('Admin.pedidos.agregarpedido', compact('usuarios', 'vehiculos'));
+        $pusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('*')->get();
+        $cusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857095)->select('*')->get();
+        $vehiculos = Vehiculo::Where('estadoaplicativo_id', 3)->get();
+        return view('Admin.pedidos.agregarpedido', compact('pusuarios', 'cusuarios', 'vehiculos'));
     }
 
     /**
@@ -75,14 +77,14 @@ class PedidoController extends Controller
         $pedido->vehiculo = $request->input('vehiculo');
         $pedido->valor = $request->input('valor');
         $pedido->fechaentrega = $fecha;
+        $vehiculo->estadoaplicativo_id = 5;
+        $vehiculo->save();
         $pedido->save();
 
-        $vehiculo->user_id = $request->input('cliente');
-        $vehiculo->estadoaplicativo_id = 4;
+        // $vehiculo->user_id = $request->input('cliente');
+        // $vehiculo->estadoaplicativo_id = 4;
 
-        $vehiculo->save();
-
-        
+        // $vehiculo->save();
 
         return redirect('/admin/pedidos')->with('agregar', 'ok');
 
@@ -100,7 +102,7 @@ class PedidoController extends Controller
         if(empty($pedido)){
             $e = 1; 
             $usuarios = User::All();
-            $pedidos = Pedido::All();
+            $pedidos =  Pedido::Where('estado', 0)->get();
             $vehiculos = Vehiculo::All();
             return view('Admin.pedidos.pedidosindex', compact('usuarios', 'pedidos', 'vehiculos', 'e'));
         }else{
@@ -124,11 +126,17 @@ class PedidoController extends Controller
         if(empty($pedido)){
             $e = 1;
             $usuarios = User::All();
-            $pedidos = Pedido::All();
+            $pedidos = Pedido::Where('estado', 0)->get();
             $vehiculos = Vehiculo::All();
             return view('Admin.pedidos.pedidosindex', compact('usuarios', 'pedidos', 'vehiculos', 'e'));
-        }else{
+        }elseif($pedido->estado == 1){
+            $e = 2;
             $usuarios = User::All();
+            $pedidos = Pedido::Where('estado', 0)->get();
+            $vehiculos = Vehiculo::All();
+            return view('Admin.pedidos.pedidosindex', compact('usuarios', 'pedidos', 'vehiculos', 'e'));
+        }
+        else{
             $pedido = Pedido::find($id);
             $vehiculos = Vehiculo::All();
             $fechaant = $pedido->fechaentrega;
@@ -137,7 +145,7 @@ class PedidoController extends Controller
             $año = substr($fechaant, 0, 4);
 
             $fecha = $mes.'/'. $dia.'/'. $año;
-            return view('Admin.pedidos.editarpedido', compact('usuarios', 'pedido', 'vehiculos', 'fecha'));
+            return view('Admin.pedidos.editarpedido', compact('pedido', 'vehiculos', 'fecha'));
         }
     }
 
@@ -151,14 +159,13 @@ class PedidoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'cliente' => 'required | exists:users,id',
-            'vehiculo' => 'required | exists:vehiculos,id',
             'valor' => 'required | integer | numeric | between:1000000,1500000000',
-            'fecha' => 'required | date'
+            'fecha' => 'required | date',
+            'estado' => 'boolean'
         ]);
 
         $pedido = Pedido::find($id);
-        $proveedor = Vehiculo::find($request->input('vehiculo'));  
+        $vehiculo = Vehiculo::find($pedido->vehiculo);
         $fechaant = $request->input('fecha');
         $año = substr($fechaant, -4);
         $mes = substr($fechaant, 3, 2);
@@ -166,13 +173,20 @@ class PedidoController extends Controller
         $fecha = $año.'-'.$dia.'-'.$mes;
 
 
-        $pedido->cliente = $request->input('cliente');
-        $pedido->proveedor = $proveedor->user_id;
-        $pedido->vehiculo = $request->input('vehiculo');
+        // $pedido->proveedor = $vehiculo->user_id;
+        // $pedido->vehiculo = $request->input('vehiculo');
         $pedido->valor = $request->input('valor');
         $pedido->fechaentrega = $fecha;
-        $pedido->save();
+        if($request->input('estado') == 1){
+            $pedido->estado = 1;
 
+            $vehiculo->user_id = $pedido->cliente;
+            $vehiculo->estadoaplicativo_id = 4;
+
+            $vehiculo->save();
+        }
+        $pedido->save();
+        
         return redirect('/admin/pedidos')->with('actualizar', 'ok');
         
     }
@@ -185,6 +199,23 @@ class PedidoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pedido = Pedido::find($id);
+        if(empty($pedido)){
+            $e = 1;
+            $usuarios = User::All();
+            $pedidos = Pedido::Where('estado', 0)->get();
+            $vehiculos = Vehiculo::All();
+            return view('Admin.pedidos.pedidosindex', compact('usuarios', 'pedidos', 'vehiculos', 'e'));
+        }elseif($pedido->estado == 1){
+            $e = 3;
+            $usuarios = User::All();
+            $pedidos = Pedido::Where('estado', 0)->get();
+            $vehiculos = Vehiculo::All();
+            return view('Admin.pedidos.pedidosindex', compact('usuarios', 'pedidos', 'vehiculos', 'e'));
+        }else{
+            $pedido->delete();
+            return redirect('/admin/pedidos')->with('eliminar', 'ok');
+        }
     }
+
 }

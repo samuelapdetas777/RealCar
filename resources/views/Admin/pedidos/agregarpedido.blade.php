@@ -27,9 +27,9 @@
                                 <label for="selectcliente">Cliente: </label>
                                 <select  class="form-control @error('cliente') is-invalid @enderror" id="selectcliente" name="cliente" required>
                                 
-                                <option value="">Selecciona el cliente que ha adquirido el vehiculo</option>
-                                @foreach($usuarios as $usuario)
-                                    <option value="{{$usuario->id}}">{{$usuario->id}} - {{$usuario->name}} {{$usuario->last_name}}</option>
+                                <option value="">Selecciona el cliente que ha adquirido el vehículo</option>
+                                @foreach($cusuarios as $cusuario)
+                                    <option value="{{$cusuario->id}}">{{$cusuario->id}} - {{$cusuario->name}} {{$cusuario->last_name}}</option>
                                 @endforeach
                                 </select>
                                 @error('cliente')
@@ -39,10 +39,10 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectvehiculo">Vehiculo: </label>
+                                <label for="selectvehiculo">Vehículo: </label>
                                 <select  class="form-control @error('vehiculo') is-invalid @enderror" id="selectvehiculo" name="vehiculo" required>
                                 
-                                <option value="">Selecciona el vehiculo que ha sido adquirido</option>
+                                <option value="">Selecciona el vehículo que ha sido adquirido</option>
                                 @foreach($vehiculos as $vehiculo)
                                     <option value="{{$vehiculo->id}}">{{$vehiculo->id}} - {{$vehiculo->nombre}} - ${{$vehiculo->precio}}</option>
                                 @endforeach
@@ -118,7 +118,7 @@
             
 
             $('.agregarPedido').submit(function (e) { 
-
+                e.preventDefault();
 
                 //Se lanza una alerta antes de enviar el formulario para confirmar el envio
                 Swal.fire({

@@ -19,6 +19,7 @@ class CreatePedidosTable extends Migration
             $table->foreignId('proveedor')->constrained('users');
             $table->foreignId('vehiculo')->constrained('vehiculos');
             $table->date('fechaentrega');
+            $table->boolean('estado')->default(0);
             $table->bigInteger('valor');
             $table->timestamps();
         });

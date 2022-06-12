@@ -179,7 +179,13 @@ class CitaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cita = Cita::find($id);
+        if(empty($cita)){
+            $e = 1;
+            return view('Admin.citas.citasagendadas', compact('e'));
+        }
+        $cita->delete();
+        return redirect('/admin/citas')->with('eliminar', 'ok');
     }
 
     public function citasPorFecha(Request $request){

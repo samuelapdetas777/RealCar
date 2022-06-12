@@ -46,7 +46,7 @@
                                                     
                                                     @csrf
                                                     @method('DELETE')
-                                                    {{--<button type="submit" class="btn btn-danger btneliminar">Eliminar <i class="fas fa-trash"></i></button>--}}
+                                                    <button type="submit" class="btn btn-danger btneliminar">Eliminar <i class="fas fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -81,11 +81,11 @@
 <script>
 
 
-$('.deleteCiudad').submit(function (e) { 
+$('.deleteCita').submit(function (e) { 
             e.preventDefault();
             
             Swal.fire({
-                title: '¿Seguro quieres eliminar este campo?',
+                title: '¿Seguro quieres eliminar esta cita?',
                 text: "No puedes revertir este cambio",
                 icon: 'warning',
                 showCancelButton: true,

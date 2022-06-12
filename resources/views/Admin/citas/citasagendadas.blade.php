@@ -74,8 +74,13 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <a id="editarmodal" class="btn btn-info" href="">Editar</a>
-                            <a id="vermasmodal" class="btn btn-success" href="">Ver mas</a>
+                            <form action="" method="POST" class="deleteCita">
+                                @csrf
+                                @method('DELETE')
+                                <a id="editarmodal" class="btn btn-info" href="">Editar</a>
+                                <a id="vermasmodal" class="btn btn-success" href="">Ver mas</a>
+                                <button type="submit" class="btn btn-danger btneliminar">Eliminar <i class="fas fa-trash"></i></button>
+                            </form>
                         </div>
                         </div>
                     </div>
@@ -105,7 +110,24 @@
 
 
 
-
+$('.deleteCita').submit(function (e) { 
+            e.preventDefault();
+            
+            Swal.fire({
+                title: '¿Seguro quieres eliminar esta cita?',
+                text: "No puedes revertir este cambio",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0fbd37',
+                cancelButtonColor: '#fd3328',
+                confirmButtonText: 'Si, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit();
+            }
+            })
+    });
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -152,6 +174,9 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#comentarios').text(comentario);
         $('#editarmodal').attr('href', '/admin/citas/'+id+'/edit');
         $('#vermasmodal').attr('href', '/admin/citas/'+id);
+        
+        $('.deleteCita').attr('action', 'http://realcar.com/admin/citas/'+id);
+        
 
 
 

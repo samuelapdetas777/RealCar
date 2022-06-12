@@ -137,7 +137,17 @@ class RolController extends Controller
     public function destroy($id)
     {
         $rol = Role::find($id);
-        $rol->delete();
-        return redirect('/admin/roles')->with('eliminar', 'ok');
+        if(empty($rol)){
+            $e = 1;
+            $roles = Role::All();
+            return view('Admin.roles.rolesindex', compact('roles', 'e'));
+        }elseif($id == 9857095 || $id == 9857096 || $id == 9857097){
+            $e = 2;
+            $roles = Role::All();
+            return view('Admin.roles.rolesindex', compact('roles', 'e'));
+        }else{
+            $rol->delete();
+            return redirect('/admin/roles')->with('eliminar', 'ok');
+        }
     }
 }

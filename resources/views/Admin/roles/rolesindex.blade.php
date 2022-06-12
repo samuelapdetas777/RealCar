@@ -50,7 +50,7 @@
                                         <tr class="bg-dark hover">
                                             <td colspan="3">
 
-                                                No hay roles registrados, agrega una nueva para verlas aqui.
+                                                No hay roles registrados, agrega uno nuevo para verlo aquí.
                                             </td>
                                         </tr>
                                         @endforelse
@@ -120,6 +120,13 @@ $(selector).click(function (e) {
         Swal.fire({
                 icon: 'error',
                 title: 'Este rol no existe'
+                })
+    </script>
+    @elseif($e == 2)
+    <script>
+        Swal.fire({
+                icon: 'error',
+                title: 'Este rol no se puede eliminar'
                 })
     </script>
     @endif

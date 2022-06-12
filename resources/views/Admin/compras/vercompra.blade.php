@@ -46,13 +46,13 @@
                         </tr>
                         
                         <tr>
-                        <th scope="row">ID del vehiculo: </th>
+                        <th scope="row">ID del vehículo: </th>
                             @foreach($vehiculos as $vehiculo)
                                 <td>{{$vehiculo->id}}</td>
                             @endforeach
                         </tr>
                         <tr>
-                        <th scope="row">Vehiculo: </th>
+                        <th scope="row">Vehículo: </th>
                             @foreach($vehiculos as $vehiculo)
                                 <td>{{$vehiculo->nombre}}</td>
                             @endforeach
@@ -66,17 +66,6 @@
                                 <td>{{$compra->created_at}}</td>
                         </tr>
                         
-                        <tr class="table-dark text-dark">
-                        <th scope="row">Acciones: </th>
-                        <td>
-                            <form action="{{ route ('compras.destroy',$compra->id) }}" method="POST" class="deleteCompra">
-                                <a href="/admin/compras/{{$compra->id}}/edit" id="sedeeditarbtn" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Eliminar <i class="fas fa-trash"></i></button>
-                            </form>
-                        </td>
-                        </tr>
                         
                     </tbody>
                 </table>

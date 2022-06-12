@@ -25,7 +25,7 @@
                                     <thead>
                                         <tr>
                                         <th scope="col" class="text-light">#ID</th>
-                                        <th scope="col" class="text-light">Vehiculo</th>
+                                        <th scope="col" class="text-light">Vehículo</th>
                                         <th scope="col" class="text-light">Valor ($)</th>
                                         <th scope="col" class="text-light">Acciones</th>
                                         </tr>
@@ -42,15 +42,9 @@
                                                 <td>$ {{$compra->valor}}</td>
                                             <td>
                                                 
-                                                <form action="{{ route ('compras.destroy',$compra->id) }}" method="POST" class="deleteCompra">
                                                     <a href="/admin/compras/{{$compra->id}}" class="btn btn-success editarbtn">Ver<i class="fas fa-eye"></i></a>
                                                     
-                                                    <a href="/admin/compras/{{$compra->id}}/edit" class="btn btn-info editarbtn">Editar<i class="fas fa-pen"></i></a>
                                                     
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btneliminar">Eliminar <i class="fas fa-trash"></i></button>
-                                                </form>
                                             </td>
                                         </tr>
                                         
@@ -82,28 +76,6 @@
 
 
 <script>
-
-
-$('.deleteCiudad').submit(function (e) { 
-            e.preventDefault();
-            
-            Swal.fire({
-                title: '¿Seguro quieres eliminar este campo?',
-                text: "No puedes revertir este cambio",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#0fbd37',
-                cancelButtonColor: '#fd3328',
-                confirmButtonText: 'Si, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                this.submit();
-            }
-            })
-    });
-
-
 
 
     $(document).ready(function () {

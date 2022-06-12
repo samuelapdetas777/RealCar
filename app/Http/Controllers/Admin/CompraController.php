@@ -56,15 +56,15 @@ class CompraController extends Controller
         ]);
         
         $compra = new Compra();
-        $proveedor = Vehiculo::find($request->input('vehiculo'));
+        $vehiculo = Vehiculo::find($request->input('vehiculo'));
 
-        $compra->proveedor = $proveedor->user_id;
+        $compra->proveedor = $vehiculo->user_id;
         $compra->vehiculo = $request->input('vehiculo');
         $compra->valor = $request->input('valor');
         $compra->save();
 
-        $proveedor->user_id = 8;
-        $proveedor->save();
+        $vehiculo->user_id = 8;
+        $vehiculo->save();
         
         return redirect('/admin/compras')->with('agregar', 'ok');
 
@@ -100,18 +100,7 @@ class CompraController extends Controller
      */
     public function edit($id)
     {
-        $compra = Compra::find($id);
-        if(empty($compra)){
-            $e = 1;
-            $compras = Compra::All();
-            $usuarios = User::All();
-            $vehiculos = Vehiculo::All();
-            return view('Admin.compras.comprasindex', compact('compras', 'usuarios', 'vehiculos', 'e'));
-        }else{
-            $usuarios = User::All();
-            $vehiculos = Vehiculo::All();
-            return view('Admin.compras.editarcompra', compact('usuarios', 'compra', 'vehiculos'));
-        }
+        //
     }
 
     /**
@@ -123,19 +112,7 @@ class CompraController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'vehiculo' => 'required | exists:vehiculos,id',
-            'valor' => 'required | integer | numeric | between:1000000,1500000000',
-        ]);
-        $compra = Compra::find($id);
-        $proveedor = Vehiculo::find($request->input('vehiculo'));
-
-        $compra->proveedor = $proveedor->user_id;
-        $compra->vehiculo = $request->input('vehiculo');
-        $compra->valor = $request->input('valor');
-        $compra->save();
-
-        return redirect('/admin/compras')->with('actualizar', 'ok');
+        //
     }
 
     /**

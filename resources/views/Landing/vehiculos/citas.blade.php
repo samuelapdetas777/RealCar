@@ -148,8 +148,8 @@
 
 
 
-@if(!empty($x))
-    @if($x == 0)
+@if(!empty($e))
+    @if($e == 3)
     <script>
         Swal.fire({
             icon: 'error',
@@ -157,14 +157,14 @@
         })
         
     </script>
-    @elseif($x == 1)
+    @elseif($e == 1)
     <script>
         Swal.fire({
             icon: 'error',
             title: 'Esta cita esta en proceso de agendamiento',
         })
     </script>
-    @elseif($x == 2)
+    @elseif($e == 2)
     <script>
         Swal.fire({
             icon: 'error',

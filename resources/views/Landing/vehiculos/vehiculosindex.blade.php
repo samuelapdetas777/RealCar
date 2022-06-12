@@ -217,17 +217,25 @@ $('.deleteCiudad').submit(function (e) {
 
 
 
-
-@if(session('eliminar') == 'ok')
-    <script>
-        Swal.fire({
-                icon: 'success',
-                title: 'Se ha eliminado correctamente',
-                timer: 1500,
-                timerProgressBar: true,
-                })
-    </script>
-@elseif(session('actualizar') == 'ok')
+@if(!empty($e))
+    @if($e == 3)
+        <script>
+            
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Este vehículo no existe'
+                    })
+        </script>
+    @elseif($e == 1)
+        <script>
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Este vehículo no está disponible'
+                    })
+        </script>
+    @endif    
+@endif
+@if(session('actualizar') == 'ok')
     <script>
         Swal.fire({
                 icon: 'success',

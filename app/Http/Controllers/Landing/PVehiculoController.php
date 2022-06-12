@@ -14,8 +14,10 @@ use App\Models\User;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
+
 use Illuminate\Support\Facades\Auth; //se usa para sabe el usuario que a ingresado
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class PVehiculoController extends Controller
 {
@@ -36,6 +38,7 @@ class PVehiculoController extends Controller
      */
     public function index(Request $request)
     {
+        
         $texto = $request->texto;
 
         if(!empty($texto)){
@@ -164,17 +167,56 @@ class PVehiculoController extends Controller
     public function verVehiculo($id)
     {
         $vehiculo = Vehiculo::find($id);
-        $imagenes = ImagenVehiculo::where('idvehiculo', $id)->get();
+        $e = 0;
         
-        $estadoaplicativo = EstadoAplicativo::where('id', $vehiculo->estadoaplicativo_id)->first();
-        $proveedor = User::where('id', $vehiculo->user_id)->first();
-        $ciudadProveedor = Ciudad::where('id', $proveedor->city_id)->first();
-        $marca = Marca::where('id', $vehiculo->marcas_id)->first();
-        $combustible = Combustible::where('id', $vehiculo->combustibles_id)->first();
-        $tipocaja = TipoCaja::where('id', $vehiculo->tipocaja_id)->first();
-        $estadovehiculo = EstadoVehiculo::where('id', $vehiculo->estadovehiculo_id)->first();
+        if (empty($vehiculo)) {
+            // echo $x;
+            $e = 3;
+            $texto = '';
 
-        return view('Landing.vehiculos.proveedor.vervehiculo', compact('vehiculo', 'proveedor', 'ciudadProveedor', 'marca', 'combustible', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes'));
+            $id = Auth::user()->id;
+            $vehiculos = Vehiculo::whereIn('estadoaplicativo_id',[1,2,3])->where('user_id', $id)->paginate(12);
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+
+            return view('Landing.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'e'));
+         }elseif ($vehiculo->estadoaplicativo_id != 1 || $vehiculo->estadoaplicativo_id != 2 || $vehiculo->estadoaplicativo_id != 3 || $vehiculo->user_id != $id) {
+            $e = 1;
+            $texto = '';
+
+            $id = Auth::user()->id;
+            $vehiculos = Vehiculo::whereIn('estadoaplicativo_id',[1,2,3])->where('user_id', $id)->paginate(12);
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+
+            return view('Landing.vehiculos.vehiculosindex', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'e'));
+        }
+        else{
+
+            $imagenes = ImagenVehiculo::where('idvehiculo', $id)->get();
+            
+            $estadoaplicativo = EstadoAplicativo::where('id', $vehiculo->estadoaplicativo_id)->first();
+            $proveedor = User::where('id', $vehiculo->user_id)->first();
+            $ciudadProveedor = Ciudad::where('id', $proveedor->city_id)->first();
+            $marca = Marca::where('id', $vehiculo->marcas_id)->first();
+            $combustible = Combustible::where('id', $vehiculo->combustibles_id)->first();
+            $tipocaja = TipoCaja::where('id', $vehiculo->tipocaja_id)->first();
+            $estadovehiculo = EstadoVehiculo::where('id', $vehiculo->estadovehiculo_id)->first();
+    
+            return view('Landing.vehiculos.proveedor.vervehiculo', compact('vehiculo', 'proveedor', 'ciudadProveedor', 'marca', 'combustible', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes'));
+        }
     }
 
     /**

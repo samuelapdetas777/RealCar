@@ -174,16 +174,16 @@ class UUsuarioController extends Controller
     public function verCita($id){
         $cita = Cita::find($id);
         $iduser = auth()->user()->id;
-        $x=0;
+        $e=0;
         if (empty($cita)) {
-            $x = 0;
-            return view('Landing.vehiculos.citas', compact('x'));
+            $e = 3;
+            return view('Landing.vehiculos.citas', compact('e'));
         }elseif ($cita->estado != 1) {
-            $x = 1;
-            return view('Landing.vehiculos.citas', compact('x'));
+            $e = 1;
+            return view('Landing.vehiculos.citas', compact('e'));
         }elseif ($cita->idproveedor = $iduser || $cita->idcliente = $iduser) {
-            $x = 2;
-            return view('Landing.vehiculos.citas', compact('x'));
+            $e = 2;
+            return view('Landing.vehiculos.citas', compact('e'));
         }else {
             $proveedores = User::where('id', $cita->idproveedor)->get();
             $vendedores = User::where('id', $cita->idvendedor)->get();

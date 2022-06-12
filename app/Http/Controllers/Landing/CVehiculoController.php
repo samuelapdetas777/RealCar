@@ -86,22 +86,50 @@ class CVehiculoController extends Controller
      */
     public function catalogoProveedor($id){  //se desplegará cuando el usuario de click a un catalogo para ver mas vehiculos
 
+        $user = User::find($id);
+        $texto = '';
+        if(empty($user)){
+            $e = 5;
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->paginate(12);
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $action = 'c';
 
-                
-        $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->where('user_id', $id)->paginate(12);
-
-        // Paginate(12);
+            return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action', 'e'));
         
-        $usuarios = User::All();
-        $marcas = Marca::All();
-        $combustibles = Combustible::All();
-        $tipocaja = TipoCaja::All();
-        $estadovehiculo = EstadoVehiculo::All();
-        $estadoaplicativo = EstadoAplicativo::All();
-        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
-        $action = 'cp';
+        }elseif ($user->state == 0) {
+            $e = 4;
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->paginate(12);
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $action = 'c';
 
-        return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action'));
+            return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action', 'e'));
+        
+        }else{ 
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->where('user_id', $id)->paginate(12);
+            $texto = '';
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $action = 'cp';
+
+            return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action'));
+        }
     }
     
     
@@ -110,29 +138,53 @@ class CVehiculoController extends Controller
      * @param int $id
      */
     public function verVehiculo($id){
+        $texto = '';
+        $vehiculo = Vehiculo::find($id);
+        $userstate = User::join('vehiculos', 'users.id', 'vehiculos.user_id')->select('users.state')->where('vehiculos.id', $id)->get(); 
+        
+        if (empty($vehiculo)) {
+            $e = 3;
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->paginate(12);
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $action = 'c';
+            return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action', 'e'));
+        }elseif ($vehiculo->estadoaplicativo_id != 3) { // || $userstate->state != 1 
+            $e = 2;
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->paginate(12);
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $action = 'c';
 
-        $vehiculo = Vehiculo::where('id', $id)->first();
+            return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action', 'e'));
+        }
+        else {
+            $vehiculosProveedor = Vehiculo::where('user_id', $vehiculo->user_id)->take(4)->get();
+            $vehiculosSimilares = Vehiculo::where('nombre', 'like', '%'. $vehiculo->nombre. '%')->take(4)->get();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $marcas = Marca::All();
+            $estadovehiculos = EstadoVehiculo::All();
+            $estadoaplicativos = EstadoAplicativo::All();
+            $imagenesVehiculo = ImagenVehiculo::where('idvehiculo', $id)->get(); 
+            $proveedor = User::where('id', $vehiculo->user_id)->first();
+            $ciudadProveedor = Ciudad::where('id', $proveedor->city_id)->first();
+            $marca = Marca::where('id', $vehiculo->marcas_id)->first();
+            $combustible = Combustible::where('id', $vehiculo->combustibles_id)->first();
+            $tipocaja = TipoCaja::where('id', $vehiculo->tipocaja_id)->first();
+            $estadovehiculo = EstadoVehiculo::where('id', $vehiculo->estadovehiculo_id)->first();
 
-        $vehiculosProveedor = Vehiculo::where('user_id', $vehiculo->user_id)->take(4)->get();
-        // $vehiculosNombre;
-        $vehiculosSimilares = Vehiculo::where('nombre', 'like', '%'. $vehiculo->nombre. '%')->take(4)->get();
-        $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
-
-        // Paginate(12);
-        $marcas = Marca::All();
-        $estadovehiculos = EstadoVehiculo::All();
-        $estadoaplicativos = EstadoAplicativo::All();
-        $imagenesVehiculo = ImagenVehiculo::where('idvehiculo', $id)->get(); 
-
-
-        $proveedor = User::where('id', $vehiculo->user_id)->first();
-        $ciudadProveedor = Ciudad::where('id', $proveedor->city_id)->first();
-        $marca = Marca::where('id', $vehiculo->marcas_id)->first();
-        $combustible = Combustible::where('id', $vehiculo->combustibles_id)->first();
-        $tipocaja = TipoCaja::where('id', $vehiculo->tipocaja_id)->first();
-        $estadovehiculo = EstadoVehiculo::where('id', $vehiculo->estadovehiculo_id)->first();
-
-        return view('Landing.vehiculos.vervehiculo', compact('vehiculo', 'vehiculosProveedor', 'vehiculosSimilares', 'proveedor', 'ciudadProveedor', 'marca', 'combustible', 'tipocaja', 'estadovehiculo', 'marcas', 'estadoaplicativos', 'estadovehiculos', 'imagenesVehiculo', 'imagenes'));
+            return view('Landing.vehiculos.vervehiculo', compact('vehiculo', 'vehiculosProveedor', 'vehiculosSimilares', 'proveedor', 'ciudadProveedor', 'marca', 'combustible', 'tipocaja', 'estadovehiculo', 'marcas', 'estadoaplicativos', 'estadovehiculos', 'imagenesVehiculo', 'imagenes'));
+        }
     }
 
     /**
@@ -140,14 +192,42 @@ class CVehiculoController extends Controller
      * @param int $id
      */
     public function agendarCita($id){
+        $texto = '';
         $vehiculo = Vehiculo::find($id);
-        $imagen = ImagenVehiculo::where('idvehiculo', $id)->where('prioridad', 1)->first();
-        $marca = Vehiculo::join('marcas', 'marcas.id', 'vehiculos.marcas_id')->select(DB::raw('marcas.nombre'))->where('vehiculos.id', $id)->first();
-        $estadovehiculo = Vehiculo::join('estadovehiculo as ev', 'ev.id', 'vehiculos.estadovehiculo_id')->select(DB::raw('ev.nombre'))->where('vehiculos.id', $id)->first();
-        $estadoaplicativo= Vehiculo::join('estadoaplicativo as ea', 'ea.id', 'vehiculos.estadoaplicativo_id')->select(DB::raw('ea.nombre'))->where('vehiculos.id', $id)->first();
-        $proveedor = Vehiculo::join('users', 'users.id', 'vehiculos.user_id')->select(DB::raw('users.name, users.last_name, users.id'))->where('vehiculos.id', $id)->first();
-        $sedes = Sede::All();
-        return view('Landing.vehiculos.agendarcita', compact('vehiculo', 'sedes', 'marca', 'estadovehiculo', 'estadoaplicativo', 'proveedor', 'imagen'));
+        if (empty($vehiculo)) {
+            $e = 3;
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->paginate(12);
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $action = 'c';
+            return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action', 'e'));
+        }elseif ($vehiculo->estadoaplicativo_id != 3) {
+            $e = 2;
+            $vehiculos = Vehiculo::where('estadoaplicativo_id', 3)->paginate(12);
+            $usuarios = User::All();
+            $marcas = Marca::All();
+            $combustibles = Combustible::All();
+            $tipocaja = TipoCaja::All();
+            $estadovehiculo = EstadoVehiculo::All();
+            $estadoaplicativo = EstadoAplicativo::All();
+            $imagenes = ImagenVehiculo::where('prioridad', 1)->get(); 
+            $action = 'c';
+
+            return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action', 'e'));
+        }else{
+            $imagen = ImagenVehiculo::where('idvehiculo', $id)->where('prioridad', 1)->first();
+            $marca = Vehiculo::join('marcas', 'marcas.id', 'vehiculos.marcas_id')->select(DB::raw('marcas.nombre'))->where('vehiculos.id', $id)->first();
+            $estadovehiculo = Vehiculo::join('estadovehiculo as ev', 'ev.id', 'vehiculos.estadovehiculo_id')->select(DB::raw('ev.nombre'))->where('vehiculos.id', $id)->first();
+            $estadoaplicativo= Vehiculo::join('estadoaplicativo as ea', 'ea.id', 'vehiculos.estadoaplicativo_id')->select(DB::raw('ea.nombre'))->where('vehiculos.id', $id)->first();
+            $proveedor = Vehiculo::join('users', 'users.id', 'vehiculos.user_id')->select(DB::raw('users.name, users.last_name, users.id'))->where('vehiculos.id', $id)->first();
+            $sedes = Sede::All();
+            return view('Landing.vehiculos.agendarcita', compact('vehiculo', 'sedes', 'marca', 'estadovehiculo', 'estadoaplicativo', 'proveedor', 'imagen'));
+        }
     }
     
     /**

@@ -225,26 +225,39 @@ $('.deleteCiudad').submit(function (e) {
 
 
 
+@if(!empty($e))
 
-@if(session('eliminar') == 'ok')
-    <script>
-        Swal.fire({
-                icon: 'success',
-                title: 'Se ha eliminado correctamente',
-                timer: 1500,
-                timerProgressBar: true,
-                })
-    </script>
-@elseif(session('actualizar') == 'ok')
-    <script>
-        Swal.fire({
-                icon: 'success',
-                title: 'Se han guardado los cambios correctamente',
-                timer: 1500,
-                timerProgressBar: true,
-                })
-    </script>
-@elseif(session('agregar') == 'ok')
+    @if($e == 3)
+        <script>
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Este vehículo no existe'
+                    })
+        </script>
+    @elseif($e == 2)
+        <script>
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Este vehículo no está disponible'
+                    })
+        </script>
+    @elseif($e == 5)
+        <script>
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Este catalogo no existe'
+                    })
+        </script>
+    @elseif($e == 4)
+        <script>
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Este catálogo no está disponible'
+                    })
+        </script>
+    @endif
+@endif
+@if(session('agregar') == 'ok')
     <script>
         Swal.fire({
                 icon: 'success',
@@ -267,63 +280,3 @@ $('.deleteCiudad').submit(function (e) {
 
 
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{--
-<div class="col-sm-4">
-                                        <div class="card"> <img src="{{asset('img/img-landing/mazda.jpg')}}" class="card-img-top" width="100%">
-                                            <div class="card-body pt-0 px-0">
-
-                                                <div class="d-flex flex-row justify-content-between  px-3 mt-1"> 
-                                                        @foreach($marcas as $marca)
-                                                            <p class="d-inline"> <bold>{{$marca->id == $vehiculo->marcas_id? $marca->nombre : ''}}</bold></p>
-                                                        @endforeach
-                                                        {{$vehiculo->nombre}}
-                                                </div>
-
-                                                <div class="d-flex flex-row justify-content-between mb-0 px-3 mt-1 mid"> 
-                                                    
-                                                        Precio
-                                                        <h6>&dollar;{{$vehiculo->precio}}</h6>
-                                                     
-                                                </div>
-                                                <hr class="mt-2 mx-3">
-                                                <div class="d-flex flex-row justify-content-between px-3 pb-4">
-                                                    <div class="d-flex flex-column"><span class="text-muted">Fuel Efficiency</span><small class="text-muted">L/100KM&ast;</small></div>
-                                                    <div class="d-flex flex-column">
-                                                        <h5 class="mb-0">8.5/7.1</h5><small class="text-muted text-right">(city/Hwy)</small>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex flex-row justify-content-between p-3 mid">
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-1">ENGINE</small>
-                                                        <div class="d-flex flex-row"><i class="fas fa-tachometer"></i>
-                                                            <div class="d-flex flex-column ml-1"><small class="ghj">1.4L MultiAir</small><small class="ghj">16V I-4 Turbo</small></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex flex-column"><small class="text-muted mb-2">HORSEPOWER</small>
-                                                        <div class="d-flex flex-row"><img src="https://imgur.com/J11mEBq.png">
-                                                            <h6 class="ml-1">135 hp&ast;</h6>
-                                                        </div>
-                                                    </div>
-                                                </div> 
-                                                <small class="text-muted key pl-3">Standard key Features</small>
-                                                <div class="mx-3 mt-3 mb-2">
-                                                    <button type="button" class="btn btn-danger btn-block">
-                                                        <small>Ver más</small>
-                                                    </button>
-                                                </div> <small class="d-flex justify-content-center text-">*Legal Disclaimer</small>
-                                            </div>
-                                        </div>
-                                     </div> --}}

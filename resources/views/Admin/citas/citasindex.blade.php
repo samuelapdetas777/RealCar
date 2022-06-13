@@ -20,6 +20,23 @@
                             Agregar <i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
+                            <div class="rounded-lg p-2" style="background-color: gray;">
+                                <form action="/admin/reportes/citas" class="row text-center">
+                                    {{--<div class="col-sm-5">
+                                        <label class="text-black" for="inputfechai">Fecha inicio</label>
+                                        <input type="date" class="form-control" id="inputfechai" name="fechainicio" value="{{old('fecha')}}"  min="" max="<?= date('Y-m-d'); ?>">
+                                    </div>
+                                    
+                                    <div class="col-sm-5">
+                                        <label class="text-black" for="inputfechaf">Fecha fin</label>
+                                        <input type="date" class="form-control d-inline" id="inputfechaf" name="fechafin" value="{{old('fecha')}}" min=""  max="<?= date('Y-m-d'); ?>">
+                                    </div>--}}
+                                    <div class="col">
+
+                                        <button class="btn btn-primary mt-0" type="submit">Generar PDF</button>
+                                    </div>
+                                </form>
+                            </div>
                             <div class="card-body">
                                 <table class="table table-hover table-dark text-light " id="tablepedidos">
                                     <thead>

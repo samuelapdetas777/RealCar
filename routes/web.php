@@ -66,6 +66,7 @@ Route::group(['prefix' =>'admin'], function(){
         Route::resource('usuarios', UsuarioController::class);
         Route::resource('vehiculos', VehiculoController::class);
         Route::get('/vehiculossinaprobar', [VehiculoController::class, 'vehiculosSinAprobar']);
+        
 
         Route::resource('pedidos', PedidoController::class);
         Route::resource('ventas', VentaController::class);
@@ -94,6 +95,16 @@ Route::group(['prefix' =>'admin'], function(){
         
         Route::get('/catalogo/{id}', [UsuarioController::class, 'verCatalogo']);
         Route::get('/citas/cliente/{id}', [UsuarioController::class, 'verCitas']);
+
+        //REPORTES
+        Route::group(['prefix' =>'reportes'], function(){
+            Route::get('usuarios', [UsuarioController::class, 'reporte']);
+            Route::get('compras', [CompraController::class, 'reporte']);
+            Route::get('vehiculos', [VehiculoController::class, 'reporte']);
+            Route::get('pedidos', [PedidoController::class, 'reporte']);
+            Route::get('ventas', [VentaController::class, 'reporte']);
+            Route::get('citas', [CitaController::class, 'reporte']);
+        });
     });
 });
 

@@ -10,6 +10,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class CitaController extends Controller
 {
@@ -224,6 +225,29 @@ class CitaController extends Controller
         $id = $request->id;
         $citas = Cita::find($id);
         return response(json_encode($citas));
+    }
+
+    public function reporte(Request $request){
+        if (!empty($request->fechainicio) && !empty($request->fechafin)) {
+            $fi = strval($request->fechainicio);
+            $ff = strval($request->fechafin);
+            // $usuarioscant = DB::select('SELECT COUNT(id) as cant FROM `users` WHERE created_at BETWEEN "'.$fi.'" AND "'.$ff.'"');
+            $usuarioscant = User::whereBetween('created_at', [$fi, $ff]);
+            
+            // return view('Admin.usuarios.pdf', compact('usuarioscant', 'ff'));
+            
+        }else{
+            $citascant = Cita::count();
+            $citascantage = Cita::where('estado',1)->count();
+            $citascantsoli = Cita::where('estado',0)->count();
+            
+            $citasxsede = DB::table('citas')->join('sedes', 'citas.sedes_id', '=', 'sedes.id' )->select('sedes.nombre', DB::raw('count(*) as total'))->groupBy('sedes.nombre')->orderBy('total', 'ASC')->get();
+            
+            $pdf = PDF::loadView('Admin.citas.pdf', ['citascant'=>$citascant, 'citascantage'=>$citascantage, 'citascantsoli'=>$citascantsoli, 'citasxsede'=>$citasxsede]);
+            
+            return $pdf->stream();
+            // return view('Admin.usuarios.pdf', compact('usuarioscant', 'usuarioscanthab', 'usuarioscantinhab', 'pusuarios', 'cusuarios', 'ausuarios', 'usuariosxciudad'));
+        }
     }
 
     

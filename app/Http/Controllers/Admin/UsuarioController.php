@@ -15,13 +15,17 @@ use App\Models\TipoCaja;
 use App\Models\User;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
-
+use Barryvdh\DomPDF\Facade as PDF;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+
+//DOM PDF
+// use PDF;
+
 
 class UsuarioController extends Controller
 {
@@ -331,7 +335,33 @@ class UsuarioController extends Controller
             return view('Admin.citas.citasindex', compact('citas'));
         }
     }
-    
+
+    public function reporte(Request $request){
+        if (!empty($request->fechainicio) && !empty($request->fechafin)) {
+            $fi = strval($request->fechainicio);
+            $ff = strval($request->fechafin);
+            // $usuarioscant = DB::select('SELECT COUNT(id) as cant FROM `users` WHERE created_at BETWEEN "'.$fi.'" AND "'.$ff.'"');
+            $usuarioscant = User::whereBetween('created_at', [$fi, $ff]);
+            
+            // return view('Admin.usuarios.pdf', compact('usuarioscant', 'ff'));
+            
+        }else{
+            $usuarioscant = User::count();
+            $usuarioscanthab = User::where('state',1)->count();
+            $usuarioscantinhab = User::where('state',0)->count();
+            
+            $pusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('users.id')->count();
+            $cusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857095)->select('users.id')->count();
+            $ausuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857097)->select('users.id')->count();
+            $usuariosxciudad = DB::table('users')->join('ciudades', 'users.city_id', '=', 'ciudades.id' )->select('ciudades.nombre', DB::raw('count(*) as total'))->groupBy('ciudades.nombre')->orderBy('total', 'ASC')->get();
+            
+            $pdf = PDF::loadView('Admin.usuarios.pdf', ['usuarioscant'=>$usuarioscant, 'usuarioscanthab'=>$usuarioscanthab, 'usuarioscantinhab'=>$usuarioscantinhab, 'pusuarios'=> $pusuarios, 'cusuarios'=>$cusuarios, 'ausuarios'=>$ausuarios, 'usuariosxciudad'=>$usuariosxciudad]);
+            
+            return $pdf->stream();
+            // return view('Admin.usuarios.pdf', compact('usuarioscant', 'usuarioscanthab', 'usuarioscantinhab', 'pusuarios', 'cusuarios', 'ausuarios', 'usuariosxciudad'));
+        }
+    }
+
 
 
 }

@@ -7,6 +7,8 @@ use App\Models\Compra;
 use App\Models\User;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB;
 
 class CompraController extends Controller
 {
@@ -125,4 +127,29 @@ class CompraController extends Controller
     {
         //
     }
+
+    public function reporte(Request $request){
+        if (!empty($request->fechainicio) && !empty($request->fechafin)) {
+            $fi = strval($request->fechainicio);
+            $ff = strval($request->fechafin);
+            // $usuarioscant = DB::select('SELECT COUNT(id) as cant FROM `users` WHERE created_at BETWEEN "'.$fi.'" AND "'.$ff.'"');
+            $usuarioscant = User::whereBetween('created_at', [$fi, $ff]);
+            
+            // return view('Admin.usuarios.pdf', compact('usuarioscant', 'ff'));
+            
+        }else{
+            $comprascant = Compra::count();
+            $usuarioscanthab = User::where('state',1)->count();
+            $usuarioscantinhab = User::where('state',0)->count();
+            
+            $vehiculosmascomprados = DB::table('compras')->join('vehiculos', 'compras.vehiculo', '=', 'vehiculos.id' )->join('marcas', 'vehiculos.marcas_id', '=', 'marcas.id' )->select('marcas.nombre', DB::raw('count(*) as total'))->groupBy('marcas.nombre')->orderBy('total', 'ASC')->get();
+            $proveedoresmascomprados = DB::table('compras')->join('users', 'compras.proveedor', '=', 'users.id' )->select('users.id', 'users.name', DB::raw('count(*) as total'))->groupBy('users.id','users.name')->orderBy('total', 'ASC')->get();
+            
+            $pdf = PDF::loadView('Admin.compras.pdf', ['comprascant'=>$comprascant, 'usuarioscanthab'=>$usuarioscanthab, 'usuarioscantinhab'=>$usuarioscantinhab, 'vehiculosmascomprados'=> $vehiculosmascomprados, 'proveedoresmascomprados'=>$proveedoresmascomprados]);
+            
+            return $pdf->stream();
+            // return view('Admin.usuarios.pdf', compact('usuarioscant', 'usuarioscanthab', 'usuarioscantinhab', 'pusuarios', 'cusuarios', 'ausuarios', 'usuariosxciudad'));
+        }
+    }
+    
 }

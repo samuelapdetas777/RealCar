@@ -424,16 +424,17 @@ class VehiculoController extends Controller
             // return view('Admin.usuarios.pdf', compact('usuarioscant', 'ff'));
             
         }else{
-            $usuarioscant = User::count();
-            $usuarioscanthab = User::where('state',1)->count();
-            $usuarioscantinhab = User::where('state',0)->count();
+            $vehiculoscant = Vehiculo::count();
             
-            $pusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('users.id')->count();
-            $cusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857095)->select('users.id')->count();
-            $ausuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857097)->select('users.id')->count();
-            $usuariosxciudad = DB::table('users')->join('ciudades', 'users.city_id', '=', 'ciudades.id' )->select('ciudades.nombre', DB::raw('count(*) as total'))->groupBy('ciudades.nombre')->orderBy('total', 'ASC')->get();
+            $vehiculosxestadov = DB::table('vehiculos')->join('estadovehiculo', 'vehiculos.estadovehiculo_id', '=', 'estadovehiculo.id' )->select('estadovehiculo.nombre', DB::raw('count(*) as total'))->groupBy('estadovehiculo.nombre')->orderBy('total', 'ASC')->get();
+
+            $vehiculosxestadoa = DB::table('vehiculos')->join('estadoaplicativo', 'vehiculos.estadoaplicativo_id', '=', 'estadoaplicativo.id' )->select('estadoaplicativo.nombre', DB::raw('count(*) as total'))->groupBy('estadoaplicativo.nombre')->orderBy('total', 'ASC')->get();
+
+            $vehiculosxmarcasmasregistradas = DB::table('vehiculos')->join('marcas', 'vehiculos.marcas_id', '=', 'marcas.id' )->select('marcas.nombre', DB::raw('count(*) as total'))->groupBy('marcas.nombre')->orderBy('total', 'ASC')->get();
+
+
             
-            $pdf = PDF::loadView('Admin.usuarios.pdf', ['usuarioscant'=>$usuarioscant, 'usuarioscanthab'=>$usuarioscanthab, 'usuarioscantinhab'=>$usuarioscantinhab, 'pusuarios'=> $pusuarios, 'cusuarios'=>$cusuarios, 'ausuarios'=>$ausuarios, 'usuariosxciudad'=>$usuariosxciudad]);
+            $pdf = PDF::loadView('Admin.vehiculos.pdf', ['vehiculoscant'=>$vehiculoscant, 'vehiculosxestadoa'=>$vehiculosxestadoa, 'vehiculosxestadov'=>$vehiculosxestadov, 'vehiculosxmarcasmasregistradas'=> $vehiculosxmarcasmasregistradas]);
             
             return $pdf->stream();
             // return view('Admin.usuarios.pdf', compact('usuarioscant', 'usuarioscanthab', 'usuarioscantinhab', 'pusuarios', 'cusuarios', 'ausuarios', 'usuariosxciudad'));

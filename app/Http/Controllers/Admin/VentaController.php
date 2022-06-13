@@ -121,16 +121,17 @@ class VentaController extends Controller
             // return view('Admin.usuarios.pdf', compact('usuarioscant', 'ff'));
             
         }else{
-            $usuarioscant = User::count();
-            $usuarioscanthab = User::where('state',1)->count();
-            $usuarioscantinhab = User::where('state',0)->count();
+            $ventascant = Pedido::where('estado', 1)->count();
+
+            $proveedoresmasventas = DB::table('pedidos')->join('users', 'pedidos.proveedor', '=', 'users.id' )->join('model_has_roles', 'model_has_roles.model_id', 'users.id')->select('users.name','users.last_name','users.id', 'pedidos.estado', DB::raw('count(*) as total'))->where('model_has_roles.role_id', 9857096)->where('pedidos.estado', 1)->groupBy('users.name','users.last_name','users.id', 'pedidos.estado')->orderBy('total', 'ASC')->get();
+
+            $clientesmasventas = DB::table('pedidos')->join('users', 'pedidos.cliente', '=', 'users.id' )->join('model_has_roles', 'model_has_roles.model_id', 'users.id')->select('users.name','users.last_name','users.id', 'pedidos.estado', DB::raw('count(*) as total'))->where('model_has_roles.role_id', 9857095)->where('pedidos.estado', 1)->groupBy('users.name','users.last_name','users.id', 'pedidos.estado')->orderBy('total', 'ASC')->get();
             
-            $pusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857096)->select('users.id')->count();
-            $cusuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857095)->select('users.id')->count();
-            $ausuarios = User::join('model_has_roles', 'model_has_roles.model_id', 'users.id')->where('model_has_roles.role_id', 9857097)->select('users.id')->count();
-            $usuariosxciudad = DB::table('users')->join('ciudades', 'users.city_id', '=', 'ciudades.id' )->select('ciudades.nombre', DB::raw('count(*) as total'))->groupBy('ciudades.nombre')->orderBy('total', 'ASC')->get();
+            $ciudadesmasventas = DB::table('pedidos')->join('users', 'pedidos.cliente', '=', 'users.id' )->join('ciudades', 'users.city_id', 'ciudades.id')->select('ciudades.nombre','pedidos.estado', DB::raw('count(*) as total'))->where('pedidos.estado', 1)->groupBy('ciudades.nombre','pedidos.estado')->orderBy('total', 'ASC')->get();
+
+            $marcasmasvendidas = DB::table('pedidos')->join('vehiculos', 'pedidos.vehiculo', '=', 'vehiculos.id' )->join('marcas', 'vehiculos.marcas_id', 'marcas.id')->select('marcas.nombre','pedidos.estado', DB::raw('count(*) as total'))->where('pedidos.estado', 1)->groupBy('marcas.nombre','pedidos.estado')->orderBy('total', 'ASC')->get();
             
-            $pdf = PDF::loadView('Admin.usuarios.pdf', ['usuarioscant'=>$usuarioscant, 'usuarioscanthab'=>$usuarioscanthab, 'usuarioscantinhab'=>$usuarioscantinhab, 'pusuarios'=> $pusuarios, 'cusuarios'=>$cusuarios, 'ausuarios'=>$ausuarios, 'usuariosxciudad'=>$usuariosxciudad]);
+            $pdf = PDF::loadView('Admin.pedidos.ventapdf', ['ventascant'=>$ventascant, 'clientesmasventas'=>$clientesmasventas, 'proveedoresmasventas'=>$proveedoresmasventas, 'ciudadesmasventas'=>$ciudadesmasventas, 'marcasmasvendidas'=>$marcasmasvendidas]);
             
             return $pdf->stream();
             // return view('Admin.usuarios.pdf', compact('usuarioscant', 'usuarioscanthab', 'usuarioscantinhab', 'pusuarios', 'cusuarios', 'ausuarios', 'usuariosxciudad'));

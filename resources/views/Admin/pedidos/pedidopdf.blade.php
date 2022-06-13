@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ public_path('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" >
     <link href="{{ public_path('assets/css/@fortawesome/fontawesome-free/css/all.css') }}" rel="stylesheet" type="text/css">
-    <title>Reportes usuarios</title>
+    <title>Reportes pedidos</title>
 </head>
 
 <body>
@@ -47,76 +47,98 @@
             <img class="img-na " src="{{public_path('img/logorealcar1.svg')}}" alt="">
         </div>
         <div class="col d-inline">
-            <h2 class="text-white font-weight-bold">Reportes de usuarios</h2>
+            <h2 class="text-white font-weight-bold">Reportes de pedidos</h2>
         </div>
     </div>
     <div class="body">
         <div class="row m-5">
-            <h3 class="font-weight-bold">Usuarios registrados: {{$usuarioscant-1}}</h3>
+            <h3 class="font-weight-bold">Pedidos registrados: {{$pedidososcant}}</h3>
         </div>
+        
+        
         <hr class="bg-dark">
         <div class="row m-5">
             <div class="col text-center">
-            <h4 class="font-weight-bold">Usuarios registrados por rol</h4>
+            <h4 class="font-weight-bold">Proveedores con mas pedidos</h4>
             </div>
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Total</th>
-                        <th scope="col">Administradores</th>
-                        <th scope="col">Clientes</th>
-                        <th scope="col">Proveedores</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">{{$usuarioscant-1}}</th>
-                        <td>{{$ausuarios}}</td>
-                        <td>{{$cusuarios}}</td>
-                        <td>{{$pusuarios}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <hr class="bg-dark">
-        <div class="row m-5">
-            <div class="col text-center">
-            <h4 class="font-weight-bold">Usuarios Habilitados/Inhabilitados</h4>
-            </div>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Total</th>
-                        <th scope="col">Habilitados</th>
-                        <th scope="col">Inhabilitados</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">{{$usuarioscant-1}}</th>
-                        <td>{{$usuarioscanthab-1}}</td>
-                        <td>{{$usuarioscantinhab}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <hr class="bg-dark">
-        <div class="row m-5">
-            <div class="col text-center">
-            <h4 class="font-weight-bold">Usuarios por ciudad</h4>
-            </div>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Ciudad</th>
+                        <th scope="col">Proveedor</th>
                         <th scope="col">Cantidad</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($usuariosxciudad as $uxc)
+                    @foreach($proveedoresmaspedidos as $pmp)
                         <tr>
-                            <th scope="row">{{$uxc->nombre}}</th>
-                            <td>{{$uxc->total}}</td>
+                            <th scope="row">{{$pmp->name}} {{$pmp->last_name}}</th>
+                            <td>{{$pmp->total}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <hr class="bg-dark">
+        <div class="row m-5">
+            <div class="col text-center">
+            <h4 class="font-weight-bold">Clientes con mas pedidos</h4>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($clientesmaspedidos as $cmp)
+                        <tr>
+                            <th scope="row">{{$cmp->name}} {{$cmp->last_name}}</th>
+                            <td>{{$cmp->total}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <hr class="bg-dark">
+        <div class="row m-5">
+            <div class="col text-center">
+            <h4 class="font-weight-bold">Marcas mas solicitadas</h4>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Marcas</th>
+                        <th scope="col">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($marcasmassolicitadas as $mms)
+                        <tr>
+                            <th scope="row">{{$mms->nombre}}</th>
+                            <td>{{$mms->total}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <hr class="bg-dark">
+        <div class="row m-5">
+            <div class="col text-center">
+            <h4 class="font-weight-bold">Ciudades con mas pedidos</h4>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Ciudades</th>
+                        <th scope="col">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($ciudadesmaspedidos as $ciump)
+                        <tr>
+                            <th scope="row">{{$ciump->nombre}}</th>
+                            <td>{{$ciump->total}}</td>
                         </tr>
                     @endforeach
                 </tbody>

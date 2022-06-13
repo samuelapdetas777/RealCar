@@ -27,7 +27,7 @@
                             Agregar nuevo usuario<i class="fas fa-plus"></i>
                         </a>
                             <hr class="bg-primary">
-                            <div class="rounded-lg p-2" style="background-color: gray;">
+                            <div class="rounded-lg p-2">
                                 <form action="/admin/reportes/usuarios" class="row text-center">
                                     {{--<div class="col-sm-5">
                                         <label class="text-black" for="inputfechai">Fecha inicio</label>
@@ -38,7 +38,7 @@
                                         <label class="text-black" for="inputfechaf">Fecha fin</label>
                                         <input type="date" class="form-control d-inline" id="inputfechaf" name="fechafin" value="{{old('fecha')}}" min=""  max="<?= date('Y-m-d'); ?>">
                                     </div>--}}
-                                    <div class="col">
+                                    <div class=" text-align-start">
 
                                         <button class="btn btn-primary mt-0" type="submit">Generar PDF</button>
                                     </div>
@@ -46,7 +46,7 @@
                             </div>
                             <div class="card-body">
                             <div class="d-block">
-                                    <form action="/admin/usuarios" class="row " method="get">
+                                    <form action="/admin/usuarios" class="row  mb-4" method="get">
                                         @csrf
                                         <div class="col-sm-10">
                                             <input type="search" class="form-control" placeholder="Buscar" value="{{$texto}}" name="texto">

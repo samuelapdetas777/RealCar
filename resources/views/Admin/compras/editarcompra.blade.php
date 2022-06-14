@@ -25,7 +25,7 @@
                         
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectvehiculo">Vehiculo: </label>
+                                <label for="selectvehiculo">Vehiculo: *</label>
                                 <select  class="form-control @error('vehiculo') is-invalid @enderror" id="selectvehiculo" name="vehiculo" required>
                                 
                                 <option value="">Selecciona el vehiculo que ha adquirido la empresa</option>
@@ -41,7 +41,7 @@
                         
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectvalor">Valor: </label>
+                                <label for="selectvalor">Valor: *</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>

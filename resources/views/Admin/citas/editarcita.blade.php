@@ -78,26 +78,12 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mt-5">
-                            <div class="col">
-                                <label for="selectvendedor">Vendedor: </label>
-                                <select  class="form-control selector @error('vendedor') is-invalid @enderror" id="selectvendedor" name="vendedor">
-                                
-                                <option value="">Selecciona el Vendedor</option>
-                                @foreach($vusuarios as $usuario)
-                                    <option value="{{$usuario->id}}" {{$cita->idvendedor == $usuario->id? 'selected': ''}}>{{$usuario->id}} - {{$usuario->name}} {{$usuario->last_name}}</option>
-                                @endforeach
-                                </select>
-                                @error('vendedor')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
+                        
                         
                         <div class="border mt-5">
                         <div class="row m-3">
                             <div class="col">
-                                <label for="inputfecha">Fecha de la cita: </label>
+                                <label for="inputfecha">Fecha de la cita: *</label>
                                 <div class="input-group date" >
                                     <input type="date" class="form-control @error('fecha') is-invalid @enderror citasfecha" id="inputfecha" name="fecha" value="{{$cita->fecha}}" min="<?= date('Y-m-d'); ?>">
                                     
@@ -107,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <label for="inputhora">Hora de la cita: </label>
+                                <label for="inputhora">Hora de la cita: *</label>
                                 <div class="input-group " >
                                     <input type="time" class="form-control @error('hora') is-invalid @enderror" id="inputhora" name="hora" value="{{$cita->hora}}" min="08:00:00">
                                     

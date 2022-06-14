@@ -40,7 +40,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col mb-5 ">
-                                    <input type="text" name="nombre" id="name" value="{{old('nombre')}}" class="form-control" placeholder="Nombre"> 
+                                    <input type="text" name="nombre" id="name" value="{{old('nombre')}}" class="form-control" placeholder="Nombre *"> 
                                     @error('nombre')
                                         <small>
                                             <strong>{{$message}}</strong>
@@ -49,7 +49,7 @@
     
                                 </div>
                                 <div class="col mb-5">
-                                    <input type="text" name="apellido" id="apellido" value="{{old('apellido')}}" class="form-control" placeholder="Apellido">
+                                    <input type="text" name="apellido" id="apellido" value="{{old('apellido')}}" class="form-control" placeholder="Apellido *">
                                     @error('apellido')
                                         <small>                                            <strong>{{$message}}</strong>
                                         </small>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="row">
                                 <div class="col mb-5 ">
-                                    <input type="text" name="documento" id="documento" value="{{old('documento')}}" class="form-control" placeholder="No. Identificación">
+                                    <input type="text" name="documento" id="documento" value="{{old('documento')}}" class="form-control" placeholder="No. Identificación *">
                                     @error('documento')
                                         <small>
                                             <strong>{{$message}}</strong>
@@ -67,7 +67,7 @@
                                     @enderror
                                 </div>
                                 <div class="col mb-5">
-                                    <input type="text" name="email" id="email" value="{{old('email')}}" class="form-control" placeholder="Correo">
+                                    <input type="text" name="email" id="email" value="{{old('email')}}" class="form-control" placeholder="Correo *">
                                     @error('email')
                                         <small>
                                             <strong>{{$message}}</strong>
@@ -78,7 +78,7 @@
                             </div>
                             <div class="row">
                                 <div class="col mb-5">
-                                    <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña">
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña *">
                                     @error('password')
                                         <small>
                                             <strong>{{$message}}</strong>
@@ -86,7 +86,7 @@
                                     @enderror 
                                 </div>
                                 <div class="col mb-5">
-                                    <input type="password" name="confirmacion_password" id="contrasena_confirmation" class="form-control" placeholder="Confirmar Contraseña">
+                                    <input type="password" name="confirmacion_password" id="contrasena_confirmation" class="form-control" placeholder="Confirmar Contraseña *">
                                     @error('confirmacion_password')
                                         <small>
                                             <strong>{{$message}}</strong>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="row">
                                 <div class="col mb-5">
-                                    <input type="text" name="celular" id="celular" value="{{old('celular')}}" class="form-control" placeholder="Celular">
+                                    <input type="text" name="celular" id="celular" value="{{old('celular')}}" class="form-control" placeholder="Celular *">
                                     @error('celular')
                                         <small>
                                             <strong>{{$message}}</strong>
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="col mb-5">
                                     <select name="ciudad" id="ciudades_id" class="form-select" >
-                                        <option selected value="" >Ciudad de residencia</option>
+                                        <option selected value="" >Ciudad de residencia *</option>
 
                                         @foreach($ciudades as $ciudad)
                                         
@@ -125,7 +125,7 @@
 
                             <div class="row">
                                 <div class="col mb-5">
-                                    <input type="text" class="form-control" name="direccion" id="direccion" value="{{old('direccion')}}" placeholder="Dirección de residencia"> 
+                                    <input type="text" class="form-control" name="direccion" id="direccion" value="{{old('direccion')}}" placeholder="Dirección de residencia *"> 
                                     @error('direccion')
                                         <small>
                                             <strong>{{$message}}</strong>
@@ -135,7 +135,7 @@
 
                                 <div class="col mb-5">
                                     <select name="roles" id="rol_id" class="form-select" >
-                                        <option selected value="">Elige como te quieres registrar</option>
+                                        <option selected value="">Elige como te quieres registrar *</option>
 
                                         @foreach($roles as $rol)
                                         

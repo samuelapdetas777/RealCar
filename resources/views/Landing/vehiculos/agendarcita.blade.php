@@ -95,7 +95,7 @@
                                 @csrf
                                 <div class="row mt-5">
                                     <div class="col">
-                                        <label for="inputfecha">Fecha tentativa de la cita: </label>
+                                        <label for="inputfecha">Fecha tentativa de la cita: *</label>
                                         <div class="input-group date" >
                                             <input type="date" class="form-control @error('fecha') is-invalid @enderror" id="inputfecha" name="fecha" value="{{old('fecha')}}"  min="<?= date('Y-m-d'); ?>">
                                             
@@ -105,7 +105,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <label for="inputhora">Hora tentativa de la cita: </label>
+                                        <label for="inputhora">Hora tentativa de la cita: *</label>
                                         <div class="input-group " >
                                             <input type="time" class="form-control @error('hora') is-invalid @enderror" id="inputhora" name="hora" value="{{old('hora')}}" min="8:00:00">
                                             
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="row mt-5">
                                     <div class="col">
-                                        <label for="selectsede">Sede: </label>
+                                        <label for="selectsede">Sede: *</label>
                                         <select  class="form-control selector @error('sede') is-invalid @enderror" id="selectsede" name="sede" required>
                                         
                                         <option value="">Selecciona la sede</option>

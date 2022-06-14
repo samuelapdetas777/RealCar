@@ -71,7 +71,7 @@
                         <div class="row mt-5">
 
                             <div class="col">
-                            <label for="selectproveedor">Proveedor</label>
+                            <label for="selectproveedor">Proveedor *</label>
                                 <select type="number" class="form-control selector @error('proveedor') is-invalid @enderror" id="selectproveedor" name="proveedor" required>
                                 
                                     <option value="">Selecciona el dueño del vehículo</option>
@@ -88,7 +88,7 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                            <label for="selectmarca">Marca: </label>
+                            <label for="selectmarca">Marca: *</label>
                                 <select class="form-control selector @error('marca') is-invalid @enderror" id="selectmarca" name="marca" required>
                                 
                                     <option value="">Selecciona la marca del vehículo</option>
@@ -101,7 +101,7 @@
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputnombre">Nombre del vehículo</label>
+                                <label for="inputnombre">Nombre del vehículo *</label>
                                 <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="inputnombre" placeholder="Nombre" value="{{old('nombre')}}" name="nombre" required>
                                 @error('nombre')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -111,14 +111,14 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputmodelo">Modelo</label>
+                                <label for="inputmodelo">Modelo *</label>
                                 <input type="number" class="form-control @error('modelo') is-invalid @enderror" id="inputmodelo" placeholder="Modelo" value="{{old('modelo')}}" name="modelo" required>
                                 @error('modelo')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputkilometraje">Kilometraje</label>
+                                <label for="inputkilometraje">Kilometraje *</label>
                                 <input type="number" class="form-control @error('kilometraje') is-invalid @enderror" id="inputkilometraje" placeholder="Kilometraje" value="{{old('kilometraje')}}" name="kilometraje" required>
                                 @error('kilometraje')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -128,7 +128,7 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="selecttipocaja">Transmisiòn: </label>
+                                <label for="selecttipocaja">Transmisiòn: *</label>
                                 <select class="form-control @error('tipocaja') is-invalid @enderror" id="selecttipocaja" name="tipocaja" required>
                                 
                                     <option value="">Selecciona la transmisiòn del vehículo</option>
@@ -141,7 +141,7 @@
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                            <label for="inputmotor">Motor</label>
+                            <label for="inputmotor">Motor *</label>
                                 <input type="text" class="form-control @error('motor') is-invalid @enderror" id="inputmotor" placeholder="Motor" value="{{old('motor')}}" name="motor" required>
                                 @error('motor')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -151,7 +151,7 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                            <label for="selectcombustible">Combustible: </label>
+                            <label for="selectcombustible">Combustible: *</label>
                                 <select type="number" class="form-control @error('combustible') is-invalid @enderror" id="selectcombustible" name="combustible" required>
                                 
                                 <option value="">Seleccione el combustible del vehículo</option>
@@ -164,7 +164,7 @@
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="selectestadovehiculo">Estado del vehículo</label>
+                                <label for="selectestadovehiculo">Estado del vehículo *</label>
                                 <select class="form-control @error('estadovehiculo') is-invalid @enderror" id="selectestadovehiculo" name="estadovehiculo" required>
                                     <option value="">Selecciona un estado</option>
                                     @foreach($estadovehiculos as $estadovehiculo)
@@ -182,24 +182,24 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-4">
-                                <label for="inputcolor">Color</label>
+                                <label for="inputcolor">Color *</label>
                                 <input type="text" class="form-control @error('color') is-invalid @enderror" id="inputcolor" placeholder="Color" value="{{old('color')}}" name="color" required>
                                 @error('color')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-sm-4">
-                                <label for="inputplaca">Placa <small> (Solo el ultimo numero de la placa</small></label>
+                                <label for="inputplaca">Placa *<small> (Solo el ultimo numero de la placa</small></label>
                                 <input type="number" class="form-control @error('placa') is-invalid @enderror" id="inputplaca" placeholder="placa" value="{{old('placa')}}" name="placa" required>
                                 @error('placa')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-sm-4">
-                            <label for="selectcplaca">Ciudad de la placa:</label>
+                            <label for="selectcplaca">Ciudad de la placa: *</label>
                                 <select class="form-control selector @error('cplaca') is-invalid @enderror" id="selectcplaca" name="cplaca" required>
                                 
-                                    <option value="">Ciudad de la placa</option>
+                                    <option value="">Ciudad de la placa *</option>
                                     @foreach($ciudades as $ciudad)
                                         <option value="{{$ciudad->id}}">{{$ciudad->nombre}}</option>
                                     @endforeach
@@ -213,14 +213,14 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputairbag">Bolsas de aire</label>
+                                <label for="inputairbag">Bolsas de aire *</label>
                                 <input type="number" class="form-control @error('airbag') is-invalid @enderror" id="inputairbag" placeholder="Airbags" value="{{old('airbag')}}" name="airbag" required>
                                 @error('airbag')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputprecio">Precio</label>
+                                <label for="inputprecio">Precio *</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
@@ -237,7 +237,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col-lg-4">
-                            <label for="selectestadoaplicativo">Estado del aplicativo:</label>
+                            <label for="selectestadoaplicativo">Estado del aplicativo: *</label>
                                 <select class="form-control  @error('estadoaplicativo') is-invalid @enderror" id="selectestadoaplicativo" name="estadoaplicativo" required>
                                 
                                     <option value="">Estado en el aplicativo</option>
@@ -252,7 +252,7 @@
                             
 
                             <div class="col-lg-8">
-                                <label for="textareadescripcion">Descripciòn</label>
+                                <label for="textareadescripcion">Descripciòn *</label>
                                 <textarea class="form-control @error('descripcion') is-invalid @enderror" id="textareadescripcion" placeholder="Descripcion..." value="{{old('descripcion')}}" name="descripcion" rows="3" required></textarea>
                                 @error('descripcion')
                                 <div class="invalid-feedback">{{$message}}</div>

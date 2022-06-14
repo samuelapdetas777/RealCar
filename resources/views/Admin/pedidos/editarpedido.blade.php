@@ -26,7 +26,7 @@
                         
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectvehiculo">Vehículo: </label>
+                                <label for="selectvehiculo">Vehículo: *</label>
                                 
                                     @foreach($vehiculos as $vehiculo)
                                         @if($pedido->vehiculo == $vehiculo->id)
@@ -39,7 +39,7 @@
                         
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectvalor">Valor: </label>
+                                <label for="selectvalor">Valor: *</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="fecha">Fecha de entrega: </label>
+                                <label for="fecha">Fecha de entrega: *</label>
                                 <div class="input-group date" data-provide="datepicker">
                                     <input type="text" name="fecha" class="form-control @error('fecha') is-invalid @enderror" value="{{$fecha}}">
                                     <div class="input-group-addon">
@@ -70,7 +70,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="estadopedido">Estado del pedido: </label>
+                                <label for="estadopedido">Estado del pedido: *</label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="estado" id="estadopedido1" value="0" checked>
                                     <label class="form-check-label" for="estadopedido1">

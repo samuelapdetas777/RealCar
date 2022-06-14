@@ -24,14 +24,14 @@
                         <div class="row mt-5">
 
                             <div class="col-lg-6">
-                                <label for="inputnombre">Nombre</label>
+                                <label for="inputnombre">Nombre *</label>
                                 <input type="text" class="form-control @error('nombre') is-invald @enderror" id="inputnombre" placeholder="Nombre" value="{{old('nombre')}}" name="nombre" required>
                                 @error('nombre')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputapellido">Apellido</label>
+                                <label for="inputapellido">Apellido *</label>
                                 <input type="text" class="form-control @error('apellido') is-invalid @enderror" id="inputapellido" placeholder="Apellido" value="{{old('apellido')}}" name="apellido" required>
                                 @error('apellido')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -41,14 +41,14 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputdocumento">Documento</label>
+                                <label for="inputdocumento">Documento *</label>
                                 <input type="number" class="form-control @error('documento') is-invalid @enderror" id="inputdocumento" placeholder="Documento" value="{{old('documento')}}" name="documento" required>
                                 @error('documento')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputcorreo">Correo</label>
+                                <label for="inputcorreo">Correo *</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="inputcorreo" placeholder="Correo electrónico" value="{{old('email')}}" name="email" required>
                                 @error('email')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -58,14 +58,14 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputpassword">Contraseña</label>
+                                <label for="inputpassword">Contraseña *</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" id="inputpassword" placeholder="Contraseña" value="{{old('password')}}" name="password" required>
                                 @error('password')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputconfcontraseña">Confirmación de contraseña</label>
+                                <label for="inputconfcontraseña">Confirmación de contraseña *</label>
                                 <input type="password" class="form-control @error('confirmacion_de_password') is-invalid @enderror" id="inputconfcontraseña" placeholder="Confirmación de la contraseña" value="{{old('confirmacion_de_password')}}" name="confirmacion_de_password" required>
                                 @error('confirmacion_de_password')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -75,14 +75,14 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputcelular">Celular</label>
+                                <label for="inputcelular">Celular *</label>
                                 <input type="number" class="form-control @error('celular') is-invalid @enderror" id="inputcelular" placeholder="Celular" value="{{old('celular')}}" name="celular" required>
                                 @error('celular')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="selectciudad">Ciudad de residencia</label>
+                                <label for="selectciudad">Ciudad de residencia *</label>
                                 <select type="number" class="form-control @error('ciudad') is-invalid @enderror" id="selectciudad" name="ciudad" required>
                                 
                                 <option value="">Selecciona la ciudad de residencia</option>
@@ -98,14 +98,14 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputdireccion">Dirección de residencia</label>
+                                <label for="inputdireccion">Dirección de residencia *</label>
                                 <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="inputdireccion" placeholder="Direccion" value="{{old('direccion')}}" name="direccion" required>
                                 @error('direccion')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="selectrol">Rol</label>
+                                <label for="selectrol">Rol *</label>
                                 <select class="form-control @error('roles') is-invalid @enderror" id="selectrol" name="roles" required>
                                     <option value="">Selecciona un rol</option>
                                     @foreach($roles as $rol)
@@ -119,7 +119,7 @@
 
 
 
-                                {{--<label for="selectrol">Rol</label>
+                                {{--<label for="selectrol">Rol *</label>
                                 <select class="form-control" id="selectrol" name="rol" required>
                                     <option value="">Selecciona un rol</option>
                                     @foreach($roles as $rol)
@@ -130,19 +130,7 @@
                             </div>
                         </div>
 
-                        <div class="row mt-5">
-                            <div class="col-lg-6">
-                                <label for="selectestado">Estado</label>
-                                    <select class="form-control @error('estado') is-invalid @enderror" id="selectestado" name="estado">
-                                        <option selected value="1">Activo</option>
-                                        <option value="0">Inactivo</option>
-                                    </select>
-                                @error('estado')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            
-                        </div>
+                        
                         <div class="row mt-5">
                             <button type="submit" class="btn btn-success">Agregar</button>
                         </div>

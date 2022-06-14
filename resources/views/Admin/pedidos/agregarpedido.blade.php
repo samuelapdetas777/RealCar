@@ -24,7 +24,7 @@
                         @csrf
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectcliente">Cliente: </label>
+                                <label for="selectcliente">Cliente: *</label>
                                 <select  class="form-control @error('cliente') is-invalid @enderror" id="selectcliente" name="cliente" required>
                                 
                                 <option value="">Selecciona el cliente que ha adquirido el vehículo</option>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectvehiculo">Vehículo: </label>
+                                <label for="selectvehiculo">Vehículo: *</label>
                                 <select  class="form-control @error('vehiculo') is-invalid @enderror" id="selectvehiculo" name="vehiculo" required>
                                 
                                 <option value="">Selecciona el vehículo que ha sido adquirido</option>
@@ -55,7 +55,7 @@
                         
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectvalor">Valor: </label>
+                                <label for="selectvalor">Valor: *</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="fecha">Fecha de entrega: </label>
+                                <label for="fecha">Fecha de entrega: *</label>
                                 <div class="input-group date" data-provide="datepicker">
                                     <input type="text" name="fecha" class="form-control @error('fecha') is-invalid @enderror">
                                     <div class="input-group-addon">

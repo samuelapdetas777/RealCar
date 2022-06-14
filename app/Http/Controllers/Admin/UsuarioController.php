@@ -122,7 +122,6 @@ class UsuarioController extends Controller
             'ciudad' => 'required | exists:ciudades,id',
             'direccion' => 'required',
             'roles' => 'required | exists:roles,id',
-            'estado'=> 'required | boolean'
         ]);
         
 
@@ -135,7 +134,6 @@ class UsuarioController extends Controller
         $usuario->password =  bcrypt($request->input('password'));
         $usuario->city_id = $request->input('ciudad');
         $usuario->address = $request->input('direccion');
-        $usuario->state = $request->input('estado');
         
         $usuario->save();
         $usuario->assignRole($request->input('roles'));

@@ -23,7 +23,7 @@
                         @csrf
                         @method('PUT')
                         
-                        <label for="inputNombreRol">Nombre del rol: </label>
+                        <label for="inputNombreRol">Nombre del rol: *</label>
                         <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="inputNombreRol" placeholder="Rol" value="{{$rol->name}}" name="nombre" required>
                         @error('nombre')
                         <div class="invalid-feedback">{{$message}}</div>

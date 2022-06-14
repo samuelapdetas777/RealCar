@@ -77,14 +77,14 @@
                         <div class="row mt-5">
 
                             <div class="col-lg-6">
-                                <label for="inputnombre">Nombre</label>
+                                <label for="inputnombre">Nombre *</label>
                                 <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="inputnombre" placeholder="Nombre" value="{{$usuario->name}}" name="nombre" required>
                                 @error('nombre')name
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputapellido">Apellido</label>
+                                <label for="inputapellido">Apellido *</label>
                                 <input type="text" class="form-control @error('apellido') is-invalid @enderror" id="inputapellido" placeholder="Apellido" value="{{$usuario->last_name}}" name="apellido" required>
                                 @error('apellido')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -94,14 +94,14 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputdocumento">Documento</label>
+                                <label for="inputdocumento">Documento *</label>
                                 <input type="number" class="form-control @error('documento') is-invalid @enderror" id="inputdocumento" placeholder="Documento" value="{{$usuario->document}}" name="documento" required>
                                 @error('documento')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputcorreo">Correo</label>
+                                <label for="inputcorreo">Correo *</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="inputcorreo" placeholder="Correo electrónico" value="{{$usuario->email}}" name="email" required>
                                 @error('email')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -111,14 +111,14 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputcelular">Celular</label>
+                                <label for="inputcelular">Celular *</label>
                                 <input type="number" class="form-control @error('celular') is-invalid @enderror" id="inputcelular" placeholder="Celular" value="{{$usuario->phone}}" name="celular" required>
                                 @error('celular')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="selectciudad">Ciudad de residencia</label>
+                                <label for="selectciudad">Ciudad de residencia *</label>
                                 <select type="number" class="form-control @error('ciudad') is-invalid @enderror" id="selectciudad" name="ciudad" required>
                                 
                                 <option value="">Selecciona la ciudad de residencia</option>
@@ -134,14 +134,14 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputdireccion">Dirección de residencia</label>
+                                <label for="inputdireccion">Dirección de residencia *</label>
                                 <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="inputdireccion" placeholder="Dirección de residencia" value="{{$usuario->address}}" name="direccion" required>
                                 @error('direccion')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="selectrol">Rol</label>
+                                <label for="selectrol">Rol *</label>
                                 <select class="form-control @error('roles') is-invalid @enderror" id="selectrol" name="roles" required>
                                     <option value="">Selecciona un rol</option>
                                     @foreach($roles as $rol)

@@ -73,14 +73,14 @@
                         <div class="row mt-5">
 
                             <div class="col-lg-6">
-                                <label for="inputnombre">Nombre</label>
+                                <label for="inputnombre">Nombre *</label>
                                 <input type="text" class="form-control " id="inputnombre" placeholder="Nombre" value="{{$usuario->name}}" name="nombre" required>
                                 @error('nombre')name
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputapellido">Apellido</label>
+                                <label for="inputapellido">Apellido *</label>
                                 <input type="text" class="form-control " id="inputapellido" placeholder="Apellido" value="{{$usuario->last_name}}" name="apellido" required>
                                 @error('apellido')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -90,14 +90,14 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputdocumento">Documento</label>
+                                <label for="inputdocumento">Documento *</label>
                                 <input type="number" class="form-control " id="inputdocumento" placeholder="Documento" value="{{$usuario->document}}" name="documento" required>
                                 @error('documento')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="inputcorreo">Correo</label>
+                                <label for="inputcorreo">Correo *</label>
                                 <input type="email" class="form-control " id="inputcorreo" placeholder="Correo electrónico" value="{{$usuario->email}}" name="email" required>
                                 @error('email')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -107,14 +107,14 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputcelular">Celular</label>
+                                <label for="inputcelular">Celular *</label>
                                 <input type="number" class="form-control " id="inputcelular" placeholder="Celular" value="{{$usuario->phone}}" name="celular" required>
                                 @error('celular')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
-                                <label for="selectciudad">Ciudad de residencia</label>
+                                <label for="selectciudad">Ciudad de residencia *</label>
                                 <select type="number" class="form-control " id="selectciudad" name="ciudad" required>
                                 
                                 <option value="">Selecciona la ciudad de residencia</option>
@@ -130,7 +130,7 @@
 
                         <div class="row mt-5">
                             <div class="col-lg-6">
-                                <label for="inputdireccion">Dirección de residencia</label>
+                                <label for="inputdireccion">Dirección de residencia *</label>
                                 <input type="text" class="form-control " id="inputdireccion" placeholder="Dirección" value="{{$usuario->address}}" name="direccion" required>
                                 @error('direccion')
                                 <div class="invalid-feedback">{{$message}}</div>

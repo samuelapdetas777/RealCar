@@ -1,6 +1,6 @@
 
         
-                <nav class="navbar navbar-expand-xl navbar-light" style="background-color: rgb(43, 38, 38); position: relative; z-index: 1000; padding: left 0 !important;">
+                <nav class="navbar navbar-expand-xl navbar-light" style="background-color: rgb(43, 38, 38); position: relative; z-index: 1000; left: 0 !important;">
                     <div class="container">
                         <a class="navbar-brand logo" href="/home">
                             <img src="{{ asset('img/logorealcar2.svg') }}" alt="..." height="36">
@@ -54,9 +54,6 @@
                               
                               <li class="nav-item {{ Request::is('/contactanos')? 'active' : ''}}">
                                 <a class="nav-link text-white" href="/contactanos">Contáctanos {{ Request::is('/contactanos')? '<span class="sr-only">(current)</span>': ''}}</a>
-                              </li> 
-                              <li class="nav-item {{ Request::is('/about')? 'active' : ''}}">
-                                <a class="nav-link text-white" href="/about">Sobre nosotros {{ Request::is('/about')? '<span class="sr-only">(current)</span>': ''}}</a>
                               </li> 
                               
                               

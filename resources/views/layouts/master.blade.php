@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{{asset('img/logorealcar2.svg')}}" type="image/x-icon">
+    <!-- Bootstrap 4.1.1 -->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
     <link href="{{ asset('assets/css/@fortawesome/fontawesome-free/css/all.css') }}" rel="stylesheet" type="text/css">
     <!-- local CSS -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
@@ -42,9 +45,13 @@
       }
       .div-ayuda{
         width: 70vw;
+        color: gray;
       }
       .div-ayuda a{
         text-decoration: none;
+        position: fixed;
+        right: 23px;
+        
       }
      
   </style>
@@ -68,9 +75,9 @@
   </div>
 </nav> -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-xl navbar-light" style="background-color: rgb(43, 38, 38); position: relative; z-index: 1000; left: 0 !important;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="{{asset('img/logorealcar1.svg')}}" height="24" width="30"></a>
+    <a class="navbar-brand" href="#"><img src="{{asset('img/logorealcar1.svg')}}" height="50" width="50"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -78,9 +85,9 @@
       <ul class="navbar-nav ">
         
         @yield('navbar-right-content')
-        <div class="div-ayuda col text-light text-center">
-          <a href="/ayudaenlinea" class=" text-white mt-1">
-            <i class="fas fa-info"></i> Ayuda en línea
+        <div class="div-ayuda col text-light text-align-end">
+          <a href="/ayudaenlinea" class=" text-white mt-1"">
+            <i class="fas fa-info-circle"></i> Ayuda en línea
           </a>
         </div>
       </ul>

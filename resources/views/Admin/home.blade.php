@@ -35,7 +35,7 @@
                                 <div class="row">
                                     
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="card-counter success">
                                             <i class="fa fa-database"></i>
                                             <span class="count-numbers">@php use App\Models\Cita; echo Cita::count(); @endphp</span>
@@ -43,28 +43,44 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="card-counter info">
                                             <i class="fa fa-users"></i>
                                             <span class="count-numbers">@php use Spatie\Permission\Models\Role; echo Role::count(); @endphp</span>
                                             <span class="count-name">Roles</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="card-counter danger">
-                                            <i class="fa fa-cars"></i>
-                                            <span class="count-numbers">23</span>
-                                            <span class="count-name">Notificaciones</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="card-counter info">
-                                            <i class="fa fa-users"></i>
+                                            <i class="fa fa-tag"></i>
                                             <span class="count-numbers">@php use App\Models\Marca; echo Marca::count(); @endphp</span>
                                             <span class="count-name">Marcas</span>
                                         </div>
                                     </div>
                                     
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card-counter info">
+                                            <i class="fa fa-tag"></i>
+                                            <span class="count-numbers">@php use App\Models\Pedido; echo Pedido::where('estado', 0)->count(); @endphp</span>
+                                            <span class="count-name">Pedidos</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-counter danger">
+                                            <i class="fa fa-tag"></i>
+                                            <span class="count-numbers">@php echo Pedido::where('estado', 1)->count(); @endphp</span>
+                                            <span class="count-name">Ventas</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-counter primary">
+                                            <i class="fa fa-tag"></i>
+                                            <span class="count-numbers">@php use App\Models\Compra; echo Compra::count(); @endphp</span>
+                                            <span class="count-name">Compras</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

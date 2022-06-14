@@ -59,7 +59,7 @@ class LoginController extends Controller
         //     return '/catalogo';
         // }
 
-        if ($rol->id === 9857097 || $user == 8) {
+        if ($rol === 9857097 || $user == 8) {
             return '/admin/home';
         }
         elseif ($rol->id === 9857096) {

@@ -257,7 +257,7 @@ $('.deleteCiudad').submit(function (e) {
         </script>
     @endif
 @endif
-@if(session('agregar') == 'ok')
+@if(session('agregarcita') == 'ok')
     <script>
         Swal.fire({
                 icon: 'success',

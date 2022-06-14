@@ -220,6 +220,7 @@ class CVehiculoController extends Controller
 
             return view('Landing.vehiculos.catalogo', compact('vehiculos', 'usuarios', 'marcas', 'combustibles', 'tipocaja', 'estadovehiculo', 'estadoaplicativo', 'imagenes', 'texto', 'action', 'e'));
         }else{
+            
             $imagen = ImagenVehiculo::where('idvehiculo', $id)->where('prioridad', 1)->first();
             $marca = Vehiculo::join('marcas', 'marcas.id', 'vehiculos.marcas_id')->select(DB::raw('marcas.nombre'))->where('vehiculos.id', $id)->first();
             $estadovehiculo = Vehiculo::join('estadovehiculo as ev', 'ev.id', 'vehiculos.estadovehiculo_id')->select(DB::raw('ev.nombre'))->where('vehiculos.id', $id)->first();

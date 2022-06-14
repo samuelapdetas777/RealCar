@@ -35,7 +35,7 @@ class UserController extends Controller
     {   
         $ciudades =Ciudad::All();
         // $ciudades = DB::table('ciudades')->where('nombre', '<>', 'prueba3')->get();
-        $roles = Role::Where('name', '<>', 'Administrador')->orWhere('name', '<>', 'Admin')->get();
+        $roles = Role::Where('id', '<>', 9857097)->get();
         return view ('auth.register', compact('ciudades', 'roles'));
     }
 

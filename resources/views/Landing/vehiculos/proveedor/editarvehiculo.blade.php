@@ -178,14 +178,7 @@
                                                         </div>
 
                                                     
-                                                        <div class="row mt-5">
-                                                            <div class="col">
-                                                                <div class="custom-file">
-                                                                    <input type="file" class="custom-file-input" value="Elegir" id="customFile">
-                                                                    <label class="custom-file-label" for="customFile">Elegir un archivo</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                     <div class="row mt-5">
                                                         <button type="submit" class="btn btn-success">Editar</button>
                                                     </div>

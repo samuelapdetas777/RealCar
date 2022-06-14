@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-body">
-            <h1 class="text-center text-black">Agregar una nueva</h1>
+            <h1 class="text-center text-black">Agregar una nueva compra</h1>
         <div class="card">
         
             <hr class="bg-primary">

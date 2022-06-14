@@ -118,6 +118,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/citas', [UUsuarioController::class, 'verCitas']);
     Route::get('/mostrarcitasagendadas', [UUsuarioController::class, 'mostrarCitasAgendadas']);
     Route::get('/cita/{id}', [UUsuarioController::class, 'verCita']);
+    Route::get('/contactanos', [UUsuarioController::class, 'contacto']);
     
     Route::get('/vehiculos/index', [PVehiculoController::class, 'index']);
     Route::get('/vehiculos/nuevo', [PVehiculoController::class, 'agregarvehiculo']);

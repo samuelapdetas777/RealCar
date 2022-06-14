@@ -203,4 +203,8 @@ class UUsuarioController extends Controller
     {
         //
     }
+
+    public function contacto(){
+        return view('Landing.usuarios.contacto');
+    }
 }

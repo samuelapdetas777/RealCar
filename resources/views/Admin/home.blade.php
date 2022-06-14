@@ -18,7 +18,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="card-counter primary">
-                                            <i class="fa fa-users"></i>
+                                            <i class="fa fa-user"></i>
                                             <span class="count-numbers">@php use App\Models\User; echo User::count(); @endphp</span>
                                             <span class="count-name">Usuarios</span>
                                         </div>
@@ -62,21 +62,21 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="card-counter info">
-                                            <i class="fa fa-tag"></i>
+                                            <i class="fa fa-list-alt"></i>
                                             <span class="count-numbers">@php use App\Models\Pedido; echo Pedido::where('estado', 0)->count(); @endphp</span>
                                             <span class="count-name">Pedidos</span>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="card-counter danger">
-                                            <i class="fa fa-tag"></i>
+                                            <i class="fa fa-list-alt"></i>
                                             <span class="count-numbers">@php echo Pedido::where('estado', 1)->count(); @endphp</span>
                                             <span class="count-name">Ventas</span>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="card-counter primary">
-                                            <i class="fa fa-tag"></i>
+                                            <i class="fa fa-shopping-cart"></i>
                                             <span class="count-numbers">@php use App\Models\Compra; echo Compra::count(); @endphp</span>
                                             <span class="count-name">Compras</span>
                                         </div>

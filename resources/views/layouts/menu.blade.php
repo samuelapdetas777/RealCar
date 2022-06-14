@@ -63,12 +63,7 @@
             <i class=" fas fa-shopping-cart"></i><span>Compras</span>
         </a>
     </li>
-    <li class="menu-header">Información</li>
-    <li class="side-menus {{ Request::is('admin/reportes') || Request::is('admin/reportes/*') ? 'active' : '' }}">
-        <a href="/admin/reportes" class="nav-link">
-            <i class=" fas fa-chart-bar"></i><span>Reportes</span>
-        </a>
-    </li>
+    
 
 
     <li class="menu-header">Información de apoyo</li>

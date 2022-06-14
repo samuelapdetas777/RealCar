@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <link href="{{ asset('assets/css/@fortawesome/fontawesome-free/css/all.css') }}" rel="stylesheet" type="text/css">
     <!-- local CSS -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
@@ -40,7 +40,12 @@
         height: 10%;
         font-size: 100%;
       }
-      
+      .div-ayuda{
+        width: 70vw;
+      }
+      .div-ayuda a{
+        text-decoration: none;
+      }
      
   </style>
   <body>
@@ -73,6 +78,11 @@
       <ul class="navbar-nav ">
         
         @yield('navbar-right-content')
+        <div class="div-ayuda col text-light text-center">
+          <a href="/ayudaenlinea" class=" text-white mt-1">
+            <i class="fas fa-info"></i> Ayuda en línea
+          </a>
+        </div>
       </ul>
     </div>
   </div>

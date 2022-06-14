@@ -25,6 +25,8 @@
                     <i class="fa fa-user"></i>Ver perfil</a>
                 <a class="dropdown-item has-icon edit-profile" href="/perfil/editar" data-id="{{ \Auth::id() }}">
                     <i class="fa fa-user"></i>Editar pérfil</a>--}}
+                <a class="dropdown-item has-icon" href="/ayudaenlinea">
+                    <i class="fa fa-info"></i>Ayuda en línea</a>
                 <a href="{{ url('logout') }}" class="dropdown-item has-icon text-danger"
                    onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt"></i> Cerrar Sesión

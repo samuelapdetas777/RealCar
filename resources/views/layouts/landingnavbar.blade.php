@@ -86,6 +86,8 @@
                                             <i class="fa fa-user"></i>Ver perfil</a>
                                         <a class="dropdown-item has-icon " href="/perfil/editar">
                                             <i class="fa fa-pen"></i>Editar perfil</a>
+                                        <a class="dropdown-item has-icon " href="/ayudaenlinea">
+                                            <i class="fa fa-info"></i>Ayuda en línea</a>
                                         
                                         <a href="{{ url('logout') }}" class="dropdown-item has-icon text-danger"
                                           onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">

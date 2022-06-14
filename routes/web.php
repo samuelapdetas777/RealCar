@@ -55,6 +55,8 @@ Route::group(['middleware' => ['permission:admin-home']], function () {
     Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('adminhome');
 });
 
+//AYUDA EN LINEA
+Route::view('/ayudaenlinea', 'ayudaenlinea');
 
 // Route::get('/estadoaplicativo', [App\Http\Controllers\VehiculosController::class, 'estadoAplicativo'])->name('estadoaplicativo');
 

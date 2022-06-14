@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class LoginController extends Controller
@@ -47,14 +48,25 @@ class LoginController extends Controller
     {
 
         $user = auth()->user()->id;
-        $rol =  Role::join('model_has_roles', 'model_has_roles.role_id', 'roles.id')->where('model_has_roles.model_id', $user)->select('roles.name')->get();
-        if ($rol == 'Administrador' || $user == 8) {
+        // $rol = DB::select('SELECT role_id FROM model_has_roles where model_id = '.$user.'');
+        $rol =  Role::join('model_has_roles', 'model_has_roles.role_id', 'roles.id')->where('model_has_roles.model_id', $user)->select('roles.id')->first();
+        // if ($rol == 'Administrador' || $user == 8) {
+        //     return '/admin/home';
+        // }
+        // elseif ($rol == 'Proveedor') {
+        //     return '/vehiculos/index';
+        // }else{
+        //     return '/catalogo';
+        // }
+
+        if ($rol->id === 9857097 || $user == 8) {
             return '/admin/home';
         }
-        elseif ($rol == 'Proveedor') {
+        elseif ($rol->id === 9857096) {
             return '/vehiculos/index';
         }else{
             return '/catalogo';
         }
+        
     }
 }

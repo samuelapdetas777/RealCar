@@ -46,11 +46,10 @@
                                   <a class="nav-link text-white" href="/vehiculos/index">Home @can('administrador')(Proveedor) @endcan {{ Request::is('/vehiculos/index')? '<span class="sr-only">(current)</span>': ''}}</a>
                                 </li> 
                               @endcan
-                              @can('cliente')
+                              
                                 <li class="nav-item {{ Request::is('/citas/cliente')? 'active' : ''}}">
                                   <a class="nav-link text-white" href="/citas">Citas {{ Request::is('/citas/cliente')? '<span class="sr-only">(current)</span>': ''}}</a>
                                 </li> 
-                              @endcan
                               
                               <li class="nav-item {{ Request::is('/contactanos')? 'active' : ''}}">
                                 <a class="nav-link text-white" href="/contactanos">Contáctanos {{ Request::is('/contactanos')? '<span class="sr-only">(current)</span>': ''}}</a>

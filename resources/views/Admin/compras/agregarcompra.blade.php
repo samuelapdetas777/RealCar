@@ -24,10 +24,10 @@
                         @csrf
                         <div class="row mt-5">
                             <div class="col">
-                                <label for="selectvehiculo">Vehiculo: *</label>
+                                <label for="selectvehiculo">Vehículo: *</label>
                                 <select  class="form-control custom-select @error('vehiculo') is-invalid @enderror" id="selectvehiculo" name="vehiculo" required>
                                 
-                                <option value="">Selecciona el vehiculo que ha sido adquirido</option>
+                                <option value="">Selecciona el vehículo que ha sido adquirido</option>
                                 @foreach($vehiculos as $vehiculo)
                                     <option value="{{$vehiculo->id}}">{{$vehiculo->id}} - {{$vehiculo->nombre}} - ${{$vehiculo->precio}}</option>
                                 @endforeach

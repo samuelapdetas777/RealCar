@@ -40,7 +40,7 @@
                                         <tr>
                                         <th scope="col" class="text-light">#ID</th>
                                         <th scope="col" class="text-light">Cliente</th>
-                                        <th scope="col" class="text-light">Vehiculo</th>
+                                        <th scope="col" class="text-light">Vehículo</th>
                                         <th scope="col" class="text-light">Acciones</th>
                                         </tr>
                                     </thead>
